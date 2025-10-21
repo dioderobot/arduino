@@ -14,6 +14,8 @@
 	)
 	(layers
 		(0 "F.Cu" mixed)
+		(4 "In1.Cu" power)
+		(6 "In2.Cu" power)
 		(2 "B.Cu" mixed)
 		(9 "F.Adhes" user "F.Adhesive")
 		(11 "B.Adhes" user "B.Adhesive")
@@ -49,7 +51,7 @@
 			)
 			(layer "F.Mask"
 				(type "Top Solder Mask")
-				(color "#4990E2")
+				(color "Blue")
 				(thickness 0.01)
 			)
 			(layer "F.Cu"
@@ -57,10 +59,32 @@
 				(thickness 0.035)
 			)
 			(layer "dielectric 1"
+				(type "prepreg")
+				(thickness 0.2104)
+				(material "Prepreg")
+				(epsilon_r 4.4)
+				(loss_tangent 0.025)
+			)
+			(layer "In1.Cu"
+				(type "copper")
+				(thickness 0.0152)
+			)
+			(layer "dielectric 2"
 				(type "core")
-				(thickness 1.53)
+				(thickness 1.065)
 				(material "FR4-Core")
 				(epsilon_r 4.6)
+				(loss_tangent 0.025)
+			)
+			(layer "In2.Cu"
+				(type "copper")
+				(thickness 0.0152)
+			)
+			(layer "dielectric 3"
+				(type "prepreg")
+				(thickness 0.2104)
+				(material "Prepreg")
+				(epsilon_r 4.4)
 				(loss_tangent 0.025)
 			)
 			(layer "B.Cu"
@@ -69,7 +93,7 @@
 			)
 			(layer "B.Mask"
 				(type "Bottom Solder Mask")
-				(color "#4990E2")
+				(color "Blue")
 				(thickness 0.01)
 			)
 			(layer "B.Paste"
@@ -178,7 +202,7 @@
 	(footprint "QFN50P400X400X80-21N:QFN50P400X400X80-21N"
 		(layer "F.Cu")
 		(uuid "022d7aea-9ad8-4e48-804d-95f6980d62a5")
-		(at 84.0225 105.11)
+		(at 69.8925 95.96)
 		(descr "QFN-20")
 		(tags "Integrated Circuit")
 		(property "Reference" "IC3"
@@ -233,43 +257,7 @@
 			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "8f8fcca0-e96c-400c-9258-5911d0cf94fb")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "prefix" "IC"
-			(at 0 0 0)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "1f97fffb-62a8-43c4-8f84-40e4fc3d6afd")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "manufacturer" "FTDI Chip"
-			(at 0 0 0)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "02a317c4-eafa-42e8-b7c4-e06188fb37d4")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "symbol_path" "/Users/davide/src/diodeinc/customers/arduino/components/FT231XQ-R/FT231XQ-R.kicad_sym"
-			(at 0 0 0)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "a4cb0797-b7c6-4922-ad26-a0bce3f79867")
+			(uuid "3e9ea6a0-db8c-4e7b-aa7f-f43f5321ed54")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -281,7 +269,43 @@
 			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "f0a4c82d-8712-4b31-a415-567112b3887a")
+			(uuid "33734730-2a66-49df-b943-965567e8524f")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "manufacturer" "FTDI Chip"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "165d9f26-354c-403c-9ed2-267f7ff601a7")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "prefix" "IC"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "e9ebedab-5244-47a7-a6a2-7482f281133b")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "symbol_path" "/Users/davide/src/diodeinc/customers/arduino/components/FT231XQ-R/FT231XQ-R.kicad_sym"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "f3a28dc3-1d66-4dc0-9fba-2615a45fa633")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -293,7 +317,7 @@
 			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "ee1db487-09dc-4bbe-bb0e-20c352331095")
+			(uuid "01b17797-8f9b-4f15-aaed-f60926c79e2d")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -585,7 +609,7 @@
 	(footprint "C_0402_1005Metric:C_0402_1005Metric"
 		(layer "F.Cu")
 		(uuid "04bb8c29-59f7-4f56-8c93-4f13ed38edd1")
-		(at 91.41 107.64)
+		(at 77.28 98.49)
 		(descr "Capacitor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
 		(tags "capacitor")
 		(property "Reference" "C1"
@@ -642,43 +666,7 @@
 			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "6cfad5b2-bb20-4a46-8770-8b75f0aabeaf")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "prefix" "C"
-			(at 0 0 0)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "9b660ad9-7d1b-4bab-8aa5-5a640628935f")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Package" "0402"
-			(at 0 0 0)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "e95483b1-fbe7-4378-95ac-825c49884987")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Type" "capacitor"
-			(at 0 0 0)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "50d7039a-8841-4946-a3c0-9fe80f94a916")
+			(uuid "971038c2-ed6b-4a09-85e4-aa6e2165e09c")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -690,19 +678,7 @@
 			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "a74504e3-9d89-4d73-b928-9f3776f951ba")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "symbol_name" "C"
-			(at 0 0 0)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "380155ab-c17c-4f47-8d7b-417afbcc937b")
+			(uuid "5f083cee-a158-494d-a788-737145ffca38")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -714,7 +690,19 @@
 			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "6ef9f401-ab5d-432b-886d-8b628f4c6ccd")
+			(uuid "55a2eb2c-4d2d-4c2c-b14a-74482b483101")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "symbol_name" "C"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "49ec3a00-fd15-4340-a155-d2e8ef59b9aa")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -726,7 +714,43 @@
 			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "ec8f9f9f-2612-402c-ab3a-ea63cc01fecf")
+			(uuid "dd84d29f-fd6b-4214-8d30-d36cafacd4e8")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Type" "capacitor"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "12bea0a9-cf5d-474c-a305-6b89601d1dc4")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Package" "0402"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "e46dfbda-598d-4aac-9614-64ea42a92978")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "prefix" "C"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "f8cf1ec3-666a-4817-8092-aec7f030d6cc")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -879,7 +903,7 @@
 	(footprint "C_0402_1005Metric:C_0402_1005Metric"
 		(layer "F.Cu")
 		(uuid "06259511-ae1c-4c34-8f4b-6d3e4dc2f333")
-		(at 85.4275 108.69 -90)
+		(at 71.2975 99.54 -90)
 		(descr "Capacitor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
 		(tags "capacitor")
 		(property "Reference" "C11"
@@ -933,70 +957,10 @@
 			)
 		)
 		(property "Path" "USB_SERIAL.C_3V3OUT.C"
-			(at 0 0 270)
+			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "5b056c0f-8398-491d-961a-76f085a51192")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "prefix" "C"
-			(at 0 0 270)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "dc14f696-080b-4784-9b1b-fd4e7f062289")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "type" "capacitor"
-			(at 0 0 270)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "b7b2e71c-29b1-4ee6-9f0b-1b8aa11d8f67")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Voltage" "6.3V"
-			(at 0 0 270)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "31da24b4-b066-4876-80af-b41eae7fdc39")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "symbol_name" "C"
-			(at 0 0 270)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "01c10553-60da-4ded-9f55-867e7494f078")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Package" "0402"
-			(at 0 0 270)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "f4349e1c-3ef4-4f1c-a55d-4b92942b06bf")
+			(uuid "862f655c-c1bd-4a09-a10d-2d8a5a7fb00e")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1005,10 +969,10 @@
 			)
 		)
 		(property "symbol_path" "/Users/davide/src/diodeinc/customers/arduino/vendor/gitlab.com/kicad/libraries/kicad-symbols/9.0.0/Device.kicad_sym"
-			(at 0 0 270)
+			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "59bd6b4a-7dc1-4018-9ab2-24cd000166fc")
+			(uuid "455b4952-040b-4536-acde-18d3e112a08b")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1016,11 +980,23 @@
 				)
 			)
 		)
-		(property "Capacitance" "100nF"
-			(at 0 0 270)
+		(property "type" "capacitor"
+			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "f464262e-20ae-424f-9076-03c2915e69a9")
+			(uuid "e32bb768-4a51-473d-a0e4-89d5df169695")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "symbol_name" "C"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "64e28dd9-b724-461c-b49a-9db49011f2d4")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1029,10 +1005,58 @@
 			)
 		)
 		(property "Type" "capacitor"
-			(at 0 0 270)
+			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "cc951f37-1197-4aae-b7d3-e039db02dbb1")
+			(uuid "b9bfa3b8-53ee-4dc4-bf28-50d43da1fe65")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Voltage" "6.3V"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "24465e8c-53e1-452a-aa9f-8239ff34b9e3")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "prefix" "C"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "d1bc3b43-e320-4749-beb1-d50e345081e9")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Package" "0402"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "1ceb5375-7934-426d-ae08-bdd193899c15")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Capacitance" "100nF"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "2602acbf-48d3-4443-b4bc-73ae928c6d5e")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1185,7 +1209,7 @@
 	(footprint "C_0402_1005Metric:C_0402_1005Metric"
 		(layer "F.Cu")
 		(uuid "0954df8b-8b41-47fb-a1ea-e3c233f5eabc")
-		(at 80.635 121.515 180)
+		(at 66.505 112.365 180)
 		(descr "Capacitor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
 		(tags "capacitor")
 		(property "Reference" "C3"
@@ -1239,58 +1263,10 @@
 			)
 		)
 		(property "Path" "MCU.C_VCC_1.C"
-			(at 0 0 180)
+			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "7fc5467d-cd4a-4689-866b-ee620c29af26")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "symbol_name" "C"
-			(at 0 0 180)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "b6ceb8c1-af8e-4664-b19b-d54abc44b4a1")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "type" "capacitor"
-			(at 0 0 180)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "5b89dde7-53fa-45ae-b5cf-6662c7987c5f")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "prefix" "C"
-			(at 0 0 180)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "05f7bbf3-d33b-45a6-90b8-ded3978e4fcc")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "symbol_path" "/Users/davide/src/diodeinc/customers/arduino/vendor/gitlab.com/kicad/libraries/kicad-symbols/9.0.0/Device.kicad_sym"
-			(at 0 0 180)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "8c32986e-63bd-47ca-ab86-1fc8c37ab14f")
+			(uuid "9edc7294-ba8b-48bd-ac43-a9b693e7af80")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1299,10 +1275,10 @@
 			)
 		)
 		(property "Package" "0402"
-			(at 0 0 180)
+			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "b060e235-0e79-493d-a42f-fe97402a9b4e")
+			(uuid "1897ae10-c5d0-401a-beae-85565c1421f5")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1310,11 +1286,11 @@
 				)
 			)
 		)
-		(property "Capacitance" "100nF"
-			(at 0 0 180)
+		(property "prefix" "C"
+			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "22970880-0896-4350-9162-71ed35d9facf")
+			(uuid "12ad7470-4788-430d-b4fb-cffaec5bfdbd")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1323,10 +1299,58 @@
 			)
 		)
 		(property "Type" "capacitor"
-			(at 0 0 180)
+			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "995ee31c-4973-46c8-bc6b-1f55902fcb27")
+			(uuid "94eb7575-3dbe-46ef-855d-56c79ffc5f85")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "symbol_path" "/Users/davide/src/diodeinc/customers/arduino/vendor/gitlab.com/kicad/libraries/kicad-symbols/9.0.0/Device.kicad_sym"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "7f1dbe4b-2e5a-4133-8949-02e28be3703e")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "type" "capacitor"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "a17de9ac-1926-421d-8ef5-eccac2ab4788")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "symbol_name" "C"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "b3d1253a-e50a-4ee3-b7c8-8b684022f3f2")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Capacitance" "100nF"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "da56eaf8-276e-43b3-9f88-350d8409fb54")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1335,10 +1359,10 @@
 			)
 		)
 		(property "Voltage" "6.3V"
-			(at 0 0 180)
+			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "a641a6bf-6842-4461-af76-4cf4d7e17668")
+			(uuid "9cd31dda-a260-41ef-890b-38b972db62b0")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1491,7 +1515,7 @@
 	(footprint "Crystal_SMD_3225-4Pin_3.2x2.5mm:Crystal_SMD_3225-4Pin_3.2x2.5mm"
 		(layer "F.Cu")
 		(uuid "392aa164-e982-485f-9edc-bcbd1e672976")
-		(at 79.385 123.695 180)
+		(at 65.255 114.545 180)
 		(descr "SMD Crystal SERIES SMD3225/4 http://www.txccrystal.com/images/pdf/7m-accuracy.pdf, 3.2x2.5mm^2 package")
 		(tags "SMD SMT crystal")
 		(property "Reference" "Y1"
@@ -1545,10 +1569,10 @@
 			)
 		)
 		(property "Path" "MCU.Y_XTAL.Y"
-			(at 0 0 180)
+			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "f090e5c7-7267-42b7-9ffa-312fad01eaab")
+			(uuid "08d3d555-ff12-4124-9a15-eeeeae32dfa8")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1557,70 +1581,10 @@
 			)
 		)
 		(property "Frequency" "16MHz"
-			(at 0 0 180)
+			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "994e8e34-2f18-4ea3-a3b9-acfdae1bb885")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Type" "crystal"
-			(at 0 0 180)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "e4c8280a-c5dc-4ea8-8900-796fc15d6d91")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "symbol_path" "/Users/davide/src/diodeinc/customers/arduino/vendor/gitlab.com/kicad/libraries/kicad-symbols/9.0.0/Device.kicad_sym"
-			(at 0 0 180)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "c5a1b180-1455-4c7f-8449-0366ffc6b074")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Package" "3225_4Pin"
-			(at 0 0 180)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "5cc0ea77-dab5-4de6-8bbc-4e487eb4e04c")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Load_capacitance" "18pF"
-			(at 0 0 180)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "4f7d88cc-d7a2-4670-9624-495ed17b3470")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "prefix" "Y"
-			(at 0 0 180)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "55c74100-c456-4c94-8698-b988c9421a87")
+			(uuid "35273c35-a6c0-4d15-b6b4-b73b40b1fea1")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1629,10 +1593,10 @@
 			)
 		)
 		(property "type" "crystal"
-			(at 0 0 180)
+			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "274cc98d-8851-40f6-8db1-21b1fe67a253")
+			(uuid "4fc4b9b1-2cb8-4dd2-bd9f-6c12ee8bb68e")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1641,10 +1605,70 @@
 			)
 		)
 		(property "symbol_name" "Crystal_GND24"
-			(at 0 0 180)
+			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "275963c2-6400-4b1e-91dd-72cf6fc78219")
+			(uuid "f8dbfecc-77ea-4f85-b6d7-d12bf38583d8")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Type" "crystal"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "1bcea46e-1335-4622-8fa0-e6894ae28ed7")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "symbol_path" "/Users/davide/src/diodeinc/customers/arduino/vendor/gitlab.com/kicad/libraries/kicad-symbols/9.0.0/Device.kicad_sym"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "7d35d229-f9ff-416b-916d-f5f7e2fa658a")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Load_capacitance" "18pF"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "71edf9e5-464a-4955-91ef-850817ecd0e3")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Package" "3225_4Pin"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "92a0261f-c6c2-41c6-a046-442e8313eb14")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "prefix" "Y"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "2f7ee92b-7c4a-4557-8fdc-43e2bdd17485")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1819,7 +1843,7 @@
 	(footprint "C_0402_1005Metric:C_0402_1005Metric"
 		(layer "F.Cu")
 		(uuid "401be9f4-8c8d-4c48-a0a3-5401cf66d2e6")
-		(at 93.015 122.355)
+		(at 78.885 113.205)
 		(descr "Capacitor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
 		(tags "capacitor")
 		(property "Reference" "C4"
@@ -1876,7 +1900,7 @@
 			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "302458b6-3c64-4916-8f76-98932d4196d3")
+			(uuid "36e3e520-b599-4a6c-be67-72d99588ee88")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1888,31 +1912,7 @@
 			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "e70c87ef-0ec9-4104-b763-43f7bd21a6e7")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Capacitance" "100nF"
-			(at 0 0 0)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "950a4c02-81e6-40b2-bdbe-6c5b7570bcab")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "prefix" "C"
-			(at 0 0 0)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "d91c2423-ea71-4f8f-b419-c09ee97790d7")
+			(uuid "8317555e-400b-4992-91eb-f73b1b6d1d77")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1924,7 +1924,19 @@
 			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "819dcd05-a82d-4692-abff-e95a088b0914")
+			(uuid "3c152c4e-5b83-434a-ae5f-520c92645ab5")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "prefix" "C"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "be08bf13-6c14-4413-9d57-aa2ef11cc0a9")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1936,7 +1948,7 @@
 			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "6bb434c6-4528-436a-9652-bd0d95a1a974")
+			(uuid "bf02f929-291e-43a0-8388-944dadc557ea")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1944,23 +1956,11 @@
 				)
 			)
 		)
-		(property "symbol_name" "C"
+		(property "Capacitance" "100nF"
 			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "3860c8e8-382a-4b8c-9e55-b64da459d149")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "symbol_path" "/Users/davide/src/diodeinc/customers/arduino/vendor/gitlab.com/kicad/libraries/kicad-symbols/9.0.0/Device.kicad_sym"
-			(at 0 0 0)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "c86d10de-36c2-4dca-b4ad-e6c2caa3e398")
+			(uuid "ff4febe3-20f9-4c71-b3d7-67c81e8d875b")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1972,7 +1972,31 @@
 			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "2a9dc133-f733-47f6-bddd-a9fdd952ec5e")
+			(uuid "b7413c41-648e-443a-9091-99c1ca5084b5")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "symbol_path" "/Users/davide/src/diodeinc/customers/arduino/vendor/gitlab.com/kicad/libraries/kicad-symbols/9.0.0/Device.kicad_sym"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "45d1da48-d095-464f-afa9-2f101da2a54a")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "symbol_name" "C"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "0599d2bf-25f0-400c-ab95-5f3efe5548ad")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2125,7 +2149,7 @@
 	(footprint "C_0402_1005Metric:C_0402_1005Metric"
 		(layer "F.Cu")
 		(uuid "49062b2a-f15c-4e0b-aff0-6a342b8b07a8")
-		(at 87.6075 103.355)
+		(at 73.4775 94.205)
 		(descr "Capacitor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
 		(tags "capacitor")
 		(property "Reference" "C13"
@@ -2182,55 +2206,7 @@
 			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "aa76f418-f916-42ef-bc31-61d26076f269")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Voltage" "10V"
-			(at 0 0 0)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "fa1f2cf1-35eb-4bd8-83b3-08296ae03206")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Type" "capacitor"
-			(at 0 0 0)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "3752da60-e5c6-4f9f-a413-1ffb1c97d9ba")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Capacitance" "100nF"
-			(at 0 0 0)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "df3a2f40-e021-4b9b-b617-494ef1e43fed")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "symbol_name" "C"
-			(at 0 0 0)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "96af1a09-85da-447a-8150-f7a580965c03")
+			(uuid "1c5abd98-13e2-4ad7-9cfc-aa739096c41b")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2242,7 +2218,7 @@
 			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "d696cc5d-cdc5-4f89-a03a-f6bc8afe4d66")
+			(uuid "2d9e3d92-fbc4-409f-81bd-9361d6f4c12d")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2250,11 +2226,11 @@
 				)
 			)
 		)
-		(property "symbol_path" "/Users/davide/src/diodeinc/customers/arduino/vendor/gitlab.com/kicad/libraries/kicad-symbols/9.0.0/Device.kicad_sym"
+		(property "Voltage" "10V"
 			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "5467edfe-2f07-49db-be03-5ef403c08855")
+			(uuid "9f0669ed-60f7-4d90-ac6a-7201843d3f90")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2266,7 +2242,7 @@
 			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "cf9dd36a-357a-4d46-9ba1-7d208ba8b130")
+			(uuid "69d1afea-8154-4e57-8744-3d3c164c1bea")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2278,7 +2254,55 @@
 			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "bdfb1907-9bf4-4ba3-b752-a8a3cff1cb55")
+			(uuid "9f35d7c3-8492-4b40-9c6b-4b3cba77cb5d")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Capacitance" "100nF"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "73680dc0-5044-4c74-ac78-57a05ac659e0")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Type" "capacitor"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "de065a36-9349-4c69-87d1-89a103819c49")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "symbol_name" "C"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "95f2c6d8-2178-443d-80f7-6ead456360e4")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "symbol_path" "/Users/davide/src/diodeinc/customers/arduino/vendor/gitlab.com/kicad/libraries/kicad-symbols/9.0.0/Device.kicad_sym"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "5b56b212-be46-4dc8-a596-fc9a08967438")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2431,7 +2455,7 @@
 	(footprint "QFP80P900X900X120-32N:QFP80P900X900X120-32N"
 		(layer "F.Cu")
 		(uuid "5156ca87-0afa-4a90-8fe9-d07d22535f30")
-		(at 86.83 120.32)
+		(at 72.7 111.17)
 		(descr "32A")
 		(tags "Integrated Circuit")
 		(property "Reference" "IC1"
@@ -2486,43 +2510,7 @@
 			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "edd936de-d844-46a8-8e9d-21fb2dbe5032")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "manufacturer" "Microchip"
-			(at 0 0 0)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "ad8573a4-8c09-495a-85f4-4a224375e45c")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "prefix" "IC"
-			(at 0 0 0)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "be71dcb1-9290-4d09-8533-c8bb303dc6db")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "symbol_name" "ATMEGA328P-AU"
-			(at 0 0 0)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "ebd08b01-f6d2-43e9-aaca-2624491f9f92")
+			(uuid "a9d72576-6c12-4ec7-a39e-46c04b8540fe")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2534,7 +2522,31 @@
 			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "2a19d910-99be-4926-9a34-fff9040fac41")
+			(uuid "fa202512-3bfe-4eb9-b761-230671e5c886")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "prefix" "IC"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "2499c264-0335-4aed-851d-209ae1679762")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "symbol_name" "ATMEGA328P-AU"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "b9eab8e0-7aa6-4051-9085-960b660d2c20")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2546,7 +2558,19 @@
 			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "fce3621f-73f9-4f44-8acf-6d2f128224ca")
+			(uuid "7cccfad4-bfdb-452c-8f87-42305b483eaa")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "manufacturer" "Microchip"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "307e9bbb-d0c5-4070-9c1a-9bd65f070d80")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2955,7 +2979,7 @@
 	(footprint "PinHeader_2x03_P2.54mm_Vertical:PinHeader_2x03_P2.54mm_Vertical"
 		(layer "F.Cu")
 		(uuid "5c6570cc-ab87-403b-b438-93855d271308")
-		(at 82.73 134.41 90)
+		(at 68.6 125.26 90)
 		(descr "Through hole straight pin header, 2x03, 2.54mm pitch, double rows")
 		(tags "Through hole pin header THT 2x03 2.54mm double row")
 		(property "Reference" "J4"
@@ -2995,7 +3019,7 @@
 				)
 			)
 		)
-		(property "Description" "Generic connector, double row, 02x03, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)"
+		(property "Description" "Header 2.54mm 3x2 Vertical"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -3009,22 +3033,10 @@
 			)
 		)
 		(property "Path" "SPI_HEADER.PH"
-			(at 0 0 90)
+			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "ba00c169-6fbc-4c66-9f0e-ba08bd863794")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "prefix" "J"
-			(at 0 0 90)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "820547b1-0b8e-4b3d-ba52-8b61158d6dab")
+			(uuid "4666b964-376b-4ed9-8feb-24c3ef124926")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3033,22 +3045,10 @@
 			)
 		)
 		(property "symbol_path" "/Users/davide/src/diodeinc/customers/arduino/vendor/gitlab.com/kicad/libraries/kicad-symbols/9.0.0/Connector_Generic.kicad_sym"
-			(at 0 0 90)
+			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "3d05197b-b5ee-4876-ba94-cd8f0c59022c")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Rows" "2"
-			(at 0 0 90)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "509c5813-bdcd-49cf-a4ae-57cdf74ad3a0")
+			(uuid "d8563fb3-bded-44b7-9ed8-a079713b58cc")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3057,22 +3057,10 @@
 			)
 		)
 		(property "Pins" "3"
-			(at 0 0 90)
+			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "3062c33d-f97e-4693-ad16-bb6d4fb217b5")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Pitch" "2.54mm"
-			(at 0 0 90)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "77fc1b62-b12a-4e05-a300-9b759c2de876")
+			(uuid "e4d5fbd1-b1a4-4ebc-9636-65759bc8b3e9")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3081,10 +3069,10 @@
 			)
 		)
 		(property "Orientation" "Vertical"
-			(at 0 0 90)
+			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "55cbc95a-4b91-4baf-a840-6a1d27ec0ddf")
+			(uuid "857e42e2-4442-43f2-a4d0-7feb10e51506")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3093,10 +3081,46 @@
 			)
 		)
 		(property "symbol_name" "Conn_02x03_Odd_Even"
-			(at 0 0 90)
+			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "258df255-8c43-48b0-bf16-5d9697d57cf2")
+			(uuid "9239f1c6-fe9f-468f-943a-fe351891dcb1")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Pitch" "2.54mm"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "029582a0-8fa4-49eb-95a0-3ddec065657a")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Rows" "2"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "3f8a9115-f722-490f-b1a4-2b77d5a21e1b")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "prefix" "J"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "c6173cf7-8dd2-4463-b237-234b166fc48b")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3357,7 +3381,7 @@
 	(footprint "LED_0603_1608Metric:LED_0603_1608Metric"
 		(layer "F.Cu")
 		(uuid "79b541fc-2716-4bf7-bacd-76a1046bc2ce")
-		(at 90.5225 111.7)
+		(at 76.3925 102.55)
 		(descr "LED SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: http://www.tortai-tech.com/upload/download/2011102023233369053.pdf), generated with kicad-footprint-generator")
 		(tags "LED")
 		(property "Reference" "D1"
@@ -3414,55 +3438,7 @@
 			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "bfb7dee3-54c9-4cdc-ac57-34756510ffb1")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "type" "led"
-			(at 0 0 0)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "ac81e48a-a585-4c8f-b33f-4db668bea995")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Color" "yellow"
-			(at 0 0 0)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "61162d8a-35c4-4cd2-b9f8-75745a8120ec")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "symbol_path" "/Users/davide/src/diodeinc/customers/arduino/vendor/gitlab.com/kicad/libraries/kicad-symbols/9.0.0/Device.kicad_sym"
-			(at 0 0 0)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "902a542d-1067-42e7-a45d-a17d1d0dcd6e")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "prefix" "D"
-			(at 0 0 0)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "22bda8ca-2e7e-48b6-be03-98239aa23a38")
+			(uuid "2a84b172-b085-48be-b7b9-2c33ba46f727")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3474,7 +3450,31 @@
 			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "8d1f67e2-128a-456e-a44f-92800e448183")
+			(uuid "1d9f47d8-25e1-4778-a13f-1e847842f69f")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "symbol_path" "/Users/davide/src/diodeinc/customers/arduino/vendor/gitlab.com/kicad/libraries/kicad-symbols/9.0.0/Device.kicad_sym"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "7d4de58f-59ab-4f4f-ae54-b915c0975967")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "prefix" "D"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "f15017f3-bfc6-47ea-af5d-b2991ad010ad")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3486,7 +3486,31 @@
 			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "e57eaeaf-2f64-4a23-a420-907b18872907")
+			(uuid "c051852f-7929-42e4-adfa-92bb24bce5b4")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "type" "led"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "0ce48c63-9718-4a65-a5c0-aa93de5055da")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Color" "yellow"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "400ba2d3-2166-493d-9b34-6b6f200da6bc")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3498,7 +3522,7 @@
 			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "1d4311df-b37f-4027-ba00-e947f1c1536e")
+			(uuid "11b1de92-b09e-46d5-9b28-abe2373d327a")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3671,7 +3695,7 @@
 	(footprint "C_0402_1005Metric:C_0402_1005Metric"
 		(layer "F.Cu")
 		(uuid "7b8c9f4c-8498-4ce0-be2f-c734507a35e7")
-		(at 78.165 125.925 180)
+		(at 64.035 116.775 180)
 		(descr "Capacitor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
 		(tags "capacitor")
 		(property "Reference" "C6"
@@ -3725,94 +3749,10 @@
 			)
 		)
 		(property "Path" "MCU.C_XTAL2.C"
-			(at 0 0 180)
+			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "400fd2cd-399d-4479-9334-fc261070b68a")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Capacitance" "22pF"
-			(at 0 0 180)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "547a3830-7c02-4078-b3f1-63942058a570")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Type" "capacitor"
-			(at 0 0 180)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "9dbc6e11-13e4-43f5-a3a4-9eabc2ee7f6d")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "symbol_path" "/Users/davide/src/diodeinc/customers/arduino/vendor/gitlab.com/kicad/libraries/kicad-symbols/9.0.0/Device.kicad_sym"
-			(at 0 0 180)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "d3b0c6e8-55a1-4f69-9750-8decde1db7f4")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "prefix" "C"
-			(at 0 0 180)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "3144f803-83df-4ee6-845e-b0524d2f0dc4")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Dielectric" "C0G"
-			(at 0 0 180)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "e66c8b17-7d7b-4553-a1c1-8d30f9a27279")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "symbol_name" "C"
-			(at 0 0 180)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "9d21b9e3-30c7-4e39-a670-fa605b0ccfb3")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "type" "capacitor"
-			(at 0 0 180)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "13bbc669-29c4-4ef3-909e-9773e9c0ccd6")
+			(uuid "32269155-ca28-4afe-ba1d-f2d88216cd75")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3821,10 +3761,94 @@
 			)
 		)
 		(property "Package" "0402"
-			(at 0 0 180)
+			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "8614cda4-03cf-4e72-bfdd-2a3b7aba75a1")
+			(uuid "b9cd1bdf-2078-49c7-83f8-90ce696e3823")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "type" "capacitor"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "14503c99-ae1e-47e9-809b-a42c602f1fd2")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Dielectric" "C0G"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "2f968df0-7d9e-405e-b3e1-f839854edc21")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Type" "capacitor"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "7077978c-9f70-4417-b834-91a455b04255")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "prefix" "C"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "eb7e1281-074b-4b06-bc1b-a83f62a2b1f2")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Capacitance" "22pF"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "cc8a4c14-cf72-40c6-a0a5-8ade971897dc")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "symbol_path" "/Users/davide/src/diodeinc/customers/arduino/vendor/gitlab.com/kicad/libraries/kicad-symbols/9.0.0/Device.kicad_sym"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "67c3f7a0-901f-41a6-927d-9e01092a1c0a")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "symbol_name" "C"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "218cd8c8-e33e-4c4a-852a-516a96a1beef")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3977,7 +4001,7 @@
 	(footprint "C_0603_1608Metric:C_0603_1608Metric"
 		(layer "F.Cu")
 		(uuid "7e0748ac-28f2-4b23-9311-4ee65316df86")
-		(at 88.19 105.56)
+		(at 74.06 96.41)
 		(descr "Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
 		(tags "capacitor")
 		(property "Reference" "C15"
@@ -4034,55 +4058,7 @@
 			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "b9e3a32e-05fc-41da-976e-ca883d3b1261")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "type" "capacitor"
-			(at 0 0 0)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "9ca20a80-9b15-40c4-b89e-75f31e35d38f")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "symbol_path" "/Users/davide/src/diodeinc/customers/arduino/vendor/gitlab.com/kicad/libraries/kicad-symbols/9.0.0/Device.kicad_sym"
-			(at 0 0 0)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "21e4e09c-75c3-4752-b4d5-0b491c5c1638")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Type" "capacitor"
-			(at 0 0 0)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "c22d834c-cc10-405f-8dcc-fd1d92565b88")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Package" "0603"
-			(at 0 0 0)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "49a389c1-b4a1-4786-bf9d-92eecd4928f5")
+			(uuid "0dfc85f7-627b-4734-9a5f-715c50c25597")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4094,7 +4070,7 @@
 			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "9c0992e0-fd5c-4248-9b8a-b541e32ab5a7")
+			(uuid "2cb00878-729b-402a-8df4-ed2bc680072c")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4102,11 +4078,11 @@
 				)
 			)
 		)
-		(property "Capacitance" "4.7uF"
+		(property "Type" "capacitor"
 			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "07d1083e-ff2d-4ffd-bdb3-1f3460dbdd2f")
+			(uuid "c30d4df8-91da-4187-82b9-4613a33ce458")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4118,7 +4094,19 @@
 			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "40c08fe4-8fbf-495e-b158-36cefd74e5f5")
+			(uuid "c1f2d888-1f84-40c8-bf99-bd6a195cb6bd")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Capacitance" "4.7uF"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "1e2f0c63-c920-4eda-a560-7ff8331cd1e8")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4130,7 +4118,43 @@
 			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "452d7ee2-692a-4ca7-a544-b823afe08625")
+			(uuid "90b69c0f-68e8-4b9a-b213-051be3d6f23f")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "symbol_path" "/Users/davide/src/diodeinc/customers/arduino/vendor/gitlab.com/kicad/libraries/kicad-symbols/9.0.0/Device.kicad_sym"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "22147d6f-abde-463d-b02a-a4d37e4c97bb")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Package" "0603"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "c96de2c4-bb86-4e48-ab70-3f64bb5c86ee")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "type" "capacitor"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "52115048-41e5-4853-9035-553bf1d8ba8a")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4283,7 +4307,7 @@
 	(footprint "C_0402_1005Metric:C_0402_1005Metric"
 		(layer "F.Cu")
 		(uuid "7f6f3c3a-f799-4301-8e1c-70cf41637430")
-		(at 78.195 121.475 180)
+		(at 64.065 112.325 180)
 		(descr "Capacitor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
 		(tags "capacitor")
 		(property "Reference" "C5"
@@ -4337,46 +4361,10 @@
 			)
 		)
 		(property "Path" "MCU.C_XTAL1.C"
-			(at 0 0 180)
+			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "f84dff31-0ae1-4f94-aef1-ae9eafb49245")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Dielectric" "C0G"
-			(at 0 0 180)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "3eac96cf-b930-4c97-842e-aa4a6a59ff22")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Capacitance" "22pF"
-			(at 0 0 180)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "77c848a0-0f86-49b6-ac8b-9c658d400b6e")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "type" "capacitor"
-			(at 0 0 180)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "00fca2c8-e789-4771-8acc-9ee4dc99a4ba")
+			(uuid "a8d63e5a-46d0-4024-a8a8-cc854f28fbde")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4385,46 +4373,10 @@
 			)
 		)
 		(property "Type" "capacitor"
-			(at 0 0 180)
+			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "81052b71-be42-4485-8fa0-4adc6886d0c2")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "prefix" "C"
-			(at 0 0 180)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "49a08e9c-9aa5-4a7f-8424-09705ece5d09")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Package" "0402"
-			(at 0 0 180)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "6340dbe3-35e6-4b7a-ab92-c0d492f7e57e")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "symbol_path" "/Users/davide/src/diodeinc/customers/arduino/vendor/gitlab.com/kicad/libraries/kicad-symbols/9.0.0/Device.kicad_sym"
-			(at 0 0 180)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "2956421b-a262-4182-b46e-cfde3f0e0bc8")
+			(uuid "1134155d-6911-47bc-97d0-cd2b015214c6")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4433,10 +4385,82 @@
 			)
 		)
 		(property "symbol_name" "C"
-			(at 0 0 180)
+			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "a5671ede-0b56-402f-93d4-c457ab2b0859")
+			(uuid "4e339b16-ec19-406b-a59c-53aa9dfd77ae")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "type" "capacitor"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "c074aade-01ad-4380-96d4-63ad2e263e05")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Capacitance" "22pF"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "20331ca3-d994-4973-946f-ffc1298582d5")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Dielectric" "C0G"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "e6efeb06-ba20-4d5e-95a1-a2fa3a6f8630")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "symbol_path" "/Users/davide/src/diodeinc/customers/arduino/vendor/gitlab.com/kicad/libraries/kicad-symbols/9.0.0/Device.kicad_sym"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "7e53eea9-1139-4679-9a82-5888f754e6b7")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Package" "0402"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "7aea230b-54f0-41da-be32-de2eedaae064")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "prefix" "C"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "ff35d60f-bda9-4ccf-a0fc-6df21859b425")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4589,7 +4613,7 @@
 	(footprint "R_0402_1005Metric:R_0402_1005Metric"
 		(layer "F.Cu")
 		(uuid "81e8f091-eab4-453f-8243-70960337c39c")
-		(at 83.5375 108.670001 -90)
+		(at 69.4075 99.520001 -90)
 		(descr "Resistor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
 		(tags "resistor")
 		(property "Reference" "R5"
@@ -4643,46 +4667,10 @@
 			)
 		)
 		(property "Path" "USB_SERIAL.R_USBDP.R"
-			(at 0 0 270)
+			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "0782f0a2-5e98-4548-920a-999eca992f08")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "symbol_name" "R"
-			(at 0 0 270)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "853182fd-a5dd-4485-9c8d-251844196020")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Type" "resistor"
-			(at 0 0 270)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "d5070ae8-685c-4cda-a939-f43ad76e42f0")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Resistance" "27 5%"
-			(at 0 0 270)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "7016f556-8f2c-47e8-baac-6b4f54d0195d")
+			(uuid "e5cc8c51-6b8a-4524-9062-03f6145dde0c")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4691,34 +4679,10 @@
 			)
 		)
 		(property "Package" "0402"
-			(at 0 0 270)
+			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "8cd9482a-dc3d-4875-bde8-a3836164e272")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "prefix" "R"
-			(at 0 0 270)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "5b934199-101a-4bb2-83c5-11b6341319da")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "symbol_path" "/Users/davide/src/diodeinc/customers/arduino/vendor/gitlab.com/kicad/libraries/kicad-symbols/9.0.0/Device.kicad_sym"
-			(at 0 0 270)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "ff5b5513-5c89-4f8b-b97b-e0070c0bb205")
+			(uuid "fe2e6c9e-03b1-4eb7-9314-35845df7c622")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4727,10 +4691,70 @@
 			)
 		)
 		(property "type" "resistor"
-			(at 0 0 270)
+			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "5709182b-d33b-4cd2-8164-dc8f0d265e01")
+			(uuid "70638a32-3eca-44d5-86ac-d073e1a7fae3")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Type" "resistor"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "d1371e21-cc6d-47f6-a29b-ec127b8458c8")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "prefix" "R"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "d6319465-ce4a-4d21-98e0-9836117e4024")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "symbol_path" "/Users/davide/src/diodeinc/customers/arduino/vendor/gitlab.com/kicad/libraries/kicad-symbols/9.0.0/Device.kicad_sym"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "04a10452-ea78-4304-9576-6bd727e891f2")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Resistance" "27 5%"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "9352b06e-95dc-474c-8846-efb803a3730a")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "symbol_name" "R"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "6c767f87-06fe-4643-a628-2352de24ebae")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4883,7 +4907,7 @@
 	(footprint "C_0402_1005Metric:C_0402_1005Metric"
 		(layer "F.Cu")
 		(uuid "84d08b81-c9e0-407f-ab39-f102593ba810")
-		(at 87.6075 104.3)
+		(at 73.4775 95.15)
 		(descr "Capacitor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
 		(tags "capacitor")
 		(property "Reference" "C14"
@@ -4940,7 +4964,7 @@
 			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "47258cea-eff3-43b7-b5c8-19e3927e7641")
+			(uuid "16cbec6a-f8b5-41bb-a604-1e7fbec56f8a")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4952,31 +4976,7 @@
 			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "f1c70650-6824-4986-9ca5-e9e8ddb024de")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Type" "capacitor"
-			(at 0 0 0)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "590ec026-d632-445f-91bf-1e53faf05a1a")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "symbol_name" "C"
-			(at 0 0 0)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "93d27db9-a878-4365-9e8a-32d26c01b9dc")
+			(uuid "5a555528-4764-442b-b75f-58a14a1fdd33")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4988,43 +4988,7 @@
 			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "27736446-dd66-426d-bdc4-535938c2fc4f")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "symbol_path" "/Users/davide/src/diodeinc/customers/arduino/vendor/gitlab.com/kicad/libraries/kicad-symbols/9.0.0/Device.kicad_sym"
-			(at 0 0 0)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "a0a02d71-1395-4219-8bfd-637fc0615552")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Package" "0402"
-			(at 0 0 0)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "ff013d58-df0d-46ef-893a-13fd99f6208f")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Capacitance" "100nF"
-			(at 0 0 0)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "bd1e5bb8-470c-4fe6-b42a-ab10a127ee4f")
+			(uuid "d8302b36-1860-467f-a3e0-b4b5397f9029")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5036,7 +5000,67 @@
 			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "64ebeaeb-9d47-4356-9261-b2368a508b4e")
+			(uuid "4821a514-3208-4f5a-8c42-bb84a5e11bc4")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "symbol_name" "C"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "cda87b12-fa1f-424e-88ed-1e5099288e0c")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Type" "capacitor"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "457558db-b2ba-4f61-a607-9bba19a7f179")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "symbol_path" "/Users/davide/src/diodeinc/customers/arduino/vendor/gitlab.com/kicad/libraries/kicad-symbols/9.0.0/Device.kicad_sym"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "1bd97adf-46fc-4d31-bdfa-a4e10e884d2e")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Package" "0402"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "c5366f60-234d-4d45-a5ac-fadcb83bfea6")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Capacitance" "100nF"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "77196832-cc6b-4142-bae8-cc282acc1c9d")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5189,7 +5213,7 @@
 	(footprint "R_0402_1005Metric:R_0402_1005Metric"
 		(layer "F.Cu")
 		(uuid "9b4c5a5e-eac9-4ff9-a58e-2433d51005c3")
-		(at 86.455 114.045 90)
+		(at 72.325 104.895 90)
 		(descr "Resistor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
 		(tags "resistor")
 		(property "Reference" "R1"
@@ -5243,10 +5267,10 @@
 			)
 		)
 		(property "Path" "MCU.R_RESET.R"
-			(at 0 0 90)
+			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "c076015f-1cb8-466c-afd2-c99180c4c449")
+			(uuid "3f9d7c68-f1c6-4c7b-b935-fe7105f3c8ff")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5255,46 +5279,10 @@
 			)
 		)
 		(property "type" "resistor"
-			(at 0 0 90)
+			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "a393cb2a-bd21-472b-978e-3e056f9af94a")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Package" "0402"
-			(at 0 0 90)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "94e29838-0672-44ce-83a6-e904c8b83682")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "symbol_name" "R"
-			(at 0 0 90)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "f8f9c639-f8b5-47f1-bfb6-cc066a58bd10")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "prefix" "R"
-			(at 0 0 90)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "3715aeec-a445-4e2a-974f-91b6c0daa221")
+			(uuid "752f48ac-1186-4099-b2c8-839f233c02ad")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5303,10 +5291,10 @@
 			)
 		)
 		(property "Resistance" "10k 5%"
-			(at 0 0 90)
+			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "a8633dab-9bad-423e-8cbd-fa1d88f3fc30")
+			(uuid "84357fc6-5477-47af-af25-a88616c9746f")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5314,11 +5302,11 @@
 				)
 			)
 		)
-		(property "Type" "resistor"
-			(at 0 0 90)
+		(property "Package" "0402"
+			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "d615a15d-ffb5-442e-952b-dd050cae582c")
+			(uuid "04581c97-23d2-4cda-a6f2-c3833503a674")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5327,10 +5315,46 @@
 			)
 		)
 		(property "symbol_path" "/Users/davide/src/diodeinc/customers/arduino/vendor/gitlab.com/kicad/libraries/kicad-symbols/9.0.0/Device.kicad_sym"
-			(at 0 0 90)
+			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "c2d24f1e-f49a-4db9-b37a-898b3783a12f")
+			(uuid "6163412e-61cc-4116-95a2-047a019f0c64")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "prefix" "R"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "d2e2f5e6-f216-47de-8ab6-cbd0ee1c2f58")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Type" "resistor"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "b1d2bd71-a903-4332-9258-1096b7684190")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "symbol_name" "R"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "7723606c-e36d-4bed-8e71-56b30ebc2486")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5483,7 +5507,7 @@
 	(footprint "C_0402_1005Metric:C_0402_1005Metric"
 		(layer "F.Cu")
 		(uuid "9e2dd910-07fb-48c1-9d79-f16b5c25132d")
-		(at 80.675 119.965 180)
+		(at 66.545 110.815 180)
 		(descr "Capacitor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
 		(tags "capacitor")
 		(property "Reference" "C2"
@@ -5537,22 +5561,10 @@
 			)
 		)
 		(property "Path" "MCU.C_AVCC.C"
-			(at 0 0 180)
+			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "c7a60040-e024-4384-8fb7-a29e839027d9")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "symbol_path" "/Users/davide/src/diodeinc/customers/arduino/vendor/gitlab.com/kicad/libraries/kicad-symbols/9.0.0/Device.kicad_sym"
-			(at 0 0 180)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "781bb093-c9ef-4cba-8a89-0226048c150d")
+			(uuid "d83e59d4-bb80-4b85-9471-2962863a9ccb")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5561,34 +5573,10 @@
 			)
 		)
 		(property "prefix" "C"
-			(at 0 0 180)
+			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "6d868349-c826-4cfc-85bb-5e0294044c40")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Type" "capacitor"
-			(at 0 0 180)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "7922b823-00e3-4083-91c0-12ca6d0f99f6")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "symbol_name" "C"
-			(at 0 0 180)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "842082ca-dbf4-42f7-ae6e-09c2c6dd93c9")
+			(uuid "3e4ce18a-1d57-4ede-bf81-d3d2fab7b44d")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5597,10 +5585,10 @@
 			)
 		)
 		(property "type" "capacitor"
-			(at 0 0 180)
+			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "ceab23e7-690e-4a66-a196-07590afa262f")
+			(uuid "e8657de4-64e0-410f-898c-d7805a95a34f")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5609,22 +5597,10 @@
 			)
 		)
 		(property "Capacitance" "100nF"
-			(at 0 0 180)
+			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "413dfc31-91bb-4518-93c7-24e0413d4c9f")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Voltage" "6.3V"
-			(at 0 0 180)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "5ad5ad45-f2fb-4452-9d5a-9fa3c657c5c1")
+			(uuid "9d52a624-7b60-4aab-98e0-a7d6230d8734")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5633,10 +5609,58 @@
 			)
 		)
 		(property "Package" "0402"
-			(at 0 0 180)
+			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "2417a285-8954-4ef2-8200-70a876e4826f")
+			(uuid "10bbe085-ce36-4f8e-8a80-31720861ac72")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Voltage" "6.3V"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "204c9c69-9cd8-46cd-9bb0-a34d111b9709")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "symbol_name" "C"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "f514bbc7-af86-4653-ae88-e31feee0a538")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "symbol_path" "/Users/davide/src/diodeinc/customers/arduino/vendor/gitlab.com/kicad/libraries/kicad-symbols/9.0.0/Device.kicad_sym"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "8c8d6861-5f43-4f89-8ff0-8dae2237fb5e")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Type" "capacitor"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "a7e229ef-a056-4232-b9de-9fcd44566ec0")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5789,7 +5813,7 @@
 	(footprint "R_0402_1005Metric:R_0402_1005Metric"
 		(layer "F.Cu")
 		(uuid "a456dddb-28de-44ec-8de8-ca05bd5c9ec3")
-		(at 91.31 109.46)
+		(at 77.18 100.31)
 		(descr "Resistor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
 		(tags "resistor")
 		(property "Reference" "R2"
@@ -5846,31 +5870,7 @@
 			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "2724199c-ce32-4823-8795-7136fd7acf27")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "symbol_name" "R"
-			(at 0 0 0)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "f863a1b2-276d-4e47-addc-c693241354c0")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "symbol_path" "/Users/davide/src/diodeinc/customers/arduino/vendor/gitlab.com/kicad/libraries/kicad-symbols/9.0.0/Device.kicad_sym"
-			(at 0 0 0)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "a412004b-f236-4bb7-98c3-befd82b1d295")
+			(uuid "e5915c7b-6a2f-4a0c-8a57-00160bd93d2e")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5882,31 +5882,7 @@
 			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "cd4ea762-3903-49d9-8c56-43e586879611")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Type" "resistor"
-			(at 0 0 0)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "6edece99-d8c1-4367-adbe-1973082139ac")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Package" "0402"
-			(at 0 0 0)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "009959cb-011f-4a2f-a1c9-244154b3b45c")
+			(uuid "7b201187-f1d5-4e9c-b7fb-9c4dfa5fa354")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5918,7 +5894,31 @@
 			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "b903642d-0270-4058-8683-d3b4ec942fe8")
+			(uuid "7d7027d8-d348-4a75-ab6a-06f0244ebdf8")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Type" "resistor"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "b4fbbdd3-02ae-49f1-812a-3c546b54b49e")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "symbol_path" "/Users/davide/src/diodeinc/customers/arduino/vendor/gitlab.com/kicad/libraries/kicad-symbols/9.0.0/Device.kicad_sym"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "a8847914-971c-4d18-a2f4-50bffeedafd9")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5930,7 +5930,31 @@
 			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "71edd546-f80f-42fa-9ade-55e7fc45a3ae")
+			(uuid "612a43d0-5b40-4bb5-934b-c4315c9b6b33")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "symbol_name" "R"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "645360c0-d468-4bc8-b58c-94b881f51328")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Package" "0402"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "0bb72ef2-126c-4ec3-b313-8d61d6fd2b92")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6083,7 +6107,7 @@
 	(footprint "LED_0603_1608Metric:LED_0603_1608Metric"
 		(layer "F.Cu")
 		(uuid "a94c0364-7b68-4fb6-afc0-9d77806241c8")
-		(at 91.05 99.04)
+		(at 76.92 89.89)
 		(descr "LED SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: http://www.tortai-tech.com/upload/download/2011102023233369053.pdf), generated with kicad-footprint-generator")
 		(tags "LED")
 		(property "Reference" "D2"
@@ -6140,55 +6164,7 @@
 			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "ff15c49b-a95a-4fff-a29f-c147dd0a306c")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "type" "led"
-			(at 0 0 0)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "1e65374f-9444-4fc6-8718-11d0d68588eb")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Type" "led"
-			(at 0 0 0)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "fa35cf74-b0cc-4240-97d0-e8310e88a635")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Color" "green"
-			(at 0 0 0)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "af3d352c-96bc-440d-ac42-ade822a47fb1")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "symbol_path" "/Users/davide/src/diodeinc/customers/arduino/vendor/gitlab.com/kicad/libraries/kicad-symbols/9.0.0/Device.kicad_sym"
-			(at 0 0 0)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "817d20c0-01f9-488a-b697-d3de3eb989cf")
+			(uuid "633e0f9d-816e-4bcf-8a88-b7bb9b1d16fc")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6200,19 +6176,7 @@
 			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "e164b459-61c2-4db8-8d6f-edbecb2e1e23")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Package" "0603"
-			(at 0 0 0)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "eaebbe6e-e43e-4e2e-8989-d69b57d69304")
+			(uuid "2fbe5460-d6c1-4542-944d-f5a2f4301d4e")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6224,7 +6188,67 @@
 			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "1f247f8e-67e9-488a-a329-ac981c401960")
+			(uuid "3d66c67b-70ba-4af2-b952-2e5869960199")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Package" "0603"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "1857f97e-1b23-4add-bc22-f6ce7a68cfd1")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Color" "green"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "849975b0-cfef-4da1-882b-fdbff8f44c49")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "type" "led"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "14bf7e73-d3ca-4f0b-a9ca-ce4abd54007a")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Type" "led"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "5f5aa04e-95a8-439b-b344-54316910376f")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "symbol_path" "/Users/davide/src/diodeinc/customers/arduino/vendor/gitlab.com/kicad/libraries/kicad-symbols/9.0.0/Device.kicad_sym"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "c9601668-5b78-48b0-87c7-596a4afa7ee3")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6397,7 +6421,7 @@
 	(footprint "101181940001LF:101181940001LF"
 		(layer "F.Cu")
 		(uuid "b8439caa-287e-4b23-ac39-a79604c37bc9")
-		(at 85.34 92.93 180)
+		(at 71.21 83.78 180)
 		(descr "10118194-0001LF-2")
 		(tags "Connector")
 		(property "Reference" "J3"
@@ -6452,19 +6476,7 @@
 			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "1d38fbad-790a-4422-83ec-09c6a9cec5cd")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "prefix" "J"
-			(at 0 0 0)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "47932e41-2a85-4b9b-ac96-0931ea061350")
+			(uuid "316683a2-20a4-4450-89ef-32e7f1ae733c")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6476,7 +6488,7 @@
 			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "415e20c5-98ed-40bb-99e3-64d03a0c8821")
+			(uuid "3c9bc8c0-aefb-40ed-8f37-cfcb09ec9449")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6484,23 +6496,11 @@
 				)
 			)
 		)
-		(property "symbol_name" "10118194-0001LF"
+		(property "prefix" "J"
 			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "e2117df5-0ca1-4494-8e4b-a61c6372bd5b")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "symbol_path" "/Users/davide/src/diodeinc/customers/arduino/components/10118194-0001LF/10118194-0001LF.kicad_sym"
-			(at 0 0 0)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "03709d43-ee47-47d3-9115-6d638f378163")
+			(uuid "7351c9f0-42ae-4d8d-9b46-64799eefcafd")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6512,7 +6512,31 @@
 			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "492fa12b-ce0b-4bdb-bda6-f6430a96fca3")
+			(uuid "5458a8cf-7439-415f-b8be-aac4a198f4b8")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "symbol_name" "10118194-0001LF"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "691656a0-03a3-4722-b21a-594003046685")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "symbol_path" "/Users/davide/src/diodeinc/customers/arduino/components/10118194-0001LF/10118194-0001LF.kicad_sym"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "8c8b1892-8ce2-4516-b3d4-9113f17df88f")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6833,7 +6857,7 @@
 	(footprint "C_0402_1005Metric:C_0402_1005Metric"
 		(layer "F.Cu")
 		(uuid "cb6fdbc1-a481-4dcd-a0d6-176d3b614b85")
-		(at 83.0675 101.58 90)
+		(at 68.9375 92.43 90)
 		(descr "Capacitor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
 		(tags "capacitor")
 		(property "Reference" "C12"
@@ -6887,22 +6911,10 @@
 			)
 		)
 		(property "Path" "USB_SERIAL.C_VCCIO.C"
-			(at 0 0 90)
+			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "fca7d03d-943d-43b4-af32-3509502e98ba")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "type" "capacitor"
-			(at 0 0 90)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "c216a1fc-8063-4be3-9931-61019679bb62")
+			(uuid "703c626c-af30-4abd-8262-f2ec48d7e8ed")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6911,34 +6923,10 @@
 			)
 		)
 		(property "Capacitance" "100nF"
-			(at 0 0 90)
+			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "656d84fd-031b-44b5-998c-4b0df67f9c66")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Type" "capacitor"
-			(at 0 0 90)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "b98a174b-f2e3-499e-a5bf-e1cdcceb561d")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "symbol_name" "C"
-			(at 0 0 90)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "0485ed4c-4cc9-4d28-8f36-944e7159f2f3")
+			(uuid "d0ad1a07-3613-4251-9967-3a7bdb21f827")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6947,34 +6935,10 @@
 			)
 		)
 		(property "symbol_path" "/Users/davide/src/diodeinc/customers/arduino/vendor/gitlab.com/kicad/libraries/kicad-symbols/9.0.0/Device.kicad_sym"
-			(at 0 0 90)
+			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "27e9def7-78b9-46a4-b1d1-fec471d1e88f")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Voltage" "10V"
-			(at 0 0 90)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "9352201d-8c16-4180-aa12-89497e9440c2")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Package" "0402"
-			(at 0 0 90)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "ea49043f-9902-4ff6-b5d3-d7c54152f3e0")
+			(uuid "b785df28-0e03-4305-ae32-7a1b89ecc539")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6983,10 +6947,70 @@
 			)
 		)
 		(property "prefix" "C"
-			(at 0 0 90)
+			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "deb0eeb4-35af-48e9-8cf5-2d74b6cb98fc")
+			(uuid "b678ead5-f9bd-4dee-95e8-975eaf90dfb0")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "type" "capacitor"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "580985ed-08eb-4f1e-87b8-d4f07bb27d49")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Voltage" "10V"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "0b51de1a-5acf-448c-a561-a8dc682a195d")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Package" "0402"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "c24a7771-4734-417f-8421-0c18948d10c0")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Type" "capacitor"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "a4eada32-cd7c-4a71-a045-f57db67dfffc")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "symbol_name" "C"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "468dea1f-0b4f-43c3-b51a-d1e14ed0ce74")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7139,7 +7163,7 @@
 	(footprint "R_0402_1005Metric:R_0402_1005Metric"
 		(layer "F.Cu")
 		(uuid "d567d646-3d1e-488b-a485-dae24f4ffdad")
-		(at 84.4775 108.700001 -90)
+		(at 70.3475 99.550001 -90)
 		(descr "Resistor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
 		(tags "resistor")
 		(property "Reference" "R4"
@@ -7193,22 +7217,10 @@
 			)
 		)
 		(property "Path" "USB_SERIAL.R_USBDM.R"
-			(at 0 0 270)
+			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "401e8797-75d7-4cef-8e36-5f8227f40f32")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "prefix" "R"
-			(at 0 0 270)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "92cb3418-db90-4c3b-b571-f537f3866897")
+			(uuid "90c4350c-7f01-4ade-a5b3-da685d9160c8")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7217,46 +7229,10 @@
 			)
 		)
 		(property "Resistance" "27 5%"
-			(at 0 0 270)
+			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "b8c729c3-ffa1-406f-ba4f-2f26d193a8c3")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Type" "resistor"
-			(at 0 0 270)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "dd4f0bb8-26a5-42b0-b424-97da30cdd514")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "symbol_path" "/Users/davide/src/diodeinc/customers/arduino/vendor/gitlab.com/kicad/libraries/kicad-symbols/9.0.0/Device.kicad_sym"
-			(at 0 0 270)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "3d15d930-fdbd-4d45-bc82-a6820b732d02")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "symbol_name" "R"
-			(at 0 0 270)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "41947c36-df15-40e3-a861-023d0085b734")
+			(uuid "a71252a1-cc08-4cdc-a67e-0bd441664432")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7265,10 +7241,10 @@
 			)
 		)
 		(property "type" "resistor"
-			(at 0 0 270)
+			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "8ec3e84f-8ead-4f3d-b418-88bc98403c7f")
+			(uuid "d0d83c47-3231-4f5b-9114-7edba44eadf0")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7277,10 +7253,58 @@
 			)
 		)
 		(property "Package" "0402"
-			(at 0 0 270)
+			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "3b2f40ca-3730-43a3-820a-4d0a4ee6a195")
+			(uuid "d635acfd-dbeb-4e66-b152-b486f42e9dd4")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Type" "resistor"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "b2106874-9a46-4ec2-be02-ad539eb8e975")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "prefix" "R"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "a92f3848-86f2-4d82-b3eb-4733515a282e")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "symbol_name" "R"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "2c50d422-ea92-449b-b312-42b0cc74abee")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "symbol_path" "/Users/davide/src/diodeinc/customers/arduino/vendor/gitlab.com/kicad/libraries/kicad-symbols/9.0.0/Device.kicad_sym"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "d5b09541-dc87-4678-941a-b00c709b3a99")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7433,7 +7457,7 @@
 	(footprint "R_0402_1005Metric:R_0402_1005Metric"
 		(layer "F.Cu")
 		(uuid "f099b597-d54e-4a51-b5a9-59997b1ff6e1")
-		(at 91.43 105.56)
+		(at 77.3 96.41)
 		(descr "Resistor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
 		(tags "resistor")
 		(property "Reference" "R3"
@@ -7490,7 +7514,7 @@
 			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "497d9d80-0bbc-48cb-9667-031907f98225")
+			(uuid "7b50d1cc-0ecb-4916-837b-9bdc6d3eebef")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7502,55 +7526,7 @@
 			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "cee5fcdb-0ef7-4652-8277-174f03d03e7a")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "symbol_path" "/Users/davide/src/diodeinc/customers/arduino/vendor/gitlab.com/kicad/libraries/kicad-symbols/9.0.0/Device.kicad_sym"
-			(at 0 0 0)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "6a94d153-3d68-4894-b150-e8644daab084")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "prefix" "R"
-			(at 0 0 0)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "cf412a72-29b2-4c32-a473-be48d9c27e1e")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Type" "resistor"
-			(at 0 0 0)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "b6c67741-c77d-4a6f-a499-77d8087e0bb1")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Package" "0402"
-			(at 0 0 0)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "f8215ee5-639f-48ce-a7ec-d62ef606fbb1")
+			(uuid "efcd8321-fe18-4783-bf75-436903b6b069")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7562,7 +7538,31 @@
 			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "0b23634a-5846-4f5d-8dac-1c62d59c870b")
+			(uuid "8fc613fe-5518-4e16-b847-578fb722f03c")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "prefix" "R"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "033ce2dc-6fca-43c4-baee-2c18ba0702fe")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "symbol_path" "/Users/davide/src/diodeinc/customers/arduino/vendor/gitlab.com/kicad/libraries/kicad-symbols/9.0.0/Device.kicad_sym"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "918fdc08-4120-41e3-a90c-06320e09dc82")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7574,7 +7574,31 @@
 			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "caf32c81-581f-42f2-b10d-d624333d1e0d")
+			(uuid "47a37a76-e1dc-4ece-98a1-4b150a2947f9")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Package" "0402"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "faf3ab41-a25c-484f-b9f4-f72feeff9077")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Type" "resistor"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "e844654c-7a23-41e6-9310-b987f8f592a6")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7727,7 +7751,7 @@
 	(footprint "SKRKAEE020:SKRKAEE020"
 		(layer "F.Cu")
 		(uuid "fcffd43d-2199-406c-a9a6-7c8ef7328d7e")
-		(at 79.29476 115.991205 90)
+		(at 65.16476 106.841205 90)
 		(descr "SKRKAEE020")
 		(tags "Switch")
 		(property "Reference" "S1"
@@ -7779,58 +7803,10 @@
 			)
 		)
 		(property "Path" "MCU.SW_RESET.SW.SKRKAHE020"
-			(at 0 0 90)
+			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "f0bd626d-9f00-43e9-8ad8-d0a83a379204")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "manufacturer" "ALPS Electric"
-			(at 0 0 90)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "256d937d-6572-4e8b-ab03-4e9261814fb5")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "symbol_path" "/Users/davide/src/diodeinc/customers/arduino/components/SKRKAHE020/SKRKAHE020.kicad_sym"
-			(at 0 0 90)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "7d7c702f-99b1-4242-b158-e24e8d524b9d")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "mpn" "SKRKAHE020"
-			(at 0 0 90)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "faba7cd5-7894-41e4-9100-43c228f33ec3")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "symbol_name" "SKRKAHE020"
-			(at 0 0 90)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "7df44861-9d6e-4e46-82b0-fbc7ed6b786f")
+			(uuid "3fc285a4-8157-4aa9-8224-b54024de7ac1")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7839,10 +7815,58 @@
 			)
 		)
 		(property "prefix" "S"
-			(at 0 0 90)
+			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "28f76c8a-2a2b-4ad1-bfba-67c415588adb")
+			(uuid "7675039f-8d26-4d3d-b290-0e84d5d9e8d3")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "symbol_path" "/Users/davide/src/diodeinc/customers/arduino/components/SKRKAHE020/SKRKAHE020.kicad_sym"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "f9e98208-f3ad-43ca-bada-07e56053cb76")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "mpn" "SKRKAHE020"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "ee3cab20-0488-4818-8f60-bc9ddd0045c2")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "symbol_name" "SKRKAHE020"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "f909d53c-27a8-43b6-9433-96a112cd6212")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "manufacturer" "ALPS Electric"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "79db5f81-cd4b-44ff-b131-a6683b801cd9")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8000,7 +8024,7 @@
 	(footprint "C_0402_1005Metric:C_0402_1005Metric"
 		(layer "B.Cu")
 		(uuid "1b1bb382-00da-411e-be32-55a965a15222")
-		(at 88.745711 103.922427 90)
+		(at 74.615711 94.772427 90)
 		(descr "Capacitor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
 		(tags "capacitor")
 		(property "Reference" "C8"
@@ -8030,7 +8054,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 -90)
+			(at 0 0 270)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
@@ -8044,7 +8068,7 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
-			(at 0 0 -90)
+			(at 0 0 270)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
@@ -8058,120 +8082,111 @@
 			)
 		)
 		(property "Path" "REG_5V.C_IN_HF.C"
-			(at 0 0 -90)
+			(at 0 0 0)
 			(layer "B.SilkS")
 			(hide yes)
-			(uuid "653d2a85-5188-4179-af78-c5ffaff6949f")
+			(uuid "5f2e5037-0d42-4404-b8c2-4a09decaa568")
 			(effects
 				(font
 					(size 1.27 1.27)
 					(thickness 0.15)
 				)
-				(justify mirror)
-			)
-		)
-		(property "Type" "capacitor"
-			(at 0 0 -90)
-			(layer "B.SilkS")
-			(hide yes)
-			(uuid "c823b0ba-91fd-4f3b-954b-9ed5741fb1b9")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-				(justify mirror)
-			)
-		)
-		(property "symbol_path" "/Users/davide/src/diodeinc/customers/arduino/vendor/gitlab.com/kicad/libraries/kicad-symbols/9.0.0/Device.kicad_sym"
-			(at 0 0 -90)
-			(layer "B.SilkS")
-			(hide yes)
-			(uuid "903ce541-7ab3-4089-9b2c-4d0838a56e76")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-				(justify mirror)
 			)
 		)
 		(property "symbol_name" "C"
-			(at 0 0 -90)
+			(at 0 0 0)
 			(layer "B.SilkS")
 			(hide yes)
-			(uuid "6f0792d5-9754-4ba2-b576-3341ca106a87")
+			(uuid "3a327b33-71b1-428c-894e-f984c2c16484")
 			(effects
 				(font
 					(size 1.27 1.27)
 					(thickness 0.15)
 				)
-				(justify mirror)
 			)
 		)
 		(property "Capacitance" "100nF"
-			(at 0 0 -90)
+			(at 0 0 0)
 			(layer "B.SilkS")
 			(hide yes)
-			(uuid "6ee7abeb-3914-4f73-b317-0d47fd30b846")
+			(uuid "6f9f19c4-2d29-4157-8438-5e61a73b1d19")
 			(effects
 				(font
 					(size 1.27 1.27)
 					(thickness 0.15)
 				)
-				(justify mirror)
-			)
-		)
-		(property "prefix" "C"
-			(at 0 0 -90)
-			(layer "B.SilkS")
-			(hide yes)
-			(uuid "3ab15628-0b2f-49b2-b536-2b4e2258a191")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-				(justify mirror)
-			)
-		)
-		(property "Voltage" "25V"
-			(at 0 0 -90)
-			(layer "B.SilkS")
-			(hide yes)
-			(uuid "5a37b037-16c9-41b5-8e19-ca610805d018")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-				(justify mirror)
 			)
 		)
 		(property "type" "capacitor"
-			(at 0 0 -90)
+			(at 0 0 0)
 			(layer "B.SilkS")
 			(hide yes)
-			(uuid "a44e178d-2751-413a-b956-3f3ee65ab4e9")
+			(uuid "39652933-c8d7-4da5-8d78-180f0beb594f")
 			(effects
 				(font
 					(size 1.27 1.27)
 					(thickness 0.15)
 				)
-				(justify mirror)
+			)
+		)
+		(property "Type" "capacitor"
+			(at 0 0 0)
+			(layer "B.SilkS")
+			(hide yes)
+			(uuid "c8d68ba7-89c1-43bf-a83e-421dd9063a3f")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "prefix" "C"
+			(at 0 0 0)
+			(layer "B.SilkS")
+			(hide yes)
+			(uuid "94a4cbd6-5881-4e01-a494-067c82bda92c")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
 			)
 		)
 		(property "Package" "0402"
-			(at 0 0 -90)
+			(at 0 0 0)
 			(layer "B.SilkS")
 			(hide yes)
-			(uuid "58f812aa-3822-40b1-a77a-df401f3788e6")
+			(uuid "ef3c4fde-f03d-465b-adaf-87919a8fec4f")
 			(effects
 				(font
 					(size 1.27 1.27)
 					(thickness 0.15)
 				)
-				(justify mirror)
+			)
+		)
+		(property "Voltage" "25V"
+			(at 0 0 0)
+			(layer "B.SilkS")
+			(hide yes)
+			(uuid "040709e5-aa94-4994-a690-822d17abce8e")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "symbol_path" "/Users/davide/src/diodeinc/customers/arduino/vendor/gitlab.com/kicad/libraries/kicad-symbols/9.0.0/Device.kicad_sym"
+			(at 0 0 0)
+			(layer "B.SilkS")
+			(hide yes)
+			(uuid "82b18d4b-c2b4-43b9-b33e-1776a42b4411")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
 			)
 		)
 		(path "/bd0df9ad-a757-5c8a-b269-b3ea0290e4bc/bd0df9ad-a757-5c8a-b269-b3ea0290e4bc")
@@ -8277,7 +8292,7 @@
 			(uuid "3926d39e-b3f8-4464-8f01-352fe5c225fd")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 0 -90)
+			(at 0 0 270)
 			(layer "B.Fab")
 			(uuid "ca79fc54-98d6-487e-a657-ff3f7e909538")
 			(effects
@@ -8320,7 +8335,7 @@
 	(footprint "SOT229P700X180-4N:SOT229P700X180-4N"
 		(layer "B.Cu")
 		(uuid "1ee76c19-8774-418a-973a-a55d8e724b71")
-		(at 84.66 107.23 -90)
+		(at 70.53 98.08 -90)
 		(descr "3 Lead SOT-223 Plastic Package")
 		(tags "Integrated Circuit")
 		(property "Reference" "IC2"
@@ -8376,81 +8391,75 @@
 			)
 		)
 		(property "Path" "REG_5V.U_REG.AMS1117M5_0"
-			(at 0 0 90)
+			(at 0 0 0)
 			(layer "B.SilkS")
 			(hide yes)
-			(uuid "fb7a6d92-2961-4079-b225-f801bee103e4")
+			(uuid "6b576e70-b51e-40f8-9219-821165038b70")
 			(effects
 				(font
 					(size 1.27 1.27)
 					(thickness 0.15)
 				)
-				(justify mirror)
-			)
-		)
-		(property "symbol_name" "AMS1117-5.0"
-			(at 0 0 90)
-			(layer "B.SilkS")
-			(hide yes)
-			(uuid "f5877d09-9db5-4d10-9de1-67e61d125eca")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-				(justify mirror)
-			)
-		)
-		(property "mpn" "AMS1117M5_0"
-			(at 0 0 90)
-			(layer "B.SilkS")
-			(hide yes)
-			(uuid "1c4d1090-7e8b-423b-84f2-b31322f0dd64")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-				(justify mirror)
 			)
 		)
 		(property "prefix" "IC"
-			(at 0 0 90)
+			(at 0 0 0)
 			(layer "B.SilkS")
 			(hide yes)
-			(uuid "f85b134d-3cc8-4437-aba8-9c9041db4dc1")
+			(uuid "9103de42-2f6d-4210-ac68-04d87ce3f106")
 			(effects
 				(font
 					(size 1.27 1.27)
 					(thickness 0.15)
 				)
-				(justify mirror)
-			)
-		)
-		(property "symbol_path" "/Users/davide/src/diodeinc/customers/arduino/components/AMS1117-5.0/AMS1117-5_0.kicad_sym"
-			(at 0 0 90)
-			(layer "B.SilkS")
-			(hide yes)
-			(uuid "47df25fb-c5d9-4a03-bf0e-39988404ba96")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-				(justify mirror)
 			)
 		)
 		(property "manufacturer" "Advanced Monolithic Systems"
-			(at 0 0 90)
+			(at 0 0 0)
 			(layer "B.SilkS")
 			(hide yes)
-			(uuid "8b4b5bcf-7b97-49b3-b03b-3106d941e941")
+			(uuid "5fddb563-d5a9-411e-9cbc-26d1aa368cbc")
 			(effects
 				(font
 					(size 1.27 1.27)
 					(thickness 0.15)
 				)
-				(justify mirror)
+			)
+		)
+		(property "mpn" "AMS1117M5_0"
+			(at 0 0 0)
+			(layer "B.SilkS")
+			(hide yes)
+			(uuid "3b476d74-0790-425c-8153-6ed02146652c")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "symbol_path" "/Users/davide/src/diodeinc/customers/arduino/components/AMS1117-5.0/AMS1117-5_0.kicad_sym"
+			(at 0 0 0)
+			(layer "B.SilkS")
+			(hide yes)
+			(uuid "2ede18c6-2251-4ef6-a0c6-bf0cece61908")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "symbol_name" "AMS1117-5.0"
+			(at 0 0 0)
+			(layer "B.SilkS")
+			(hide yes)
+			(uuid "6e513c6f-c8ae-4665-887e-da31196f0621")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
 			)
 		)
 		(path "/b478a567-3ecf-54e2-b314-f110739cde3a/b478a567-3ecf-54e2-b314-f110739cde3a")
@@ -8658,7 +8667,7 @@
 	(footprint "C_0805_2012Metric:C_0805_2012Metric"
 		(layer "B.Cu")
 		(uuid "2406e970-10f3-4ede-ab6e-d1042ca40fd2")
-		(at 86.385712 101.892427)
+		(at 72.255712 92.742427)
 		(descr "Capacitor SMD 0805 (2012 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf, https://docs.google.com/spreadsheets/d/1BsfQQcO9C6DZCsRaXUlFlo91Tg2WpOkGARC1WS5S8t0/edit?usp=sharing), generated with kicad-footprint-generator")
 		(tags "capacitor")
 		(property "Reference" "C7"
@@ -8716,120 +8725,111 @@
 			)
 		)
 		(property "Path" "REG_5V.C_IN.C"
-			(at 0 0 180)
+			(at 0 0 0)
 			(layer "B.SilkS")
 			(hide yes)
-			(uuid "638732a3-7243-4d3b-86f7-9c570702b2ad")
+			(uuid "3e6f47a5-6660-433d-8dcf-9ef3e06c55de")
 			(effects
 				(font
 					(size 1.27 1.27)
 					(thickness 0.15)
 				)
-				(justify mirror)
-			)
-		)
-		(property "Type" "capacitor"
-			(at 0 0 180)
-			(layer "B.SilkS")
-			(hide yes)
-			(uuid "0ad4e2b4-7487-41a2-a992-0cdff1dbe29d")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-				(justify mirror)
 			)
 		)
 		(property "symbol_name" "C"
-			(at 0 0 180)
+			(at 0 0 0)
 			(layer "B.SilkS")
 			(hide yes)
-			(uuid "02350a0d-e00e-4239-b9ba-f90b4fd9b853")
+			(uuid "678a074d-8ce9-4c85-9b3c-5a131d1679e1")
 			(effects
 				(font
 					(size 1.27 1.27)
 					(thickness 0.15)
 				)
-				(justify mirror)
 			)
 		)
 		(property "Capacitance" "10uF"
-			(at 0 0 180)
+			(at 0 0 0)
 			(layer "B.SilkS")
 			(hide yes)
-			(uuid "9d46671a-5f1c-461f-9dd1-f09ec45bbdd4")
+			(uuid "71b8f8d3-25b9-4a3e-a58c-e935fdcddb44")
 			(effects
 				(font
 					(size 1.27 1.27)
 					(thickness 0.15)
 				)
-				(justify mirror)
-			)
-		)
-		(property "Package" "0805"
-			(at 0 0 180)
-			(layer "B.SilkS")
-			(hide yes)
-			(uuid "18964d2b-b255-4454-87a0-504ffe45928d")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-				(justify mirror)
-			)
-		)
-		(property "prefix" "C"
-			(at 0 0 180)
-			(layer "B.SilkS")
-			(hide yes)
-			(uuid "ee45fb08-2eb4-4b64-b1bf-b919e92a2e0b")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-				(justify mirror)
-			)
-		)
-		(property "type" "capacitor"
-			(at 0 0 180)
-			(layer "B.SilkS")
-			(hide yes)
-			(uuid "1027e5d0-286e-4823-b8e0-5bf9ce6d4685")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-				(justify mirror)
 			)
 		)
 		(property "Voltage" "25V"
-			(at 0 0 180)
+			(at 0 0 0)
 			(layer "B.SilkS")
 			(hide yes)
-			(uuid "046d096f-1899-4de6-b1a3-d8ba80f7d893")
+			(uuid "a7b0947f-341a-43ba-ba6b-d0a903b9f818")
 			(effects
 				(font
 					(size 1.27 1.27)
 					(thickness 0.15)
 				)
-				(justify mirror)
+			)
+		)
+		(property "prefix" "C"
+			(at 0 0 0)
+			(layer "B.SilkS")
+			(hide yes)
+			(uuid "6e402a43-b58b-41f2-a6e6-45e00f120158")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Package" "0805"
+			(at 0 0 0)
+			(layer "B.SilkS")
+			(hide yes)
+			(uuid "61271060-da27-4d6b-9b00-14031aae62f4")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "type" "capacitor"
+			(at 0 0 0)
+			(layer "B.SilkS")
+			(hide yes)
+			(uuid "fe177353-2ebf-48a8-a7fa-4f4af8e4381f")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
 			)
 		)
 		(property "symbol_path" "/Users/davide/src/diodeinc/customers/arduino/vendor/gitlab.com/kicad/libraries/kicad-symbols/9.0.0/Device.kicad_sym"
-			(at 0 0 180)
+			(at 0 0 0)
 			(layer "B.SilkS")
 			(hide yes)
-			(uuid "b8a6f66c-d7ea-4884-b986-1f798ac3a9f9")
+			(uuid "1ce63105-9b8a-495f-b49e-2301357f320f")
 			(effects
 				(font
 					(size 1.27 1.27)
 					(thickness 0.15)
 				)
-				(justify mirror)
+			)
+		)
+		(property "Type" "capacitor"
+			(at 0 0 0)
+			(layer "B.SilkS")
+			(hide yes)
+			(uuid "7f29770d-62aa-4f00-bbd8-f4978b008010")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
 			)
 		)
 		(path "/7b7c0535-5300-5dea-97c9-8368ff644db9/7b7c0535-5300-5dea-97c9-8368ff644db9")
@@ -8978,7 +8978,7 @@
 	(footprint "PinHeader_1x15_P2.54mm_Vertical:PinHeader_1x15_P2.54mm_Vertical"
 		(layer "B.Cu")
 		(uuid "472ea7c7-8015-4e52-a764-4efe8b87d515")
-		(at 96.05 95.16 180)
+		(at 81.92 86.01 180)
 		(descr "Through hole straight pin header, 1x15, 2.54mm pitch, single row")
 		(tags "Through hole pin header THT 1x15 2.54mm single row")
 		(property "Reference" "J2"
@@ -9039,104 +9039,96 @@
 			(at 0 0 0)
 			(layer "B.SilkS")
 			(hide yes)
-			(uuid "2412518f-04a3-4899-8669-bac3fb63eb3d")
+			(uuid "ec4fd1bf-e547-49a5-98de-a24ccda0eccb")
 			(effects
 				(font
 					(size 1.27 1.27)
 					(thickness 0.15)
 				)
-				(justify mirror)
-			)
-		)
-		(property "Pitch" "2.54mm"
-			(at 0 0 0)
-			(layer "B.SilkS")
-			(hide yes)
-			(uuid "4f2d490f-bcef-474c-8ab0-61dead2f4b0c")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-				(justify mirror)
-			)
-		)
-		(property "Pins" "15"
-			(at 0 0 0)
-			(layer "B.SilkS")
-			(hide yes)
-			(uuid "b1af0276-af57-4502-9f1b-edce43c8b628")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-				(justify mirror)
-			)
-		)
-		(property "Orientation" "Vertical"
-			(at 0 0 0)
-			(layer "B.SilkS")
-			(hide yes)
-			(uuid "a863c558-ef0f-4633-a174-267dd82a16dc")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-				(justify mirror)
-			)
-		)
-		(property "symbol_path" "/Users/davide/src/diodeinc/customers/arduino/vendor/gitlab.com/kicad/libraries/kicad-symbols/9.0.0/Connector_Generic.kicad_sym"
-			(at 0 0 0)
-			(layer "B.SilkS")
-			(hide yes)
-			(uuid "81acbbb3-1356-4c9c-9d0e-31cbe796e3a3")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-				(justify mirror)
-			)
-		)
-		(property "prefix" "J"
-			(at 0 0 0)
-			(layer "B.SilkS")
-			(hide yes)
-			(uuid "57a95dde-9ecc-42c4-9f67-0753960785b4")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-				(justify mirror)
-			)
-		)
-		(property "Rows" "1"
-			(at 0 0 0)
-			(layer "B.SilkS")
-			(hide yes)
-			(uuid "0e09ba2a-8884-4f9a-ab33-da04f4161abc")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-				(justify mirror)
 			)
 		)
 		(property "symbol_name" "Conn_01x15"
 			(at 0 0 0)
 			(layer "B.SilkS")
 			(hide yes)
-			(uuid "e384a3bb-d5fe-4e24-b7fa-2c517ad06736")
+			(uuid "cd4305d6-7c06-41c3-8fc9-2e60d07e2ce5")
 			(effects
 				(font
 					(size 1.27 1.27)
 					(thickness 0.15)
 				)
-				(justify mirror)
+			)
+		)
+		(property "Rows" "1"
+			(at 0 0 0)
+			(layer "B.SilkS")
+			(hide yes)
+			(uuid "18419826-e5bd-4a46-afd3-168f40c6014b")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Pins" "15"
+			(at 0 0 0)
+			(layer "B.SilkS")
+			(hide yes)
+			(uuid "85bffa2d-1627-4af0-84f7-516867ac4130")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Pitch" "2.54mm"
+			(at 0 0 0)
+			(layer "B.SilkS")
+			(hide yes)
+			(uuid "51238b08-704a-4a65-a4d7-d7b4be7d154a")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Orientation" "Vertical"
+			(at 0 0 0)
+			(layer "B.SilkS")
+			(hide yes)
+			(uuid "056878aa-812d-4917-af9e-8d63f9841a8d")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "prefix" "J"
+			(at 0 0 0)
+			(layer "B.SilkS")
+			(hide yes)
+			(uuid "3127142e-0303-489d-a6f1-9a57d642f023")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "symbol_path" "/Users/davide/src/diodeinc/customers/arduino/vendor/gitlab.com/kicad/libraries/kicad-symbols/9.0.0/Connector_Generic.kicad_sym"
+			(at 0 0 0)
+			(layer "B.SilkS")
+			(hide yes)
+			(uuid "b0e506fb-038e-4483-a2f0-4f022a1d1bb5")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
 			)
 		)
 		(path "/9145f0ba-975f-51f2-8f0c-4bbd94d509c7/9145f0ba-975f-51f2-8f0c-4bbd94d509c7")
@@ -9454,7 +9446,7 @@
 	(footprint "C_0805_2012Metric:C_0805_2012Metric"
 		(layer "B.Cu")
 		(uuid "a19014ff-095f-42e3-8388-a047708a5fb0")
-		(at 82.925712 101.892427 180)
+		(at 68.795712 92.742427 180)
 		(descr "Capacitor SMD 0805 (2012 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf, https://docs.google.com/spreadsheets/d/1BsfQQcO9C6DZCsRaXUlFlo91Tg2WpOkGARC1WS5S8t0/edit?usp=sharing), generated with kicad-footprint-generator")
 		(tags "capacitor")
 		(property "Reference" "C9"
@@ -9515,117 +9507,108 @@
 			(at 0 0 0)
 			(layer "B.SilkS")
 			(hide yes)
-			(uuid "372ea11e-c586-4613-9cec-c29baa2b9c49")
+			(uuid "b4f8b8f4-5bf0-4600-8e2b-5730e3739be8")
 			(effects
 				(font
 					(size 1.27 1.27)
 					(thickness 0.15)
 				)
-				(justify mirror)
-			)
-		)
-		(property "Type" "capacitor"
-			(at 0 0 0)
-			(layer "B.SilkS")
-			(hide yes)
-			(uuid "565ae80c-7e91-46c4-aa20-b1827993150b")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-				(justify mirror)
-			)
-		)
-		(property "symbol_path" "/Users/davide/src/diodeinc/customers/arduino/vendor/gitlab.com/kicad/libraries/kicad-symbols/9.0.0/Device.kicad_sym"
-			(at 0 0 0)
-			(layer "B.SilkS")
-			(hide yes)
-			(uuid "1a4669e4-8704-45bf-bab2-c6c45af6f0bd")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-				(justify mirror)
-			)
-		)
-		(property "Package" "0805"
-			(at 0 0 0)
-			(layer "B.SilkS")
-			(hide yes)
-			(uuid "2b68bf49-ea34-49f2-b42d-41e0323ee625")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-				(justify mirror)
-			)
-		)
-		(property "prefix" "C"
-			(at 0 0 0)
-			(layer "B.SilkS")
-			(hide yes)
-			(uuid "b8613a68-2391-4645-8667-b1425068858d")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-				(justify mirror)
-			)
-		)
-		(property "Voltage" "10V"
-			(at 0 0 0)
-			(layer "B.SilkS")
-			(hide yes)
-			(uuid "5a1a6760-9e40-49ef-b4c6-7fe84cea6e73")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-				(justify mirror)
-			)
-		)
-		(property "symbol_name" "C"
-			(at 0 0 0)
-			(layer "B.SilkS")
-			(hide yes)
-			(uuid "c129bcc2-6daa-4793-b216-883c46bbc445")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-				(justify mirror)
 			)
 		)
 		(property "type" "capacitor"
 			(at 0 0 0)
 			(layer "B.SilkS")
 			(hide yes)
-			(uuid "87d63689-e6db-4a7c-90db-9fd30a03a2ea")
+			(uuid "387b0918-7142-45c9-b7a1-ef177fb8a9da")
 			(effects
 				(font
 					(size 1.27 1.27)
 					(thickness 0.15)
 				)
-				(justify mirror)
+			)
+		)
+		(property "Type" "capacitor"
+			(at 0 0 0)
+			(layer "B.SilkS")
+			(hide yes)
+			(uuid "6d17d0e0-6981-4f47-a12e-fc3abcbe0e91")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Voltage" "10V"
+			(at 0 0 0)
+			(layer "B.SilkS")
+			(hide yes)
+			(uuid "032e913b-136d-4f32-b109-cf8e0a50f9ef")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "symbol_name" "C"
+			(at 0 0 0)
+			(layer "B.SilkS")
+			(hide yes)
+			(uuid "17d92f02-b212-4a66-afaf-4701835c435e")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "prefix" "C"
+			(at 0 0 0)
+			(layer "B.SilkS")
+			(hide yes)
+			(uuid "4710284f-8149-436e-8f12-b7eecc03aace")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
 			)
 		)
 		(property "Capacitance" "22uF"
 			(at 0 0 0)
 			(layer "B.SilkS")
 			(hide yes)
-			(uuid "dfed6ae4-348b-4ed7-8d57-96947e3abe72")
+			(uuid "9bac38de-8460-4625-8371-7d4b18a38a73")
 			(effects
 				(font
 					(size 1.27 1.27)
 					(thickness 0.15)
 				)
-				(justify mirror)
+			)
+		)
+		(property "symbol_path" "/Users/davide/src/diodeinc/customers/arduino/vendor/gitlab.com/kicad/libraries/kicad-symbols/9.0.0/Device.kicad_sym"
+			(at 0 0 0)
+			(layer "B.SilkS")
+			(hide yes)
+			(uuid "f862ad44-9110-49c0-b460-e269742fe3d2")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Package" "0805"
+			(at 0 0 0)
+			(layer "B.SilkS")
+			(hide yes)
+			(uuid "e8ff52fc-af22-48e1-8ecc-962dceebd61c")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
 			)
 		)
 		(path "/6e4eb754-6736-596b-89e6-2f4d1b2c2999/6e4eb754-6736-596b-89e6-2f4d1b2c2999")
@@ -9774,7 +9757,7 @@
 	(footprint "PinHeader_1x15_P2.54mm_Vertical:PinHeader_1x15_P2.54mm_Vertical"
 		(layer "B.Cu")
 		(uuid "c5e03f94-b5f8-4577-984a-fdfc72c4fe63")
-		(at 75.06 95.24 180)
+		(at 60.93 86.09 180)
 		(descr "Through hole straight pin header, 1x15, 2.54mm pitch, single row")
 		(tags "Through hole pin header THT 1x15 2.54mm single row")
 		(property "Reference" "J1"
@@ -9817,7 +9800,7 @@
 				(justify mirror)
 			)
 		)
-		(property "Description" "Generic connector, single row, 01x15, script generated (kicad-library-utils/schlib/autogen/connector/)"
+		(property "Description" "Header 2.54mm 15x1 Vertical"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -9835,104 +9818,96 @@
 			(at 0 0 0)
 			(layer "B.SilkS")
 			(hide yes)
-			(uuid "2a448b63-2d26-48af-9121-3d291a2bc56d")
+			(uuid "99ca427c-ab5d-4fff-9e0d-cb5d142f206e")
 			(effects
 				(font
 					(size 1.27 1.27)
 					(thickness 0.15)
 				)
-				(justify mirror)
-			)
-		)
-		(property "prefix" "J"
-			(at 0 0 0)
-			(layer "B.SilkS")
-			(hide yes)
-			(uuid "85db1d3b-5d1c-491a-b219-aedcb377d482")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-				(justify mirror)
-			)
-		)
-		(property "Rows" "1"
-			(at 0 0 0)
-			(layer "B.SilkS")
-			(hide yes)
-			(uuid "7993f64a-7383-4de4-a1a7-e7f0c6b02e65")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-				(justify mirror)
-			)
-		)
-		(property "Pitch" "2.54mm"
-			(at 0 0 0)
-			(layer "B.SilkS")
-			(hide yes)
-			(uuid "c1ba0288-c59b-4b67-88c2-5eeaccf6b0d3")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-				(justify mirror)
 			)
 		)
 		(property "symbol_path" "/Users/davide/src/diodeinc/customers/arduino/vendor/gitlab.com/kicad/libraries/kicad-symbols/9.0.0/Connector_Generic.kicad_sym"
 			(at 0 0 0)
 			(layer "B.SilkS")
 			(hide yes)
-			(uuid "90824f0e-bcb2-4fe9-b60f-0553a0ac3cc9")
+			(uuid "b3d903ff-de19-41c0-953b-f34a8fb138ec")
 			(effects
 				(font
 					(size 1.27 1.27)
 					(thickness 0.15)
 				)
-				(justify mirror)
 			)
 		)
 		(property "symbol_name" "Conn_01x15"
 			(at 0 0 0)
 			(layer "B.SilkS")
 			(hide yes)
-			(uuid "3c03b2cb-3b57-4828-92e6-a00cdc039bf0")
+			(uuid "f4bc9f18-1d9b-4bbc-8485-ba5c87c5c362")
 			(effects
 				(font
 					(size 1.27 1.27)
 					(thickness 0.15)
 				)
-				(justify mirror)
 			)
 		)
-		(property "Pins" "15"
+		(property "Pitch" "2.54mm"
 			(at 0 0 0)
 			(layer "B.SilkS")
 			(hide yes)
-			(uuid "a47e56dc-6251-4b2a-8389-d2e2d4d7c1e4")
+			(uuid "7e4a51be-233f-44cd-9b78-653d93d25b6c")
 			(effects
 				(font
 					(size 1.27 1.27)
 					(thickness 0.15)
 				)
-				(justify mirror)
 			)
 		)
 		(property "Orientation" "Vertical"
 			(at 0 0 0)
 			(layer "B.SilkS")
 			(hide yes)
-			(uuid "20437e09-ed04-4bed-8861-afe4bfaa9c79")
+			(uuid "2e9f07b2-1d4a-41b2-9f9f-4ee5b679e5a1")
 			(effects
 				(font
 					(size 1.27 1.27)
 					(thickness 0.15)
 				)
-				(justify mirror)
+			)
+		)
+		(property "prefix" "J"
+			(at 0 0 0)
+			(layer "B.SilkS")
+			(hide yes)
+			(uuid "9aec209e-aab4-4b9a-9972-da16b750b6df")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Pins" "15"
+			(at 0 0 0)
+			(layer "B.SilkS")
+			(hide yes)
+			(uuid "ee0f6059-33b8-4adf-b803-c3fad2dbfc6f")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Rows" "1"
+			(at 0 0 0)
+			(layer "B.SilkS")
+			(hide yes)
+			(uuid "a47f81f7-a909-4733-9d6c-feb1bccdb4af")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
 			)
 		)
 		(path "/bd50a30c-a919-50ad-ac94-91e80d12bbac/bd50a30c-a919-50ad-ac94-91e80d12bbac")
@@ -10250,7 +10225,7 @@
 	(footprint "C_0402_1005Metric:C_0402_1005Metric"
 		(layer "B.Cu")
 		(uuid "ffdfeada-bd88-4ef8-848f-649b6883a8a8")
-		(at 80.545711 103.882427 90)
+		(at 66.415711 94.732427 90)
 		(descr "Capacitor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
 		(tags "capacitor")
 		(property "Reference" "C10"
@@ -10280,7 +10255,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 -90)
+			(at 0 0 270)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
@@ -10294,7 +10269,7 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
-			(at 0 0 -90)
+			(at 0 0 270)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
@@ -10308,120 +10283,111 @@
 			)
 		)
 		(property "Path" "REG_5V.C_OUT_HF.C"
-			(at 0 0 -90)
+			(at 0 0 0)
 			(layer "B.SilkS")
 			(hide yes)
-			(uuid "e3188479-0a4c-4f80-807b-da7d92ea0ca0")
+			(uuid "7352ac5c-8449-4b5c-9038-a5a0f7d296f9")
 			(effects
 				(font
 					(size 1.27 1.27)
 					(thickness 0.15)
 				)
-				(justify mirror)
-			)
-		)
-		(property "prefix" "C"
-			(at 0 0 -90)
-			(layer "B.SilkS")
-			(hide yes)
-			(uuid "84af885b-b2b1-4cba-aa7a-5d45e7c47187")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-				(justify mirror)
-			)
-		)
-		(property "type" "capacitor"
-			(at 0 0 -90)
-			(layer "B.SilkS")
-			(hide yes)
-			(uuid "b9558068-9943-4fa8-b813-e920863a36f9")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-				(justify mirror)
-			)
-		)
-		(property "symbol_path" "/Users/davide/src/diodeinc/customers/arduino/vendor/gitlab.com/kicad/libraries/kicad-symbols/9.0.0/Device.kicad_sym"
-			(at 0 0 -90)
-			(layer "B.SilkS")
-			(hide yes)
-			(uuid "e7633386-b6bb-49e9-97f0-d5070bb42a89")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-				(justify mirror)
-			)
-		)
-		(property "symbol_name" "C"
-			(at 0 0 -90)
-			(layer "B.SilkS")
-			(hide yes)
-			(uuid "481f2cad-d58b-4117-83c0-f3e286843a00")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-				(justify mirror)
-			)
-		)
-		(property "Type" "capacitor"
-			(at 0 0 -90)
-			(layer "B.SilkS")
-			(hide yes)
-			(uuid "a50bda48-71c0-4ca8-9cf8-a4f7336d4d77")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-				(justify mirror)
-			)
-		)
-		(property "Voltage" "10V"
-			(at 0 0 -90)
-			(layer "B.SilkS")
-			(hide yes)
-			(uuid "71c3cdd4-7532-4ea7-8642-1d4df1dd867e")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-				(justify mirror)
-			)
-		)
-		(property "Package" "0402"
-			(at 0 0 -90)
-			(layer "B.SilkS")
-			(hide yes)
-			(uuid "305fa817-8067-4b1e-9742-26aa4358efc7")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-				(justify mirror)
 			)
 		)
 		(property "Capacitance" "100nF"
-			(at 0 0 -90)
+			(at 0 0 0)
 			(layer "B.SilkS")
 			(hide yes)
-			(uuid "62d00d13-efa2-473c-a315-883c8b0a5d86")
+			(uuid "eec23b25-eb9c-487f-beef-de9bd8e849f5")
 			(effects
 				(font
 					(size 1.27 1.27)
 					(thickness 0.15)
 				)
-				(justify mirror)
+			)
+		)
+		(property "symbol_name" "C"
+			(at 0 0 0)
+			(layer "B.SilkS")
+			(hide yes)
+			(uuid "49972e89-f95a-4a9f-8bf5-9330a41f44ce")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "symbol_path" "/Users/davide/src/diodeinc/customers/arduino/vendor/gitlab.com/kicad/libraries/kicad-symbols/9.0.0/Device.kicad_sym"
+			(at 0 0 0)
+			(layer "B.SilkS")
+			(hide yes)
+			(uuid "628c3f43-899a-42d8-96ab-965844acfac6")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Voltage" "10V"
+			(at 0 0 0)
+			(layer "B.SilkS")
+			(hide yes)
+			(uuid "4950b502-4bbd-41ee-b935-b9a667d41fb8")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Package" "0402"
+			(at 0 0 0)
+			(layer "B.SilkS")
+			(hide yes)
+			(uuid "3323438e-5f35-46ae-a6b8-e53706371f09")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Type" "capacitor"
+			(at 0 0 0)
+			(layer "B.SilkS")
+			(hide yes)
+			(uuid "44c00d29-77f8-40a9-a737-f470eaf0c2e9")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "type" "capacitor"
+			(at 0 0 0)
+			(layer "B.SilkS")
+			(hide yes)
+			(uuid "b7fc1f71-3806-4dbe-8e13-d8dd517685a2")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "prefix" "C"
+			(at 0 0 0)
+			(layer "B.SilkS")
+			(hide yes)
+			(uuid "cf39c9bd-8337-4bae-b7d3-d3d57178f1e7")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
 			)
 		)
 		(path "/538d2e35-04e9-50b3-bd0d-d5e14ad71d9c/538d2e35-04e9-50b3-bd0d-d5e14ad71d9c")
@@ -10527,7 +10493,7 @@
 			(uuid "7780b96b-62fe-4bff-a52f-48f3e46d523f")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 0 -90)
+			(at 0 0 270)
 			(layer "B.Fab")
 			(uuid "6bf0ecfb-37b9-4820-9943-9d0033f03301")
 			(effects
@@ -10568,8 +10534,8 @@
 		)
 	)
 	(gr_rect
-		(start 73.46 90.08)
-		(end 97.94 136.44)
+		(start 59.33 80.93)
+		(end 83.81 127.29)
 		(stroke
 			(width 0.05)
 			(type default)
@@ -10577,6 +10543,1688 @@
 		(fill no)
 		(layer "Edge.Cuts")
 		(uuid "df6ba866-ddcd-420a-8931-e47eadaec64f")
+	)
+	(gr_line
+		(start 113.84 93.856)
+		(end 237.168575 93.856)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "F.Fab")
+		(uuid "1fa2be34-8300-49f6-bbfe-8155a68b81d0")
+	)
+	(gr_line
+		(start 113.84 90.25)
+		(end 237.168575 90.25)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "F.Fab")
+		(uuid "29412beb-192c-42ee-a90f-3d07e2db3cb2")
+	)
+	(gr_line
+		(start 237.168575 60.7)
+		(end 237.168575 111.886)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "F.Fab")
+		(uuid "2df41ff9-1e0a-46bb-9e10-1fdd280ba6fa")
+	)
+	(gr_line
+		(start 220.211431 60.7)
+		(end 220.211431 111.886)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "F.Fab")
+		(uuid "39bb838f-b7b4-47ec-8c69-106a85ae4688")
+	)
+	(gr_line
+		(start 113.84 101.068)
+		(end 237.168575 101.068)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "F.Fab")
+		(uuid "3d2e1cb2-9116-4bcc-bca6-9f5a75ea2ab3")
+	)
+	(gr_line
+		(start 113.84 68.614)
+		(end 237.168575 68.614)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "F.Fab")
+		(uuid "415652c7-3f9d-40e3-b72a-602332ee142e")
+	)
+	(gr_line
+		(start 113.84 97.462)
+		(end 237.168575 97.462)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "F.Fab")
+		(uuid "4218d862-0652-405d-84e7-45fe262b41bf")
+	)
+	(gr_line
+		(start 113.84 111.886)
+		(end 237.168575 111.886)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "F.Fab")
+		(uuid "591acd37-4d1e-453f-b5d3-ced6688927f6")
+	)
+	(gr_line
+		(start 113.84 60.7)
+		(end 113.84 111.886)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "F.Fab")
+		(uuid "61d075ef-cfb5-4e3b-890a-896db597bb77")
+	)
+	(gr_line
+		(start 190.825715 60.7)
+		(end 190.825715 111.886)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "F.Fab")
+		(uuid "6979555b-39ad-4b89-aa81-6a1f7770fd26")
+	)
+	(gr_line
+		(start 113.84 104.674)
+		(end 237.168575 104.674)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "F.Fab")
+		(uuid "75bca883-c895-4af0-b02c-e63fbf1a660b")
+	)
+	(gr_line
+		(start 170.797143 60.7)
+		(end 170.797143 111.886)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "F.Fab")
+		(uuid "7d0adde5-990e-477c-aca1-4948999136fc")
+	)
+	(gr_line
+		(start 113.84 79.432)
+		(end 237.168575 79.432)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "F.Fab")
+		(uuid "7e479b45-d1b4-4194-8d82-942cf021575c")
+	)
+	(gr_line
+		(start 129.225714 60.7)
+		(end 129.225714 111.886)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "F.Fab")
+		(uuid "8e029c49-131a-46b4-8f37-d4e9782df981")
+	)
+	(gr_line
+		(start 113.84 83.038)
+		(end 237.168575 83.038)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "F.Fab")
+		(uuid "9362ce0a-648f-4304-95d4-cfa509afa70a")
+	)
+	(gr_line
+		(start 113.84 86.644)
+		(end 237.168575 86.644)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "F.Fab")
+		(uuid "a6885ecd-ed6a-486b-a372-e7519756bffe")
+	)
+	(gr_line
+		(start 113.84 65.008)
+		(end 237.168575 65.008)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "F.Fab")
+		(uuid "a847e073-d56b-457b-82df-b479e792c27a")
+	)
+	(gr_line
+		(start 207.325716 60.7)
+		(end 207.325716 111.886)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "F.Fab")
+		(uuid "a9ac78cd-30f2-4323-8d88-33b2c886db9c")
+	)
+	(gr_line
+		(start 113.84 60.7)
+		(end 237.168575 60.7)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "F.Fab")
+		(uuid "b38f51a5-2af4-4421-9ef2-940072669f1e")
+	)
+	(gr_line
+		(start 113.84 75.826)
+		(end 237.168575 75.826)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "F.Fab")
+		(uuid "b8073bc3-d5ac-4f0e-9cb3-bd683e13b05a")
+	)
+	(gr_line
+		(start 113.84 108.28)
+		(end 237.168575 108.28)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "F.Fab")
+		(uuid "be3b7f6d-d9db-4513-9912-373decee6756")
+	)
+	(gr_line
+		(start 154.297142 60.7)
+		(end 154.297142 111.886)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "F.Fab")
+		(uuid "cae90cb5-d8c5-4fc2-a0b2-1bda91ae6ae9")
+	)
+	(gr_line
+		(start 113.84 72.22)
+		(end 237.168575 72.22)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "F.Fab")
+		(uuid "e1c1d7f9-f849-48ab-bb3d-e3c1b755e7af")
+	)
+	(gr_text "Type"
+		(at 129.975714 61.45 0)
+		(layer "F.Fab")
+		(uuid "0540bc2f-65bb-411f-89bc-b3de1486b6c2")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.3)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "Not specified"
+		(at 191.575715 87.394 0)
+		(layer "F.Fab")
+		(uuid "05912972-88e5-4a6f-b2c0-5e8a9c203cbe")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "1"
+		(at 208.075716 76.576 0)
+		(layer "F.Fab")
+		(uuid "0891cb5a-fa57-4c05-9bbb-68d3185aaa3f")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "Edge card connectors: "
+		(at 124.35 146.739 0)
+		(layer "F.Fab")
+		(uuid "091496c1-5a65-400d-a767-d6d1d316eff2")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.2)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "Loss Tangent"
+		(at 220.961431 61.45 0)
+		(layer "F.Fab")
+		(uuid "11679dee-1889-4b02-88ab-bfa06a1f8e77")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.3)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "3.3"
+		(at 208.075716 72.97 0)
+		(layer "F.Fab")
+		(uuid "12560eb2-bf6d-492d-8012-ffe5458942df")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text ""
+		(at 191.575715 105.424 0)
+		(layer "F.Fab")
+		(uuid "136b7033-7cdc-4a9b-b8f3-53ce7f5dd2d5")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text ""
+		(at 155.047142 105.424 0)
+		(layer "F.Fab")
+		(uuid "152bee95-7fc7-4880-b02a-550d92eed137")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "Castellated pads: "
+		(at 124.35 142.782 0)
+		(layer "F.Fab")
+		(uuid "15476714-07ea-4420-8327-e3df4e6dc750")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.2)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "FR4-Core"
+		(at 155.047142 87.394 0)
+		(layer "F.Fab")
+		(uuid "1632d00a-e461-4fbc-8da6-ac5ed5d804f5")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "copper"
+		(at 129.975714 91 0)
+		(layer "F.Fab")
+		(uuid "18adc75c-56a4-41a5-9a07-4e576adff0e0")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "0.1500 mm"
+		(at 216.107138 134.868 0)
+		(layer "F.Fab")
+		(uuid "1a45c9da-ddae-445f-a717-e120f8b59d97")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.2)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text ""
+		(at 191.575715 76.576 0)
+		(layer "F.Fab")
+		(uuid "1c9d3345-7a82-4c1f-884d-e71f03471455")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "Impedance Control: "
+		(at 191.164281 138.825 0)
+		(layer "F.Fab")
+		(uuid "1d88382f-6a6f-4617-9a91-45f92b0dc26a")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.2)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "0"
+		(at 220.961431 83.788 0)
+		(layer "F.Fab")
+		(uuid "215ce5cb-7f30-440b-a68e-457246c2cb1c")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "1"
+		(at 208.075716 69.364 0)
+		(layer "F.Fab")
+		(uuid "23152ac3-ab9f-4907-9df2-79c6ab100dde")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "0.025"
+		(at 220.961431 80.182 0)
+		(layer "F.Fab")
+		(uuid "23fda1bc-4e43-48af-886a-66c0f857bd2a")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text ""
+		(at 216.107138 130.911 0)
+		(layer "F.Fab")
+		(uuid "2576b196-dac8-4c03-855c-d078363d6ad9")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.2)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "copper"
+		(at 129.975714 83.788 0)
+		(layer "F.Fab")
+		(uuid "26a025fc-6332-494a-97a7-4049135e206f")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "Not specified"
+		(at 191.575715 94.606 0)
+		(layer "F.Fab")
+		(uuid "2cb057cf-3e90-44a3-ba6b-6f52332ef963")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "0.0900 mm / 0.0900 mm"
+		(at 157.007143 134.868 0)
+		(layer "F.Fab")
+		(uuid "2d8eafba-6c91-4e6a-9a7c-c6bcfd0c90e5")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.2)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "1"
+		(at 208.075716 65.758 0)
+		(layer "F.Fab")
+		(uuid "2f1016de-758c-46ce-ac06-edc1c843c454")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "0"
+		(at 220.961431 91 0)
+		(layer "F.Fab")
+		(uuid "3183263c-2421-415b-9f63-88223d409b72")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "Top Solder Mask"
+		(at 129.975714 72.97 0)
+		(layer "F.Fab")
+		(uuid "369396af-fa27-4f7d-9f62-2a9b489f896d")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "1"
+		(at 208.075716 91 0)
+		(layer "F.Fab")
+		(uuid "3ade7a4d-d002-46ab-aa71-bf7e92695b76")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "B.Mask"
+		(at 114.59 101.818 0)
+		(layer "F.Fab")
+		(uuid "3cf6554d-cb7a-4a82-9543-f9c9d131bac1")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "1.6000 mm"
+		(at 216.107138 126.954 0)
+		(layer "F.Fab")
+		(uuid "3fde3c16-fa04-42a3-be2f-be695ffc511d")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.2)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text ""
+		(at 191.164281 130.911 0)
+		(layer "F.Fab")
+		(uuid "43dbdfbf-944b-4ce8-a2bb-778fabdac44d")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.2)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "Dielectric"
+		(at 114.59 87.394 0)
+		(layer "F.Fab")
+		(uuid "4b34317b-3dcb-44af-ab52-893bc6b32fba")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "0.025"
+		(at 220.961431 87.394 0)
+		(layer "F.Fab")
+		(uuid "4bdee22e-462a-48b6-9957-7ac3886da58b")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "1"
+		(at 208.075716 83.788 0)
+		(layer "F.Fab")
+		(uuid "4c49a53a-6b25-477e-af60-1de3219f2953")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "copper"
+		(at 129.975714 98.212 0)
+		(layer "F.Fab")
+		(uuid "4c532794-2178-4ba5-9268-951aad688664")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "Blue"
+		(at 191.575715 72.97 0)
+		(layer "F.Fab")
+		(uuid "4d0fc922-d024-4016-89d6-34a8d8e4874f")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "0.035 mm"
+		(at 171.547143 98.212 0)
+		(layer "F.Fab")
+		(uuid "4d6ddac6-60d0-4b9d-b725-02c89c55ccc7")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "Epsilon R"
+		(at 208.075716 61.45 0)
+		(layer "F.Fab")
+		(uuid "4f1a82e1-a32b-46d2-aab1-ecaa5856515f")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.3)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "Dielectric"
+		(at 114.59 94.606 0)
+		(layer "F.Fab")
+		(uuid "510037ed-4ad3-4107-a18e-cb3ed9cb3b88")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "3.3"
+		(at 208.075716 101.818 0)
+		(layer "F.Fab")
+		(uuid "5151dd2c-2372-465d-a31a-2687bdc7ee50")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "In2.Cu"
+		(at 114.59 91 0)
+		(layer "F.Fab")
+		(uuid "52360d0b-136c-4864-9961-5555fee83e78")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "0"
+		(at 220.961431 109.03 0)
+		(layer "F.Fab")
+		(uuid "5243b25c-545b-4da7-9fd9-389da1d6dc0f")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "0"
+		(at 220.961431 69.364 0)
+		(layer "F.Fab")
+		(uuid "540229f8-e9be-4797-b14c-3b79806d3e0e")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "Bottom Solder Paste"
+		(at 129.975714 105.424 0)
+		(layer "F.Fab")
+		(uuid "54833561-0523-48a3-920b-19469aac1c85")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "Copper Finish: "
+		(at 124.35 138.825 0)
+		(layer "F.Fab")
+		(uuid "56442a18-f0cc-450b-988f-e5aca88df705")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.2)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "0.025"
+		(at 220.961431 94.606 0)
+		(layer "F.Fab")
+		(uuid "56d774bd-b61b-4f2d-9f18-45b29b5bfb45")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "4.4"
+		(at 208.075716 94.606 0)
+		(layer "F.Fab")
+		(uuid "5bfe7f77-1a89-4b5e-83b9-2e3287e0269c")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "Material"
+		(at 155.047142 61.45 0)
+		(layer "F.Fab")
+		(uuid "5c8977da-d81e-4072-b353-670208d9f95d")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.3)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "Board Thickness: "
+		(at 191.164281 126.954 0)
+		(layer "F.Fab")
+		(uuid "5e956cdb-4d92-4524-983f-48c08b44cf1e")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.2)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "Bottom Silk Screen"
+		(at 129.975714 109.03 0)
+		(layer "F.Fab")
+		(uuid "6120f05c-4cc3-401a-9a20-99a4621ae1da")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "0"
+		(at 220.961431 98.212 0)
+		(layer "F.Fab")
+		(uuid "614f280e-bbdb-4d4d-8553-d7f4416d8406")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "F.Silkscreen"
+		(at 114.59 65.758 0)
+		(layer "F.Fab")
+		(uuid "655f7df9-f0d7-431a-9fae-1ee30437171a")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "F.Mask"
+		(at 114.59 72.97 0)
+		(layer "F.Fab")
+		(uuid "6951e07f-f8f9-461e-afb9-bd6508444c8b")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "0.01 mm"
+		(at 171.547143 101.818 0)
+		(layer "F.Fab")
+		(uuid "6a3d8433-11ca-461b-a933-266e4865a788")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "0.01 mm"
+		(at 171.547143 72.97 0)
+		(layer "F.Fab")
+		(uuid "6d9ddef4-c1f4-4e3f-bc6c-91af3a3d8d2f")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "Color"
+		(at 191.575715 61.45 0)
+		(layer "F.Fab")
+		(uuid "717a5d61-ceee-4992-b2d1-44917a950c32")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.3)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "Plated Board Edge: "
+		(at 191.164281 142.782 0)
+		(layer "F.Fab")
+		(uuid "719ece6e-f6f0-4612-aadc-2db0013c0923")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.2)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "Board overall dimensions: "
+		(at 124.35 130.911 0)
+		(layer "F.Fab")
+		(uuid "71a77b72-52d6-4007-98de-f9d437ae644a")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.2)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "Prepreg"
+		(at 155.047142 80.182 0)
+		(layer "F.Fab")
+		(uuid "748f35e9-b1d6-42c8-a2ac-d3bd334124a0")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "0"
+		(at 220.961431 76.576 0)
+		(layer "F.Fab")
+		(uuid "7539a0a5-8af0-4836-92c4-5806f190870f")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "Not specified"
+		(at 155.047142 109.03 0)
+		(layer "F.Fab")
+		(uuid "76a8731e-5138-4621-9ce1-88c0e1c97228")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text ""
+		(at 191.575715 98.212 0)
+		(layer "F.Fab")
+		(uuid "7c0d3935-c496-4d84-a404-84b91eb9084e")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "copper"
+		(at 129.975714 76.576 0)
+		(layer "F.Fab")
+		(uuid "7f3da86e-f8e4-492e-bc34-d3877f242cde")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "1"
+		(at 208.075716 105.424 0)
+		(layer "F.Fab")
+		(uuid "81c102c6-c4f5-40e3-a6f2-dbe5366e4205")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text ""
+		(at 155.047142 91 0)
+		(layer "F.Fab")
+		(uuid "85e5206d-adf0-451c-8438-5d6df323ad6c")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "BOARD CHARACTERISTICS"
+		(at 123.6 121.46 0)
+		(layer "F.Fab")
+		(uuid "85e6ec35-4aa7-463e-9b88-41dceab8b4a3")
+		(effects
+			(font
+				(size 2 2)
+				(thickness 0.4)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "Copper Layer Count: "
+		(at 124.35 126.954 0)
+		(layer "F.Fab")
+		(uuid "86e479e2-d192-4a78-91e2-6d0cba079996")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.2)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "No"
+		(at 216.107138 138.825 0)
+		(layer "F.Fab")
+		(uuid "88a8bb53-b00b-4ffc-8bf7-07f7b0d9e158")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.2)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "0 mm"
+		(at 171.547143 109.03 0)
+		(layer "F.Fab")
+		(uuid "8d09a442-07c6-4e3c-b1a4-ca97dd925c27")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "4"
+		(at 157.007143 126.954 0)
+		(layer "F.Fab")
+		(uuid "8d4725cb-a7bc-4dad-bef5-befdacccb83e")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.2)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "Not specified"
+		(at 155.047142 101.818 0)
+		(layer "F.Fab")
+		(uuid "8e536bf0-a43c-48bc-8517-6f8605b53463")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "core"
+		(at 129.975714 87.394 0)
+		(layer "F.Fab")
+		(uuid "8ea379e2-f554-4fb9-a77a-5382bb352b33")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text ""
+		(at 155.047142 76.576 0)
+		(layer "F.Fab")
+		(uuid "9092c9ba-ad28-49a0-9f12-02deae0e78fc")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "0"
+		(at 220.961431 72.97 0)
+		(layer "F.Fab")
+		(uuid "919f932d-b0f1-487e-b66a-f33d0b3c3f96")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "0"
+		(at 220.961431 101.818 0)
+		(layer "F.Fab")
+		(uuid "91f843ff-092d-48ec-a815-94c3d48b0607")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "0.0152 mm"
+		(at 171.547143 91 0)
+		(layer "F.Fab")
+		(uuid "9258f22f-2a3b-4ab2-9d41-73e9057b0956")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "0.2104 mm"
+		(at 171.547143 94.606 0)
+		(layer "F.Fab")
+		(uuid "95e2c54c-61f0-4a1b-a694-e0a1e37a58bc")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "B.Paste"
+		(at 114.59 105.424 0)
+		(layer "F.Fab")
+		(uuid "9a4d67e7-dd9e-479e-b59d-53237c02b786")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "0"
+		(at 220.961431 105.424 0)
+		(layer "F.Fab")
+		(uuid "9b12f26a-b5db-4b77-b1c8-53270429c159")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "Not specified"
+		(at 191.575715 80.182 0)
+		(layer "F.Fab")
+		(uuid "9b3dcff2-5f27-42e6-99cd-b03f2a6f638d")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "B.Cu"
+		(at 114.59 98.212 0)
+		(layer "F.Fab")
+		(uuid "9e7e7057-7698-49e6-8d38-9df028e45a67")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "1.065 mm"
+		(at 171.547143 87.394 0)
+		(layer "F.Fab")
+		(uuid "a39e00b6-193e-4f53-b133-b6c2e4a79074")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text ""
+		(at 155.047142 98.212 0)
+		(layer "F.Fab")
+		(uuid "a3b685c2-99e6-461a-abb7-7103bdc9dd5d")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text ""
+		(at 191.575715 69.364 0)
+		(layer "F.Fab")
+		(uuid "a50e42b3-a713-4306-8c53-29e01140cc85")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text ""
+		(at 155.047142 69.364 0)
+		(layer "F.Fab")
+		(uuid "a70bbc9d-217f-41f6-bdd1-9495dbb535f2")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text ""
+		(at 191.575715 91 0)
+		(layer "F.Fab")
+		(uuid "a755ba1f-16b1-45eb-846e-0489c81a4fdb")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "In1.Cu"
+		(at 114.59 83.788 0)
+		(layer "F.Fab")
+		(uuid "a9ab13cc-4187-4a09-9d95-733873067afd")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "Layer Name"
+		(at 114.59 61.45 0)
+		(layer "F.Fab")
+		(uuid "aa560c8d-3964-4fd3-b205-1f13843d1de2")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.3)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "No"
+		(at 157.007143 142.782 0)
+		(layer "F.Fab")
+		(uuid "ac06747b-5dd2-44af-be78-2cf9fcc36284")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.2)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "4.6"
+		(at 208.075716 87.394 0)
+		(layer "F.Fab")
+		(uuid "ae2a73fa-a1e7-4766-ad0b-f54327b4011c")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "0"
+		(at 220.961431 65.758 0)
+		(layer "F.Fab")
+		(uuid "af67dde4-a614-4b59-b52b-3e6a21613019")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "ENIG"
+		(at 157.007143 138.825 0)
+		(layer "F.Fab")
+		(uuid "b6c512d2-1475-4103-b9e3-429ab07f8515")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.2)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "No"
+		(at 157.007143 146.739 0)
+		(layer "F.Fab")
+		(uuid "b786f4ca-0316-4dad-93d7-74bb041c57a4")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.2)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "Dielectric"
+		(at 114.59 80.182 0)
+		(layer "F.Fab")
+		(uuid "ba25ef89-70ce-404a-b395-5f02d909a8f2")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "F.Paste"
+		(at 114.59 69.364 0)
+		(layer "F.Fab")
+		(uuid "bf97d762-4444-4444-84f9-f5ac8119dce6")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "B.Silkscreen"
+		(at 114.59 109.03 0)
+		(layer "F.Fab")
+		(uuid "c0a9544d-0abd-4270-836b-d7d052426c60")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "0.0152 mm"
+		(at 171.547143 83.788 0)
+		(layer "F.Fab")
+		(uuid "c31fff6a-5915-4ae1-aa32-c2e3c18fcd13")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "Thickness (mm)"
+		(at 171.547143 61.45 0)
+		(layer "F.Fab")
+		(uuid "c944a52e-1cff-41b8-b39f-571d8f4cd6a0")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.3)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "24.4800 mm x 46.3600 mm"
+		(at 157.007143 130.911 0)
+		(layer "F.Fab")
+		(uuid "cc90a0c5-7554-4884-97f2-480128c12b93")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.2)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "4.4"
+		(at 208.075716 80.182 0)
+		(layer "F.Fab")
+		(uuid "d1a3b4de-efc3-48e2-9640-0d16edf680a6")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "Top Silk Screen"
+		(at 129.975714 65.758 0)
+		(layer "F.Fab")
+		(uuid "d2be2093-7409-497e-9ef4-e43613db0887")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "1"
+		(at 208.075716 98.212 0)
+		(layer "F.Fab")
+		(uuid "d3db5b00-b4ee-4e96-b6b7-959708c5a4db")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "Top Solder Paste"
+		(at 129.975714 69.364 0)
+		(layer "F.Fab")
+		(uuid "d49bb69d-fe4e-46eb-bb47-2c57ca6b8a38")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "Prepreg"
+		(at 155.047142 94.606 0)
+		(layer "F.Fab")
+		(uuid "d76169ee-74f2-4d46-b162-0930ee9f2f7d")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "0.2104 mm"
+		(at 171.547143 80.182 0)
+		(layer "F.Fab")
+		(uuid "d7b1a2b0-17e2-4ee8-894a-95095458842b")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "0 mm"
+		(at 171.547143 105.424 0)
+		(layer "F.Fab")
+		(uuid "d9f87e40-7819-4879-9e3d-1f8a9b64e29c")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "Blue"
+		(at 191.575715 101.818 0)
+		(layer "F.Fab")
+		(uuid "dbc7e432-47b6-4f91-900d-bc5e0ed6ccd1")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "prepreg"
+		(at 129.975714 80.182 0)
+		(layer "F.Fab")
+		(uuid "dcdfd397-eeb3-490d-bd08-c11c8a81ed81")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "White"
+		(at 191.575715 65.758 0)
+		(layer "F.Fab")
+		(uuid "df861d83-12f3-4dd1-a111-4afbd712dfbd")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "Not specified"
+		(at 155.047142 72.97 0)
+		(layer "F.Fab")
+		(uuid "e334ba58-af0a-42c5-9013-1187ea622e9a")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "F.Cu"
+		(at 114.59 76.576 0)
+		(layer "F.Fab")
+		(uuid "e35490a2-2bae-4c5b-a667-d0db90ccfa51")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "0.035 mm"
+		(at 171.547143 76.576 0)
+		(layer "F.Fab")
+		(uuid "e5b9bd45-5680-4c7c-9595-92839500d85e")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "White"
+		(at 191.575715 109.03 0)
+		(layer "F.Fab")
+		(uuid "e6f47543-ccfa-4a6c-9460-10f6b2b5e60d")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "prepreg"
+		(at 129.975714 94.606 0)
+		(layer "F.Fab")
+		(uuid "ef4e6c53-d2a7-4c52-81a9-18f61089c456")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "1"
+		(at 208.075716 109.03 0)
+		(layer "F.Fab")
+		(uuid "ef4ebbbe-ecd7-45bd-84f8-758408a4c4a9")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "0 mm"
+		(at 171.547143 65.758 0)
+		(layer "F.Fab")
+		(uuid "f0b1b030-23f7-4531-9a22-f8bca4ce1e89")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "Bottom Solder Mask"
+		(at 129.975714 101.818 0)
+		(layer "F.Fab")
+		(uuid "f4144d09-7ed5-48bd-bb9f-cbf4c3123012")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text ""
+		(at 155.047142 83.788 0)
+		(layer "F.Fab")
+		(uuid "f5e74e45-da45-46aa-a90a-b730af3cad42")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "Min track/spacing: "
+		(at 124.35 134.868 0)
+		(layer "F.Fab")
+		(uuid "f6ece2bc-486c-46a7-944b-cae4e36d83c3")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.2)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "0 mm"
+		(at 171.547143 69.364 0)
+		(layer "F.Fab")
+		(uuid "f834f34a-6425-4bea-9fc0-f67d905935ac")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "Min hole diameter: "
+		(at 191.164281 134.868 0)
+		(layer "F.Fab")
+		(uuid "f84c03f4-6e9e-401f-afd3-d8ba1d6f8cd0")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.2)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "No"
+		(at 216.107138 142.782 0)
+		(layer "F.Fab")
+		(uuid "f959cd97-2ef0-4556-9b05-299b3fca3916")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.2)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text ""
+		(at 191.575715 83.788 0)
+		(layer "F.Fab")
+		(uuid "fa97b6fb-d2bb-4c3e-a812-215c6c6de28a")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "Not specified"
+		(at 155.047142 65.758 0)
+		(layer "F.Fab")
+		(uuid "fab83e13-dc16-4f7c-aa75-e714d5fdeb20")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.1)
+			)
+			(justify left top)
+		)
 	)
 	(group "USB_SERIAL"
 		(uuid "971c032c-0d11-428f-884d-dd7cf54ef3c2")
@@ -10600,6 +12248,87 @@
 		(members "1b1bb382-00da-411e-be32-55a965a15222" "1ee76c19-8774-418a-973a-a55d8e724b71"
 			"2406e970-10f3-4ede-ab6e-d1042ca40fd2" "a19014ff-095f-42e3-8388-a047708a5fb0"
 			"ffdfeada-bd88-4ef8-848f-649b6883a8a8"
+		)
+	)
+	(group "group-boardStackUp"
+		(uuid "7b7f17e4-6134-49ba-a1e5-7cc5a197df98")
+		(members "0540bc2f-65bb-411f-89bc-b3de1486b6c2" "05912972-88e5-4a6f-b2c0-5e8a9c203cbe"
+			"0891cb5a-fa57-4c05-9bbb-68d3185aaa3f" "11679dee-1889-4b02-88ab-bfa06a1f8e77"
+			"12560eb2-bf6d-492d-8012-ffe5458942df" "136b7033-7cdc-4a9b-b8f3-53ce7f5dd2d5"
+			"152bee95-7fc7-4880-b02a-550d92eed137" "1632d00a-e461-4fbc-8da6-ac5ed5d804f5"
+			"18adc75c-56a4-41a5-9a07-4e576adff0e0" "1c9d3345-7a82-4c1f-884d-e71f03471455"
+			"1fa2be34-8300-49f6-bbfe-8155a68b81d0" "215ce5cb-7f30-440b-a68e-457246c2cb1c"
+			"23152ac3-ab9f-4907-9df2-79c6ab100dde" "23fda1bc-4e43-48af-886a-66c0f857bd2a"
+			"26a025fc-6332-494a-97a7-4049135e206f" "29412beb-192c-42ee-a90f-3d07e2db3cb2"
+			"2cb057cf-3e90-44a3-ba6b-6f52332ef963" "2df41ff9-1e0a-46bb-9e10-1fdd280ba6fa"
+			"2f1016de-758c-46ce-ac06-edc1c843c454" "3183263c-2421-415b-9f63-88223d409b72"
+			"369396af-fa27-4f7d-9f62-2a9b489f896d" "39bb838f-b7b4-47ec-8c69-106a85ae4688"
+			"3ade7a4d-d002-46ab-aa71-bf7e92695b76" "3cf6554d-cb7a-4a82-9543-f9c9d131bac1"
+			"3d2e1cb2-9116-4bcc-bca6-9f5a75ea2ab3" "415652c7-3f9d-40e3-b72a-602332ee142e"
+			"4218d862-0652-405d-84e7-45fe262b41bf" "4b34317b-3dcb-44af-ab52-893bc6b32fba"
+			"4bdee22e-462a-48b6-9957-7ac3886da58b" "4c49a53a-6b25-477e-af60-1de3219f2953"
+			"4c532794-2178-4ba5-9268-951aad688664" "4d0fc922-d024-4016-89d6-34a8d8e4874f"
+			"4d6ddac6-60d0-4b9d-b725-02c89c55ccc7" "4f1a82e1-a32b-46d2-aab1-ecaa5856515f"
+			"510037ed-4ad3-4107-a18e-cb3ed9cb3b88" "5151dd2c-2372-465d-a31a-2687bdc7ee50"
+			"52360d0b-136c-4864-9961-5555fee83e78" "5243b25c-545b-4da7-9fd9-389da1d6dc0f"
+			"540229f8-e9be-4797-b14c-3b79806d3e0e" "54833561-0523-48a3-920b-19469aac1c85"
+			"56d774bd-b61b-4f2d-9f18-45b29b5bfb45" "591acd37-4d1e-453f-b5d3-ced6688927f6"
+			"5bfe7f77-1a89-4b5e-83b9-2e3287e0269c" "5c8977da-d81e-4072-b353-670208d9f95d"
+			"6120f05c-4cc3-401a-9a20-99a4621ae1da" "614f280e-bbdb-4d4d-8553-d7f4416d8406"
+			"61d075ef-cfb5-4e3b-890a-896db597bb77" "655f7df9-f0d7-431a-9fae-1ee30437171a"
+			"6951e07f-f8f9-461e-afb9-bd6508444c8b" "6979555b-39ad-4b89-aa81-6a1f7770fd26"
+			"6a3d8433-11ca-461b-a933-266e4865a788" "6d9ddef4-c1f4-4e3f-bc6c-91af3a3d8d2f"
+			"717a5d61-ceee-4992-b2d1-44917a950c32" "748f35e9-b1d6-42c8-a2ac-d3bd334124a0"
+			"7539a0a5-8af0-4836-92c4-5806f190870f" "75bca883-c895-4af0-b02c-e63fbf1a660b"
+			"76a8731e-5138-4621-9ce1-88c0e1c97228" "7c0d3935-c496-4d84-a404-84b91eb9084e"
+			"7d0adde5-990e-477c-aca1-4948999136fc" "7e479b45-d1b4-4194-8d82-942cf021575c"
+			"7f3da86e-f8e4-492e-bc34-d3877f242cde" "81c102c6-c4f5-40e3-a6f2-dbe5366e4205"
+			"85e5206d-adf0-451c-8438-5d6df323ad6c" "8d09a442-07c6-4e3c-b1a4-ca97dd925c27"
+			"8e029c49-131a-46b4-8f37-d4e9782df981" "8e536bf0-a43c-48bc-8517-6f8605b53463"
+			"8ea379e2-f554-4fb9-a77a-5382bb352b33" "9092c9ba-ad28-49a0-9f12-02deae0e78fc"
+			"919f932d-b0f1-487e-b66a-f33d0b3c3f96" "91f843ff-092d-48ec-a815-94c3d48b0607"
+			"9258f22f-2a3b-4ab2-9d41-73e9057b0956" "9362ce0a-648f-4304-95d4-cfa509afa70a"
+			"95e2c54c-61f0-4a1b-a694-e0a1e37a58bc" "9a4d67e7-dd9e-479e-b59d-53237c02b786"
+			"9b12f26a-b5db-4b77-b1c8-53270429c159" "9b3dcff2-5f27-42e6-99cd-b03f2a6f638d"
+			"9e7e7057-7698-49e6-8d38-9df028e45a67" "a39e00b6-193e-4f53-b133-b6c2e4a79074"
+			"a3b685c2-99e6-461a-abb7-7103bdc9dd5d" "a50e42b3-a713-4306-8c53-29e01140cc85"
+			"a6885ecd-ed6a-486b-a372-e7519756bffe" "a70bbc9d-217f-41f6-bdd1-9495dbb535f2"
+			"a755ba1f-16b1-45eb-846e-0489c81a4fdb" "a847e073-d56b-457b-82df-b479e792c27a"
+			"a9ab13cc-4187-4a09-9d95-733873067afd" "a9ac78cd-30f2-4323-8d88-33b2c886db9c"
+			"aa560c8d-3964-4fd3-b205-1f13843d1de2" "ae2a73fa-a1e7-4766-ad0b-f54327b4011c"
+			"af67dde4-a614-4b59-b52b-3e6a21613019" "b38f51a5-2af4-4421-9ef2-940072669f1e"
+			"b8073bc3-d5ac-4f0e-9cb3-bd683e13b05a" "ba25ef89-70ce-404a-b395-5f02d909a8f2"
+			"be3b7f6d-d9db-4513-9912-373decee6756" "bf97d762-4444-4444-84f9-f5ac8119dce6"
+			"c0a9544d-0abd-4270-836b-d7d052426c60" "c31fff6a-5915-4ae1-aa32-c2e3c18fcd13"
+			"c944a52e-1cff-41b8-b39f-571d8f4cd6a0" "cae90cb5-d8c5-4fc2-a0b2-1bda91ae6ae9"
+			"d1a3b4de-efc3-48e2-9640-0d16edf680a6" "d2be2093-7409-497e-9ef4-e43613db0887"
+			"d3db5b00-b4ee-4e96-b6b7-959708c5a4db" "d49bb69d-fe4e-46eb-bb47-2c57ca6b8a38"
+			"d76169ee-74f2-4d46-b162-0930ee9f2f7d" "d7b1a2b0-17e2-4ee8-894a-95095458842b"
+			"d9f87e40-7819-4879-9e3d-1f8a9b64e29c" "dbc7e432-47b6-4f91-900d-bc5e0ed6ccd1"
+			"dcdfd397-eeb3-490d-bd08-c11c8a81ed81" "df861d83-12f3-4dd1-a111-4afbd712dfbd"
+			"e1c1d7f9-f849-48ab-bb3d-e3c1b755e7af" "e334ba58-af0a-42c5-9013-1187ea622e9a"
+			"e35490a2-2bae-4c5b-a667-d0db90ccfa51" "e5b9bd45-5680-4c7c-9595-92839500d85e"
+			"e6f47543-ccfa-4a6c-9460-10f6b2b5e60d" "ef4e6c53-d2a7-4c52-81a9-18f61089c456"
+			"ef4ebbbe-ecd7-45bd-84f8-758408a4c4a9" "f0b1b030-23f7-4531-9a22-f8bca4ce1e89"
+			"f4144d09-7ed5-48bd-bb9f-cbf4c3123012" "f5e74e45-da45-46aa-a90a-b730af3cad42"
+			"f834f34a-6425-4bea-9fc0-f67d905935ac" "fa97b6fb-d2bb-4c3e-a812-215c6c6de28a"
+			"fab83e13-dc16-4f7c-aa75-e714d5fdeb20"
+		)
+	)
+	(group "group-boardCharacteristics"
+		(uuid "87905518-b87c-4661-8441-69e8a1af24fc")
+		(members "091496c1-5a65-400d-a767-d6d1d316eff2" "15476714-07ea-4420-8327-e3df4e6dc750"
+			"1a45c9da-ddae-445f-a717-e120f8b59d97" "1d88382f-6a6f-4617-9a91-45f92b0dc26a"
+			"2576b196-dac8-4c03-855c-d078363d6ad9" "2d8eafba-6c91-4e6a-9a7c-c6bcfd0c90e5"
+			"3fde3c16-fa04-42a3-be2f-be695ffc511d" "43dbdfbf-944b-4ce8-a2bb-778fabdac44d"
+			"56442a18-f0cc-450b-988f-e5aca88df705" "5e956cdb-4d92-4524-983f-48c08b44cf1e"
+			"719ece6e-f6f0-4612-aadc-2db0013c0923" "71a77b72-52d6-4007-98de-f9d437ae644a"
+			"85e6ec35-4aa7-463e-9b88-41dceab8b4a3" "86e479e2-d192-4a78-91e2-6d0cba079996"
+			"88a8bb53-b00b-4ffc-8bf7-07f7b0d9e158" "8d4725cb-a7bc-4dad-bef5-befdacccb83e"
+			"ac06747b-5dd2-44af-be78-2cf9fcc36284" "b6c512d2-1475-4103-b9e3-429ab07f8515"
+			"b786f4ca-0316-4dad-93d7-74bb041c57a4" "cc90a0c5-7554-4884-97f2-480128c12b93"
+			"f6ece2bc-486c-46a7-944b-cae4e36d83c3" "f84c03f4-6e9e-401f-afd3-d8ba1d6f8cd0"
+			"f959cd97-2ef0-4556-9b05-299b3fca3916"
 		)
 	)
 	(embedded_fonts no)

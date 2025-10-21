@@ -12,7 +12,8 @@ This board combines:
 """
 
 load("@stdlib/interfaces.zen", "Power", "Ground", "Usb2", "Uart", "Gpio", "NotConnected")
-load("//stackup.zen", "Board")
+load("@stdlib/board_config.zen", "Board")
+load("//stackup.zen", "ARDUINO_BLUE_CONFIG")
 
 # Power rails
 VCC_5V = Power("VCC_5V")
@@ -280,4 +281,5 @@ Board(
     name = "Nano",
     layout_path = "layout/Nano",
     layers = 2,
+    config = ARDUINO_BLUE_CONFIG,
 )
