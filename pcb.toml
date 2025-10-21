@@ -1,8 +1,10 @@
 [workspace]
-name = "customer"
+name = "arduino"
 
 [packages]
 stdlib = "@github/diodeinc/stdlib:v0.3.2"
 
 [access]
-allow = []
+allow = [
+    "*arduino.cc",
+]
