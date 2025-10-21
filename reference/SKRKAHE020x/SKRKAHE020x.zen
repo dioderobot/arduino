@@ -1,0 +1,31 @@
+"""SKRKAHE020 Tactile Switch Reference Design
+
+Low-profile tactile switch for reset buttons and user input.
+This reference design implements a simple momentary push button.
+
+Key Features:
+- 4.2mm x 3.5mm x 2.0mm package
+- Surface mount (SMD)
+- Operating force: 260gf
+- 50mA @ 12V rating
+- SPST-NO (normally open)
+- Long life: 100,000 cycles minimum
+"""
+
+load("@stdlib/interfaces.zen", "Ground", "NotConnected")
+
+# IO
+P1 = io("P1", Net)
+P2 = io("P2", Net)
+
+# Components
+SKRKAHE020 = Module("//components/SKRKAHE020/SKRKAHE020.zen")
+
+# Tactile switch
+SKRKAHE020(
+    name = "SW",
+    P1 = P1.NET,
+    P2 = P2.NET,
+)
+
+# pcb:sch SW.SKRKAHE020 x=-102.6000 y=87.9000 rot=0

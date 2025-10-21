@@ -1,0 +1,8 @@
+(fp_lib_table
+  (version 7)
+  (lib (name "C_0402_1005Metric") (type "KiCad") (uri "${KIPRJMOD}/../../../../../../../../Library/Caches/pcb/gitlab/kicad/libraries/kicad-footprints/9.0.0/Capacitor_SMD.pretty/") (options "") (descr ""))
+  (lib (name "C_0603_1608Metric") (type "KiCad") (uri "${KIPRJMOD}/../../../../../../../../Library/Caches/pcb/gitlab/kicad/libraries/kicad-footprints/9.0.0/Capacitor_SMD.pretty/") (options "") (descr ""))
+  (lib (name "L_0603_1608Metric") (type "KiCad") (uri "${KIPRJMOD}/../../../../../../../../Library/Caches/pcb/gitlab/kicad/libraries/kicad-footprints/9.0.0/Inductor_SMD.pretty/") (options "") (descr ""))
+  (lib (name "QFN50P400X400X80-21N") (type "KiCad") (uri "${KIPRJMOD}/../../../../components/FT231XQ-R/") (options "") (descr ""))
+  (lib (name "R_0402_1005Metric") (type "KiCad") (uri "${KIPRJMOD}/../../../../../../../../Library/Caches/pcb/gitlab/kicad/libraries/kicad-footprints/9.0.0/Resistor_SMD.pretty/") (options "") (descr ""))
+)

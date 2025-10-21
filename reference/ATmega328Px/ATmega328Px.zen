@@ -1,0 +1,208 @@
+"""ATmega328P Microcontroller Reference Design
+
+8-bit AVR microcontroller with 32KB Flash, 2KB SRAM, 1KB EEPROM.
+This reference design implements a complete ATmega328P circuit with:
+- 16MHz crystal oscillator with load capacitors
+- Power supply decoupling
+- Reset circuit with pull-up resistor
+- All GPIO pins exposed
+- Compatible with Arduino bootloader
+
+Key Features:
+- 32KB Flash (2KB used by bootloader)
+- 2KB SRAM, 1KB EEPROM
+- 23 programmable I/O lines
+- 8-channel 10-bit ADC (TQFP package)
+- USART, SPI, and I2C interfaces
+- 6 PWM channels
+- Operating voltage: 1.8V to 5.5V
+- Clock speed: Up to 20MHz @ 4.5-5.5V
+"""
+
+load("@stdlib/interfaces.zen", "Gpio", "Uart", "Spi", "I2c", "OscPair", "Power", "Ground", "NotConnected")
+load("@stdlib/properties.zen", "Layout")
+
+# Configuration
+add_reset_button = config("add_reset_button", bool, default = False)
+
+# IO
+VCC = io("VCC", Power, default = Power("VCC"))
+GND = io("GND", Ground)
+AREF = io("AREF", Gpio, optional = True)
+RESET = io("RESET", Net, optional = True)
+
+# Digital I/O pins
+D0 = io("D0", Gpio, optional = True)  # UART RX
+D1 = io("D1", Gpio, optional = True)  # UART TX
+D2 = io("D2", Gpio, optional = True)
+D3 = io("D3", Gpio, optional = True)  # PWM
+D4 = io("D4", Gpio, optional = True)
+D5 = io("D5", Gpio, optional = True)  # PWM
+D6 = io("D6", Gpio, optional = True)  # PWM
+D7 = io("D7", Gpio, optional = True)
+D8 = io("D8", Gpio, optional = True)
+D9 = io("D9", Gpio, optional = True)  # PWM
+D10 = io("D10", Gpio, optional = True)  # PWM, SPI SS
+D11 = io("D11", Gpio, optional = True)  # PWM, SPI MOSI
+D12 = io("D12", Gpio, optional = True)  # SPI MISO
+D13 = io("D13", Gpio, optional = True)  # SPI SCK
+
+# Analog input pins
+A0 = io("A0", Gpio, optional = True)
+A1 = io("A1", Gpio, optional = True)
+A2 = io("A2", Gpio, optional = True)
+A3 = io("A3", Gpio, optional = True)
+A4 = io("A4", Gpio, optional = True)  # I2C SDA
+A5 = io("A5", Gpio, optional = True)  # I2C SCL
+A6 = io("A6", Gpio, optional = True)  # ADC only (TQFP)
+A7 = io("A7", Gpio, optional = True)  # ADC only (TQFP)
+
+# Internal nets
+oscpair = OscPair("oscpair")
+RESET_INTERNAL = Net("RESET_INTERNAL")
+
+# Generics
+Resistor = Module("@stdlib/generics/Resistor.zen")
+Capacitor = Module("@stdlib/generics/Capacitor.zen")
+Crystal = Module("@stdlib/generics/Crystal.zen")
+
+# Components
+ATMEGA328PMAU = Module("//components/ATMEGA328P-AU/ATMEGA328P-AU.zen")
+
+# Button (if needed)
+if add_reset_button:
+    SKRKAHE020x = Module("//reference/SKRKAHE020x/SKRKAHE020x.zen")
+
+# Main microcontroller
+ATMEGA328PMAU(
+    name = "U_MCU",
+    VCC_1 = VCC,
+    VCC_2 = VCC,
+    GND_1 = GND,
+    GND_2 = GND,
+    GND_3 = GND,
+    AVCC = VCC,
+    AREF = AREF,
+    PC6_n_RESET_PCINT14 = RESET,
+    PD0_RXD_PCINT16 = D0,
+    PD1_TXD_PCINT17 = D1,
+    PD2_INT0_PCINT18 = D2,
+    PCINT19_OC2B_INT1_PD3 = D3,
+    PCINT20_XCK_T0_PD4 = D4,
+    PCINT21_OC0B_T1_PD5 = D5,
+    PCINT22_OC0A_AIN0_PD6 = D6,
+    PCINT23_AIN1_PD7 = D7,
+    PCINT0_CLKO_ICP1_PB0 = D8,
+    PCINT1_OC1A_PB1 = D9,
+    PCINT2_SS_OC1B_PB2 = D10,
+    PCINT3_OC2A_MOSI_PB3 = D11,
+    PCINT4_MISO_PB4 = D12,
+    PB5_SCK_PCINT5 = D13,
+    PC0_ADC0_PCINT8 = A0,
+    PC1_ADC1_PCINT9 = A1,
+    PC2_ADC2_PCINT10 = A2,
+    PC3_ADC3_PCINT11 = A3,
+    PC4_ADC4_SDA_PCINT12 = A4,
+    PC5_ADC5_SCL_PCINT13 = A5,
+    ADC6 = A6,
+    ADC7 = A7,
+    PCINT6_XTAL1_TOSC1_PB6 = oscpair.XIN,
+    PCINT7_XTAL2_TOSC2_PB7 = oscpair.XOUT,
+)
+
+# Power supply decoupling capacitors
+Capacitor(
+    name = "C_VCC_1",
+    value = "100nF",
+    voltage = "6.3V",
+    package = "0402",
+    P1 = VCC.NET,
+    P2 = GND.NET,
+)
+
+Capacitor(
+    name = "C_VCC_2",
+    value = "100nF",
+    voltage = "6.3V",
+    package = "0402",
+    P1 = VCC.NET,
+    P2 = GND.NET,
+)
+
+Capacitor(
+    name = "C_AVCC",
+    value = "100nF",
+    voltage = "6.3V",
+    package = "0402",
+    P1 = VCC.NET,
+    P2 = GND.NET,
+)
+
+# Reset pull-up resistor (10k per datasheet recommendation)
+Resistor(
+    name = "R_RESET",
+    value = "10kohm 5%",
+    package = "0402",
+    P1 = RESET.NET,
+    P2 = VCC.NET,
+)
+
+# 16MHz crystal oscillator circuit
+Crystal(
+    name = "Y_XTAL",
+    frequency = "16MHz",
+    package = "3225_4Pin",
+    load_capacitance = "18pF",
+    XIN = oscpair.XIN,
+    XOUT = oscpair.XOUT,
+    GND = GND.NET,
+)
+
+# Crystal load capacitors (22pF each for 18pF crystal)
+Capacitor(
+    name = "C_XTAL1",
+    value = "22pF",
+    dielectric = "C0G",
+    package = "0402",
+    P1 = oscpair.XIN,
+    P2 = GND.NET,
+)
+
+Capacitor(
+    name = "C_XTAL2",
+    value = "22pF",
+    dielectric = "C0G",
+    package = "0402",
+    P1 = oscpair.XOUT,
+    P2 = GND.NET,
+)
+
+# Optional reset button
+if add_reset_button:
+    SKRKAHE020x(
+        name = "SW_RESET",
+        P1 = RESET,
+        P2 = GND,
+    )
+
+Layout(
+    name = "ATmega328Px",
+    path = "layout/ATmega328Px",
+)
+
+# pcb:sch C_AVCC.C x=-567.4200 y=-128.0000 rot=0
+# pcb:sch C_VCC_1.C x=-681.7200 y=-242.3000 rot=0
+# pcb:sch C_VCC_2.C x=-453.1200 y=-1.0000 rot=0
+# pcb:sch C_XTAL1.C x=-681.7200 y=316.5000 rot=0
+# pcb:sch C_XTAL2.C x=-376.9200 y=316.5000 rot=0
+# pcb:sch GND.2 x=481.6000 y=697.5000 rot=0
+# pcb:sch GND.3 x=-445.5000 y=138.7000 rot=0
+# pcb:sch GND.4 x=-509.0000 y=354.6000 rot=0
+# pcb:sch GND.5 x=-369.3000 y=430.8000 rot=0
+# pcb:sch GND.6 x=-674.1000 y=430.8000 rot=0
+# pcb:sch R_RESET.R x=52.3400 y=-432.8000 rot=180
+# pcb:sch U_MCU.ATMEGA328PMAU x=-267.7000 y=-305.8000 rot=0
+# pcb:sch VCC.1 x=-326.1200 y=-382.0000 rot=0
+# pcb:sch VCC.2 x=550.1800 y=176.8000 rot=0
+# pcb:sch VCC.3 x=54.8800 y=-521.7000 rot=0
+# pcb:sch Y_XTAL.Y x=-534.4000 y=202.2000 rot=90

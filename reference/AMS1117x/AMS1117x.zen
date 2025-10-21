@@ -1,0 +1,98 @@
+"""AMS1117 Linear Voltage Regulator Reference Design
+
+1A Low Dropout Linear Regulator with fixed 5.0V output.
+This reference design implements a complete AMS1117-5.0 circuit with:
+- Input and output capacitors for stability
+- Thermal protection
+- Short circuit protection
+
+Key Features:
+- Fixed 5.0V output voltage
+- 1A maximum output current
+- Low dropout voltage: 1.3V @ 1A
+- Input voltage range: 6.5V to 15V (7-12V recommended)
+- Thermal shutdown protection
+- SOT-223 package with excellent thermal performance
+"""
+
+load("@stdlib/interfaces.zen", "Ground", "Power")
+load("@stdlib/properties.zen", "Layout")
+
+# IO
+VIN = io("VIN", Power, default = Power("VIN"))
+VOUT = io("VOUT", Power, default = Power("VOUT_5V"))
+GND = io("GND", Ground)
+
+# Generics
+Resistor = Module("@stdlib/generics/Resistor.zen")
+Capacitor = Module("@stdlib/generics/Capacitor.zen")
+
+# Components
+AMS1117M5_0 = Module("//components/AMS1117-5.0/AMS1117-5.0.zen")
+
+# Main regulator
+AMS1117M5_0(
+    name = "U_REG",
+    VIN = VIN.NET,
+    VOUT = VOUT.NET,
+    GROUND_ADJUST = GND.NET,
+    TAB = GND.NET,  # Tab connected to ground for heat sinking
+)
+
+# Input capacitor (22µF minimum for stability per datasheet)
+# Using tantalum or low-ESR ceramic
+Capacitor(
+    name = "C_IN",
+    value = "10uF",
+    package = "0805",
+    voltage = "25V",
+    P1 = VIN.NET,
+    P2 = GND.NET,
+)
+
+# Additional high-frequency bypass capacitor on input
+Capacitor(
+    name = "C_IN_HF",
+    value = "100nF",
+    package = "0402",
+    voltage = "25V",
+    P1 = VIN.NET,
+    P2 = GND.NET,
+)
+
+# Output capacitor (minimum 22µF tantalum or 10µF low-ESR ceramic per datasheet)
+# Critical for stability - must have low ESR
+Capacitor(
+    name = "C_OUT",
+    value = "22uF",
+    package = "0805",
+    voltage = "10V",
+    P1 = VOUT.NET,
+    P2 = GND.NET,
+)
+
+# Additional output bypass capacitor for high frequency noise
+Capacitor(
+    name = "C_OUT_HF",
+    value = "100nF",
+    package = "0402",
+    voltage = "10V",
+    P1 = VOUT.NET,
+    P2 = GND.NET,
+)
+
+
+Layout(
+    name = "AMS1117x",
+    path = "layout/AMS1117x",
+)
+
+# pcb:sch C_IN.C x=-275.3200 y=49.8000 rot=0
+# pcb:sch C_IN_HF.C x=-376.9200 y=49.8000 rot=0
+# pcb:sch C_OUT.C x=461.2800 y=37.1000 rot=0
+# pcb:sch C_OUT_HF.C x=359.6800 y=37.1000 rot=0
+# pcb:sch GND.1 x=-153.4000 y=164.1000 rot=0
+# pcb:sch GND.2 x=316.5000 y=164.1000 rot=0
+# pcb:sch U_REG.AMS1117M5_0 x=-64.5000 y=24.4000 rot=0
+# pcb:sch VIN.3 x=-173.7200 y=-77.2000 rot=0
+# pcb:sch VOUT_5V.2 x=473.9800 y=-64.5000 rot=0

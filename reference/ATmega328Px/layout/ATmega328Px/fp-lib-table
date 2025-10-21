@@ -1,0 +1,7 @@
+(fp_lib_table
+  (version 7)
+  (lib (name "C_0402_1005Metric") (type "KiCad") (uri "${KIPRJMOD}/../../../../../../../../Library/Caches/pcb/gitlab/kicad/libraries/kicad-footprints/9.0.0/Capacitor_SMD.pretty/") (options "") (descr ""))
+  (lib (name "Crystal_SMD_3225-4Pin_3.2x2.5mm") (type "KiCad") (uri "${KIPRJMOD}/../../../../../../../../Library/Caches/pcb/gitlab/kicad/libraries/kicad-footprints/9.0.0/Crystal.pretty/") (options "") (descr ""))
+  (lib (name "QFP80P900X900X120-32N") (type "KiCad") (uri "${KIPRJMOD}/../../../../components/ATMEGA328P-AU/") (options "") (descr ""))
+  (lib (name "R_0402_1005Metric") (type "KiCad") (uri "${KIPRJMOD}/../../../../../../../../Library/Caches/pcb/gitlab/kicad/libraries/kicad-footprints/9.0.0/Resistor_SMD.pretty/") (options "") (descr ""))
+)

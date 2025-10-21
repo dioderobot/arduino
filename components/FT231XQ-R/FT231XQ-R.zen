@@ -1,0 +1,60 @@
+"""
+FT231XQMR
+
+Auto-generated using `pcb-pro search`. Do not modify.
+"""
+
+Pins = struct(
+    CBUS0 = io("CBUS0", Net),
+    CBUS1 = io("CBUS1", Net),
+    CBUS2 = io("CBUS2", Net),
+    CBUS3 = io("CBUS3", Net),
+    CTSh = io("CTSh", Net),
+    DCDh = io("DCDh", Net),
+    DSRh = io("DSRh", Net),
+    DTRh = io("DTRh", Net),
+    EP = io("EP", Net),
+    GND_1 = io("GND_1", Net),
+    GND_2 = io("GND_2", Net),
+    P3V3OUT = io("P3V3OUT", Net),
+    RESETh = io("RESETh", Net),
+    RIh = io("RIh", Net),
+    RTSh = io("RTSh", Net),
+    RXD = io("RXD", Net),
+    TXD = io("TXD", Net),
+    USBDM = io("USBDM", Net),
+    USBDP = io("USBDP", Net),
+    VCC = io("VCC", Net),
+    VCCIO = io("VCCIO", Net)
+)
+
+Component(
+    name = "FT231XQMR",
+    mpn = "FT231XQMR",
+    # datasheet = File("FT231XQ-R.pdf"),
+    symbol = Symbol(library = "FT231XQ-R.kicad_sym"),
+    footprint = File("QFN50P400X400X80-21N.kicad_mod"),
+    pins = {
+        "CBUS0": Pins.CBUS0,
+        "CBUS1": Pins.CBUS1,
+        "CBUS2": Pins.CBUS2,
+        "CBUS3": Pins.CBUS3,
+        "CTS#": Pins.CTSh,
+        "DCD#": Pins.DCDh,
+        "DSR#": Pins.DSRh,
+        "DTR#": Pins.DTRh,
+        "EP": Pins.EP,
+        "GND_1": Pins.GND_1,
+        "GND_2": Pins.GND_2,
+        "3V3OUT": Pins.P3V3OUT,
+        "RESET#": Pins.RESETh,
+        "RI#": Pins.RIh,
+        "RTS#": Pins.RTSh,
+        "RXD": Pins.RXD,
+        "TXD": Pins.TXD,
+        "USBDM": Pins.USBDM,
+        "USBDP": Pins.USBDP,
+        "VCC": Pins.VCC,
+        "VCCIO": Pins.VCCIO
+    },
+)

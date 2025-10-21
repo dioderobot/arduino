@@ -1,0 +1,245 @@
+"""FT232RL/FT231XQ USB to Serial Converter Reference Design
+
+FTDI USB to UART bridge IC for serial communication and Arduino programming.
+This reference design supports two package options:
+- FT232RL: 28-pin SSOP (10mm × 5mm) - Full featured
+- FT231XQ: 20-pin QFN (4mm × 4mm) - Compact, Arduino-ready
+
+Common features:
+- USB 2.0 Full Speed (12Mbps)
+- Internal oscillator (no external crystal needed)
+- Power supply decoupling  
+- 3.3V output regulator (50mA max)
+- DTR and RTS control signals for Arduino programming
+- TX/RX LEDs (optional)
+- CBUS pins configurable
+
+Key Features:
+- UART with RTS/CTS hardware flow control
+- Baud rates from 300 to 3Mbps
+- Built-in USB termination and pull-up resistors
+- Internal EEPROM for USB descriptors
+- High quality FTDI chipset
+"""
+
+load("@stdlib/interfaces.zen", "Uart", "Usb2", "Power", "Ground", "NotConnected")
+load("@stdlib/properties.zen", "Layout")
+
+# Package options
+Package = enum("FT232RL", "FT231XQ")
+
+# Configuration
+package = config("package", Package, default = "FT231XQ")
+add_tx_rx_leds = config("add_tx_rx_leds", bool, default = False)
+
+# IO
+VCC = io("VCC", Power, default = Power("VCC"))
+VCCIO = io("VCCIO", Power, default = Power("VCCIO"), optional = True)
+USB_VCC = io("USB_VCC", Power, default = Power("USB_VCC"))
+GND = io("GND", Ground)
+USB = io("USB", Usb2)
+UART = io("UART", Uart)
+DTR = io("DTR", Net, optional = True)  # Used for Arduino auto-reset
+RTS = io("RTS", Net, optional = True)
+CTS = io("CTS", Net, optional = True)
+CBUS0 = io("CBUS0", Net, optional = True)  # TXLED by default
+CBUS1 = io("CBUS1", Net, optional = True)  # RXLED by default
+CBUS2 = io("CBUS2", Net, optional = True)  # GPIO
+CBUS3 = io("CBUS3", Net, optional = True)  # GPIO
+CBUS4 = io("CBUS4", Net, optional = True)  # GPIO (FT232RL only)
+
+# Internal nets
+P3V3OUT = Net("P3V3OUT")
+USBDP_INTERNAL = Net("USBDP_INTERNAL")
+USBDM_INTERNAL = Net("USBDM_INTERNAL")
+
+# Generics
+Resistor = Module("@stdlib/generics/Resistor.zen")
+Capacitor = Module("@stdlib/generics/Capacitor.zen")
+Inductor = Module("@stdlib/generics/Inductor.zen")
+
+# Components
+FT232RLMREEL = Module("//components/FT232RL-REEL/FT232RL-REEL.zen")
+FT231XQMR = Module("//components/FT231XQ-R/FT231XQ-R.zen")
+
+# Select IC based on package configuration
+if package == Package("FT232RL"):
+    # FT232RL - SSOP-28 package (10mm × 5mm)
+    FT232RLMREEL(
+        name = "U_USB_SERIAL",
+        VCC = VCC.NET,
+        VCCIO = VCCIO.NET,
+        GND_1 = GND.NET,
+        GND_2 = GND.NET,
+        GND_3 = GND.NET,
+        AGND = GND.NET,
+        P3V3OUT = P3V3OUT,
+        USBDP = USBDP_INTERNAL,
+        USBDM = USBDM_INTERNAL,
+        OSCI = NotConnected(),  # Internal oscillator used
+        OSCO = NotConnected(),  # Internal oscillator used
+        TEST = GND.NET,         # Must be grounded
+        RESETh = VCC.NET,       # Active low, pulled high
+        TXD = UART.TX,
+        RXD = UART.RX,
+        RTSh = RTS.NET,
+        CTSh = CTS.NET,
+        DTRh = DTR.NET,
+        DSRh = NotConnected(),  # Not commonly used
+        DCDh = NotConnected(),  # Not commonly used
+        RIh = NotConnected(),   # Not commonly used
+        CBUS0 = CBUS0.NET,
+        CBUS1 = CBUS1.NET,
+        CBUS2 = CBUS2.NET,
+        CBUS3 = CBUS3.NET,
+        CBUS4 = CBUS4.NET,
+        NC_1 = NotConnected(),
+        NC_2 = NotConnected(),
+    )
+else:
+    # FT231XQ - QFN-20 package (4mm × 4mm) - More compact
+    FT231XQMR(
+        name = "U_USB_SERIAL",
+        VCC = VCC.NET,
+        VCCIO = VCCIO.NET,
+        GND_1 = GND.NET,
+        GND_2 = GND.NET,
+        EP = GND.NET,           # Exposed pad to ground
+        P3V3OUT = P3V3OUT,
+        USBDP = USBDP_INTERNAL,
+        USBDM = USBDM_INTERNAL,
+        RESETh = VCC.NET,       # Active low, pulled high
+        TXD = UART.TX,
+        RXD = UART.RX,
+        RTSh = RTS.NET,
+        CTSh = CTS.NET,
+        DTRh = DTR.NET,
+        DSRh = NotConnected(),  # Not commonly used
+        DCDh = NotConnected(),  # Not commonly used
+        RIh = NotConnected(),   # Not commonly used
+        CBUS0 = CBUS0.NET,
+        CBUS1 = CBUS1.NET,
+        CBUS2 = CBUS2.NET,
+        CBUS3 = CBUS3.NET,
+    )
+
+# USB data line series resistors for signal integrity
+Resistor(
+    name = "R_USBDP",
+    value = "27ohm 5%",
+    package = "0402",
+    P1 = USBDP_INTERNAL,
+    P2 = USB.DP,
+)
+
+Resistor(
+    name = "R_USBDM",
+    value = "27ohm 5%",
+    package = "0402",
+    P1 = USBDM_INTERNAL,
+    P2 = USB.DM,
+)
+
+# VCC power supply decoupling
+Capacitor(
+    name = "C_VCC_1",
+    value = "100nF",
+    voltage = "10V",
+    package = "0402",
+    P1 = VCC.NET,
+    P2 = GND.NET,
+)
+
+Capacitor(
+    name = "C_VCC_2",
+    value = "100nF",
+    voltage = "10V",
+    package = "0402",
+    P1 = VCC.NET,
+    P2 = GND.NET,
+)
+
+# Bulk capacitor for VCC
+Capacitor(
+    name = "C_VCC_BULK",
+    value = "4.7uF",
+    voltage = "10V",
+    package = "0603",
+    P1 = VCC.NET,
+    P2 = GND.NET,
+)
+
+# VCCIO decoupling
+Capacitor(
+    name = "C_VCCIO",
+    value = "100nF",
+    voltage = "10V",
+    package = "0402",
+    P1 = VCCIO.NET,
+    P2 = GND.NET,
+)
+
+# 3.3V output decoupling (can source up to 50mA)
+Capacitor(
+    name = "C_3V3OUT",
+    value = "100nF",
+    voltage = "6.3V",
+    package = "0402",
+    P1 = P3V3OUT,
+    P2 = GND.NET,
+)
+
+# Optional TX/RX indicator LEDs on CBUS pins
+if add_tx_rx_leds:
+    LED = Module("@stdlib/common/led.zen").LED_0603
+    
+    # TX LED on CBUS0 (configured as TXLED in EEPROM)
+    Resistor(
+        name = "R_TX_LED",
+        value = "470ohm 5%",
+        package = "0402",
+        P1 = VCC.NET,
+        P2 = Net("TX_LED_ANODE"),
+    )
+    
+    LED(
+        name = "D_TX",
+        color = "green",
+        A = Net("TX_LED_ANODE"),
+        C = CBUS0.NET,
+    )
+    
+    # RX LED on CBUS1 (configured as RXLED in EEPROM)
+    Resistor(
+        name = "R_RX_LED",
+        value = "470ohm 5%",
+        package = "0402",
+        P1 = VCC.NET,
+        P2 = Net("RX_LED_ANODE"),
+    )
+    
+    LED(
+        name = "D_RX",
+        color = "green",
+        A = Net("RX_LED_ANODE"),
+        C = CBUS1.NET,
+    )
+
+Layout(
+    name = "FT232RLx",
+    path = "layout/FT232RLx",
+)
+
+# pcb:sch C_3V3OUT.C x=105.6800 y=367.3000 rot=0
+# pcb:sch C_VCCIO.C x=-211.8200 y=-242.3000 rot=0
+# pcb:sch C_VCC_1.C x=359.6800 y=151.4000 rot=0
+# pcb:sch C_VCC_2.C x=232.6800 y=151.4000 rot=0
+# pcb:sch C_VCC_BULK.C x=486.6800 y=164.1000 rot=0
+# pcb:sch GND.1 x=-178.8000 y=-128.0000 rot=0
+# pcb:sch GND.5 x=240.3000 y=265.7000 rot=0
+# pcb:sch GND.7 x=113.3000 y=481.6000 rot=0
+# pcb:sch R_USBDM.R x=1.5400 y=430.8000 rot=0
+# pcb:sch R_USBDP.R x=-74.6600 y=430.8000 rot=0
+# pcb:sch U_USB_SERIAL.FT231XQMR x=-166.1000 y=-140.7000 rot=0
+# pcb:sch VCC.2 x=245.3800 y=75.2000 rot=0
+# pcb:sch VCCIO.1 x=-46.7200 y=-293.1000 rot=0

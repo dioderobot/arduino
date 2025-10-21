@@ -1,0 +1,22 @@
+"""
+SKRKAHE020
+
+Auto-generated using `pcb-pro search`. Do not modify.
+"""
+
+Pins = struct(
+    P1 = io("P1", Net),
+    P2 = io("P2", Net)
+)
+
+Component(
+    name = "SKRKAHE020",
+    mpn = "SKRKAHE020",
+    # datasheet = File("SKRKAHE020.pdf"),
+    symbol = Symbol(library = "SKRKAHE020.kicad_sym"),
+    footprint = File("SKRKAEE020.kicad_mod"),
+    pins = {
+        "1": Pins.P1,
+        "2": Pins.P2
+    },
+)

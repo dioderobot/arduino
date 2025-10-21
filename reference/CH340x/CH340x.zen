@@ -1,0 +1,206 @@
+"""CH340G USB to Serial Converter Reference Design
+
+USB to UART bridge IC for serial communication over USB.
+This reference design implements a complete CH340G circuit with:
+- USB data line configuration
+- 12MHz crystal oscillator
+- Power supply decoupling
+- DTR and RTS control signals for Arduino programming
+- TX/RX LEDs (optional)
+
+Key Features:
+- USB 2.0 Full Speed (12Mbps)
+- UART with RTS/CTS hardware flow control
+- Baud rates up to 2Mbps
+- Built-in USB termination resistors
+- 3.3V output regulator
+- DTR/RTS signals for Arduino auto-reset
+- Low cost alternative to FTDI
+"""
+
+load("@stdlib/interfaces.zen", "Uart", "Usb2", "Power", "Ground", "NotConnected", "OscPair")
+load("@stdlib/properties.zen", "Layout")
+
+# Configuration
+add_tx_rx_leds = config("add_tx_rx_leds", bool, default = True)
+
+# IO
+VCC = io("VCC", Power, default = Power("VCC"))
+USB_VCC = io("USB_VCC", Power, default = Power("USB_VCC"), optional = True)
+GND = io("GND", Ground)
+USB = io("USB", Usb2)
+UART = io("UART", Uart)
+DTR = io("DTR", Net, optional = True)  # Used for Arduino auto-reset
+RTS = io("RTS", Net, optional = True)
+
+# Internal nets
+oscpair = OscPair("oscpair")
+V3_INTERNAL = Net("V3_INTERNAL")
+R232 = Net("R232")
+
+# Generics
+Resistor = Module("@stdlib/generics/Resistor.zen")
+Capacitor = Module("@stdlib/generics/Capacitor.zen")
+Crystal = Module("@stdlib/generics/Crystal.zen")
+
+# Components
+CH340G = Module("//components/CH340G/CH340G.zen")
+Led = Module("@stdlib/generics/Led.zen")
+
+# Main CH340G IC
+CH340G(
+    name = "U_USB_SERIAL",
+    VCC = USB_VCC.NET,
+    V3 = V3_INTERNAL,
+    GND = GND.NET,
+    UDP = USB.DP,
+    UDM = USB.DM,
+    XI = oscpair.XIN,
+    XO = oscpair.XOUT,
+    TXD = UART.TX,
+    RXD = UART.RX,
+    n_RTS = RTS.NET,
+    n_DTR = DTR.NET,
+    n_CTS = NotConnected(),  # Not commonly used
+    n_DSR = NotConnected(),  # Not commonly used
+    n_RI = NotConnected(),   # Not commonly used
+    n_DCD = NotConnected(),  # Not commonly used
+    R232 = R232,
+)
+
+# USB VBUS decoupling capacitor
+Capacitor(
+    name = "C_USB_VCC",
+    value = "100nF",
+    voltage = "10V",
+    package = "0402",
+    P1 = USB_VCC.NET,
+    P2 = GND.NET,
+)
+
+# VCC power supply decoupling
+Capacitor(
+    name = "C_VCC",
+    value = "100nF",
+    voltage = "10V",
+    package = "0402",
+    P1 = VCC.NET,
+    P2 = GND.NET,
+)
+
+# V3 internal regulator output decoupling (0.1µF per datasheet)
+Capacitor(
+    name = "C_V3",
+    value = "100nF",
+    voltage = "6.3V",
+    package = "0402",
+    P1 = V3_INTERNAL,
+    P2 = GND.NET,
+)
+
+# 12MHz crystal oscillator for USB timing
+Crystal(
+    name = "Y_USB",
+    frequency = "12MHz",
+    package = "3225_4Pin",
+    load_capacitance = "20pF",
+    XIN = oscpair.XIN,
+    XOUT = oscpair.XOUT,
+    GND = GND.NET,
+)
+
+# Crystal load capacitors (22pF recommended per datasheet)
+Capacitor(
+    name = "C_XI",
+    value = "22pF",
+    dielectric = "C0G",
+    package = "0402",
+    P1 = oscpair.XIN,
+    P2 = GND.NET,
+)
+
+Capacitor(
+    name = "C_XO",
+    value = "22pF",
+    dielectric = "C0G",
+    package = "0402",
+    P1 = oscpair.XOUT,
+    P2 = GND.NET,
+)
+
+# R232 pullup resistor (per datasheet typical application)
+Resistor(
+    name = "R_R232",
+    value = "1kohm 5%",
+    package = "0402",
+    P1 = R232,
+    P2 = VCC.NET,
+)
+
+# Optional TX/RX indicator LEDs
+if add_tx_rx_leds:
+
+    TX_LED_ANODE = Net("TX_LED_ANODE")
+    RX_LED_ANODE = Net("RX_LED_ANODE")
+    
+    # TX LED (lights when transmitting from host to device)
+    Resistor(
+        name = "R_TX_LED",
+        value = "1kohm 5%",
+        package = "0402",
+        P1 = VCC.NET,
+        P2 = TX_LED_ANODE,
+    )
+    
+    Led(
+        name = "D_TX",
+        color = "yellow",
+        package = "0603",
+        A = TX_LED_ANODE,
+        K = UART.RX,  # Connected to RXD pin (receives from USB)
+    )
+    
+    # RX LED (lights when transmitting from device to host)
+    Resistor(
+        name = "R_RX_LED",
+        value = "1kohm 5%",
+        package = "0402",
+        P1 = UART.TX,  # Connected to TXD pin (sends to USB)
+        P2 = RX_LED_ANODE,
+    )
+    
+    Led(
+        name = "D_RX",
+        color = "yellow",
+        package = "0603",
+        A = RX_LED_ANODE,
+        K = GND.NET,
+    )
+
+Layout(
+    name = "CH340x",
+    path = "layout/CH340x",
+)
+
+# pcb:sch C_USB_VCC.C x=232.6800 y=87.9000 rot=0
+# pcb:sch C_V3.C x=-351.5200 y=62.5000 rot=90
+# pcb:sch C_VCC.C x=385.0800 y=24.4000 rot=0
+# pcb:sch C_XI.C x=-110.2200 y=227.6000 rot=0
+# pcb:sch C_XO.C x=-364.2200 y=227.6000 rot=0
+# pcb:sch D_RX.LED x=-343.9000 y=-31.4800 rot=0
+# pcb:sch D_TX.LED x=-343.9000 y=19.3200 rot=180
+# pcb:sch GND.1 x=-128.0000 y=-89.9000 rot=0
+# pcb:sch GND.5 x=-229.6000 y=253.0000 rot=0
+# pcb:sch GND.6 x=-102.6000 y=341.9000 rot=0
+# pcb:sch GND.7 x=-356.6000 y=341.9000 rot=0
+# pcb:sch GND.8 x=392.7000 y=240.3000 rot=0
+# pcb:sch GND.9 x=-394.7000 y=189.5000 rot=0
+# pcb:sch GND.10 x=240.3000 y=240.3000 rot=0
+# pcb:sch R_R232.R x=306.3400 y=-26.4000 rot=270
+# pcb:sch R_RX_LED.R x=-239.7600 y=-51.8000 rot=90
+# pcb:sch R_TX_LED.R x=-430.2600 y=-128.0000 rot=0
+# pcb:sch USB_VCC.1 x=219.9800 y=-102.6000 rot=0
+# pcb:sch U_USB_SERIAL.CH340G x=-26.4000 y=-39.1000 rot=0
+# pcb:sch VCC.1 x=-427.7200 y=-178.8000 rot=0
+# pcb:sch VCC.2 x=397.7800 y=-64.5000 rot=0
+# pcb:sch Y_USB.Y x=-255.0000 y=113.3000 rot=90
