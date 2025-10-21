@@ -1,13 +1,283 @@
 """
-Arduino Nano
+Arduino Nano - Complete Board Design
+
+Compact Arduino-compatible development board based on ATmega328P.
+This board combines:
+- ATmega328P microcontroller @ 16MHz
+- FT231XQ USB-to-serial converter (4mm×4mm QFN)
+- AMS1117-5.0 voltage regulator
+- Micro USB connector
+- Reset button
+- All GPIO pins on headers
 """
 
-load("@stdlib/interfaces.zen", "Ground", "I2c", "Power")
-load("@stdlib/board_config.zen", "Board")
+load("@stdlib/interfaces.zen", "Power", "Ground", "Usb2", "Uart", "Gpio", "NotConnected")
+load("//stackup.zen", "Board")
 
+# Power rails
+VCC_5V = Power("VCC_5V")
+VCC_3V3 = Power("VCC_3V3")
+VCC_VIN = Power("VCC_VIN")
+USB_VBUS = Power("USB_VBUS")
+GND = Ground("GND")
+
+# USB interface
+USB = Usb2("USB_DATA")
+
+# Auto-reset signal
+DTR = Net("DTR")
+RESET = Net("RESET")
+
+# UART nets (shared between USB-serial and MCU)
+UART = Uart("UART")  # MCU RX <- USB TX
+
+# GPIO nets
+D0 = Gpio("D0", NET = UART.RX)   # UART RX
+D1 = Gpio("D1", NET = UART.TX)   # UART TX
+D2 = Gpio("D2")
+D3 = Gpio("D3")
+D4 = Gpio("D4")
+D5 = Gpio("D5")
+D6 = Gpio("D6")
+D7 = Gpio("D7")
+D8 = Gpio("D8")
+D9 = Gpio("D9")
+D10 = Gpio("D10")
+D11 = Gpio("D11")
+D12 = Gpio("D12")
+D13 = Gpio("D13")  # Special: has LED connected
+A0 = Gpio("A0")
+A1 = Gpio("A1")
+A2 = Gpio("A2")
+A3 = Gpio("A3")
+A4 = Gpio("A4")
+A5 = Gpio("A5")
+A6 = Gpio("A6")
+A7 = Gpio("A7")
+AREF = Gpio("AREF")
+
+# Generics
+Resistor = Module("@stdlib/generics/Resistor.zen")
+Capacitor = Module("@stdlib/generics/Capacitor.zen")
+Led = Module("@stdlib/generics/Led.zen")
+PinHeader = Module("@stdlib/kicad/PinHeader.zen")
+
+# Reference designs
+ATmega328Px = Module("//reference/ATmega328Px/ATmega328Px.zen")
+FT232RLx = Module("//reference/FT232RLx/FT232RLx.zen")
+AMS1117x = Module("//reference/AMS1117x/AMS1117x.zen")
+SKRKAHE020x = Module("//reference/SKRKAHE020x/SKRKAHE020x.zen")
+
+# Components
+USB_CONNECTOR = Module("//components/10118194-0001LF/10118194-0001LF.zen")
+
+# ============================================================================
+# POWER SUPPLY
+# ============================================================================
+
+# 5V Regulator (from USB or external VIN)
+AMS1117x(
+    name = "REG_5V",
+    VIN = USB_VBUS,
+    VOUT = VCC_5V,
+    GND = GND,
+)
+
+# ============================================================================
+# USB-TO-SERIAL CONVERTER
+# ============================================================================
+
+FT232RLx(
+    name = "USB_SERIAL",
+    package = "FT231XQ",  # Compact 4×4mm package
+    add_tx_rx_leds = False,
+    VCC = VCC_5V,
+    VCCIO = VCC_5V,  # 5V I/O voltage
+    USB_VCC = USB_VBUS,
+    GND = GND,
+    USB = USB,
+    UART = UART,
+    DTR = DTR,
+)
+
+# Auto-reset capacitor (connects DTR to RESET for Arduino programming)
+Capacitor(
+    name = "C_AUTORESET",
+    value = "100nF",
+    package = "0402",
+    P1 = DTR,
+    P2 = RESET,
+)
+
+# ============================================================================
+# MICROCONTROLLER
+# ============================================================================
+
+ATmega328Px(
+    name = "MCU",
+    add_reset_button = True,
+    VCC = VCC_5V,
+    GND = GND,
+    AREF = AREF,
+    RESET = RESET,
+    # Digital pins
+    D0 = D0,
+    D1 = D1,
+    D2 = D2,
+    D3 = D3,
+    D4 = D4,
+    D5 = D5,
+    D6 = D6,
+    D7 = D7,
+    D8 = D8,
+    D9 = D9,
+    D10 = D10,
+    D11 = D11,
+    D12 = D12,
+    D13 = D13,
+    # Analog pins
+    A0 = A0,
+    A1 = A1,    
+    A2 = A2,
+    A3 = A3,
+    A4 = A4,
+    A5 = A5,
+    A6 = A6,
+    A7 = A7,
+)
+
+# ============================================================================
+# USB CONNECTOR
+# Micro USB B Connector Pinout:
+# P1 = VBUS (5V)
+# P2 = D- (USB Data Minus)
+# P3 = D+ (USB Data Plus)
+# P4 = ID (not connected)
+# P5 = GND
+# MH1-4 = Mounting holes (connect to GND)
+# MP1-2 = Shield (connect to GND)
+# ============================================================================
+
+USB_CONNECTOR(
+    name = "J_USB",
+    P1 = USB_VBUS,       # VBUS
+    P2 = USB.D.N,         # D-
+    P3 = USB.D.P,         # D+
+    P4 = NotConnected(),      # ID (not used)
+    P5 = GND,             # GND
+    MH1 = GND,            # Mounting hole
+    MH2 = GND,            # Mounting hole
+    MH3 = GND,            # Mounting hole
+    MH4 = GND,            # Mounting hole
+    MP1 = GND,            # Shield
+    MP2 = GND,            # Shield
+)
+
+# ============================================================================
+# POWER LED
+# ============================================================================
+
+LED_PWR_ANODE = Net("LED_PWR_ANODE")
+
+Resistor(
+    name = "R_LED_PWR",
+    value = "1kohm 5%",
+    package = "0402",
+    P1 = VCC_5V,
+    P2 = LED_PWR_ANODE,
+)
+
+Led(
+    name = "D_PWR",
+    package = "0603",
+    color = "green",
+    A = LED_PWR_ANODE,
+    K = GND,
+)
+
+# ============================================================================
+# L LED (Connected to D13)
+# ============================================================================
+
+LED_L_ANODE = Net("LED_L_ANODE")
+
+Resistor(
+    name = "R_LED_L",
+    value = "1kohm 5%",
+    package = "0402",
+    P1 = D13,
+    P2 = LED_L_ANODE,
+)
+
+Led(
+    name = "D_L",
+    package = "0603",
+    color = "yellow",
+    A = LED_L_ANODE,
+    K = GND,
+)
+
+# ============================================================================
+# PIN HEADER
+# ============================================================================
+
+PinHeader(
+    name = "HEADER_1",
+    pins = 15,
+    Pin_1 = D0,
+    Pin_2 = RESET,
+    Pin_3 = GND,
+    Pin_4 = D1,
+    Pin_5 = D2,
+    Pin_6 = D3,
+    Pin_7 = D4,
+    Pin_8 = D5,
+    Pin_9 = D6,
+    Pin_10 = D7,
+    Pin_11 = D8,
+    Pin_12 = D9,
+    Pin_13 = D10,
+    Pin_14 = D11,
+    Pin_15 = D12,
+)
+
+PinHeader(
+    name = "HEADER_2",
+    pins = 15,
+    Pin_1 = VCC_VIN,
+    Pin_2 = GND,
+    Pin_3 = RESET,
+    Pin_4 = VCC_5V,
+    Pin_5 = A0,
+    Pin_6 = A1,
+    Pin_7 = A2,
+    Pin_8 = A3,
+    Pin_9 = A4,
+    Pin_10 = A5,
+    Pin_11 = A6,
+    Pin_12 = A7,
+    Pin_13 = AREF,
+    Pin_14 = VCC_3V3,
+    Pin_15 = D13,
+)
+
+PinHeader(
+    name = "SPI_HEADER",
+    pins = 3,
+    rows = 2,
+    Pin_1 = D12,
+    Pin_2 = VCC_5V,
+    Pin_3 = D13,
+    Pin_4 = D11,
+    Pin_5 = RESET,
+    Pin_6 = GND,
+)
+# ============================================================================
+# BOARD CONFIGURATION
+# ============================================================================
 
 Board(
     name = "Nano",
     layout_path = "layout/Nano",
-    layers = 4,
+    layers = 2,
 )

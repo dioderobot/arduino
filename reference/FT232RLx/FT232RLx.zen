@@ -129,7 +129,7 @@ Resistor(
     value = "27ohm 5%",
     package = "0402",
     P1 = USBDP_INTERNAL,
-    P2 = USB.DP,
+    P2 = USB.D.P,
 )
 
 Resistor(
@@ -137,7 +137,7 @@ Resistor(
     value = "27ohm 5%",
     package = "0402",
     P1 = USBDM_INTERNAL,
-    P2 = USB.DM,
+    P2 = USB.D.N,
 )
 
 # VCC power supply decoupling
