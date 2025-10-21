@@ -3,14 +3,29 @@ globs: *.zen
 alwaysApply: false
 ---
 <guide>
+
 - `.zen` files use a Starlark-based language to define electronic components, modules, and boards as code.
 - **Do not edit files in `components/`**: These are auto-generated using `pcb search <PART_NUMBER>`.
 - **Create and edit reusable modules in `modules/`**: Modules combine components and logic. Use the format `name.zen`.
 - **Boards go in `boards/`**: These instantiate modules for real-world use.
 - Use the `mcp` server to run `pcb` commands and generate docs.
-- Always use the `search` tool to add new components; never write component definitions by hand.
+- Always use the `search` tool to add new components; never write component definitions by hand. Use `pcb pro search` when `pcb search` is unavailable. 
 - Organize files:
     - `components/`: auto-generated, unmodified
+    - `reference/`: reference design based on the datasheet
     - `modules/`: user-authored logic
+    - `common/`: index of commonly used and validated referenced designs
     - `boards/`: end-use designs
+- Reference design guidelines:
+    - When generating a reference design, name it `<MPN_PREFIX>x` where MPN_PREFIX is the generic prefix to the specific MPN in components
+        - <example> "MPN_PREFIX": "LT8610x", "MPN": "LT8610EMSE#PBF" </example>
+    - You should refer to the datasheet in the component folder to understand how to implement the reference design.
+        - If the datasheet is not avaialble, find it online, download it to the component folder, and run `pcb pro scan -p <absolute/path/to/component/folder>`
+    - If you want examples, look for folders in the reference/ path that contain a README.md, those have been validated.
+    - If you need generic components, use the standard library.
+    - If you need additional parts (i.e. specific voltage reference, specific inductor) add them with the `search` tool.
+    - Your goal is to reduce the number of `config` options as much as possible, but while still keeping all the functionality of the design. For example, you should not have a config option for decoupling capacitors, we always need those. But you might have a config option for I2C address configuration with pulldown resistors, which is something a user needs to decide.
+    - After implementing the reference design, add a very simple README.md with a minimal usage guide and notes. This needs to use as few words as possible while still providing full context on how to use the reference design code.
+    - Once done with the implementation, look into `common/` and check if there is an adequate file we can add this component to. You can think of `common/` as an index of the registry.
+
 </guide>
