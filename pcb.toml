@@ -6,5 +6,5 @@ stdlib = "@github/diodeinc/stdlib:v0.3.2"
 
 [access]
 allow = [
-    "*arduino.cc",
+    "*@arduino.cc",
 ]
