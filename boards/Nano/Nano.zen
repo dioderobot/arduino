@@ -1,5 +1,5 @@
 """
-CS0001
+Arduino Nano
 """
 
 load("@stdlib/interfaces.zen", "Ground", "I2c", "Power")
@@ -7,7 +7,7 @@ load("@stdlib/board_config.zen", "Board")
 
 
 Board(
-    name = "CS0001",
-    layout_path = "layout/CS0001",
+    name = "Nano",
+    layout_path = "layout/Nano",
     layers = 4,
 )

@@ -1,7 +1,0 @@
-[board]
-name = "CS0001"
-description = """
-<PROMPT>
-Add a 3 sentence description of the board here.
-</PROMPT>
-"""

@@ -1,0 +1,7 @@
+[board]
+name = "Nano"
+description = """
+Arduino Nano compatible board design.
+A compact microcontroller board based on the ATmega328P.
+Ideal for breadboard-friendly prototyping and embedded applications.
+"""
