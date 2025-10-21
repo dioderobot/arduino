@@ -1,0 +1,38 @@
+"""
+10033526MN3212LF
+
+USB - mini B Receptacle Connector 5 Position Surface Mount, Right Angle
+
+Auto-generated using `pcb-pro search`. Do not modify.
+"""
+
+Pins = struct(
+    MP1 = io("MP1", Net),
+    MP2 = io("MP2", Net),
+    MP3 = io("MP3", Net),
+    MP4 = io("MP4", Net),
+    P1 = io("P1", Net),
+    P2 = io("P2", Net),
+    P3 = io("P3", Net),
+    P4 = io("P4", Net),
+    P5 = io("P5", Net)
+)
+
+Component(
+    name = "10033526MN3212LF",
+    mpn = "10033526MN3212LF",
+    description = "USB - mini B Receptacle Connector 5 Position Surface Mount, Right Angle",
+    symbol = Symbol(library = "10033526-N3212LF.kicad_sym"),
+    footprint = File("10033526N3212LF.kicad_mod"),
+    pins = {
+        "MP1": Pins.MP1,
+        "MP2": Pins.MP2,
+        "MP3": Pins.MP3,
+        "MP4": Pins.MP4,
+        "1": Pins.P1,
+        "2": Pins.P2,
+        "3": Pins.P3,
+        "4": Pins.P4,
+        "5": Pins.P5
+    },
+)

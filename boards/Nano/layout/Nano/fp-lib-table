@@ -1,6 +1,6 @@
 (fp_lib_table
   (version 7)
-  (lib (name "101181940001LF") (type "KiCad") (uri "${KIPRJMOD}/../../../../components/10118194-0001LF/") (options "") (descr ""))
+  (lib (name "10033526N3212LF") (type "KiCad") (uri "${KIPRJMOD}/../../../../components/10033526-N3212LF/") (options "") (descr ""))
   (lib (name "C_0402_1005Metric") (type "KiCad") (uri "${KIPRJMOD}/../../../../vendor/gitlab.com/kicad/libraries/kicad-footprints/9.0.0/Capacitor_SMD.pretty/") (options "") (descr ""))
   (lib (name "C_0603_1608Metric") (type "KiCad") (uri "${KIPRJMOD}/../../../../vendor/gitlab.com/kicad/libraries/kicad-footprints/9.0.0/Capacitor_SMD.pretty/") (options "") (descr ""))
   (lib (name "C_0805_2012Metric") (type "KiCad") (uri "${KIPRJMOD}/../../../../vendor/gitlab.com/kicad/libraries/kicad-footprints/9.0.0/Capacitor_SMD.pretty/") (options "") (descr ""))

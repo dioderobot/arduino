@@ -2,12 +2,12 @@
 	(version 20241209)
 	(generator "kicad_symbol_editor")
 	(generator_version "9.0")
-	(symbol "10118194-0001LF"
+	(symbol "10033526-N3212LF"
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(property "Reference" "J"
-			(at 21.59 7.62 0)
+			(at 19.05 7.62 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15,8 +15,8 @@
 				(justify left top)
 			)
 		)
-		(property "Value" "10118194-0001LF"
-			(at 21.59 5.08 0)
+		(property "Value" "10033526-N3212LF"
+			(at 19.05 5.08 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24,18 +24,8 @@
 				(justify left top)
 			)
 		)
-		(property "Footprint" "101181940001LF"
-			(at 21.59 -94.92 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://www.amphenol-cs.com/micro-usb-101181940001lf.html"
-			(at 21.59 -194.92 0)
+		(property "Footprint" "10033526N3212LF"
+			(at 19.05 -94.92 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -44,7 +34,17 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Micro USB, Input Output Connectors, B TYPE RECEPTACLE with flange"
+		(property "Datasheet" "https://cdn.amphenol-cs.com/media/wysiwyg/files/drawing/10033526.pdf"
+			(at 19.05 -194.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Description" "USB - mini B Receptacle Connector 5 Position Surface Mount, Right Angle"
 			(at 0 0 0)
 			(effects
 				(font
@@ -53,8 +53,8 @@
 				(hide yes)
 			)
 		)
-		(property "Height" "3.25"
-			(at 21.59 -394.92 0)
+		(property "Height" "4.15"
+			(at 19.05 -394.92 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -63,8 +63,8 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer_Name" "Amphenol Communications Solutions"
-			(at 21.59 -494.92 0)
+		(property "Manufacturer_Name" "Amphenol"
+			(at 19.05 -494.92 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -73,8 +73,8 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer_Part_Number" "10118194-0001LF"
-			(at 21.59 -594.92 0)
+		(property "Manufacturer_Part_Number" "10033526-N3212LF"
+			(at 19.05 -594.92 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -83,8 +83,8 @@
 				(hide yes)
 			)
 		)
-		(property "Mouser Part Number" ""
-			(at 21.59 -694.92 0)
+		(property "Mouser Part Number" "649-10033526-N3212LF"
+			(at 19.05 -694.92 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -93,8 +93,8 @@
 				(hide yes)
 			)
 		)
-		(property "Mouser Price/Stock" ""
-			(at 21.59 -794.92 0)
+		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Amphenol-FCI/10033526-N3212LF?qs=LmzVcvYPptRTPTxae6JWyQ%3D%3D"
+			(at 19.05 -794.92 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -103,8 +103,8 @@
 				(hide yes)
 			)
 		)
-		(property "Arrow Part Number" "10118194-0001LF"
-			(at 21.59 -894.92 0)
+		(property "Arrow Part Number" "10033526-N3212LF"
+			(at 19.05 -894.92 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -113,8 +113,8 @@
 				(hide yes)
 			)
 		)
-		(property "Arrow Price/Stock" "https://www.arrow.com/en/products/10118194-0001lf/amphenol-fci?utm_currency=USD&region=nac"
-			(at 21.59 -994.92 0)
+		(property "Arrow Price/Stock" "https://www.arrow.com/en/products/10033526-n3212lf/amphenol-fci?utm_currency=USD&region=nac"
+			(at 19.05 -994.92 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -123,10 +123,10 @@
 				(hide yes)
 			)
 		)
-		(symbol "10118194-0001LF_1_1"
+		(symbol "10033526-N3212LF_1_1"
 			(rectangle
 				(start 5.08 2.54)
-				(end 20.32 -17.78)
+				(end 17.78 -12.7)
 				(stroke
 					(width 0.254)
 					(type default)
@@ -137,96 +137,6 @@
 			)
 			(pin passive line
 				(at 0 0 0)
-				(length 5.08)
-				(name "MH2"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "MH2"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin passive line
-				(at 0 -2.54 0)
-				(length 5.08)
-				(name "MP1"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "MP1"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin passive line
-				(at 0 -5.08 0)
-				(length 5.08)
-				(name "MP2"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "MP2"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin passive line
-				(at 0 -7.62 0)
-				(length 5.08)
-				(name "MH3"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "MH3"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin passive line
-				(at 25.4 0 180)
-				(length 5.08)
-				(name "MH1"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "MH1"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin passive line
-				(at 25.4 -2.54 180)
 				(length 5.08)
 				(name "1"
 					(effects
@@ -244,7 +154,7 @@
 				)
 			)
 			(pin passive line
-				(at 25.4 -5.08 180)
+				(at 0 -2.54 0)
 				(length 5.08)
 				(name "2"
 					(effects
@@ -262,7 +172,7 @@
 				)
 			)
 			(pin passive line
-				(at 25.4 -7.62 180)
+				(at 0 -5.08 0)
 				(length 5.08)
 				(name "3"
 					(effects
@@ -280,7 +190,7 @@
 				)
 			)
 			(pin passive line
-				(at 25.4 -10.16 180)
+				(at 0 -7.62 0)
 				(length 5.08)
 				(name "4"
 					(effects
@@ -298,7 +208,7 @@
 				)
 			)
 			(pin passive line
-				(at 25.4 -12.7 180)
+				(at 0 -10.16 0)
 				(length 5.08)
 				(name "5"
 					(effects
@@ -316,16 +226,70 @@
 				)
 			)
 			(pin passive line
-				(at 25.4 -15.24 180)
+				(at 22.86 0 180)
 				(length 5.08)
-				(name "MH4"
+				(name "MP1"
 					(effects
 						(font
 							(size 1.27 1.27)
 						)
 					)
 				)
-				(number "MH4"
+				(number "8"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 22.86 -2.54 180)
+				(length 5.08)
+				(name "MP2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "9"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 22.86 -5.08 180)
+				(length 5.08)
+				(name "MP3"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "10"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 22.86 -7.62 180)
+				(length 5.08)
+				(name "MP4"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "11"
 					(effects
 						(font
 							(size 1.27 1.27)
