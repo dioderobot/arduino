@@ -1,0 +1,8 @@
+[workspace]
+name = "customer"
+
+[packages]
+stdlib = "@github/diodeinc/stdlib:v0.2.24"
+
+[access]
+allow = []

@@ -1,0 +1,115 @@
+name: PCB Release
+
+on:
+  workflow_dispatch:
+  push:
+
+env:
+  PCB_VERSION: "v0.2.8"
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  build:
+    name: Build
+    strategy:
+      fail-fast: false
+      matrix:
+        pcb-version: [HEAD, latest]
+    continue-on-error: ${{ matrix.pcb-version == 'HEAD' }}
+    runs-on: ubicloud-standard-30-ubuntu-2404
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Install pcb
+        uses: diodeinc/pcb-action/setup@v2
+        with:
+          version: ${{ matrix.pcb-version }}
+      - name: Build .zen files
+        run: |
+          pcb build boards -Dwarnings --offline
+
+  detect:
+    name: Detect boards
+    runs-on: ubicloud-standard-30-ubuntu-2404
+    outputs:
+      boards: ${{ steps.detect.outputs.boards }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Install pcb
+        uses: diodeinc/pcb-action/setup@v2
+        with:
+          version: ${{ env.PCB_VERSION }}
+
+      - name: Detect boards
+        id: detect
+        uses: diodeinc/pcb-action/detect@v2
+
+  release:
+    name: Release ${{ matrix.board }}
+    needs: detect
+    runs-on: ubicloud-standard-30-ubuntu-2404
+    container:
+      image: kicad/kicad:9.0.3-full
+      options: --user root
+    strategy:
+      fail-fast: false
+      matrix:
+        board: ${{ fromJSON(needs.detect.outputs.boards) }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Install dependencies
+        run: apt-get update && apt-get install -y curl jq git python3 python3-venv python-is-python3
+
+      - name: Fix git permissions
+        run: git config --global --add safe.directory $GITHUB_WORKSPACE
+
+      - name: Install pcb
+        uses: diodeinc/pcb-action/setup@v2
+        with:
+          version: ${{ env.PCB_VERSION }}
+
+      - name: Run pcb release
+        id: release
+        shell: bash
+        run: |
+          short_sha=$(git rev-parse --short HEAD)
+          archive_path="${{ matrix.board }}-$short_sha.zip"
+          pcb release -b ${{ matrix.board }} --output-dir . --output-name $archive_path
+          echo "archive_path=$archive_path" >> "$GITHUB_OUTPUT"
+          echo "short_sha=$short_sha" >> "$GITHUB_OUTPUT"
+
+      - name: Sign
+        uses: sigstore/gh-action-sigstore-python@v3.0.0
+        with:
+          inputs: ${{ steps.release.outputs.archive_path }}
+
+      - name: Upload release archive
+        uses: actions/upload-artifact@v4
+        with:
+          name: pcb-release-${{ matrix.board }}-${{ steps.release.outputs.short_sha }}
+          path: ${{ steps.release.outputs.archive_path }}
+          retention-days: 30
+
+      - name: Upload cosign bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.release.outputs.archive_path }}.sigstore.json
+          path: ${{ steps.release.outputs.archive_path }}.sigstore.json
+          retention-days: 30
+
+      - name: Create release
+        shell: bash
+        env:
+          API_URL: https://api.diode.computer/api/releases/upload
+        run: |
+          set -euo pipefail
+          curl -sSf -X POST "$API_URL" \
+            -F "artifact=@${{ steps.release.outputs.archive_path }};type=application/zip" \
+            -F "bundle=@${{ steps.release.outputs.archive_path }}.sigstore.json;type=application/json"

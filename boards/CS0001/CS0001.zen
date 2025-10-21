@@ -1,0 +1,13 @@
+"""
+CS0001
+"""
+
+load("@stdlib/interfaces.zen", "Ground", "I2c", "Power")
+load("@stdlib/board_config.zen", "Board")
+
+
+Board(
+    name = "CS0001",
+    layout_path = "layout/CS0001",
+    layers = 4,
+)
