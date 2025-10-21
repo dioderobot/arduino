@@ -1,0 +1,50 @@
+"""
+CH340G
+
+Auto-generated using `pcb-pro search`. Do not modify.
+"""
+
+Pins = struct(
+    GND = io("GND", Net),
+    R232 = io("R232", Net),
+    RXD = io("RXD", Net),
+    TXD = io("TXD", Net),
+    UDM = io("UDM", Net),
+    UDP = io("UDP", Net),
+    V3 = io("V3", Net),
+    VCC = io("VCC", Net),
+    XI = io("XI", Net),
+    XO = io("XO", Net),
+    n_CTS = io("n_CTS", Net),
+    n_DCD = io("n_DCD", Net),
+    n_DSR = io("n_DSR", Net),
+    n_DTR = io("n_DTR", Net),
+    n_RI = io("n_RI", Net),
+    n_RTS = io("n_RTS", Net)
+)
+
+Component(
+    name = "CH340G",
+    mpn = "CH340G",
+    datasheet = File("C14267.pdf"),
+    symbol = Symbol(library = "C14267.kicad_sym"),
+    footprint = File("SOIC-16_L9.9-W3.9-P1.27-LS6.0-BL.kicad_mod"),
+    pins = {
+        "GND": Pins.GND,
+        "R232": Pins.R232,
+        "RXD": Pins.RXD,
+        "TXD": Pins.TXD,
+        "UD-": Pins.UDM,
+        "UD+": Pins.UDP,
+        "V3": Pins.V3,
+        "VCC": Pins.VCC,
+        "XI": Pins.XI,
+        "XO": Pins.XO,
+        "~{CTS}": Pins.n_CTS,
+        "~{DCD}": Pins.n_DCD,
+        "~{DSR}": Pins.n_DSR,
+        "~{DTR}": Pins.n_DTR,
+        "~{RI}": Pins.n_RI,
+        "~{RTS}": Pins.n_RTS
+    },
+)

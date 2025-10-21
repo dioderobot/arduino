@@ -1,0 +1,74 @@
+"""
+FT232RLMREEL
+
+Auto-generated using `pcb-pro search`. Do not modify.
+"""
+
+Pins = struct(
+    AGND = io("AGND", Net),
+    CBUS0 = io("CBUS0", Net),
+    CBUS1 = io("CBUS1", Net),
+    CBUS2 = io("CBUS2", Net),
+    CBUS3 = io("CBUS3", Net),
+    CBUS4 = io("CBUS4", Net),
+    CTSh = io("CTSh", Net),
+    DCDh = io("DCDh", Net),
+    DSRh = io("DSRh", Net),
+    DTRh = io("DTRh", Net),
+    GND_1 = io("GND_1", Net),
+    GND_2 = io("GND_2", Net),
+    GND_3 = io("GND_3", Net),
+    NC_1 = io("NC_1", Net),
+    NC_2 = io("NC_2", Net),
+    OSCI = io("OSCI", Net),
+    OSCO = io("OSCO", Net),
+    P3V3OUT = io("P3V3OUT", Net),
+    RESETh = io("RESETh", Net),
+    RIh = io("RIh", Net),
+    RTSh = io("RTSh", Net),
+    RXD = io("RXD", Net),
+    TEST = io("TEST", Net),
+    TXD = io("TXD", Net),
+    USBDM = io("USBDM", Net),
+    USBDP = io("USBDP", Net),
+    VCC = io("VCC", Net),
+    VCCIO = io("VCCIO", Net)
+)
+
+Component(
+    name = "FT232RLMREEL",
+    mpn = "FT232RLMREEL",
+    datasheet = File("FT232RL-REEL.pdf"),
+    symbol = Symbol(library = "FT232RL-REEL.kicad_sym"),
+    footprint = File("SOP65P778X200-28N.kicad_mod"),
+    pins = {
+        "AGND": Pins.AGND,
+        "CBUS0": Pins.CBUS0,
+        "CBUS1": Pins.CBUS1,
+        "CBUS2": Pins.CBUS2,
+        "CBUS3": Pins.CBUS3,
+        "CBUS4": Pins.CBUS4,
+        "CTS#": Pins.CTSh,
+        "DCD#": Pins.DCDh,
+        "DSR#": Pins.DSRh,
+        "DTR#": Pins.DTRh,
+        "GND_1": Pins.GND_1,
+        "GND_2": Pins.GND_2,
+        "GND_3": Pins.GND_3,
+        "NC_1": Pins.NC_1,
+        "NC_2": Pins.NC_2,
+        "OSCI": Pins.OSCI,
+        "OSCO": Pins.OSCO,
+        "3V3OUT": Pins.P3V3OUT,
+        "RESET#": Pins.RESETh,
+        "RI#": Pins.RIh,
+        "RTS#": Pins.RTSh,
+        "RXD": Pins.RXD,
+        "TEST": Pins.TEST,
+        "TXD": Pins.TXD,
+        "USBDM": Pins.USBDM,
+        "USBDP": Pins.USBDP,
+        "VCC": Pins.VCC,
+        "VCCIO": Pins.VCCIO
+    },
+)

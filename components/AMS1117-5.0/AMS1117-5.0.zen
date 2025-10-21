@@ -1,0 +1,26 @@
+"""
+AMS1117M5_0
+
+Auto-generated using `pcb-pro search`. Do not modify.
+"""
+
+Pins = struct(
+    GROUND_ADJUST = io("GROUND_ADJUST", Net),
+    TAB = io("TAB", Net),
+    VIN = io("VIN", Net),
+    VOUT = io("VOUT", Net)
+)
+
+Component(
+    name = "AMS1117M5_0",
+    mpn = "AMS1117M5_0",
+    datasheet = File("AMS1117-5_0.pdf"),
+    symbol = Symbol(library = "AMS1117-5_0.kicad_sym"),
+    footprint = File("SOT229P700X180-4N.kicad_mod"),
+    pins = {
+        "GROUND/ADJUST": Pins.GROUND_ADJUST,
+        "TAB": Pins.TAB,
+        "VIN": Pins.VIN,
+        "VOUT": Pins.VOUT
+    },
+)
