@@ -217,6 +217,45 @@ Led(
 )
 
 # ============================================================================
+# UART LEDs
+# ============================================================================
+
+TX_LED_ANODE = Net("TX_LED_ANODE")
+RX_LED_ANODE = Net("RX_LED_ANODE")
+
+Resistor(
+    name = "R_TX_LED",
+    value = "1kohm 5%",
+    package = "0402",
+    P1 = VCC_5V,
+    P2 = TX_LED_ANODE,
+)
+
+Led(
+    name = "D_TX",
+    package = "0603",
+    color = "yellow",
+    A = TX_LED_ANODE,
+    K = UART.TX,
+)
+
+Resistor(
+    name = "R_RX_LED",
+    value = "1kohm 5%",
+    package = "0402",
+    P1 = UART.RX,
+    P2 = RX_LED_ANODE,
+)
+
+Led(
+    name = "D_RX",
+    package = "0603",
+    color = "yellow",
+    A = RX_LED_ANODE,
+    K = GND,
+)
+
+# ============================================================================
 # PIN HEADER
 # ============================================================================
 
