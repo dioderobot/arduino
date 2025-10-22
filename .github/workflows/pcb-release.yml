@@ -65,7 +65,7 @@ jobs:
         uses: actions/checkout@v5
 
       - name: Install dependencies
-        run: apt-get update && apt-get install -y curl jq git python3 python3-venv python-is-python3
+        run: apt-get update && apt-get install -y curl jq git python3 python3-pip python3-venv python-is-python3
 
       - name: Fix git permissions
         run: git config --global --add safe.directory $GITHUB_WORKSPACE
@@ -80,10 +80,12 @@ jobs:
         shell: bash
         run: |
           short_sha=$(git rev-parse --short HEAD)
-          archive_path="${{ matrix.board }}-$short_sha.zip"
-          pcb release -b ${{ matrix.board }} --output-dir . --output-name $archive_path
+          board_slug=$(echo "${{ matrix.board }}" | tr ' ' '_')
+          archive_path="${board_slug}-$short_sha.zip"
+          pcb release -b "${{ matrix.board }}" --output-dir . --output-name "$archive_path"
           echo "archive_path=$archive_path" >> "$GITHUB_OUTPUT"
           echo "short_sha=$short_sha" >> "$GITHUB_OUTPUT"
+          echo "board_slug=$board_slug" >> "$GITHUB_OUTPUT"
 
       - name: Sign
         uses: sigstore/gh-action-sigstore-python@v3.0.0
@@ -93,7 +95,7 @@ jobs:
       - name: Upload release archive
         uses: actions/upload-artifact@v4
         with:
-          name: pcb-release-${{ matrix.board }}-${{ steps.release.outputs.short_sha }}
+          name: pcb-release-${{ steps.release.outputs.board_slug }}-${{ steps.release.outputs.short_sha }}
           path: ${{ steps.release.outputs.archive_path }}
           retention-days: 30
 
