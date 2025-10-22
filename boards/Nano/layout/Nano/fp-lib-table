@@ -13,4 +13,5 @@
   (lib (name "R_0402_1005Metric") (type "KiCad") (uri "${KIPRJMOD}/../../../../vendor/gitlab.com/kicad/libraries/kicad-footprints/9.0.0/Resistor_SMD.pretty/") (options "") (descr ""))
   (lib (name "SKRKAEE020") (type "KiCad") (uri "${KIPRJMOD}/../../../../components/SKRKAHE020/") (options "") (descr ""))
   (lib (name "SOT229P700X180-4N") (type "KiCad") (uri "${KIPRJMOD}/../../../../components/AMS1117-5.0/") (options "") (descr ""))
+  (lib (name "version-footprint") (type "KiCad") (uri "${KIPRJMOD}/../../../../../../../../Library/Caches/pcb/github/diodeinc/stdlib/v0.3.2/generics/footprints/") (options "") (descr ""))
 )

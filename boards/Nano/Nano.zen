@@ -62,6 +62,7 @@ Resistor = Module("@stdlib/generics/Resistor.zen")
 Capacitor = Module("@stdlib/generics/Capacitor.zen")
 Led = Module("@stdlib/generics/Led.zen")
 PinHeader = Module("@stdlib/kicad/PinHeader.zen")
+Version = Module("@stdlib/generics/Version.zen")
 
 # Reference designs
 ATmega328Px = Module("//reference/ATmega328Px/ATmega328Px.zen")
@@ -71,6 +72,14 @@ SKRKAHE020x = Module("//reference/SKRKAHE020x/SKRKAHE020x.zen")
 
 # Components
 MicroUsbConnector = Module("//components/10033526-N3212LF/10033526-N3212LF.zen")
+
+# ============================================================================
+# VERSION
+# ============================================================================
+    
+Version(
+    name = "VERSION",
+)
 
 # ============================================================================
 # POWER SUPPLY
