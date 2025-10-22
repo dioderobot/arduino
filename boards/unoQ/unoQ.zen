@@ -1,0 +1,849 @@
+"""
+Arduino UNO Q - Complete Board Design
+
+Powerful dual-processor development board combining a Qualcomm application processor with STM32 microcontroller.
+This board combines:
+- Qualcomm QRB2210 Dragonwing™ (Quad-core Arm® Cortex®-A53 @ 2.0 GHz)
+- STM32U585 microcontroller (Arm® Cortex®-M33 @ 160 MHz)
+- 2GB LPDDR4X RAM (MT53E512M32D1ZW)
+- 16GB eMMC storage (EMMC16G-MW28-GA01)
+- Power management: 6-24V DC input with multi-rail DC-DC conversion (5V, 3.8V, 3.3V, 1.8V, 1.128V, 0.6V)
+- USB-C connector with SuperSpeed USB 3.0
+- 8×13 Blue LED matrix + 4× RGB user-controllable LEDs
+- Dual-band Wi-Fi 5 (2.4/5 GHz) and Bluetooth® 5.1
+- Multiple interfaces: I2C/I3C, SPI, PWM, CAN, UART, PSSI, GPIO, JTAG, ADC
+- MIPI DSI/CSI camera interfaces via high-density connectors
+- Audio: Microphone IN / Headphone OUT / Line OUT
+- Qwiic connector (3.3V, I2C)
+- Arduino UNO form factor (68.85mm × 53.34mm)
+- Compatible with Arduino shields and accessories
+
+Operating Systems:
+- MPU: Linux Debian OS
+- MCU: Arduino Core on Zephyr OS
+
+Author: Nasheed Ur Rehman
+"""
+
+# ----------------------------------------------------------------------------
+# Libraries & Dependencies
+# ----------------------------------------------------------------------------
+
+load("@stdlib/config.zen", "config_properties", "config_unit")
+load("@stdlib/interfaces.zen", "Power", "Ground", "NotConnected", "I2c", "Gpio")
+load("@stdlib/properties.zen", "Layout")
+load("@stdlib/units.zen", "Capacitance", "Current", "Frequency", "Inductance", "Resistance", "Voltage")
+load("//stackup.zen", "ARDUINO_BLUE_CONFIG")
+# ----------------------------------------------------------------------------
+# Configuration
+# ----------------------------------------------------------------------------
+
+# ----------------------------------------------------------------------------
+# Component Modules
+# ----------------------------------------------------------------------------
+
+MountingHole = Module("@stdlib/generics/MountingHole.zen")
+
+# ----------------------------------------------------------------------------
+# Sub Schematics
+# ----------------------------------------------------------------------------
+
+IO = Module("src/IO.zen")
+LED = Module("src/LED.zen")
+MCU = Module("src/MCU.zen")
+DC_DC = Module("src/DC_DC.zen")
+LPDDR4X = Module("src/LPDDR4X.zen")
+eMMC = Module("src/eMMC.zen")
+
+# ----------------------------------------------------------------------------
+# Graphics
+# ----------------------------------------------------------------------------
+
+QUALCOMM_LOGO = Module("graphics/qualcomm_logo/qualcomm_logo.zen")
+UKCA_LOGO = Module("graphics/ukca_logo/ukca_logo.zen")
+UNOQ_LOGO = Module("graphics/unoQ_logo/unoQ_logo.zen")
+
+# ----------------------------------------------------------------------------
+# IO Interfaces
+# ----------------------------------------------------------------------------
+
+# Power Rails
+DC_IN = io("DC_IN", Power)
+USB_VBUS_IN = io("USB_VBUS_IN", Power)
+USB_5V_VBUS = io("USB_5V_VBUS", Power)
+BUCK_5V_OUT = io("BUCK_5V_OUT", Power)
+SYS_5V = io("SYS_5V", Power)
+PWR_3P8V = io("PWR_3P8V", Power)
+PWR_3P3V = io("PWR_3P3V", Power)
+VREG_L15A_1P8V = io("VREG_L15A_1P8V", Power)
+VREG_L14A_1P8V = io("VREG_L14A_1P8V", Power)
+VREG_L20A_2P96V = io("VREG_L20A_2P96V", Power)
+VREG_L3A_0P6V = io("VREG_L3A_0P6V", Power)
+VREG_L2A_1P128V = io("VREG_L2A_1P128V", Power)
+MCU_VREFP = io("MCU_VREFP", Power)
+VCOIN = io("VCOIN", Power)
+VBAT = io("VBAT", Power)
+GND = io("GND", Ground)
+
+# MCU Signals
+MCU_BOOT0 = Net("MCU_BOOT0")
+MCU_NRST = Net("MCU_NRST")
+MCU_JTAG_SWDIO = Net("MCU_JTAG_SWDIO")
+MCU_JTAG_SWCLK = Net("MCU_JTAG_SWCLK")
+MCU_JTAG_SWO_PB3 = Net("MCU_JTAG_SWO_PB3")
+MCU_JTAG_NJTRST_PB4 = Net("MCU_JTAG_NJTRST_PB4")
+MCU_TRACE_CLK = Net("MCU_TRACE_CLK")
+MCU_TRACE_D0 = Net("MCU_TRACE_D0")
+MCU_TRACE_D2 = Net("MCU_TRACE_D2")
+MCU_TRACE_D3 = Net("MCU_TRACE_D3")
+
+# MCU I2C
+MCU_I2C2_SCL = Net("MCU_I2C2_SCL")
+MCU_I2C2_SDA = Net("MCU_I2C2_SDA")
+MCU_I2C4_SCL_PD12 = Net("MCU_I2C4_SCL_PD12")
+MCU_I2C4_SDA_PD13 = Net("MCU_I2C4_SDA_PD13")
+MCU_I2C4_SCL_PF14 = Net("MCU_I2C4_SCL_PF14")
+MCU_I2C4_SDA_PF15 = Net("MCU_I2C4_SDA_PF15")
+
+# MCU SPI
+MCU_SPI2_NSS = Net("MCU_SPI2_NSS")
+MCU_SPI2_CLK = Net("MCU_SPI2_CLK")
+MCU_SPI2_CLK_PD1 = Net("MCU_SPI2_CLK_PD1")
+MCU_SPI2_MISO = Net("MCU_SPI2_MISO")
+MCU_SPI2_MISO_PC2 = Net("MCU_SPI2_MISO_PC2")
+MCU_SPI2_MOSI = Net("MCU_SPI2_MOSI")
+MCU_SPI2_MOSI_PC3 = Net("MCU_SPI2_MOSI_PC3")
+MCU_SPI3_CLK = Net("MCU_SPI3_CLK")
+MCU_SPI3_MISO = Net("MCU_SPI3_MISO")
+MCU_SPI3_MOSI = Net("MCU_SPI3_MOSI")
+MCU_SPI3_MOSI_3P3V = Net("MCU_SPI3_MOSI_3P3V")
+MCU_SPI3_CS_N = Net("MCU_SPI3_CS_N")
+MCU_SPI3_RDY = Net("MCU_SPI3_RDY")
+
+# MCU USART
+MCU_USART1_TX = Net("MCU_USART1_TX")
+MCU_USART1_RX = Net("MCU_USART1_RX")
+SOC_MCU_LPUART1_RTS = Net("SOC_MCU_LPUART1_RTS")
+SOC_MCU_LPUART1_CTS = Net("SOC_MCU_LPUART1_CTS")
+SOC_MCU_LPUART1_RX = Net("SOC_MCU_LPUART1_RX")
+SOC_MCU_LPUART1_TX = Net("SOC_MCU_LPUART1_TX")
+
+# MCU Other
+MCU_SDMMC1_CMD_PD2 = Net("MCU_SDMMC1_CMD_PD2")
+MCU_PSSI_DE = Net("MCU_PSSI_DE")
+MCU_PSSI_PDCK = Net("MCU_PSSI_PDCK")
+MCU_PSSI_RDY = Net("MCU_PSSI_RDY")
+MCU_PSSI_D0 = Net("MCU_PSSI_D0")
+MCU_PSSI_D1 = Net("MCU_PSSI_D1")
+MCU_PSSI_D2 = Net("MCU_PSSI_D2")
+MCU_PSSI_D3 = Net("MCU_PSSI_D3")
+MCU_PSSI_D4 = Net("MCU_PSSI_D4")
+MCU_PSSI_D5 = Net("MCU_PSSI_D5")
+MCU_PSSI_D6 = Net("MCU_PSSI_D6")
+MCU_PSSI_D7 = Net("MCU_PSSI_D7")
+MCU_OPAMP1_VINP_PA0 = Net("MCU_OPAMP1_VINP_PA0")
+MCU_OPAMP1_VINM_PA1 = Net("MCU_OPAMP1_VINM_PA1")
+MCU_OPAMP1_VOUT_PA3 = Net("MCU_OPAMP1_VOUT_PA3")
+
+# MCU GPIO
+MCU_PA4 = Net("MCU_PA4")
+MCU_PA5 = Net("MCU_PA5")
+MCU_PA6 = Net("MCU_PA6")
+MCU_PA7 = Net("MCU_PA7")
+MCU_MCO_PA8 = Net("MCU_MCO_PA8")
+MCU_CRS_SYNC_PA10 = Net("MCU_CRS_SYNC_PA10")
+MCU_PA11 = Net("MCU_PA11")
+MCU_PA12 = Net("MCU_PA12")
+MCU_PB0 = Net("MCU_PB0")
+MCU_PB1 = Net("MCU_PB1")
+MCU_PB2 = Net("MCU_PB2")
+MCU_PB8 = Net("MCU_PB8")
+MCU_PC0 = Net("MCU_PC0")
+MCU_PC1 = Net("MCU_PC1")
+MCU_PE7 = Net("MCU_PE7")
+MCU_PE8 = Net("MCU_PE8")
+
+# MCU LED
+MCU_LED1_RED = Net("MCU_LED1_RED")
+MCU_LED1_GRN = Net("MCU_LED1_GRN")
+MCU_LED1_BLU = Net("MCU_LED1_BLU")
+MCU_LED2_RED = Net("MCU_LED2_RED")
+MCU_LED2_GRN = Net("MCU_LED2_GRN")
+MCU_LED2_BLU = Net("MCU_LED2_BLU")
+
+# SOC LED
+SOC_LED1_RED = Net("SOC_LED1_RED")
+SOC_LED1_GRN = Net("SOC_LED1_GRN")
+SOC_LED1_BLU = Net("SOC_LED1_BLU")
+SOC_LED2_RED = Net("SOC_LED2_RED")
+SOC_LED2_GRN = Net("SOC_LED2_GRN")
+SOC_LED2_BLU = Net("SOC_LED2_BLU")
+
+# LED Matrix
+LED_MATRIX_0 = Net("LED_MATRIX_0")
+LED_MATRIX_1 = Net("LED_MATRIX_1")
+LED_MATRIX_2 = Net("LED_MATRIX_2")
+LED_MATRIX_3 = Net("LED_MATRIX_3")
+LED_MATRIX_4 = Net("LED_MATRIX_4")
+LED_MATRIX_5 = Net("LED_MATRIX_5")
+LED_MATRIX_6 = Net("LED_MATRIX_6")
+LED_MATRIX_7 = Net("LED_MATRIX_7")
+LED_MATRIX_8 = Net("LED_MATRIX_8")
+LED_MATRIX_9 = Net("LED_MATRIX_9")
+LED_MATRIX_10 = Net("LED_MATRIX_10")
+
+# USB Signals
+USB0_HS_DM = Net("USB0_HS_DM")
+USB0_HS_DP = Net("USB0_HS_DP")
+USB_CC1 = Net("USB_CC1")
+USB_CC2 = Net("USB_CC2")
+MUX_SBU1 = Net("MUX_SBU1")
+MUX_SBU2 = Net("MUX_SBU2")
+MUX_SSRXN1 = Net("MUX_SSRXN1")
+MUX_SSRXN2 = Net("MUX_SSRXN2")
+MUX_SSRXP1 = Net("MUX_SSRXP1")
+MUX_SSRXP2 = Net("MUX_SSRXP2")
+MUX_SSTXN1 = Net("MUX_SSTXN1")
+MUX_SSTXN2 = Net("MUX_SSTXN2")
+MUX_SSTXP1 = Net("MUX_SSTXP1")
+MUX_SSTXP2 = Net("MUX_SSTXP2")
+
+# SOC Signals
+FORCED_USB_BOOT_N = Net("FORCED_USB_BOOT_N")
+PHONE_ON_N = Net("PHONE_ON_N")
+PM_RESIN_N = Net("PM_RESIN_N")
+SOC_UART_RX_SE4 = Net("SOC_UART_RX_SE4")
+SOC_UART_TX_SE4 = Net("SOC_UART_TX_SE4")
+VBUS_POWER_SWITCH_DISABLE_N = Net("VBUS_POWER_SWITCH_DISABLE_N")
+VOLUME_DOWN_N = Net("VOLUME_DOWN_N")
+VOLUME_UP_N = Net("VOLUME_UP_N")
+SOC_GPIO_0_SE0 = Net("SOC_GPIO_0_SE0")
+SOC_GPIO_1_SE0 = Net("SOC_GPIO_1_SE0")
+SOC_GPIO_2_SE0 = Net("SOC_GPIO_2_SE0")
+SOC_GPIO_3_SE0 = Net("SOC_GPIO_3_SE0")
+SOC_GPIO_86_SE0 = Net("SOC_GPIO_86_SE0")
+SOC_GPIO_82_SE0 = Net("SOC_GPIO_82_SE0")
+SOC_GPIO18 = Net("SOC_GPIO18")
+SOC_GPIO28 = Net("SOC_GPIO28")
+SOC_GPIO_98 = Net("SOC_GPIO_98")
+SOC_GPIO_99 = Net("SOC_GPIO_99")
+SOC_GPIO_100 = Net("SOC_GPIO_100")
+SOC_GPIO_101 = Net("SOC_GPIO_101")
+
+# MIPI DSI
+MIPI_DSI0_CLK_M_CONN = Net("MIPI_DSI0_CLK_M_CONN")
+MIPI_DSI0_CLK_P_CONN = Net("MIPI_DSI0_CLK_P_CONN")
+MIPI_DSI0_L0_M_CONN = Net("MIPI_DSI0_L0_M_CONN")
+MIPI_DSI0_L0_P_CONN = Net("MIPI_DSI0_L0_P_CONN")
+MIPI_DSI0_L1_M_CONN = Net("MIPI_DSI0_L1_M_CONN")
+MIPI_DSI0_L1_P_CONN = Net("MIPI_DSI0_L1_P_CONN")
+MIPI_DSI0_L2_M_CONN = Net("MIPI_DSI0_L2_M_CONN")
+MIPI_DSI0_L2_P_CONN = Net("MIPI_DSI0_L2_P_CONN")
+MIPI_DSI0_L3_M_CONN = Net("MIPI_DSI0_L3_M_CONN")
+MIPI_DSI0_L3_P_CONN = Net("MIPI_DSI0_L3_P_CONN")
+
+# CSI0
+CSI0_A0_CLK_M = Net("CSI0_A0_CLK_M")
+CSI0_A1_LN1_P = Net("CSI0_A1_LN1_P")
+CSI0_A2_LN2_M = Net("CSI0_A2_LN2_M")
+CSI0_B0_LN0_P = Net("CSI0_B0_LN0_P")
+CSI0_B1_LN1_M = Net("CSI0_B1_LN1_M")
+CSI0_B2_LN3_P = Net("CSI0_B2_LN3_P")
+CSI0_C0_LN0_M = Net("CSI0_C0_LN0_M")
+CSI0_C1_LN2_P = Net("CSI0_C1_LN2_P")
+CSI0_C2_LN3_M = Net("CSI0_C2_LN3_M")
+CSI0_NC_CLK_P = Net("CSI0_NC_CLK_P")
+
+# CSI1
+CSI1_A0_CLK_M = Net("CSI1_A0_CLK_M")
+CSI1_A1_LN1_P = Net("CSI1_A1_LN1_P")
+CSI1_A2_LN2_M = Net("CSI1_A2_LN2_M")
+CSI1_B0_LN0_P = Net("CSI1_B0_LN0_P")
+CSI1_B1_LN1_M = Net("CSI1_B1_LN1_M")
+CSI1_B2_LN3_P = Net("CSI1_B2_LN3_P")
+CSI1_C0_LN0_M = Net("CSI1_C0_LN0_M")
+CSI1_C1_LN2_P = Net("CSI1_C1_LN2_P")
+CSI1_C2_LN3_M = Net("CSI1_C2_LN3_M")
+CSI1_NC_CLK_P = Net("CSI1_NC_CLK_P")
+
+# Camera
+CCI_I2C_SCL0 = Net("CCI_I2C_SCL0")
+CCI_I2C_SCL1 = Net("CCI_I2C_SCL1")
+CCI_I2C_SDA0 = Net("CCI_I2C_SDA0")
+CCI_I2C_SDA1 = Net("CCI_I2C_SDA1")
+SOC_CAM_MCLK0 = Net("SOC_CAM_MCLK0")
+SOC_CAM_MCLK1 = Net("SOC_CAM_MCLK1")
+
+# eMMC
+SDC1_RCLK = Net("SDC1_RCLK")
+SDC1_CLK = Net("SDC1_CLK")
+SDC1_CMD = Net("SDC1_CMD")
+SDC1_DATA_0 = Net("SDC1_DATA_0")
+SDC1_DATA_1 = Net("SDC1_DATA_1")
+SDC1_DATA_2 = Net("SDC1_DATA_2")
+SDC1_DATA_3 = Net("SDC1_DATA_3")
+SDC1_DATA_4 = Net("SDC1_DATA_4")
+SDC1_DATA_5 = Net("SDC1_DATA_5")
+SDC1_DATA_6 = Net("SDC1_DATA_6")
+SDC1_DATA_7 = Net("SDC1_DATA_7")
+RESOUT_N = Net("RESOUT_N")
+
+# LPDDR4X - EBI0
+EBI0_CA_0 = Net("EBI0_CA_0")
+EBI0_CA_1 = Net("EBI0_CA_1")
+EBI0_CA_2 = Net("EBI0_CA_2")
+EBI0_CA_3 = Net("EBI0_CA_3")
+EBI0_CA_4 = Net("EBI0_CA_4")
+EBI0_CA_5 = Net("EBI0_CA_5")
+EBI0_DQ0 = Net("EBI0_DQ0")
+EBI0_DQ1 = Net("EBI0_DQ1")
+EBI0_DQ2 = Net("EBI0_DQ2")
+EBI0_DQ3 = Net("EBI0_DQ3")
+EBI0_DQ4 = Net("EBI0_DQ4")
+EBI0_DQ5 = Net("EBI0_DQ5")
+EBI0_DQ6 = Net("EBI0_DQ6")
+EBI0_DQ7 = Net("EBI0_DQ7")
+EBI0_DQ8 = Net("EBI0_DQ8")
+EBI0_DQ9 = Net("EBI0_DQ9")
+EBI0_DQ10 = Net("EBI0_DQ10")
+EBI0_DQ11 = Net("EBI0_DQ11")
+EBI0_DQ12 = Net("EBI0_DQ12")
+EBI0_DQ13 = Net("EBI0_DQ13")
+EBI0_DQ14 = Net("EBI0_DQ14")
+EBI0_DQ15 = Net("EBI0_DQ15")
+EBI0_CS_0 = Net("EBI0_CS_0")
+EBI0_CS_1 = Net("EBI0_CS_1")
+EBI0_CKE_0 = Net("EBI0_CKE_0")
+EBI0_CKE_1 = Net("EBI0_CKE_1")
+EBI0_CLK_P = Net("EBI0_CLK_P")
+EBI0_CLK_M = Net("EBI0_CLK_M")
+EBI0_DMI_0 = Net("EBI0_DMI_0")
+EBI0_DQS_0_P = Net("EBI0_DQS_0_P")
+EBI0_DQS_0_M = Net("EBI0_DQS_0_M")
+EBI0_DMI_1 = Net("EBI0_DMI_1")
+EBI0_DQS_1_P = Net("EBI0_DQS_1_P")
+EBI0_DQS_1_M = Net("EBI0_DQS_1_M")
+
+# LPDDR4X - EBI1
+EBI1_CA_0 = Net("EBI1_CA_0")
+EBI1_CA_1 = Net("EBI1_CA_1")
+EBI1_CA_2 = Net("EBI1_CA_2")
+EBI1_CA_3 = Net("EBI1_CA_3")
+EBI1_CA_4 = Net("EBI1_CA_4")
+EBI1_CA_5 = Net("EBI1_CA_5")
+EBI1_DQ0 = Net("EBI1_DQ0")
+EBI1_DQ1 = Net("EBI1_DQ1")
+EBI1_DQ2 = Net("EBI1_DQ2")
+EBI1_DQ3 = Net("EBI1_DQ3")
+EBI1_DQ4 = Net("EBI1_DQ4")
+EBI1_DQ5 = Net("EBI1_DQ5")
+EBI1_DQ6 = Net("EBI1_DQ6")
+EBI1_DQ7 = Net("EBI1_DQ7")
+EBI1_DQ8 = Net("EBI1_DQ8")
+EBI1_DQ9 = Net("EBI1_DQ9")
+EBI1_DQ10 = Net("EBI1_DQ10")
+EBI1_DQ11 = Net("EBI1_DQ11")
+EBI1_DQ12 = Net("EBI1_DQ12")
+EBI1_DQ13 = Net("EBI1_DQ13")
+EBI1_DQ14 = Net("EBI1_DQ14")
+EBI1_DQ15 = Net("EBI1_DQ15")
+EBI1_CS_0 = Net("EBI1_CS_0")
+EBI1_CS_1 = Net("EBI1_CS_1")
+EBI1_CKE_0 = Net("EBI1_CKE_0")
+EBI1_CKE_1 = Net("EBI1_CKE_1")
+EBI1_CLK_P = Net("EBI1_CLK_P")
+EBI1_CLK_M = Net("EBI1_CLK_M")
+EBI1_DMI_0 = Net("EBI1_DMI_0")
+EBI1_DQS_0_P = Net("EBI1_DQS_0_P")
+EBI1_DQS_0_M = Net("EBI1_DQS_0_M")
+EBI1_DMI_1 = Net("EBI1_DMI_1")
+EBI1_DQS_1_P = Net("EBI1_DQS_1_P")
+EBI1_DQS_1_M = Net("EBI1_DQS_1_M")
+DDR_RESET_N = Net("DDR_RESET_N")
+
+# Audio
+EAR_P = Net("EAR_P")
+EAR_M = Net("EAR_M")
+LINEOUT_P = Net("LINEOUT_P")
+LINEOUT_M = Net("LINEOUT_M")
+HPH_REF = Net("HPH_REF")
+HPH_L = Net("HPH_L")
+HPH_R = Net("HPH_R")
+MIC2_INP = Net("MIC2_INP")
+MIC2_INN = Net("MIC2_INN")
+MIC2_BIAS = Net("MIC2_BIAS")
+HS_DET = Net("HS_DET")
+
+# Additional Signals
+RESOUT_N = Net("RESOUT_N")
+USB0_HS_DM = Net("USB0_HS_DM")
+USB0_HS_DP = Net("USB0_HS_DP")
+USB_CC1 = Net("USB_CC1")
+USB_CC2 = Net("USB_CC2")
+MUX_SBU1 = Net("MUX_SBU1")
+MUX_SBU2 = Net("MUX_SBU2")
+MUX_SSRXN1 = Net("MUX_SSRXN1")
+MUX_SSRXN2 = Net("MUX_SSRXN2")
+MUX_SSRXP1 = Net("MUX_SSRXP1")
+MUX_SSRXP2 = Net("MUX_SSRXP2")
+MUX_SSTXN1 = Net("MUX_SSTXN1")
+MUX_SSTXN2 = Net("MUX_SSTXN2")
+MUX_SSTXP1 = Net("MUX_SSTXP1")
+MUX_SSTXP2 = Net("MUX_SSTXP2")
+
+# ----------------------------------------------------------------------------
+# Module Instantiations
+# ----------------------------------------------------------------------------
+
+DC_DC(
+    name = "DC_DC",
+    properties = {"embed": "true"},
+    DC_IN = DC_IN,
+    USB_VBUS_IN = USB_VBUS_IN,
+    BUCK_5V_OUT = BUCK_5V_OUT,
+    PWR_3P8V = PWR_3P8V,
+    PWR_3P3V = PWR_3P3V,
+    SYS_5V = SYS_5V,
+    USB_5V_VBUS = USB_5V_VBUS,
+    VBAT = VBAT,
+    VBUS_POWER_SWITCH_DISABLE_N = VBUS_POWER_SWITCH_DISABLE_N,
+    GND = GND,
+)
+
+MCU(
+    name = "MCU",
+    properties = {"embed": "true"},
+    PWR_3P3V = PWR_3P3V,
+    VREG_L15A_1P8V = VREG_L15A_1P8V,
+    MCU_VREFP = MCU_VREFP,
+    VCOIN = VCOIN,
+    GND = GND,
+    MCU_BOOT0 = MCU_BOOT0,
+    MCU_NRST = MCU_NRST,
+    MCU_JTAG_SWDIO = MCU_JTAG_SWDIO,
+    MCU_JTAG_SWCLK = MCU_JTAG_SWCLK,
+    MCU_JTAG_SWO_PB3 = MCU_JTAG_SWO_PB3,
+    MCU_JTAG_NJTRST_PB4 = MCU_JTAG_NJTRST_PB4,
+    MCU_TRACE_CLK = MCU_TRACE_CLK,
+    MCU_TRACE_D0 = MCU_TRACE_D0,
+    MCU_TRACE_D2 = MCU_TRACE_D2,
+    MCU_TRACE_D3 = MCU_TRACE_D3,
+    MCU_I2C2_SCL = MCU_I2C2_SCL,
+    MCU_I2C2_SDA = MCU_I2C2_SDA,
+    MCU_I2C4_SCL_PD12 = MCU_I2C4_SCL_PD12,
+    MCU_I2C4_SDA_PD13 = MCU_I2C4_SDA_PD13,
+    MCU_I2C4_SCL_PF14 = MCU_I2C4_SCL_PF14,
+    MCU_I2C4_SDA_PF15 = MCU_I2C4_SDA_PF15,
+    MCU_SPI2_NSS = MCU_SPI2_NSS,
+    MCU_SPI2_CLK = MCU_SPI2_CLK,
+    MCU_SPI2_CLK_PD1 = MCU_SPI2_CLK_PD1,
+    MCU_SPI2_MISO = MCU_SPI2_MISO,
+    MCU_SPI2_MISO_PC2 = MCU_SPI2_MISO_PC2,
+    MCU_SPI2_MOSI = MCU_SPI2_MOSI,
+    MCU_SPI2_MOSI_PC3 = MCU_SPI2_MOSI_PC3,
+    MCU_SPI3_CLK = MCU_SPI3_CLK,
+    MCU_SPI3_MISO = MCU_SPI3_MISO,
+    MCU_SPI3_MOSI = MCU_SPI3_MOSI,
+    MCU_SPI3_MOSI_3P3V = MCU_SPI3_MOSI_3P3V,
+    MCU_SPI3_CS_N = MCU_SPI3_CS_N,
+    MCU_SPI3_RDY = MCU_SPI3_RDY,
+    MCU_USART1_TX = MCU_USART1_TX,
+    MCU_USART1_RX = MCU_USART1_RX,
+    SOC_MCU_LPUART1_RTS = SOC_MCU_LPUART1_RTS,
+    SOC_MCU_LPUART1_CTS = SOC_MCU_LPUART1_CTS,
+    SOC_MCU_LPUART1_RX = SOC_MCU_LPUART1_RX,
+    SOC_MCU_LPUART1_TX = SOC_MCU_LPUART1_TX,
+    MCU_SDMMC1_CMD_PD2 = MCU_SDMMC1_CMD_PD2,
+    MCU_PSSI_DE = MCU_PSSI_DE,
+    MCU_PSSI_PDCK = MCU_PSSI_PDCK,
+    MCU_PSSI_RDY = MCU_PSSI_RDY,
+    MCU_PSSI_D0 = MCU_PSSI_D0,
+    MCU_PSSI_D1 = MCU_PSSI_D1,
+    MCU_PSSI_D2 = MCU_PSSI_D2,
+    MCU_PSSI_D3 = MCU_PSSI_D3,
+    MCU_PSSI_D4 = MCU_PSSI_D4,
+    MCU_PSSI_D5 = MCU_PSSI_D5,
+    MCU_PSSI_D6 = MCU_PSSI_D6,
+    MCU_PSSI_D7 = MCU_PSSI_D7,
+    MCU_OPAMP1_VINP_PA0 = MCU_OPAMP1_VINP_PA0,
+    MCU_OPAMP1_VINM_PA1 = MCU_OPAMP1_VINM_PA1,
+    MCU_OPAMP1_VOUT_PA3 = MCU_OPAMP1_VOUT_PA3,
+    MCU_LED1_RED = MCU_LED1_RED,
+    MCU_LED1_GRN = MCU_LED1_GRN,
+    MCU_LED1_BLU = MCU_LED1_BLU,
+    MCU_LED2_RED = MCU_LED2_RED,
+    MCU_LED2_GRN = MCU_LED2_GRN,
+    MCU_LED2_BLU = MCU_LED2_BLU,
+    LED_MATRIX_0 = LED_MATRIX_0,
+    LED_MATRIX_1 = LED_MATRIX_1,
+    LED_MATRIX_2 = LED_MATRIX_2,
+    LED_MATRIX_3 = LED_MATRIX_3,
+    LED_MATRIX_4 = LED_MATRIX_4,
+    LED_MATRIX_5 = LED_MATRIX_5,
+    LED_MATRIX_6 = LED_MATRIX_6,
+    LED_MATRIX_7 = LED_MATRIX_7,
+    LED_MATRIX_8 = LED_MATRIX_8,
+    LED_MATRIX_9 = LED_MATRIX_9,
+    LED_MATRIX_10 = LED_MATRIX_10,
+    MCU_PA4 = MCU_PA4,
+    MCU_PA5 = MCU_PA5,
+    MCU_PA6 = MCU_PA6,
+    MCU_PA7 = MCU_PA7,
+    MCU_MCO_PA8 = MCU_MCO_PA8,
+    MCU_CRS_SYNC_PA10 = MCU_CRS_SYNC_PA10,
+    MCU_PA11 = MCU_PA11,
+    MCU_PA12 = MCU_PA12,
+    MCU_PB0 = MCU_PB0,
+    MCU_PB1 = MCU_PB1,
+    MCU_PB2 = MCU_PB2,
+    MCU_PB8 = MCU_PB8,
+    MCU_PC0 = MCU_PC0,
+    MCU_PC1 = MCU_PC1,
+    MCU_PE7 = MCU_PE7,
+    MCU_PE8 = MCU_PE8,
+)
+
+LED(
+    name = "LED",
+    properties = {"embed": "true"},
+    PWR_3P3V = PWR_3P3V,
+    GND = GND,
+    LED_MATRIX_0 = LED_MATRIX_0,
+    LED_MATRIX_1 = LED_MATRIX_1,
+    LED_MATRIX_2 = LED_MATRIX_2,
+    LED_MATRIX_3 = LED_MATRIX_3,
+    LED_MATRIX_4 = LED_MATRIX_4,
+    LED_MATRIX_5 = LED_MATRIX_5,
+    LED_MATRIX_6 = LED_MATRIX_6,
+    LED_MATRIX_7 = LED_MATRIX_7,
+    LED_MATRIX_8 = LED_MATRIX_8,
+    LED_MATRIX_9 = LED_MATRIX_9,
+    LED_MATRIX_10 = LED_MATRIX_10,
+    SOC_LED1_RED = SOC_LED1_RED,
+    SOC_LED1_GRN = SOC_LED1_GRN,
+    SOC_LED1_BLU = SOC_LED1_BLU,
+    SOC_LED2_RED = SOC_LED2_RED,
+    SOC_LED2_GRN = SOC_LED2_GRN,
+    SOC_LED2_BLU = SOC_LED2_BLU,
+    MCU_LED1_RED = MCU_LED1_RED,
+    MCU_LED1_BLU = MCU_LED1_BLU,
+    MCU_LED1_GRN = MCU_LED1_GRN,
+    MCU_LED2_GRN = MCU_LED2_GRN,
+    MCU_LED2_BLU = MCU_LED2_BLU,
+    MCU_LED2_RED = MCU_LED2_RED,
+)
+
+eMMC(
+    name = "eMMC",
+    properties = {"embed": "true"},
+    VREG_L20A_2P96V = VREG_L20A_2P96V,
+    VREG_L14A_1P8V = VREG_L14A_1P8V,
+    VREG_L15A_1P8V = VREG_L15A_1P8V,
+    GND = GND,
+    SDC1_RCLK = SDC1_RCLK,
+    SDC1_CLK = SDC1_CLK,
+    SDC1_CMD = SDC1_CMD,
+    SDC1_DATA_0 = SDC1_DATA_0,
+    SDC1_DATA_1 = SDC1_DATA_1,
+    SDC1_DATA_2 = SDC1_DATA_2,
+    SDC1_DATA_3 = SDC1_DATA_3,
+    SDC1_DATA_4 = SDC1_DATA_4,
+    SDC1_DATA_5 = SDC1_DATA_5,
+    SDC1_DATA_6 = SDC1_DATA_6,
+    SDC1_DATA_7 = SDC1_DATA_7,
+    RESOUT_N = RESOUT_N,
+)
+
+LPDDR4X(
+    name = "LPDDR4X",
+    properties = {"embed": "true"},
+    VREG_L3A_0P6V = VREG_L3A_0P6V,
+    VREG_L2A_1P128V = VREG_L2A_1P128V,
+    VREG_L15A_1P8V = VREG_L15A_1P8V,
+    GND = GND,
+    EBI0_CA_0 = EBI0_CA_0,
+    EBI0_CA_1 = EBI0_CA_1,
+    EBI0_CA_2 = EBI0_CA_2,
+    EBI0_CA_3 = EBI0_CA_3,
+    EBI0_CA_4 = EBI0_CA_4,
+    EBI0_CA_5 = EBI0_CA_5,
+    EBI1_CA_0 = EBI1_CA_0,
+    EBI1_CA_1 = EBI1_CA_1,
+    EBI1_CA_2 = EBI1_CA_2,
+    EBI1_CA_3 = EBI1_CA_3,
+    EBI1_CA_4 = EBI1_CA_4,
+    EBI1_CA_5 = EBI1_CA_5,
+    EBI0_DQ0 = EBI0_DQ0,
+    EBI0_DQ1 = EBI0_DQ1,
+    EBI0_DQ2 = EBI0_DQ2,
+    EBI0_DQ3 = EBI0_DQ3,
+    EBI0_DQ4 = EBI0_DQ4,
+    EBI0_DQ5 = EBI0_DQ5,
+    EBI0_DQ6 = EBI0_DQ6,
+    EBI0_DQ7 = EBI0_DQ7,
+    EBI1_DQ0 = EBI1_DQ0,
+    EBI1_DQ1 = EBI1_DQ1,
+    EBI1_DQ2 = EBI1_DQ2,
+    EBI1_DQ3 = EBI1_DQ3,
+    EBI1_DQ4 = EBI1_DQ4,
+    EBI1_DQ5 = EBI1_DQ5,
+    EBI1_DQ6 = EBI1_DQ6,
+    EBI1_DQ7 = EBI1_DQ7,
+    EBI0_DQ8 = EBI0_DQ8,
+    EBI0_DQ9 = EBI0_DQ9,
+    EBI0_DQ10 = EBI0_DQ10,
+    EBI0_DQ11 = EBI0_DQ11,
+    EBI0_DQ12 = EBI0_DQ12,
+    EBI0_DQ13 = EBI0_DQ13,
+    EBI0_DQ14 = EBI0_DQ14,
+    EBI0_DQ15 = EBI0_DQ15,
+    EBI1_DQ8 = EBI1_DQ8,
+    EBI1_DQ9 = EBI1_DQ9,
+    EBI1_DQ10 = EBI1_DQ10,
+    EBI1_DQ11 = EBI1_DQ11,
+    EBI1_DQ12 = EBI1_DQ12,
+    EBI1_DQ13 = EBI1_DQ13,
+    EBI1_DQ14 = EBI1_DQ14,
+    EBI1_DQ15 = EBI1_DQ15,
+    EBI0_CS_0 = EBI0_CS_0,
+    EBI0_CS_1 = EBI0_CS_1,
+    EBI0_CKE_0 = EBI0_CKE_0,
+    EBI0_CKE_1 = EBI0_CKE_1,
+    EBI0_CLK_P = EBI0_CLK_P,
+    EBI0_CLK_M = EBI0_CLK_M,
+    EBI1_CS_0 = EBI1_CS_0,
+    EBI1_CS_1 = EBI1_CS_1,
+    EBI1_CKE_0 = EBI1_CKE_0,
+    EBI1_CKE_1 = EBI1_CKE_1,
+    EBI1_CLK_P = EBI1_CLK_P,
+    EBI1_CLK_M = EBI1_CLK_M,
+    EBI0_DMI_0 = EBI0_DMI_0,
+    EBI0_DQS_0_P = EBI0_DQS_0_P,
+    EBI0_DQS_0_M = EBI0_DQS_0_M,
+    EBI1_DMI_0 = EBI1_DMI_0,
+    EBI1_DQS_0_P = EBI1_DQS_0_P,
+    EBI1_DQS_0_M = EBI1_DQS_0_M,
+    EBI0_DMI_1 = EBI0_DMI_1,
+    EBI0_DQS_1_P = EBI0_DQS_1_P,
+    EBI0_DQS_1_M = EBI0_DQS_1_M,
+    EBI1_DMI_1 = EBI1_DMI_1,
+    EBI1_DQS_1_P = EBI1_DQS_1_P,
+    EBI1_DQS_1_M = EBI1_DQS_1_M,
+    DDR_RESET_N = DDR_RESET_N,
+)
+
+IO(
+    name = "IO",
+    properties = {"embed": "true"},
+    DC_IN = DC_IN,
+    GND = GND,
+    MCU_VREFP = MCU_VREFP,
+    PWR_3P3V = PWR_3P3V,
+    USB_5V_VBUS = USB_5V_VBUS,
+    VREG_L15A_1P8V = VREG_L15A_1P8V,
+    VCOIN = VCOIN,
+    VBAT = VBAT,
+    USB0_HS_DM = USB0_HS_DM,
+    USB0_HS_DP = USB0_HS_DP,
+    USB_CC1 = USB_CC1,
+    USB_CC2 = USB_CC2,
+    MUX_SBU1 = MUX_SBU1,
+    MUX_SBU2 = MUX_SBU2,
+    MUX_SSRXN1 = MUX_SSRXN1,
+    MUX_SSRXN2 = MUX_SSRXN2,
+    MUX_SSRXP1 = MUX_SSRXP1,
+    MUX_SSRXP2 = MUX_SSRXP2,
+    MUX_SSTXN1 = MUX_SSTXN1,
+    MUX_SSTXN2 = MUX_SSTXN2,
+    MUX_SSTXP1 = MUX_SSTXP1,
+    MUX_SSTXP2 = MUX_SSTXP2,
+    MCU_I2C2_SCL = MCU_I2C2_SCL,
+    MCU_I2C2_SDA = MCU_I2C2_SDA,
+    MCU_I2C4_SCL_PD12 = MCU_I2C4_SCL_PD12,
+    MCU_I2C4_SDA_PD13 = MCU_I2C4_SDA_PD13,
+    MCU_SPI2_CLK = MCU_SPI2_CLK,
+    MCU_SPI2_CLK_PD1 = MCU_SPI2_CLK_PD1,
+    MCU_SPI2_MISO = MCU_SPI2_MISO,
+    MCU_SPI2_MISO_PC2 = MCU_SPI2_MISO_PC2,
+    MCU_SPI2_MOSI = MCU_SPI2_MOSI,
+    MCU_SPI2_MOSI_PC3 = MCU_SPI2_MOSI_PC3,
+    MCU_SPI2_NSS = MCU_SPI2_NSS,
+    MCU_USART1_RX = MCU_USART1_RX,
+    MCU_USART1_TX = MCU_USART1_TX,
+    MCU_JTAG_NJTRST_PB4 = MCU_JTAG_NJTRST_PB4,
+    MCU_JTAG_SWO_PB3 = MCU_JTAG_SWO_PB3,
+    MCU_BOOT0 = MCU_BOOT0,
+    MCU_NRST = MCU_NRST,
+    MCU_PA4 = MCU_PA4,
+    MCU_PA5 = MCU_PA5,
+    MCU_PA6 = MCU_PA6,
+    MCU_PA7 = MCU_PA7,
+    MCU_PA11 = MCU_PA11,
+    MCU_PA12 = MCU_PA12,
+    MCU_PB0 = MCU_PB0,
+    MCU_PB1 = MCU_PB1,
+    MCU_PB2 = MCU_PB2,
+    MCU_PB8 = MCU_PB8,
+    MCU_PC0 = MCU_PC0,
+    MCU_PC1 = MCU_PC1,
+    FORCED_USB_BOOT_N = FORCED_USB_BOOT_N,
+    PHONE_ON_N = PHONE_ON_N,
+    PM_RESIN_N = PM_RESIN_N,
+    SOC_UART_RX_SE4 = SOC_UART_RX_SE4,
+    SOC_UART_TX_SE4 = SOC_UART_TX_SE4,
+    VBUS_POWER_SWITCH_DISABLE_N = VBUS_POWER_SWITCH_DISABLE_N,
+    VOLUME_DOWN_N = VOLUME_DOWN_N,
+    VOLUME_UP_N = VOLUME_UP_N,
+    MIPI_DSI0_CLK_M_CONN = MIPI_DSI0_CLK_M_CONN,
+    MIPI_DSI0_CLK_P_CONN = MIPI_DSI0_CLK_P_CONN,
+    MIPI_DSI0_L0_M_CONN = MIPI_DSI0_L0_M_CONN,
+    MIPI_DSI0_L0_P_CONN = MIPI_DSI0_L0_P_CONN,
+    MIPI_DSI0_L1_M_CONN = MIPI_DSI0_L1_M_CONN,
+    MIPI_DSI0_L1_P_CONN = MIPI_DSI0_L1_P_CONN,
+    MIPI_DSI0_L2_M_CONN = MIPI_DSI0_L2_M_CONN,
+    MIPI_DSI0_L2_P_CONN = MIPI_DSI0_L2_P_CONN,
+    MIPI_DSI0_L3_M_CONN = MIPI_DSI0_L3_M_CONN,
+    MIPI_DSI0_L3_P_CONN = MIPI_DSI0_L3_P_CONN,
+    CSI0_A0_CLK_M = CSI0_A0_CLK_M,
+    CSI0_A1_LN1_P = CSI0_A1_LN1_P,
+    CSI0_A2_LN2_M = CSI0_A2_LN2_M,
+    CSI0_B0_LN0_P = CSI0_B0_LN0_P,
+    CSI0_B1_LN1_M = CSI0_B1_LN1_M,
+    CSI0_B2_LN3_P = CSI0_B2_LN3_P,
+    CSI0_C0_LN0_M = CSI0_C0_LN0_M,
+    CSI0_C1_LN2_P = CSI0_C1_LN2_P,
+    CSI0_C2_LN3_M = CSI0_C2_LN3_M,
+    CSI0_NC_CLK_P = CSI0_NC_CLK_P,
+    CSI1_A0_CLK_M = CSI1_A0_CLK_M,
+    CSI1_A1_LN1_P = CSI1_A1_LN1_P,
+    CSI1_A2_LN2_M = CSI1_A2_LN2_M,
+    CSI1_B0_LN0_P = CSI1_B0_LN0_P,
+    CSI1_B1_LN1_M = CSI1_B1_LN1_M,
+    CSI1_B2_LN3_P = CSI1_B2_LN3_P,
+    CSI1_C0_LN0_M = CSI1_C0_LN0_M,
+    CSI1_C1_LN2_P = CSI1_C1_LN2_P,
+    CSI1_C2_LN3_M = CSI1_C2_LN3_M,
+    CSI1_NC_CLK_P = CSI1_NC_CLK_P,
+    CCI_I2C_SCL0 = CCI_I2C_SCL0,
+    CCI_I2C_SCL1 = CCI_I2C_SCL1,
+    CCI_I2C_SDA0 = CCI_I2C_SDA0,
+    CCI_I2C_SDA1 = CCI_I2C_SDA1,
+    SOC_CAM_MCLK0 = SOC_CAM_MCLK0,
+    SOC_CAM_MCLK1 = SOC_CAM_MCLK1,
+    MCU_PSSI_D0 = MCU_PSSI_D0,
+    MCU_PSSI_D1 = MCU_PSSI_D1,
+    MCU_PSSI_D2 = MCU_PSSI_D2,
+    MCU_PSSI_D3 = MCU_PSSI_D3,
+    MCU_PSSI_D4 = MCU_PSSI_D4,
+    MCU_PSSI_D5 = MCU_PSSI_D5,
+    MCU_PSSI_D6 = MCU_PSSI_D6,
+    MCU_PSSI_D7 = MCU_PSSI_D7,
+    MCU_PSSI_PDCK = MCU_PSSI_PDCK,
+    MCU_PSSI_RDY = MCU_PSSI_RDY,
+    MCU_PSSI_DE = MCU_PSSI_DE,
+    MCU_MCO_PA8 = MCU_MCO_PA8,
+    MCU_CRS_SYNC_PA10 = MCU_CRS_SYNC_PA10,
+    SOC_GPIO_0_SE0 = SOC_GPIO_0_SE0,
+    SOC_GPIO_1_SE0 = SOC_GPIO_1_SE0,
+    SOC_GPIO_2_SE0 = SOC_GPIO_2_SE0,
+    SOC_GPIO_3_SE0 = SOC_GPIO_3_SE0,
+    SOC_GPIO_86_SE0 = SOC_GPIO_86_SE0,
+    SOC_GPIO_82_SE0 = SOC_GPIO_82_SE0,
+    SOC_GPIO18 = SOC_GPIO18,
+    SOC_GPIO28 = SOC_GPIO28,
+    MCU_SDMMC1_CMD_PD2 = MCU_SDMMC1_CMD_PD2,
+    MCU_TRACE_CLK = MCU_TRACE_CLK,
+    MCU_TRACE_D0 = MCU_TRACE_D0,
+    MCU_TRACE_D2 = MCU_TRACE_D2,
+    MCU_TRACE_D3 = MCU_TRACE_D3,
+    MCU_PE7 = MCU_PE7,
+    MCU_PE8 = MCU_PE8,
+    MCU_OPAMP1_VOUT_PA3 = MCU_OPAMP1_VOUT_PA3,
+    MCU_OPAMP1_VINP_PA0 = MCU_OPAMP1_VINP_PA0,
+    MCU_OPAMP1_VINM_PA1 = MCU_OPAMP1_VINM_PA1,
+    HS_DET = HS_DET,
+    SOC_GPIO_98 = SOC_GPIO_98,
+    SOC_GPIO_99 = SOC_GPIO_99,
+    SOC_GPIO_100 = SOC_GPIO_100,
+    SOC_GPIO_101 = SOC_GPIO_101,
+    MCU_I2C4_SCL_PF14 = MCU_I2C4_SCL_PF14,
+    MCU_I2C4_SDA_PF15 = MCU_I2C4_SDA_PF15,
+    EAR_P = EAR_P,
+    EAR_M = EAR_M,
+    LINEOUT_P = LINEOUT_P,
+    LINEOUT_M = LINEOUT_M,
+    HPH_REF = HPH_REF,
+    HPH_L = HPH_L,
+    HPH_R = HPH_R,
+    MIC2_INP = MIC2_INP,
+    MIC2_INN = MIC2_INN,
+    MIC2_BIAS = MIC2_BIAS,
+)
+
+# ----------------------------------------------------------------------------
+# Mechanical Components
+# ----------------------------------------------------------------------------
+
+MountingHole(
+    name = "MH1",
+    diameter = "M3",
+    standard = "ISO14580",
+    plating = "Via",
+)
+
+MountingHole(
+    name = "MH2",
+    diameter = "M3",
+    standard = "ISO14580",
+    plating = "Via",
+)
+
+MountingHole(
+    name = "MH3",
+    diameter = "M3",
+    standard = "ISO14580",
+    plating = "Via",
+)
+
+MountingHole(
+    name = "MH4",
+    diameter = "M3",
+    standard = "ISO14580",
+    plating = "Via",
+)
+
+
+# ----------------------------------------------------------------------------
+# Graphics Components
+# ----------------------------------------------------------------------------
+
+QUALCOMM_LOGO(
+    name = "QUALCOMM_LOGO",
+)
+
+UKCA_LOGO(
+    name = "UKCA_LOGO",
+)
+
+UNOQ_LOGO(
+    name = "UNOQ_LOGO",
+)
+
+UNOQ_LOGO(
+    name = "UNOQ_LOGO_B",
+)
+
+Layout(
+    name = "unoQ",
+    path = "layout/unoQ",
+)
+
+# pcb:sch DC_DC x=2476.5000 y=622.3000 rot=0
+# pcb:sch IO x=-2006.6000 y=-3009.9000 rot=0
+# pcb:sch LED x=-292.1000 y=3822.7000 rot=0
+# pcb:sch LPDDR4X x=2489.2000 y=-3009.9000 rot=0
+# pcb:sch MCU x=-1155.7000 y=1295.4000 rot=0
+# pcb:sch QUALCOMM_LOGO.QUALCOMM_LOGO x=4887.1210 y=683.3230 rot=0
+# pcb:sch UKCA_LOGO.UKCA_LOGO x=4888.2040 y=726.2320 rot=0
+# pcb:sch UNOQ_LOGO.UNOQ_LOGO x=4887.3410 y=758.7020 rot=0
+# pcb:sch eMMC x=2501.9000 y=2641.6000 rot=0

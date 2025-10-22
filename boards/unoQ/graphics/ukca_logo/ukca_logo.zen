@@ -1,0 +1,17 @@
+# Component definition file
+# Graphics: UKCA Logo
+
+"""UKCA Logo - Graphical Component
+
+UKCA (UK Conformity Assessed) certification mark for PCB silkscreen/copper layer.
+This is a non-electrical graphical element required for UK market compliance.
+"""
+
+# Component
+Component(
+    name = "UKCA_LOGO",
+    symbol = Symbol(library = "ukca.kicad_sym"),
+    footprint = File("ukca.kicad_mod"),
+    pins = {}
+)
+

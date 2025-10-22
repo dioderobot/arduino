@@ -1,0 +1,1505 @@
+"""
+LED Schematic
+Author: Nasheed Ur Rehman
+"""
+
+# ----------------------------------------------------------------------------
+# Libraries & Dependencies
+# ----------------------------------------------------------------------------
+
+load("@stdlib/config.zen", "config_properties", "config_unit")
+load("@stdlib/interfaces.zen", "Power", "Ground", "NotConnected", "I2c", "Gpio")
+load("@stdlib/properties.zen", "Layout")
+load("@stdlib/units.zen", "Capacitance", "Current", "Frequency", "Inductance", "Resistance", "Voltage")
+
+# ----------------------------------------------------------------------------
+# Configuration
+# ----------------------------------------------------------------------------
+
+# ----------------------------------------------------------------------------
+# Component Modules
+# ----------------------------------------------------------------------------
+
+Led = Module("@stdlib/generics/Led.zen")
+Resistor = Module("@stdlib/generics/Resistor.zen")
+Capacitor = Module("@stdlib/generics/Capacitor.zen")
+SchottkyDiode = Module("@stdlib/generics/Diode.zen")
+MMDT3904 = Module("../../../components/MMDT3904-7-F_SOT363_6P/MMDT3904-7-F_SOT363_6P.zen")
+LTST_C28NBEGK_SN = Module("../../../components/LTST-C28NBEGK-SN/LTST-C28NBEGK-SN.zen")
+
+# ----------------------------------------------------------------------------
+# IO Interfaces
+# ----------------------------------------------------------------------------
+
+PWR_3P3V = io("PWR_3P3V", Power)
+GND = io("GND", Ground)
+
+# LED Matrix Column Control Signals
+LED_MATRIX_0 = io("LED_MATRIX_0", Net)
+LED_MATRIX_1 = io("LED_MATRIX_1", Net)
+LED_MATRIX_2 = io("LED_MATRIX_2", Net)
+LED_MATRIX_3 = io("LED_MATRIX_3", Net)
+LED_MATRIX_4 = io("LED_MATRIX_4", Net)
+LED_MATRIX_5 = io("LED_MATRIX_5", Net)
+LED_MATRIX_6 = io("LED_MATRIX_6", Net)
+LED_MATRIX_7 = io("LED_MATRIX_7", Net)
+LED_MATRIX_8 = io("LED_MATRIX_8", Net)
+LED_MATRIX_9 = io("LED_MATRIX_9", Net)
+LED_MATRIX_10 = io("LED_MATRIX_10", Net)
+
+SOC_LED1_RED = io("SOC_LED1_RED", Net)
+SOC_LED1_GRN = io("SOC_LED1_GRN", Net)
+
+SOC_LED1_BLU = io("SOC_LED1_BLU", Net)
+SOC_LED2_RED = io("SOC_LED2_RED", Net)
+
+SOC_LED2_GRN = io("SOC_LED2_GRN", Net)
+SOC_LED2_BLU = io("SOC_LED2_BLU", Net)
+
+MCU_LED1_RED = io("MCU_LED1_RED", Net)
+MCU_LED1_BLU = io("MCU_LED1_BLU", Net)
+MCU_LED1_GRN = io("MCU_LED1_GRN", Net)
+
+MCU_LED2_GRN = io("MCU_LED2_GRN", Net)
+MCU_LED2_BLU = io("MCU_LED2_BLU", Net)
+MCU_LED2_RED = io("MCU_LED2_RED", Net)
+# ----------------------------------------------------------------------------
+# Local Nets
+# ----------------------------------------------------------------------------
+
+# LED Matrix Row Control Signals
+LED_MATRIX_0_R = Net("LED_MATRIX_0_R")
+LED_MATRIX_1_R = Net("LED_MATRIX_1_R")
+LED_MATRIX_2_R = Net("LED_MATRIX_2_R")
+LED_MATRIX_3_R = Net("LED_MATRIX_3_R")
+LED_MATRIX_4_R = Net("LED_MATRIX_4_R")
+LED_MATRIX_5_R = Net("LED_MATRIX_5_R")
+LED_MATRIX_6_R = Net("LED_MATRIX_6_R")
+LED_MATRIX_7_R = Net("LED_MATRIX_7_R")
+LED_MATRIX_8_R = Net("LED_MATRIX_8_R")
+LED_MATRIX_9_R = Net("LED_MATRIX_9_R")
+LED_MATRIX_10_R = Net("LED_MATRIX_10_R")
+
+SOC_LED1_RED_B = Net("SOC_LED1_RED_B")
+SOC_LED1_GRN_B = Net("SOC_LED1_GRN_B")
+
+SOC_LED1_BLU_B = Net("SOC_LED1_BLU_B")
+SOC_LED2_RED_B = Net("SOC_LED2_RED_B")
+
+SOC_LED2_GRN_B = Net("SOC_LED2_GRN_B")
+SOC_LED2_BLU_B = Net("SOC_LED2_BLU_B")
+
+SOC_LED2_RED_C = Net("SOC_LED2_RED_C")
+SOC_LED2_GRN_C = Net("SOC_LED2_GRN_C")
+SOC_LED2_BLU_C = Net("SOC_LED2_BLU_C")
+
+SOC_LED1_RED_C = Net("SOC_LED1_RED_C")
+SOC_LED1_GRN_C = Net("SOC_LED1_GRN_C")
+SOC_LED1_BLU_C = Net("SOC_LED1_BLU_C")
+
+SOC_LED1_RED_D = Net("SOC_LED1_RED_D")
+SOC_LED1_BLU_D = Net("SOC_LED1_BLU_D")
+SOC_LED1_GRN_D = Net("SOC_LED1_GRN_D")
+
+SOC_LED2_RED_D = Net("SOC_LED2_RED_D")
+SOC_LED2_BLU_D = Net("SOC_LED2_BLU_D")
+SOC_LED2_GRN_D = Net("SOC_LED2_GRN_D")
+
+MCU_LED1_RED_D = Net("MCU_LED1_RED_D")
+MCU_LED1_BLU_D = Net("MCU_LED1_BLU_D")
+MCU_LED1_GRN_D = Net("MCU_LED1_GRN_D")
+
+MCU_LED2_RED_D = Net("MCU_LED2_RED_D")
+MCU_LED2_BLU_D = Net("MCU_LED2_BLU_D")
+MCU_LED2_GRN_D = Net("MCU_LED2_GRN_D")
+
+LED_PWR = Net("LED_PWR")
+
+# ----------------------------------------------------------------------------
+# Components
+# ----------------------------------------------------------------------------
+
+# Led Matrix
+
+Resistor(
+    name = "R_LED_MATRIX_0",
+    value = "22",
+    package = "0402",
+    P1 = LED_MATRIX_0,
+    P2 = LED_MATRIX_0_R,
+)
+
+Resistor(
+        name = "R_LED_MATRIX_1",
+    value = "22",
+    package = "0402",
+    P1 = LED_MATRIX_1,
+    P2 = LED_MATRIX_1_R,
+)
+
+Resistor(
+    name = "R_LED_MATRIX_2",
+    value = "22",
+    package = "0402",
+    P1 = LED_MATRIX_2,
+    P2 = LED_MATRIX_2_R,
+)
+
+Resistor(
+    name = "R_LED_MATRIX_3",
+    value = "22",
+    package = "0402",
+    P1 = LED_MATRIX_3,
+    P2 = LED_MATRIX_3_R,
+)
+
+Resistor(
+    name = "R_LED_MATRIX_4",
+    value = "22",
+    package = "0402",
+    P1 = LED_MATRIX_4,
+    P2 = LED_MATRIX_4_R,
+)
+
+Resistor(
+    name = "R_LED_MATRIX_5",
+    value = "22",
+    package = "0402",
+    P1 = LED_MATRIX_5,
+    P2 = LED_MATRIX_5_R,
+)
+
+Resistor(
+    name = "R_LED_MATRIX_6",
+    value = "22",
+    package = "0402",
+    P1 = LED_MATRIX_6,
+    P2 = LED_MATRIX_6_R,
+)
+
+Resistor(
+    name = "R_LED_MATRIX_7",
+    value = "22",
+    package = "0402",
+    P1 = LED_MATRIX_7,
+    P2 = LED_MATRIX_7_R,
+)
+
+Resistor(
+    name = "R_LED_MATRIX_8",
+    value = "22",
+    package = "0402",
+    P1 = LED_MATRIX_8,
+    P2 = LED_MATRIX_8_R,
+)
+
+Resistor(
+    name = "R_LED_MATRIX_9",
+    value = "22",
+    package = "0402",
+    P1 = LED_MATRIX_9,
+    P2 = LED_MATRIX_9_R,
+)
+
+Resistor(
+    name = "R_LED_MATRIX_10",
+    value = "22",
+    package = "0402",
+    P1 = LED_MATRIX_10,
+    P2 = LED_MATRIX_10_R,
+)
+
+Led(
+    name = "LED_MATRIX_1",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_0_R,
+    K = LED_MATRIX_1_R,
+)
+
+Led(
+    name = "LED_MATRIX_2",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_1_R,
+    K = LED_MATRIX_0_R,
+)
+
+Led(
+    name = "LED_MATRIX_3",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_0_R,
+    K = LED_MATRIX_2_R,
+)
+
+Led(
+    name = "LED_MATRIX_4",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_2_R,
+    K = LED_MATRIX_0_R,
+)
+
+Led(
+    name = "LED_MATRIX_5",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_1_R,
+    K = LED_MATRIX_2_R,
+)
+
+Led(
+    name = "LED_MATRIX_6",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_2_R,
+    K = LED_MATRIX_1_R,
+)
+
+Led(
+    name = "LED_MATRIX_7",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_0_R,
+    K = LED_MATRIX_3_R,
+)
+
+Led(
+    name = "LED_MATRIX_8",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_3_R,
+    K = LED_MATRIX_0_R,
+)
+
+Led(
+    name = "LED_MATRIX_9",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_1_R,
+    K = LED_MATRIX_3_R,
+)
+
+Led(
+    name = "LED_MATRIX_10",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_3_R,
+    K = LED_MATRIX_1_R,
+)
+
+Led(
+    name = "LED_MATRIX_11",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_2_R,
+    K = LED_MATRIX_3_R,
+)
+
+Led(
+    name = "LED_MATRIX_12",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_3_R,
+    K = LED_MATRIX_2_R,
+)
+
+Led(
+    name = "LED_MATRIX_13",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_0_R,
+    K = LED_MATRIX_4_R,
+)
+
+Led(
+    name = "LED_MATRIX_14",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_4_R,
+    K = LED_MATRIX_0_R,
+)
+
+Led(
+    name = "LED_MATRIX_15",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_1_R,
+    K = LED_MATRIX_4_R,
+)
+
+Led(
+    name = "LED_MATRIX_16",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_4_R,
+    K = LED_MATRIX_1_R,
+)
+
+Led(
+    name = "LED_MATRIX_17",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_2_R,
+    K = LED_MATRIX_4_R,
+)
+
+Led(
+    name = "LED_MATRIX_18",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_4_R,
+    K = LED_MATRIX_2_R,
+)
+
+Led(
+    name = "LED_MATRIX_19",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_3_R,
+    K = LED_MATRIX_4_R,
+)
+
+Led(
+    name = "LED_MATRIX_20",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_4_R,
+    K = LED_MATRIX_3_R,
+)
+
+Led(
+    name = "LED_MATRIX_21",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_0_R,
+    K = LED_MATRIX_5_R,
+)
+
+Led(
+    name = "LED_MATRIX_22",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_5_R,
+    K = LED_MATRIX_0_R,
+)
+
+Led(
+    name = "LED_MATRIX_23",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_1_R,
+    K = LED_MATRIX_5_R,
+)
+
+Led(
+    name = "LED_MATRIX_24",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_5_R,
+    K = LED_MATRIX_1_R,
+)
+
+Led(
+    name = "LED_MATRIX_25",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_2_R,
+    K = LED_MATRIX_5_R,
+)
+
+Led(
+    name = "LED_MATRIX_26",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_5_R,
+    K = LED_MATRIX_2_R,
+)
+
+Led(
+    name = "LED_MATRIX_27",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_3_R,
+    K = LED_MATRIX_5_R,
+)
+
+Led(
+    name = "LED_MATRIX_28",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_5_R,
+    K = LED_MATRIX_3_R,
+)
+
+Led(
+    name = "LED_MATRIX_29",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_4_R,
+    K = LED_MATRIX_5_R,
+)
+
+Led(
+    name = "LED_MATRIX_30",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_5_R,
+    K = LED_MATRIX_4_R,
+)
+
+Led(
+    name = "LED_MATRIX_31",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_0_R,
+    K = LED_MATRIX_6_R,
+)
+
+Led(
+    name = "LED_MATRIX_32",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_6_R,
+    K = LED_MATRIX_0_R,
+)
+
+Led(
+    name = "LED_MATRIX_33",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_1_R,
+    K = LED_MATRIX_6_R,
+)
+
+Led(
+    name = "LED_MATRIX_34",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_6_R,
+    K = LED_MATRIX_1_R,
+)
+
+Led(
+    name = "LED_MATRIX_35",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_2_R,
+    K = LED_MATRIX_6_R,
+)
+
+Led(
+    name = "LED_MATRIX_36",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_6_R,
+    K = LED_MATRIX_2_R,
+)
+
+Led(
+    name = "LED_MATRIX_37",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_3_R,
+    K = LED_MATRIX_6_R,
+)
+
+Led(
+    name = "LED_MATRIX_38",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_6_R,
+    K = LED_MATRIX_3_R,
+)
+
+Led(
+    name = "LED_MATRIX_39",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_4_R,
+    K = LED_MATRIX_6_R,
+)
+
+Led(
+    name = "LED_MATRIX_40",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_6_R,
+    K = LED_MATRIX_4_R,
+)
+
+Led(
+    name = "LED_MATRIX_41",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_5_R,
+    K = LED_MATRIX_6_R,
+)
+
+Led(
+    name = "LED_MATRIX_42",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_6_R,
+    K = LED_MATRIX_5_R,
+)
+
+Led(
+    name = "LED_MATRIX_43",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_0_R,
+    K = LED_MATRIX_7_R,
+)
+
+Led(
+    name = "LED_MATRIX_44",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_7_R,
+    K = LED_MATRIX_0_R,
+)
+
+Led(
+    name = "LED_MATRIX_45",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_1_R,
+    K = LED_MATRIX_7_R,
+)
+
+Led(
+    name = "LED_MATRIX_46",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_7_R,
+    K = LED_MATRIX_1_R,
+)
+
+Led(
+    name = "LED_MATRIX_47",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_2_R,
+    K = LED_MATRIX_7_R,
+)
+
+Led(
+    name = "LED_MATRIX_48",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_7_R,
+    K = LED_MATRIX_2_R,
+)
+
+Led(
+    name = "LED_MATRIX_49",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_3_R,
+    K = LED_MATRIX_7_R,
+)
+
+Led(
+    name = "LED_MATRIX_50",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_7_R,
+    K = LED_MATRIX_3_R,
+)
+
+Led(
+    name = "LED_MATRIX_51",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_4_R,
+    K = LED_MATRIX_7_R,
+)
+
+Led(
+    name = "LED_MATRIX_52",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_7_R,
+    K = LED_MATRIX_4_R,
+)
+
+Led(
+    name = "LED_MATRIX_53",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_5_R,
+    K = LED_MATRIX_7_R,
+)
+
+Led(
+    name = "LED_MATRIX_54",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_7_R,
+    K = LED_MATRIX_5_R,
+)
+
+Led(
+    name = "LED_MATRIX_55",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_6_R,
+    K = LED_MATRIX_7_R,
+)
+
+Led(
+    name = "LED_MATRIX_56",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_7_R,
+    K = LED_MATRIX_6_R,
+)
+
+Led(
+    name = "LED_MATRIX_57",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_0_R,
+    K = LED_MATRIX_8_R,
+)
+
+Led(
+    name = "LED_MATRIX_58",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_8_R,
+    K = LED_MATRIX_0_R,
+)
+
+Led(
+    name = "LED_MATRIX_59",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_1_R,
+    K = LED_MATRIX_8_R,
+)
+
+Led(
+    name = "LED_MATRIX_60",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_8_R,
+    K = LED_MATRIX_1_R,
+)
+
+Led(
+    name = "LED_MATRIX_61",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_2_R,
+    K = LED_MATRIX_8_R,
+)
+
+Led(
+    name = "LED_MATRIX_62",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_8_R,
+    K = LED_MATRIX_2_R,
+)
+
+Led(
+    name = "LED_MATRIX_63",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_3_R,
+    K = LED_MATRIX_8_R,
+)
+
+Led(
+    name = "LED_MATRIX_64",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_8_R,
+    K = LED_MATRIX_3_R,
+)
+
+Led(
+    name = "LED_MATRIX_65",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_4_R,
+    K = LED_MATRIX_8_R,
+)
+
+Led(
+    name = "LED_MATRIX_66",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_8_R,
+    K = LED_MATRIX_4_R,
+)
+
+Led(
+    name = "LED_MATRIX_67",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_5_R,
+    K = LED_MATRIX_8_R,
+)
+
+Led(
+    name = "LED_MATRIX_68",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_8_R,
+    K = LED_MATRIX_5_R,
+)
+
+Led(
+    name = "LED_MATRIX_69",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_6_R,
+    K = LED_MATRIX_8_R,
+)
+
+Led(
+    name = "LED_MATRIX_70",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_8_R,
+    K = LED_MATRIX_6_R,
+)
+
+Led(
+    name = "LED_MATRIX_71",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_7_R,
+    K = LED_MATRIX_8_R,
+)
+
+Led(
+    name = "LED_MATRIX_72",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_8_R,
+    K = LED_MATRIX_7_R,
+)
+
+
+Led(
+    name = "LED_MATRIX_73",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_0_R,
+    K = LED_MATRIX_9_R,
+)
+
+Led(
+    name = "LED_MATRIX_74",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_9_R,
+    K = LED_MATRIX_0_R,
+)
+
+Led(
+    name = "LED_MATRIX_75",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_1_R,
+    K = LED_MATRIX_9_R,
+)
+
+Led(
+    name = "LED_MATRIX_76",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_9_R,
+    K = LED_MATRIX_1_R,
+)
+
+Led(
+    name = "LED_MATRIX_77",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_2_R,
+    K = LED_MATRIX_9_R,
+)
+
+Led(
+    name = "LED_MATRIX_78",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_9_R,
+    K = LED_MATRIX_2_R,
+)
+
+Led(
+    name = "LED_MATRIX_79",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_3_R,
+    K = LED_MATRIX_9_R,
+)
+
+Led(
+    name = "LED_MATRIX_80",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_9_R,
+    K = LED_MATRIX_3_R,
+)
+
+Led(
+    name = "LED_MATRIX_81",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_4_R,
+    K = LED_MATRIX_9_R,
+)
+
+Led(
+    name = "LED_MATRIX_82",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_9_R,
+    K = LED_MATRIX_4_R,
+)
+
+Led(
+    name = "LED_MATRIX_83",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_5_R,
+    K = LED_MATRIX_9_R,
+)
+
+Led(
+    name = "LED_MATRIX_84",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_9_R,
+    K = LED_MATRIX_5_R,
+)
+
+Led(
+    name = "LED_MATRIX_85",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_6_R,
+    K = LED_MATRIX_9_R,
+)
+
+Led(
+    name = "LED_MATRIX_86",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_9_R,
+    K = LED_MATRIX_6_R,
+)
+
+Led(
+    name = "LED_MATRIX_87",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_7_R,
+    K = LED_MATRIX_9_R,
+)
+
+Led(
+    name = "LED_MATRIX_88",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_9_R,
+    K = LED_MATRIX_7_R,
+)
+
+Led(
+    name = "LED_MATRIX_89",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_8_R,
+    K = LED_MATRIX_9_R,
+)
+
+Led(
+    name = "LED_MATRIX_90",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_9_R,
+    K = LED_MATRIX_8_R,
+)
+Led(
+    name = "LED_MATRIX_91",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_0_R,
+    K = LED_MATRIX_10_R,
+)
+
+Led(
+    name = "LED_MATRIX_92",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_10_R,
+    K = LED_MATRIX_0_R,
+)
+
+Led(
+    name = "LED_MATRIX_93",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_1_R,
+    K = LED_MATRIX_10_R,
+)
+
+Led(
+    name = "LED_MATRIX_94",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_10_R,
+    K = LED_MATRIX_1_R,
+)
+
+Led(
+    name = "LED_MATRIX_95",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_2_R,
+    K = LED_MATRIX_10_R,
+)
+
+Led(
+    name = "LED_MATRIX_96",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_10_R,
+    K = LED_MATRIX_2_R,
+)
+
+Led(
+    name = "LED_MATRIX_97",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_3_R,
+    K = LED_MATRIX_10_R,
+)
+
+Led(
+    name = "LED_MATRIX_98",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_10_R,
+    K = LED_MATRIX_3_R,
+)
+
+Led(
+    name = "LED_MATRIX_99",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_4_R,
+    K = LED_MATRIX_10_R,
+)
+
+Led(
+    name = "LED_MATRIX_100",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_10_R,
+    K = LED_MATRIX_4_R,
+)
+
+Led(
+    name = "LED_MATRIX_101",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_5_R,
+    K = LED_MATRIX_10_R,
+)
+
+Led(
+    name = "LED_MATRIX_102",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_10_R,
+    K = LED_MATRIX_5_R,
+)
+
+Led(
+    name = "LED_MATRIX_103",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_6_R,
+    K = LED_MATRIX_10_R,
+)
+
+Led(
+    name = "LED_MATRIX_104",
+    color = "blue",
+    package = "0603",
+    A = LED_MATRIX_10_R,
+    K = LED_MATRIX_6_R,
+)
+
+MMDT3904(
+    name = "MMDT3904_SOC_LED1",
+    C1 = SOC_LED1_GRN_C,
+    B1 = SOC_LED1_RED_B,
+    E1 = GND,
+    C2 = SOC_LED1_RED_C,
+    B2 = SOC_LED1_GRN_B,
+    E2 = GND,
+)
+
+Resistor(
+    name = "R_SOC_LED1_RED_B",
+    value = "1k",
+    package = "0402",
+    P1 = SOC_LED1_RED,
+    P2 = SOC_LED1_RED_B,
+)
+
+Resistor(
+    name = "R_SOC_LED1_GRN_B",
+    value = "1k",
+    package = "0402",
+    P1 = SOC_LED1_GRN,
+    P2 = SOC_LED1_GRN_B,
+)
+
+Capacitor(
+    name = "C_SOC_LED1_RED_B",
+    value = "100nF",
+    package = "0402",
+    voltage = "10V",
+    P1 = SOC_LED1_RED_B,
+    P2 = GND,
+    do_not_populate = True,
+)
+
+Capacitor(
+    name = "C_SOC_LED1_GRN_B",
+    value = "100nF",
+    package = "0402",
+    voltage = "10V",
+    P1 = SOC_LED1_GRN_B,
+    P2 = GND,
+    do_not_populate = True,
+)
+
+MMDT3904(
+    name = "MMDT3904_SOC_LED2",
+    C1 = SOC_LED1_BLU_C,
+    B1 = SOC_LED1_BLU_B,
+    E1 = GND,
+    C2 = SOC_LED2_RED_C,
+    B2 = SOC_LED2_RED_B,
+    E2 = GND,
+)
+
+Resistor(
+    name = "R_SOC_LED1_BLU_B",
+    value = "1k",
+    package = "0402",
+    P1 = SOC_LED1_BLU,
+    P2 = SOC_LED1_BLU_B,
+)
+
+Resistor(
+    name = "R_SOC_LED2_RED_B",
+    value = "1k",
+    package = "0402",
+    P1 = SOC_LED2_RED,
+    P2 = SOC_LED2_RED_B,
+)
+
+Capacitor(
+    name = "C_SOC_LED1_BLU_B",
+    value = "100nF",
+    package = "0402",
+    voltage = "10V",
+    P1 = SOC_LED1_BLU_B,
+    P2 = GND,
+    do_not_populate = True,
+)
+
+Capacitor(
+    name = "C_SOC_LED2_RED_B",
+    value = "100nF",
+    package = "0402",
+    voltage = "10V",
+    P1 = SOC_LED2_RED_B,
+    P2 = GND,
+    do_not_populate = True,
+)
+
+
+MMDT3904(
+    name = "MMDT3904_SOC_LED3",
+    C1 = SOC_LED2_GRN_C,
+    B1 = SOC_LED2_GRN_B,
+    E1 = GND,
+    C2 = SOC_LED2_BLU_C,
+    B2 = SOC_LED2_BLU_B,
+    E2 = GND,
+)
+
+Resistor(
+    name = "R_SOC_LED2_GRN_B",
+    value = "1k",
+    package = "0402",
+    P1 = SOC_LED2_GRN,
+    P2 = SOC_LED2_GRN_B,
+)
+
+Resistor(
+    name = "R_SOC_LED2_BLU_B",
+    value = "1k",
+    package = "0402",
+    P1 = SOC_LED2_BLU,
+    P2 = SOC_LED2_BLU_B,
+)
+
+Capacitor(
+    name = "C_SOC_LED2_GRN_B",
+    value = "100nF",
+    package = "0402",
+    voltage = "10V",
+    P1 = SOC_LED2_GRN_B,
+    P2 = GND,
+    do_not_populate = True,
+)
+
+Capacitor(
+    name = "C_SOC_LED2_BLU_B",
+    value = "100nF",
+    package = "0402",
+    voltage = "10V",
+    P1 = SOC_LED2_BLU_B,
+    P2 = GND,
+    do_not_populate = True,
+)
+
+#SoC_LED1
+
+LTST_C28NBEGK_SN(
+    name = "SoC_LED1",
+    P = PWR_3P3V,
+    BM = SOC_LED1_BLU_D,
+    GM = SOC_LED1_GRN_D,
+    RM = SOC_LED1_RED_D,
+)
+
+Resistor(
+    name = "R_SOC_LED1_RED_D",
+    value = "1.1k 1%",
+    package = "0402",
+    P1 = SOC_LED1_RED_D,
+    P2 = SOC_LED1_RED_C,
+)
+
+Resistor(
+    name = "R_SOC_LED1_GRN_D",
+    value = "1.1k 1%",
+    package = "0402",
+    P1 = SOC_LED1_GRN_D,
+    P2 = SOC_LED1_GRN_C,
+)
+
+Resistor(
+    name = "R_SOC_LED1_BLU_D",
+    value = "1.1k 1%",
+    package = "0402",
+    P1 = SOC_LED1_BLU_D,
+    P2 = SOC_LED1_BLU_C,
+)
+
+#SoC_LED2
+
+LTST_C28NBEGK_SN(
+    name = "SoC_LED2",
+    P = PWR_3P3V,
+    BM = SOC_LED2_BLU_D,
+    GM = SOC_LED2_GRN_D,
+    RM = SOC_LED2_RED_D,
+)
+
+Resistor(
+    name = "R_SOC_LED2_RED_D",
+    value = "1.1k 1%",
+    package = "0402",
+    P1 = SOC_LED2_RED_D,
+    P2 = SOC_LED2_RED_C,
+)
+
+Resistor(
+    name = "R_SOC_LED2_GRN_D",
+    value = "1.1k 1%",
+    package = "0402",
+    P1 = SOC_LED2_GRN_D,
+    P2 = SOC_LED2_GRN_C,
+)
+
+Resistor(
+    name = "R_SOC_LED2_BLU_D",
+    value = "1.1k 1%",
+    package = "0402",
+    P1 = SOC_LED2_BLU_D,
+    P2 = SOC_LED2_BLU_C,
+)
+
+#MCU_LED1
+
+LTST_C28NBEGK_SN(
+    name = "MCU_LED1",
+    P = PWR_3P3V,
+    BM = MCU_LED1_BLU_D,
+    GM = MCU_LED1_GRN_D,
+    RM = MCU_LED1_RED_D,
+)
+
+Resistor(
+    name = "R_MCU_LED1_RED_D",
+    value = "1.1k 1%",
+    package = "0402",
+    P1 = MCU_LED1_RED_D,
+    P2 = MCU_LED1_RED,
+)
+
+Resistor(
+    name = "R_MCU_LED1_GRN_D",
+    value = "1.1k 1%",
+    package = "0402",
+    P1 = MCU_LED1_GRN_D,
+    P2 = MCU_LED1_GRN,
+)
+
+Resistor(
+    name = "R_MCU_LED1_BLU_D",
+    value = "1.1k 1%",
+    package = "0402",
+    P1 = MCU_LED1_BLU_D,
+    P2 = MCU_LED1_BLU,
+)
+
+#MCU_LED2
+
+LTST_C28NBEGK_SN(
+    name = "MCU_LED2",
+    P = PWR_3P3V,
+    BM = MCU_LED2_BLU_D,
+    GM = MCU_LED2_GRN_D,
+    RM = MCU_LED2_RED_D,
+)
+
+Resistor(
+    name = "R_MCU_LED2_RED_D",
+    value = "1.1k 1%",
+    package = "0402",
+    P1 = MCU_LED2_RED_D,
+    P2 = MCU_LED2_RED,
+)
+
+Resistor(
+    name = "R_MCU_LED2_GRN_D",
+    value = "1.1k 1%",
+    package = "0402",
+    P1 = MCU_LED2_GRN_D,
+    P2 = MCU_LED2_GRN,
+)
+
+Resistor(
+    name = "R_MCU_LED2_BLU_D",
+    value = "1.1k 1%",
+    package = "0402",
+    P1 = MCU_LED2_BLU_D,
+    P2 = MCU_LED2_BLU,
+)
+
+Resistor(
+    name = "R_LED_PWR",
+    value = "330",
+    package = "0402",
+    P1 = PWR_3P3V,
+    P2 = LED_PWR,
+)
+
+Led(
+    name = "LED_PWR_IND",
+    color = "green",
+    package = "0603",
+    A = LED_PWR,
+    K = GND,
+)
+
+Layout(
+    name = "LED",
+    path = "LED_Layout",
+)
+
+# pcb:sch C_SOC_LED1_BLU_B.C x=67.5800 y=1954.8000 rot=0
+# pcb:sch C_SOC_LED1_GRN_B.C x=385.0800 y=1700.8000 rot=0
+# pcb:sch C_SOC_LED1_RED_B.C x=67.5800 y=1688.1000 rot=0
+# pcb:sch C_SOC_LED2_BLU_B.C x=385.0800 y=2234.2000 rot=0
+# pcb:sch C_SOC_LED2_GRN_B.C x=67.5800 y=2221.5000 rot=0
+# pcb:sch C_SOC_LED2_RED_B.C x=385.0800 y=1967.5000 rot=0
+# pcb:sch GND.1 x=151.4000 y=1611.9000 rot=90
+# pcb:sch GND.2 x=329.2000 y=1738.9000 rot=270
+# pcb:sch GND.3 x=151.4000 y=1878.6000 rot=90
+# pcb:sch GND.4 x=329.2000 y=2005.6000 rot=270
+# pcb:sch GND.5 x=329.2000 y=2272.3000 rot=270
+# pcb:sch GND.6 x=151.4000 y=2145.3000 rot=90
+# pcb:sch GND.7 x=392.7000 y=1789.7000 rot=0
+# pcb:sch GND.8 x=75.2000 y=2323.1000 rot=0
+# pcb:sch GND.9 x=75.2000 y=1789.7000 rot=0
+# pcb:sch GND.10 x=392.7000 y=2056.4000 rot=0
+# pcb:sch GND.11 x=75.2000 y=2056.4000 rot=0
+# pcb:sch GND.12 x=392.7000 y=2335.8000 rot=0
+# pcb:sch GND.13 x=2297.7000 y=1992.9000 rot=0
+# pcb:sch LED_MATRIX_1.LED x=202.2000 y=82.8200 rot=90
+# pcb:sch LED_MATRIX_2.LED x=303.8000 y=70.1200 rot=270
+# pcb:sch LED_MATRIX_3.LED x=202.2000 y=197.1200 rot=90
+# pcb:sch LED_MATRIX_4.LED x=303.8000 y=197.1200 rot=270
+# pcb:sch LED_MATRIX_5.LED x=405.4000 y=197.1200 rot=90
+# pcb:sch LED_MATRIX_6.LED x=507.0000 y=197.1200 rot=270
+# pcb:sch LED_MATRIX_7.LED x=202.2000 y=336.8200 rot=90
+# pcb:sch LED_MATRIX_8.LED x=303.8000 y=336.8200 rot=270
+# pcb:sch LED_MATRIX_9.LED x=405.4000 y=336.8200 rot=90
+# pcb:sch LED_MATRIX_10.LED x=507.0000 y=336.8200 rot=270
+# pcb:sch LED_MATRIX_11.LED x=621.3000 y=336.8200 rot=90
+# pcb:sch LED_MATRIX_12.LED x=722.9000 y=336.8200 rot=270
+# pcb:sch LED_MATRIX_13.LED x=202.2000 y=463.8200 rot=90
+# pcb:sch LED_MATRIX_14.LED x=303.8000 y=463.8200 rot=270
+# pcb:sch LED_MATRIX_15.LED x=405.4000 y=463.8200 rot=90
+# pcb:sch LED_MATRIX_16.LED x=507.0000 y=463.8200 rot=270
+# pcb:sch LED_MATRIX_17.LED x=621.3000 y=463.8200 rot=90
+# pcb:sch LED_MATRIX_18.LED x=722.9000 y=463.8200 rot=270
+# pcb:sch LED_MATRIX_19.LED x=811.8000 y=463.8200 rot=90
+# pcb:sch LED_MATRIX_20.LED x=913.4000 y=463.8200 rot=270
+# pcb:sch LED_MATRIX_21.LED x=202.2000 y=603.5200 rot=90
+# pcb:sch LED_MATRIX_22.LED x=303.8000 y=603.5200 rot=270
+# pcb:sch LED_MATRIX_23.LED x=405.4000 y=603.5200 rot=90
+# pcb:sch LED_MATRIX_24.LED x=507.0000 y=603.5200 rot=270
+# pcb:sch LED_MATRIX_25.LED x=608.6000 y=603.5200 rot=90
+# pcb:sch LED_MATRIX_26.LED x=722.9000 y=603.5200 rot=270
+# pcb:sch LED_MATRIX_27.LED x=811.8000 y=603.5200 rot=90
+# pcb:sch LED_MATRIX_28.LED x=913.4000 y=590.8200 rot=270
+# pcb:sch LED_MATRIX_29.LED x=1040.4000 y=590.8200 rot=90
+# pcb:sch LED_MATRIX_30.LED x=1154.7000 y=590.8200 rot=270
+# pcb:sch LED_MATRIX_31.LED x=202.2000 y=755.9200 rot=90
+# pcb:sch LED_MATRIX_32.LED x=303.8000 y=755.9200 rot=270
+# pcb:sch LED_MATRIX_33.LED x=405.4000 y=755.9200 rot=90
+# pcb:sch LED_MATRIX_34.LED x=507.0000 y=755.9200 rot=270
+# pcb:sch LED_MATRIX_35.LED x=621.3000 y=755.9200 rot=90
+# pcb:sch LED_MATRIX_36.LED x=722.9000 y=755.9200 rot=270
+# pcb:sch LED_MATRIX_37.LED x=824.5000 y=755.9200 rot=90
+# pcb:sch LED_MATRIX_38.LED x=913.4000 y=755.9200 rot=270
+# pcb:sch LED_MATRIX_39.LED x=1027.7000 y=755.9200 rot=90
+# pcb:sch LED_MATRIX_40.LED x=1142.0000 y=755.9200 rot=270
+# pcb:sch LED_MATRIX_41.LED x=1269.0000 y=755.9200 rot=90
+# pcb:sch LED_MATRIX_42.LED x=1396.0000 y=755.9200 rot=270
+# pcb:sch LED_MATRIX_43.LED x=202.2000 y=921.0200 rot=90
+# pcb:sch LED_MATRIX_44.LED x=303.8000 y=908.3200 rot=270
+# pcb:sch LED_MATRIX_45.LED x=418.1000 y=921.0200 rot=90
+# pcb:sch LED_MATRIX_46.LED x=507.0000 y=921.0200 rot=270
+# pcb:sch LED_MATRIX_47.LED x=634.0000 y=921.0200 rot=90
+# pcb:sch LED_MATRIX_48.LED x=735.6000 y=908.3200 rot=270
+# pcb:sch LED_MATRIX_49.LED x=811.8000 y=908.3200 rot=90
+# pcb:sch LED_MATRIX_50.LED x=913.4000 y=921.0200 rot=270
+# pcb:sch LED_MATRIX_51.LED x=1027.7000 y=921.0200 rot=90
+# pcb:sch LED_MATRIX_52.LED x=1142.0000 y=921.0200 rot=270
+# pcb:sch LED_MATRIX_53.LED x=1269.0000 y=921.0200 rot=90
+# pcb:sch LED_MATRIX_54.LED x=1383.3000 y=908.3200 rot=270
+# pcb:sch LED_MATRIX_55.LED x=1510.3000 y=908.3200 rot=90
+# pcb:sch LED_MATRIX_56.LED x=1637.3000 y=908.3200 rot=270
+# pcb:sch LED_MATRIX_57.LED x=189.5000 y=1086.1200 rot=90
+# pcb:sch LED_MATRIX_58.LED x=303.8000 y=1086.1200 rot=270
+# pcb:sch LED_MATRIX_59.LED x=405.4000 y=1086.1200 rot=90
+# pcb:sch LED_MATRIX_60.LED x=519.7000 y=1086.1200 rot=270
+# pcb:sch LED_MATRIX_61.LED x=646.7000 y=1086.1200 rot=90
+# pcb:sch LED_MATRIX_62.LED x=748.3000 y=1086.1200 rot=270
+# pcb:sch LED_MATRIX_63.LED x=849.9000 y=1086.1200 rot=90
+# pcb:sch LED_MATRIX_64.LED x=951.5000 y=1086.1200 rot=270
+# pcb:sch LED_MATRIX_65.LED x=1040.4000 y=1086.1200 rot=90
+# pcb:sch LED_MATRIX_66.LED x=1154.7000 y=1086.1200 rot=270
+# pcb:sch LED_MATRIX_67.LED x=1281.7000 y=1086.1200 rot=90
+# pcb:sch LED_MATRIX_68.LED x=1383.3000 y=1086.1200 rot=270
+# pcb:sch LED_MATRIX_69.LED x=1497.6000 y=1086.1200 rot=90
+# pcb:sch LED_MATRIX_70.LED x=1624.6000 y=1086.1200 rot=270
+# pcb:sch LED_MATRIX_71.LED x=1751.6000 y=1086.1200 rot=90
+# pcb:sch LED_MATRIX_72.LED x=1878.6000 y=1086.1200 rot=270
+# pcb:sch LED_MATRIX_73.LED x=189.5000 y=1263.9200 rot=90
+# pcb:sch LED_MATRIX_74.LED x=303.8000 y=1263.9200 rot=270
+# pcb:sch LED_MATRIX_75.LED x=405.4000 y=1263.9200 rot=90
+# pcb:sch LED_MATRIX_76.LED x=519.7000 y=1263.9200 rot=270
+# pcb:sch LED_MATRIX_77.LED x=646.7000 y=1263.9200 rot=90
+# pcb:sch LED_MATRIX_78.LED x=748.3000 y=1263.9200 rot=270
+# pcb:sch LED_MATRIX_79.LED x=862.6000 y=1263.9200 rot=90
+# pcb:sch LED_MATRIX_80.LED x=964.2000 y=1263.9200 rot=270
+# pcb:sch LED_MATRIX_81.LED x=1065.8000 y=1263.9200 rot=90
+# pcb:sch LED_MATRIX_82.LED x=1167.4000 y=1263.9200 rot=270
+# pcb:sch LED_MATRIX_83.LED x=1281.7000 y=1263.9200 rot=90
+# pcb:sch LED_MATRIX_84.LED x=1396.0000 y=1263.9200 rot=270
+# pcb:sch LED_MATRIX_85.LED x=1510.3000 y=1263.9200 rot=90
+# pcb:sch LED_MATRIX_86.LED x=1624.6000 y=1263.9200 rot=270
+# pcb:sch LED_MATRIX_87.LED x=1738.9000 y=1263.9200 rot=90
+# pcb:sch LED_MATRIX_88.LED x=1878.6000 y=1263.9200 rot=270
+# pcb:sch LED_MATRIX_89.LED x=2005.6000 y=1263.9200 rot=90
+# pcb:sch LED_MATRIX_90.LED x=2119.9000 y=1263.9200 rot=270
+# pcb:sch LED_MATRIX_91.LED x=176.8000 y=1403.6200 rot=90
+# pcb:sch LED_MATRIX_92.LED x=303.8000 y=1403.6200 rot=270
+# pcb:sch LED_MATRIX_93.LED x=405.4000 y=1403.6200 rot=90
+# pcb:sch LED_MATRIX_94.LED x=519.7000 y=1403.6200 rot=270
+# pcb:sch LED_MATRIX_95.LED x=646.7000 y=1403.6200 rot=90
+# pcb:sch LED_MATRIX_96.LED x=748.3000 y=1403.6200 rot=270
+# pcb:sch LED_MATRIX_97.LED x=862.6000 y=1403.6200 rot=90
+# pcb:sch LED_MATRIX_98.LED x=964.2000 y=1403.6200 rot=270
+# pcb:sch LED_MATRIX_99.LED x=1065.8000 y=1403.6200 rot=90
+# pcb:sch LED_MATRIX_100.LED x=1167.4000 y=1403.6200 rot=270
+# pcb:sch LED_MATRIX_101.LED x=1281.7000 y=1403.6200 rot=90
+# pcb:sch LED_MATRIX_102.LED x=1396.0000 y=1403.6200 rot=270
+# pcb:sch LED_MATRIX_103.LED x=1510.3000 y=1403.6200 rot=90
+# pcb:sch LED_MATRIX_104.LED x=1624.6000 y=1390.9200 rot=270
+# pcb:sch LED_PWR_IND.LED x=2285.0000 y=1898.9200 rot=270
+# pcb:sch MCU_LED1.LTST-C28NBEGK-DF x=1586.5000 y=1672.9000 rot=90
+# pcb:sch MCU_LED2.LTST-C28NBEGK-DF x=1929.4000 y=1672.9000 rot=90
+# pcb:sch MMDT3904_SOC_LED1.MMDT3904-7-F x=164.1000 y=1611.9000 rot=90
+# pcb:sch MMDT3904_SOC_LED2.MMDT3904-7-F x=164.1000 y=1878.6000 rot=90
+# pcb:sch MMDT3904_SOC_LED3.MMDT3904-7-F x=164.1000 y=2145.3000 rot=90
+# pcb:sch PWR_3P3V.1 x=931.1800 y=1650.0000 rot=0
+# pcb:sch PWR_3P3V.2 x=1312.1800 y=1650.0000 rot=0
+# pcb:sch PWR_3P3V.3 x=1680.4800 y=1650.0000 rot=0
+# pcb:sch PWR_3P3V.4 x=2302.7800 y=1662.7000 rot=0
+# pcb:sch PWR_3P3V.5 x=2023.3800 y=1650.0000 rot=0
+# pcb:sch R_LED_MATRIX_0.R x=65.0400 y=-128.0000 rot=270
+# pcb:sch R_LED_MATRIX_1.R x=65.0400 y=11.7000 rot=270
+# pcb:sch R_LED_MATRIX_2.R x=65.0400 y=138.7000 rot=270
+# pcb:sch R_LED_MATRIX_3.R x=65.0400 y=278.4000 rot=270
+# pcb:sch R_LED_MATRIX_4.R x=65.0400 y=405.4000 rot=270
+# pcb:sch R_LED_MATRIX_5.R x=65.0400 y=532.4000 rot=270
+# pcb:sch R_LED_MATRIX_6.R x=65.0400 y=697.5000 rot=270
+# pcb:sch R_LED_MATRIX_7.R x=65.0400 y=849.9000 rot=270
+# pcb:sch R_LED_MATRIX_8.R x=65.0400 y=1027.7000 rot=270
+# pcb:sch R_LED_MATRIX_9.R x=65.0400 y=1205.5000 rot=270
+# pcb:sch R_LED_MATRIX_10.R x=65.0400 y=1332.5000 rot=270
+# pcb:sch R_LED_PWR.R x=2300.2400 y=1726.2000 rot=0
+# pcb:sch R_MCU_LED1_BLU_D.R x=1677.9400 y=1878.6000 rot=0
+# pcb:sch R_MCU_LED1_GRN_D.R x=1754.1400 y=1878.6000 rot=0
+# pcb:sch R_MCU_LED1_RED_D.R x=1601.7400 y=1878.6000 rot=0
+# pcb:sch R_MCU_LED2_BLU_D.R x=2020.8400 y=1878.6000 rot=0
+# pcb:sch R_MCU_LED2_GRN_D.R x=2097.0400 y=1878.6000 rot=0
+# pcb:sch R_MCU_LED2_RED_D.R x=1944.6400 y=1878.6000 rot=0
+# pcb:sch R_SOC_LED1_BLU_B.R x=1.5400 y=1904.0000 rot=270
+# pcb:sch R_SOC_LED1_BLU_D.R x=928.6400 y=1878.6000 rot=0
+# pcb:sch R_SOC_LED1_GRN_B.R x=458.7400 y=1637.3000 rot=90
+# pcb:sch R_SOC_LED1_GRN_D.R x=1004.8400 y=1878.6000 rot=0
+# pcb:sch R_SOC_LED1_RED_B.R x=-11.1600 y=1637.3000 rot=270
+# pcb:sch R_SOC_LED1_RED_D.R x=852.4400 y=1878.6000 rot=0
+# pcb:sch R_SOC_LED2_BLU_B.R x=458.7400 y=2170.7000 rot=90
+# pcb:sch R_SOC_LED2_BLU_D.R x=1309.6400 y=1878.6000 rot=0
+# pcb:sch R_SOC_LED2_GRN_B.R x=1.5400 y=2170.7000 rot=270
+# pcb:sch R_SOC_LED2_GRN_D.R x=1385.8400 y=1878.6000 rot=0
+# pcb:sch R_SOC_LED2_RED_B.R x=458.7400 y=1904.0000 rot=90
+# pcb:sch R_SOC_LED2_RED_D.R x=1233.4400 y=1878.6000 rot=0
+# pcb:sch SoC_LED1.LTST-C28NBEGK-DF x=837.2000 y=1672.9000 rot=90
+# pcb:sch SoC_LED2.LTST-C28NBEGK-DF x=1218.2000 y=1672.9000 rot=90

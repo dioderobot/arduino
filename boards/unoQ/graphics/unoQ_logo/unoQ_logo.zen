@@ -1,0 +1,17 @@
+# Component definition file
+# Graphics: Arduino UNO Q Logo
+
+"""Arduino UNO Q Logo - Graphical Component
+
+Arduino UNO Q branding logo for PCB silkscreen/copper layer.
+This is a non-electrical graphical element for board identification.
+"""
+
+# Component
+Component(
+    name = "UNOQ_LOGO",
+    symbol = Symbol(library = "unoq.kicad_sym"),
+    footprint = File("unoq.kicad_mod"),
+    pins = {}
+)
+
