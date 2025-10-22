@@ -1,0 +1,213 @@
+"""
+Arduino Nano - Complete Board Design
+
+Compact Arduino-compatible development board based on ATmega328P.
+This board combines:
+- ATmega328P microcontroller @ 16MHz
+- FT231XQ USB-to-serial converter (4mm×4mm QFN)
+- AMS1117-5.0 voltage regulator
+- Micro USB connector
+- Reset button
+- All GPIO pins on headers
+"""
+
+load("@stdlib/interfaces.zen", "Power", "Ground", "Usb2", "Uart", "Gpio", "NotConnected")
+load("@stdlib/properties.zen", "Layout")
+
+# Power rails
+VCC_VIN = io("VCC_VIN", Power)
+USB_VBUS = io("USB_VBUS", Power)
+GND = io("GND", Ground)
+
+# GPIO netsBUS
+USB = io("USB", Usb2, optional = True)
+RESET = io("RESET", Net, optional = True)
+D0 = io("D0", Gpio, optional = True)   # UART RX
+D1 = io("D1", Gpio, optional = True)   # UART TX
+D2 = io("D2", Gpio, optional = True) 
+D3 = io("D3", Gpio, optional = True)
+D4 = io("D4", Gpio, optional = True) 
+D5 = io("D5", Gpio, optional = True)
+D6 = io("D6", Gpio, optional = True)
+D7 = io("D7", Gpio, optional = True)
+D8 = io("D8", Gpio, optional = True)
+D9 = io("D9", Gpio, optional = True)
+D10 = io("D10", Gpio, optional = True)
+D11 = io("D11", Gpio, optional = True)
+D12 = io("D12", Gpio, optional = True)
+D13 = io("D13", Gpio, optional = True)  # Special: has LED connected
+A0 = io("A0", Gpio, optional = True)
+A1 = io("A1", Gpio, optional = True)
+A2 = io("A2", Gpio, optional = True)
+A3 = io("A3", Gpio, optional = True)
+A4 = io("A4", Gpio, optional = True)
+A5 = io("A5", Gpio, optional = True)
+A6 = io("A6", Gpio, optional = True)
+A7 = io("A7", Gpio, optional = True)
+AREF = io("AREF", Gpio, optional = True)
+
+# Auto-reset signal
+VCC_5V = Power("VCC_5V")
+DTR = Net("DTR")
+VCC_3V3 = Power("VCC_3V3")
+UART = Uart("UART", TX = D1, RX = D0)  # MCU RX <- USB TX
+
+# Generics
+Resistor = Module("@stdlib/generics/Resistor.zen")
+Capacitor = Module("@stdlib/generics/Capacitor.zen")
+Led = Module("@stdlib/generics/Led.zen")
+
+# Reference designs
+ATmega328Px = Module("//reference/ATmega328Px/ATmega328Px.zen")
+FT232RLx = Module("//reference/FT232RLx/FT232RLx.zen")
+AMS1117x = Module("//reference/AMS1117x/AMS1117x.zen")
+SKRKAHE020x = Module("//reference/SKRKAHE020x/SKRKAHE020x.zen")
+
+# ============================================================================
+# POWER SUPPLY
+# ============================================================================
+
+# 5V Regulator (from USB or external VIN)
+AMS1117x(
+    name = "REG_5V",
+    VIN = VCC_VIN,
+    VOUT = VCC_5V,
+    GND = GND,
+    properties = {"embed": True},
+)
+
+# ============================================================================
+# USB-TO-SERIAL CONVERTER
+# ============================================================================
+
+FT232RLx(
+    name = "USB_SERIAL",
+    package = "FT231XQ",  # Compact 4×4mm package
+    add_tx_rx_leds = True,
+    VCC = VCC_5V,
+    VCCIO = VCC_5V,  # 5V I/O voltage
+    USB_VCC = USB_VBUS,
+    GND = GND,
+    USB = USB,
+    UART = UART,
+    DTR = DTR,
+    properties = {"embed": True},
+)
+
+# Auto-reset capacitor (connects DTR to RESET for Arduino programming)
+Capacitor(
+    name = "C_AUTORESET",
+    value = "100nF",
+    package = "0402",
+    P1 = DTR,
+    P2 = RESET,
+)
+
+# ============================================================================
+# MICROCONTROLLER
+# ============================================================================
+
+ATmega328Px(
+    name = "MCU",
+    add_reset_button = True,
+    VCC = VCC_5V,
+    GND = GND,
+    AREF = AREF,
+    RESET = RESET,
+    # Digital pins
+    D0 = D0,
+    D1 = D1,
+    D2 = D2,
+    D3 = D3,
+    D4 = D4,
+    D5 = D5,
+    D6 = D6,
+    D7 = D7,
+    D8 = D8,
+    D9 = D9,
+    D10 = D10,
+    D11 = D11,
+    D12 = D12,
+    D13 = D13,
+    # Analog pins
+    A0 = A0,
+    A1 = A1,    
+    A2 = A2,
+    A3 = A3,
+    A4 = A4,
+    A5 = A5,
+    A6 = A6,
+    A7 = A7,
+    properties = {"embed": True},
+)
+
+# ============================================================================
+# POWER LED
+# ============================================================================
+
+LED_PWR_ANODE = Net("LED_PWR_ANODE")
+
+Resistor(
+    name = "R_LED_PWR",
+    value = "1kohm 5%",
+    package = "0402",
+    P1 = VCC_5V,
+    P2 = LED_PWR_ANODE,
+)
+
+Led(
+    name = "D_PWR",
+    package = "0603",
+    color = "green",
+    A = LED_PWR_ANODE,
+    K = GND,
+)
+
+# ============================================================================
+# L LED (Connected to D13)
+# ============================================================================
+
+LED_L_ANODE = Net("LED_L_ANODE")
+
+Resistor(
+    name = "R_LED_L",
+    value = "1kohm 5%",
+    package = "0402",
+    P1 = D13,
+    P2 = LED_L_ANODE,
+)
+
+Led(
+    name = "D_L",
+    package = "0603",
+    color = "yellow",
+    A = LED_L_ANODE,
+    K = GND,
+)
+
+# ============================================================================
+# Layout CONFIGURATION
+# ============================================================================
+
+Layout(
+    name = "NanoCore",
+    path = "layout/NanoCore",
+)
+
+# pcb:sch C_AUTORESET.C x=1350.2800 y=1065.8000 rot=0
+# pcb:sch D_L.LED x=1281.7000 y=844.8200 rot=270
+# pcb:sch D_PWR.LED x=1281.7000 y=578.1200 rot=270
+# pcb:sch GND.1 x=1446.8000 y=646.7000 rot=0
+# pcb:sch GND.6 x=1294.4000 y=913.4000 rot=0
+# pcb:sch HEADER_1.PH x=-597.9000 y=-763.0000 rot=180
+# pcb:sch HEADER_2.PH x=-775.7000 y=-763.0000 rot=0
+# pcb:sch J_USB.10033526MN3212LF x=-39.1000 y=-737.6000 rot=0
+# pcb:sch MCU x=-228.6000 y=-203.2000 rot=0
+# pcb:sch REG_5V x=-1320.8000 y=-203.2000 rot=0
+# pcb:sch R_LED_L.R x=1360.4400 y=786.4000 rot=90
+# pcb:sch R_LED_PWR.R x=1296.9400 y=456.2000 rot=0
+# pcb:sch SPI_HEADER.PH x=456.2000 y=-674.1000 rot=0
+# pcb:sch USB_SERIAL x=-1320.8000 y=241.3000 rot=0
+# pcb:sch VCC_3V3.1 x=-897.6200 y=-496.3000 rot=0
+# pcb:sch VCC_5V.1 x=1401.0800 y=392.7000 rot=0
+# pcb:sch VCC_VIN.1 x=-796.0200 y=-826.5000 rot=0

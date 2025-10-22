@@ -1,0 +1,159 @@
+"""
+Arduino Carrier, pin compatible
+"""
+
+load("@stdlib/interfaces.zen", "Power", "Ground", "Usb2", "Uart", "Gpio", "NotConnected")
+load("@stdlib/properties.zen", "Layout")
+
+# Power rails
+VCC_5V = io("VCC_5V", Power)
+VCC_VIN = io("VCC_VIN", Power)
+USB_VBUS = io("USB_VBUS", Power)
+GND = io("GND", Ground)
+
+# GPIO nets
+USB = io("USB", Usb2, optional = True)
+RESET = io("RESET", Net, optional = True)
+D0 = io("D0", Gpio, optional = True)   # UART TX
+D1 = io("D1", Gpio, optional = True)   # UART TX
+D2 = io("D2", Gpio, optional = True)
+D3 = io("D3", Gpio, optional = True)
+D4 = io("D4", Gpio, optional = True)
+D5 = io("D5", Gpio, optional = True)
+D6 = io("D6", Gpio, optional = True)
+D7 = io("D7", Gpio, optional = True)
+D8 = io("D8", Gpio, optional = True)
+D9 = io("D9", Gpio, optional = True)
+D10 = io("D10", Gpio, optional = True)
+D11 = io("D11", Gpio, optional = True)
+D12 = io("D12", Gpio, optional = True)
+D13 = io("D13", Gpio, optional = True)  # Special: has LED connected
+A0 = io("A0", Gpio, optional = True)
+A1 = io("A1", Gpio, optional = True)
+A2 = io("A2", Gpio, optional = True)
+A3 = io("A3", Gpio, optional = True)
+A4 = io("A4", Gpio, optional = True)
+A5 = io("A5", Gpio, optional = True)
+A6 = io("A6", Gpio, optional = True)
+A7 = io("A7", Gpio, optional = True)
+AREF = io("AREF", Gpio, optional = True)
+
+# Generics
+PinHeader = Module("@stdlib/kicad/PinHeader.zen")
+
+# Components
+MicroUsbConnector = Module("//components/10033526-N3212LF/10033526-N3212LF.zen")
+
+# ============================================================================
+# USB CONNECTOR
+# Micro USB B Connector Pinout:
+# P1 = VBUS (5V)
+# P2 = D- (USB Data Minus)
+# P3 = D+ (USB Data Plus)
+# P4 = ID (not connected)
+# P5 = GND
+# MH1-4 = Mounting holes (connect to GND)
+# MP1-2 = Shield (connect to GND)
+# ============================================================================
+
+MicroUsbConnector(
+    name = "J_USB",
+    P1 = USB_VBUS,       # VBUS
+    P2 = USB.D.N,         # D-
+    P3 = USB.D.P,         # D+
+    P4 = NotConnected(),      # ID (not used)
+    P5 = GND,             # GND
+    MP1 = GND,            # Shield
+    MP2 = GND,            # Shield
+    MP3 = GND,            # Shield
+    MP4 = GND,            # Shield
+)
+
+# ============================================================================
+# PIN HEADER
+# ============================================================================
+
+PinHeader(
+    name = "HEADER_1",
+    pins = 15,
+    Pin_1 = D0,
+    Pin_2 = RESET,
+    Pin_3 = GND,
+    Pin_4 = D1,
+    Pin_5 = D2,
+    Pin_6 = D3,
+    Pin_7 = D4,
+    Pin_8 = D5,
+    Pin_9 = D6,
+    Pin_10 = D7,
+    Pin_11 = D8,
+    Pin_12 = D9,
+    Pin_13 = D10,
+    Pin_14 = D11,
+    Pin_15 = D12,
+)
+
+PinHeader(
+    name = "HEADER_2",
+    pins = 15,
+    Pin_1 = VCC_VIN,
+    Pin_2 = GND,
+    Pin_3 = RESET,
+    Pin_4 = VCC_5V,
+    Pin_5 = A0,
+    Pin_6 = A1,
+    Pin_7 = A2,
+    Pin_8 = A3,
+    Pin_9 = A4,
+    Pin_10 = A5,
+    Pin_11 = A6,
+    Pin_12 = A7,
+    Pin_13 = AREF,
+    Pin_14 = NotConnected(),
+    Pin_15 = D13,
+)
+
+PinHeader(
+    name = "SPI_HEADER",
+    pins = 3,
+    rows = 2,
+    Pin_1 = D12,
+    Pin_2 = VCC_5V,
+    Pin_3 = D13,
+    Pin_4 = D11,
+    Pin_5 = RESET,
+    Pin_6 = GND,
+)
+# ============================================================================
+# BOARD CONFIGURATION
+# ============================================================================
+
+Layout(
+    name = "NanoCarrier",
+    path = "layout/NanoCarrier",
+)
+
+# pcb:sch C_AUTORESET.C x=-326.1200 y=-458.2000 rot=90
+# pcb:sch D_L.LED x=-1017.0000 y=-374.3800 rot=270
+# pcb:sch D_PWR.LED x=-1017.0000 y=-641.0800 rot=270
+# pcb:sch GND.1 x=-851.9000 y=-572.5000 rot=0
+# pcb:sch GND.2 x=-394.7000 y=-331.2000 rot=0
+# pcb:sch GND.3 x=-1448.8000 y=-458.2000 rot=0
+# pcb:sch GND.4 x=-1118.6000 y=-458.2000 rot=0
+# pcb:sch GND.5 x=-39.1000 y=-521.7000 rot=0
+# pcb:sch HEADER_1.PH x=-597.9000 y=-763.0000 rot=180
+# pcb:sch HEADER_2.PH x=-775.7000 y=-763.0000 rot=0
+# pcb:sch J_USB.10033526MN3212LF x=-1385.3000 y=-648.7000 rot=0
+# pcb:sch MCU x=-228.6000 y=-203.2000 rot=0
+# pcb:sch NANO x=-1320.8000 y=-152.4000 rot=0
+# pcb:sch REG_5V x=-1320.8000 y=-203.2000 rot=0
+# pcb:sch R_LED_L.R x=-938.2600 y=-432.8000 rot=90
+# pcb:sch R_LED_PWR.R x=-1001.7600 y=-763.0000 rot=0
+# pcb:sch SPI_HEADER.PH x=-204.2000 y=-636.0000 rot=0
+# pcb:sch USB_SERIAL x=-1320.8000 y=241.3000 rot=0
+# pcb:sch USB_VBUS.1 x=-1519.9200 y=-712.2000 rot=0
+# pcb:sch VCC_3V3.1 x=-897.6200 y=-496.3000 rot=0
+# pcb:sch VCC_5V.1 x=-897.6200 y=-826.5000 rot=0
+# pcb:sch VCC_5V.2 x=-34.0200 y=-699.5000 rot=0
+# pcb:sch VCC_VIN.1 x=-796.0200 y=-826.5000 rot=0
+# pcb:sch VERSION.Version x=837.2000 y=-712.2000 rot=0

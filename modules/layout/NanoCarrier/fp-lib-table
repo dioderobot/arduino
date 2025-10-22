@@ -1,0 +1,6 @@
+(fp_lib_table
+  (version 7)
+  (lib (name "10033526N3212LF") (type "KiCad") (uri "${KIPRJMOD}/../../../components/10033526-N3212LF/") (options "") (descr ""))
+  (lib (name "PinHeader_1x15_P2.54mm_Vertical") (type "KiCad") (uri "${KIPRJMOD}/../../../vendor/gitlab.com/kicad/libraries/kicad-footprints/9.0.0/Connector_PinHeader_2.54mm.pretty/") (options "") (descr ""))
+  (lib (name "PinHeader_2x03_P2.54mm_Vertical") (type "KiCad") (uri "${KIPRJMOD}/../../../vendor/gitlab.com/kicad/libraries/kicad-footprints/9.0.0/Connector_PinHeader_2.54mm.pretty/") (options "") (descr ""))
+)
