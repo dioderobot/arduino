@@ -81,7 +81,7 @@ jobs:
         run: |
           short_sha=$(git rev-parse --short HEAD)
           archive_path="${{ matrix.board }}-$short_sha.zip"
-          pcb release -b ${{ matrix.board }} --output-dir . --output-name $archive_path
+          pcb release -b "${{ matrix.board }}" --output-dir . --output-name "$archive_path"
           echo "archive_path=$archive_path" >> "$GITHUB_OUTPUT"
           echo "short_sha=$short_sha" >> "$GITHUB_OUTPUT"
 

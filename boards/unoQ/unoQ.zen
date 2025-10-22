@@ -33,6 +33,7 @@ load("@stdlib/config.zen", "config_properties", "config_unit")
 load("@stdlib/interfaces.zen", "Power", "Ground", "NotConnected", "I2c", "Gpio")
 load("@stdlib/properties.zen", "Layout")
 load("@stdlib/units.zen", "Capacitance", "Current", "Frequency", "Inductance", "Resistance", "Voltage")
+load("@stdlib/board_config.zen", "Board")
 load("//stackup.zen", "ARDUINO_BLUE_CONFIG")
 # ----------------------------------------------------------------------------
 # Configuration
@@ -833,9 +834,15 @@ UNOQ_LOGO(
     name = "UNOQ_LOGO_B",
 )
 
-Layout(
-    name = "unoQ",
-    path = "layout/unoQ",
+# ============================================================================
+# BOARD CONFIGURATION
+# ============================================================================
+
+Board(
+    name = "Arduino UNO Q",
+    layout_path = "layout/unoQ",
+    layers = 4,
+    config = ARDUINO_BLUE_CONFIG,
 )
 
 # pcb:sch DC_DC x=2476.5000 y=622.3000 rot=0
