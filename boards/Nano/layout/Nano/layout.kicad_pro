@@ -96,7 +96,7 @@
         "shorting_items": "error",
         "silk_edge_clearance": "ignore",
         "silk_over_copper": "warning",
-        "silk_overlap": "warning",
+        "silk_overlap": "ignore",
         "skew_out_of_range": "error",
         "solder_mask_bridge": "error",
         "starved_thermal": "error",
@@ -320,11 +320,11 @@
     "netclass_patterns": [
       {
         "netclass": "90Ohm Diff",
-        "pattern": "USB_DATA_D_N"
+        "pattern": "USB_DATA_D_P"
       },
       {
         "netclass": "90Ohm Diff",
-        "pattern": "USB_DATA_D_P"
+        "pattern": "USB_DATA_D_N"
       }
     ]
   },
