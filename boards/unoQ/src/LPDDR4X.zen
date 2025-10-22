@@ -1,0 +1,643 @@
+"""
+LPDDR4X Schematic
+Author: Nasheed Ur Rehman
+"""
+
+# ----------------------------------------------------------------------------
+# Libraries & Dependencies
+# ----------------------------------------------------------------------------
+
+load("@stdlib/config.zen", "config_properties", "config_unit")
+load("@stdlib/interfaces.zen", "Power", "Ground", "NotConnected", "I2c", "Gpio")
+load("@stdlib/properties.zen", "Layout")
+load("@stdlib/units.zen", "Capacitance", "Current", "Frequency", "Inductance", "Resistance", "Voltage")
+
+# ----------------------------------------------------------------------------
+# Configuration
+# ----------------------------------------------------------------------------
+
+# ----------------------------------------------------------------------------
+# Component Modules
+# ----------------------------------------------------------------------------
+
+LPDDR4X = Module("../../../components/MT53E512M32D1ZW/MT53E512M32D1ZW.zen")
+Capacitor = Module("@stdlib/generics/Capacitor.zen")
+Resistor = Module("@stdlib/generics/Resistor.zen")
+
+# ----------------------------------------------------------------------------
+# IO Interfaces
+# ----------------------------------------------------------------------------
+
+# Power Interfaces
+VREG_L3A_0P6V = io("VREG_L3A_0P6V", Power)
+VREG_L2A_1P128V = io("VREG_L2A_1P128V", Power)
+VREG_L15A_1P8V = io("VREG_L15A_1P8V", Power)
+
+GND = io("GND", Ground)
+
+# EBI0 Command/Address Signals
+EBI0_CA_0 = io("EBI0_CA_0", Net)
+EBI0_CA_1 = io("EBI0_CA_1", Net)
+EBI0_CA_2 = io("EBI0_CA_2", Net)
+EBI0_CA_3 = io("EBI0_CA_3", Net)
+EBI0_CA_4 = io("EBI0_CA_4", Net)
+EBI0_CA_5 = io("EBI0_CA_5", Net)
+
+# EBI1 Command/Address Signals
+EBI1_CA_0 = io("EBI1_CA_0", Net)
+EBI1_CA_1 = io("EBI1_CA_1", Net)
+EBI1_CA_2 = io("EBI1_CA_2", Net)
+EBI1_CA_3 = io("EBI1_CA_3", Net)
+EBI1_CA_4 = io("EBI1_CA_4", Net)
+EBI1_CA_5 = io("EBI1_CA_5", Net)
+
+# EBI0 Data Signals (DQ0-DQ7)
+EBI0_DQ0 = io("EBI0_DQ0", Net)
+EBI0_DQ1 = io("EBI0_DQ1", Net)
+EBI0_DQ2 = io("EBI0_DQ2", Net)
+EBI0_DQ3 = io("EBI0_DQ3", Net)
+EBI0_DQ4 = io("EBI0_DQ4", Net)
+EBI0_DQ5 = io("EBI0_DQ5", Net)
+EBI0_DQ6 = io("EBI0_DQ6", Net)
+EBI0_DQ7 = io("EBI0_DQ7", Net)
+
+# EBI1 Data Signals (DQ0-DQ7)
+EBI1_DQ0 = io("EBI1_DQ0", Net)
+EBI1_DQ1 = io("EBI1_DQ1", Net)
+EBI1_DQ2 = io("EBI1_DQ2", Net)
+EBI1_DQ3 = io("EBI1_DQ3", Net)
+EBI1_DQ4 = io("EBI1_DQ4", Net)
+EBI1_DQ5 = io("EBI1_DQ5", Net)
+EBI1_DQ6 = io("EBI1_DQ6", Net)
+EBI1_DQ7 = io("EBI1_DQ7", Net)
+
+# EBI0 Data Signals (DQ8-DQ15)
+EBI0_DQ8 = io("EBI0_DQ8", Net)
+EBI0_DQ9 = io("EBI0_DQ9", Net)
+EBI0_DQ10 = io("EBI0_DQ10", Net)
+EBI0_DQ11 = io("EBI0_DQ11", Net)
+EBI0_DQ12 = io("EBI0_DQ12", Net)
+EBI0_DQ13 = io("EBI0_DQ13", Net)
+EBI0_DQ14 = io("EBI0_DQ14", Net)
+EBI0_DQ15 = io("EBI0_DQ15", Net)
+
+# EBI1 Data Signals (DQ8-DQ15)
+EBI1_DQ8 = io("EBI1_DQ8", Net)
+EBI1_DQ9 = io("EBI1_DQ9", Net)
+EBI1_DQ10 = io("EBI1_DQ10", Net)
+EBI1_DQ11 = io("EBI1_DQ11", Net)
+EBI1_DQ12 = io("EBI1_DQ12", Net)
+EBI1_DQ13 = io("EBI1_DQ13", Net)
+EBI1_DQ14 = io("EBI1_DQ14", Net)
+EBI1_DQ15 = io("EBI1_DQ15", Net)
+
+# EBI0 Control Signals
+EBI0_CS_0 = io("EBI0_CS_0", Net)
+EBI0_CS_1 = io("EBI0_CS_1", Net)
+EBI0_CKE_0 = io("EBI0_CKE_0", Net)
+EBI0_CKE_1 = io("EBI0_CKE_1", Net)
+EBI0_CLK_P = io("EBI0_CLK_P", Net)
+EBI0_CLK_M = io("EBI0_CLK_M", Net)
+
+# EBI1 Control Signals
+EBI1_CS_0 = io("EBI1_CS_0", Net)
+EBI1_CS_1 = io("EBI1_CS_1", Net)
+EBI1_CKE_0 = io("EBI1_CKE_0", Net)
+EBI1_CKE_1 = io("EBI1_CKE_1", Net)
+EBI1_CLK_P = io("EBI1_CLK_P", Net)
+EBI1_CLK_M = io("EBI1_CLK_M", Net)
+
+# EBI0 Data Mask and Strobe Signals (Byte 0)
+EBI0_DMI_0 = io("EBI0_DMI_0", Net)
+EBI0_DQS_0_P = io("EBI0_DQS_0_P", Net)
+EBI0_DQS_0_M = io("EBI0_DQS_0_M", Net)
+
+# EBI1 Data Mask and Strobe Signals (Byte 0)
+EBI1_DMI_0 = io("EBI1_DMI_0", Net)
+EBI1_DQS_0_P = io("EBI1_DQS_0_P", Net)
+EBI1_DQS_0_M = io("EBI1_DQS_0_M", Net)
+
+# EBI0 Data Mask and Strobe Signals (Byte 1)
+EBI0_DMI_1 = io("EBI0_DMI_1", Net)
+EBI0_DQS_1_P = io("EBI0_DQS_1_P", Net)
+EBI0_DQS_1_M = io("EBI0_DQS_1_M", Net)
+
+# EBI1 Data Mask and Strobe Signals (Byte 1)
+EBI1_DMI_1 = io("EBI1_DMI_1", Net)
+EBI1_DQS_1_P = io("EBI1_DQS_1_P", Net)
+EBI1_DQS_1_M = io("EBI1_DQS_1_M", Net)
+
+# DDR Reset Signal
+DDR_RESET_N = io("DDR_RESET_N", Net)
+
+
+# ----------------------------------------------------------------------------
+# Local Nets
+# ----------------------------------------------------------------------------
+
+DRAM_ZQ0 = Net("DRAM_ZQ0")
+DRAM_ZQ1 = Net("DRAM_ZQ1")
+
+# ----------------------------------------------------------------------------
+# Components
+# ----------------------------------------------------------------------------
+
+LPDDR4X(
+    name = "LPDDR4X",
+    
+    # Power - VDD1 (1.8V)
+    V_DD1_1 = VREG_L15A_1P8V,
+    V_DD1_2 = VREG_L15A_1P8V,
+    V_DD1_3 = VREG_L15A_1P8V,
+    V_DD1_4 = VREG_L15A_1P8V,
+    V_DD1_5 = VREG_L15A_1P8V,
+    V_DD1_6 = VREG_L15A_1P8V,
+    V_DD1_7 = VREG_L15A_1P8V,
+    V_DD1_8 = VREG_L15A_1P8V,
+    
+    # Power - VDD2 (1.128V)
+    V_DD2_1 = VREG_L2A_1P128V,
+    V_DD2_2 = VREG_L2A_1P128V,
+    V_DD2_3 = VREG_L2A_1P128V,
+    V_DD2_4 = VREG_L2A_1P128V,
+    V_DD2_5 = VREG_L2A_1P128V,
+    V_DD2_6 = VREG_L2A_1P128V,
+    V_DD2_7 = VREG_L2A_1P128V,
+    V_DD2_8 = VREG_L2A_1P128V,
+    V_DD2_9 = VREG_L2A_1P128V,
+    V_DD2_10 = VREG_L2A_1P128V,
+    V_DD2_11 = VREG_L2A_1P128V,
+    V_DD2_12 = VREG_L2A_1P128V,
+    V_DD2_13 = VREG_L2A_1P128V,
+    V_DD2_14 = VREG_L2A_1P128V,
+    V_DD2_15 = VREG_L2A_1P128V,
+    V_DD2_16 = VREG_L2A_1P128V,
+    V_DD2_17 = VREG_L2A_1P128V,
+    V_DD2_18 = VREG_L2A_1P128V,
+    V_DD2_19 = VREG_L2A_1P128V,
+    V_DD2_20 = VREG_L2A_1P128V,
+    V_DD2_21 = VREG_L2A_1P128V,
+    
+    # Power - VDDQ (0.6V)
+    V_DDQ_1 = VREG_L3A_0P6V,
+    V_DDQ_2 = VREG_L3A_0P6V,
+    V_DDQ_3 = VREG_L3A_0P6V,
+    V_DDQ_4 = VREG_L3A_0P6V,
+    V_DDQ_5 = VREG_L3A_0P6V,
+    V_DDQ_6 = VREG_L3A_0P6V,
+    V_DDQ_7 = VREG_L3A_0P6V,
+    V_DDQ_8 = VREG_L3A_0P6V,
+    V_DDQ_9 = VREG_L3A_0P6V,
+    V_DDQ_10 = VREG_L3A_0P6V,
+    V_DDQ_11 = VREG_L3A_0P6V,
+    V_DDQ_12 = VREG_L3A_0P6V,
+    V_DDQ_13 = VREG_L3A_0P6V,
+    V_DDQ_14 = VREG_L3A_0P6V,
+    V_DDQ_15 = VREG_L3A_0P6V,
+    V_DDQ_16 = VREG_L3A_0P6V,
+    V_DDQ_17 = VREG_L3A_0P6V,
+    V_DDQ_18 = VREG_L3A_0P6V,
+    V_DDQ_19 = VREG_L3A_0P6V,
+    V_DDQ_20 = VREG_L3A_0P6V,
+    
+    # Ground - VSS
+    VSS_1 = GND,
+    VSS_2 = GND,
+    VSS_3 = GND,
+    VSS_4 = GND,
+    VSS_5 = GND,
+    VSS_6 = GND,
+    VSS_7 = GND,
+    VSS_8 = GND,
+    VSS_9 = GND,
+    VSS_10 = GND,
+    VSS_11 = GND,
+    VSS_12 = GND,
+    VSS_13 = GND,
+    VSS_14 = GND,
+    VSS_15 = GND,
+    VSS_16 = GND,
+    VSS_17 = GND,
+    VSS_18 = GND,
+    VSS_19 = GND,
+    VSS_20 = GND,
+    VSS_21 = GND,
+    VSS_22 = GND,
+    VSS_23 = GND,
+    VSS_24 = GND,
+    VSS_25 = GND,
+    VSS_26 = GND,
+    VSS_27 = GND,
+    VSS_28 = GND,
+    VSS_29 = GND,
+    VSS_30 = GND,
+    VSS_31 = GND,
+    VSS_32 = GND,
+    VSS_33 = GND,
+    VSS_34 = GND,
+    VSS_35 = GND,
+    VSS_36 = GND,
+    VSS_37 = GND,
+    VSS_38 = GND,
+    VSS_39 = GND,
+    VSS_40 = GND,
+    VSS_41 = GND,
+    VSS_42 = GND,
+    VSS_43 = GND,
+    VSS_44 = GND,
+    VSS_45 = GND,
+    VSS_46 = GND,
+    VSS_47 = GND,
+    VSS_48 = GND,
+    VSS_49 = GND,
+    VSS_50 = GND,
+    VSS_51 = GND,
+    
+    # Ground - V_SS
+    V_SS_1 = GND,
+    V_SS_2 = GND,
+    V_SS_3 = GND,
+    V_SS_4 = GND,
+    V_SS_5 = GND,
+    V_SS_6 = GND,
+    V_SS_7 = GND,
+    
+    # Ground - VDD2
+    VDD2_1 = GND,
+    VDD2_2 = GND,
+    VDD2_3 = GND,
+    
+    # Command/Address - Channel A
+    CA0_A = EBI0_CA_0,
+    CA1_A = EBI0_CA_1,
+    CA2_A = EBI0_CA_2,
+    CA3_A = EBI0_CA_3,
+    CA4_A = EBI0_CA_4,
+    CA5_A = EBI0_CA_5,
+    
+    # Command/Address - Channel B
+    CA0_B = EBI1_CA_0,
+    CA1_B = EBI1_CA_1,
+    CA2_B = EBI1_CA_2,
+    CA3_B = EBI1_CA_3,
+    CA4_B = EBI1_CA_4,
+    CA5_B = EBI1_CA_5,
+    
+    # Data - Channel A
+    DQ0_A = EBI0_DQ0,
+    DQ1_A = EBI0_DQ1,
+    DQ2_A = EBI0_DQ2,
+    DQ3_A = EBI0_DQ3,
+    DQ4_A = EBI0_DQ4,
+    DQ5_A = EBI0_DQ5,
+    DQ6_A = EBI0_DQ6,
+    DQ7_A = EBI0_DQ7,
+    DQ8_A = EBI0_DQ8,
+    DQ9_A = EBI0_DQ9,
+    DQ10_A = EBI0_DQ10,
+    DQ11_A = EBI0_DQ11,
+    DQ12_A = EBI0_DQ12,
+    DQ13_A = EBI0_DQ13,
+    DQ14_A = EBI0_DQ14,
+    DQ15_A = EBI0_DQ15,
+    
+    # Data - Channel B
+    DQ0_B = EBI1_DQ0,
+    DQ1_B = EBI1_DQ1,
+    DQ2_B = EBI1_DQ2,
+    DQ3_B = EBI1_DQ3,
+    DQ4_B = EBI1_DQ4,
+    DQ5_B = EBI1_DQ5,
+    DQ6_B = EBI1_DQ6,
+    DQ7_B = EBI1_DQ7,
+    DQ8_B = EBI1_DQ8,
+    DQ9_B = EBI1_DQ9,
+    DQ10_B = EBI1_DQ10,
+    DQ11_B = EBI1_DQ11,
+    DQ12_B = EBI1_DQ12,
+    DQ13_BGGGGG = EBI1_DQ13,
+    DQ14_B = EBI1_DQ14,
+    DQ15_B = EBI1_DQ15,
+    
+    # Data Strobe - Channel A
+    DQS0_T_A = EBI0_DQS_0_P,
+    DQS0_C_A = EBI0_DQS_0_M,
+    DQS1_T_A = EBI0_DQS_1_P,
+    DQS1_C_A = EBI0_DQS_1_M,
+    
+    # Data Strobe - Channel B
+    DQS0_T_B = EBI1_DQS_0_P,
+    DQS0_C_B = EBI1_DQS_0_M,
+    DQS1_T_B = EBI1_DQS_1_P,
+    DQS1_C_B = EBI1_DQS_1_M,
+    
+    # Data Mask - Channel A
+    DMI0_A = EBI0_DMI_0,
+    DMI1_A = EBI0_DMI_1,
+    
+    # Data Mask - Channel B
+    DMI0_B = EBI1_DMI_0,
+    DMI1_B = EBI1_DMI_1,
+    
+    # Clocks - Channel A
+    CK_T_A = EBI0_CLK_P,
+    CK_C_A = EBI0_CLK_M,
+    
+    # Clocks - Channel B
+    CK_T_B = EBI1_CLK_P,
+    CK_C_B = EBI1_CLK_M,
+    
+    # Chip Select - Channel A
+    CS0_A = EBI0_CS_0,
+    CS1_A = EBI0_CS_1,
+    
+    # Chip Select - Channel B
+    CS0_B = EBI1_CS_0,
+    CS1_B = EBI1_CS_1,
+    
+    # Clock Enable - Channel A
+    CKE0_A = EBI0_CKE_0,
+    CKE1_A = EBI0_CKE_1,
+    
+    # Clock Enable - Channel B
+    CKE0_B = EBI1_CKE_0,
+    CKE1_B = EBI1_CKE_1,
+    
+    # ODT
+    ODT_CA_A = VREG_L2A_1P128V,
+    ODT_CA_B = VREG_L2A_1P128V,
+    
+    # Reset
+    RESET_N = DDR_RESET_N,
+    
+    # ZQ Calibration
+    ZQ0 = DRAM_ZQ0,
+    ZQ1 = DRAM_ZQ1,
+    
+    # Do Not Use
+    DNU_1 = NotConnected(),
+    DNU_2 = NotConnected(),
+    DNU_3 = NotConnected(),
+    DNU_4 = NotConnected(),
+    DNU_5 = NotConnected(),
+    DNU_6 = NotConnected(),
+    DNU_7 = NotConnected(),
+    DNU_8 = NotConnected(),
+    DNU_9 = NotConnected(),
+    DNU_10 = NotConnected(),
+    DNU_11 = NotConnected(),
+    DNU_12 = NotConnected(),
+    
+    # No Connect
+    NC_1 = NotConnected(),
+    NC_2 = NotConnected(),
+    NC_3 = NotConnected(),
+    NC_4 = NotConnected(),
+    NC_5 = NotConnected(),
+)
+
+# ZQ Calibration Resistors
+Resistor(
+    name = "R_ZQ0",
+    value = "240 1%",
+    package = "0402",
+    P1 = DRAM_ZQ0,
+    P2 = VREG_L3A_0P6V,
+)
+
+Resistor(
+    name = "R_ZQ1",
+    value = "240 1%",
+    package = "0402",
+    P1 = DRAM_ZQ1,
+    P2 = VREG_L3A_0P6V,
+)
+
+# VDD1 Decoupling Capacitors (1.8V)
+Capacitor(
+    name = "C_VDD1_DECOUPLE1",
+    value = "1uF",
+    package = "0402",
+    voltage = "6.3V",
+    P1 = VREG_L15A_1P8V,
+    P2 = GND,
+)
+
+Capacitor(
+    name = "C_VDD1_DECOUPLE2",
+    value = "1uF",
+    package = "0402",
+    voltage = "6.3V",
+    P1 = VREG_L15A_1P8V,
+    P2 = GND,
+)
+
+Capacitor(
+    name = "C_VDD1_DECOUPLE3",
+    value = "1uF",
+    package = "0402",
+    voltage = "6.3V",
+    P1 = VREG_L15A_1P8V,
+    P2 = GND,
+)
+
+Capacitor(
+    name = "C_VDD1_DECOUPLE4",
+    value = "100nF",
+    package = "0402",
+    voltage = "6.3V",
+    P1 = VREG_L15A_1P8V,
+    P2 = GND,
+)
+
+# VDD3 Decoupling Capacitors (0.6V)
+Capacitor(
+    name = "C_VDD3_DECOUPLE1",
+    value = "1uF",
+    package = "0402",
+    voltage = "6.3V",
+    P1 = VREG_L3A_0P6V,
+    P2 = GND,
+)
+
+Capacitor(
+    name = "C_VDD3_DECOUPLE2",
+    value = "1uF",
+    package = "0402",
+    voltage = "6.3V",
+    P1 = VREG_L3A_0P6V,
+    P2 = GND,
+)
+
+Capacitor(
+    name = "C_VDD3_DECOUPLE3",
+    value = "1uF",
+    package = "0402",
+    voltage = "6.3V",
+    P1 = VREG_L3A_0P6V,
+    P2 = GND,
+)
+
+Capacitor(
+    name = "C_VDD3_DECOUPLE4",
+    value = "1uF",
+    package = "0402",
+    voltage = "6.3V",
+    P1 = VREG_L3A_0P6V,
+    P2 = GND,
+)
+
+Capacitor(
+    name = "C_VDD3_DECOUPLE5",
+    value = "1uF",
+    package = "0402",
+    voltage = "6.3V",
+    P1 = VREG_L3A_0P6V,
+    P2 = GND,
+)
+
+Capacitor(
+    name = "C_VDD3_DECOUPLE6",
+    value = "1uF",
+    package = "0402",
+    voltage = "6.3V",
+    P1 = VREG_L3A_0P6V,
+    P2 = GND,
+)
+
+Capacitor(
+    name = "C_VDD3_DECOUPLE7",
+    value = "1uF",
+    package = "0402",
+    voltage = "6.3V",
+    P1 = VREG_L3A_0P6V,
+    P2 = GND,
+)
+
+Capacitor(
+    name = "C_VDD3_DECOUPLE8",
+    value = "100nF",
+    package = "0402",
+    voltage = "6.3V",
+    P1 = VREG_L3A_0P6V,
+    P2 = GND,
+)
+
+Capacitor(
+    name = "C_VDD3_DECOUPLE9",
+    value = "10uF",
+    package = "0805",
+    voltage = "6.3V",
+    P1 = VREG_L3A_0P6V,
+    P2 = GND,
+    do_not_populate = True,
+)
+
+# VDD2 Decoupling Capacitors (1.128V)
+Capacitor(
+    name = "C_VDD2_DECOUPLE1",
+    value = "1uF",
+    package = "0402",
+    voltage = "6.3V",
+    P1 = VREG_L2A_1P128V,
+    P2 = GND,
+)
+
+Capacitor(
+    name = "C_VDD2_DECOUPLE2",
+    value = "1uF",
+    package = "0402",
+    voltage = "6.3V",
+    P1 = VREG_L2A_1P128V,
+    P2 = GND,
+)
+
+Capacitor(
+    name = "C_VDD2_DECOUPLE3",
+    value = "1uF",
+    package = "0402",
+    voltage = "6.3V",
+    P1 = VREG_L2A_1P128V,
+    P2 = GND,
+)
+
+Capacitor(
+    name = "C_VDD2_DECOUPLE4",
+    value = "1uF",
+    package = "0402",
+    voltage = "6.3V",
+    P1 = VREG_L2A_1P128V,
+    P2 = GND,
+)
+
+Capacitor(
+    name = "C_VDD2_DECOUPLE5",
+    value = "1uF",
+    package = "0402",
+    voltage = "6.3V",
+    P1 = VREG_L2A_1P128V,
+    P2 = GND,
+)
+
+Capacitor(
+    name = "C_VDD2_DECOUPLE6",
+    value = "4.7uF",
+    package = "0805",
+    voltage = "6.3V",
+    P1 = VREG_L2A_1P128V,
+    P2 = GND,
+    do_not_populate = True,
+)
+
+# pcb:sch C_VDD1_DECOUPLE1.C x=105.6800 y=1091.2000 rot=0
+# pcb:sch C_VDD1_DECOUPLE2.C x=-21.3200 y=1091.2000 rot=0
+# pcb:sch C_VDD1_DECOUPLE3.C x=-148.3200 y=1091.2000 rot=0
+# pcb:sch C_VDD1_DECOUPLE4.C x=-288.0200 y=1091.2000 rot=0
+# pcb:sch C_VDD2_DECOUPLE1.C x=105.6800 y=595.9000 rot=0
+# pcb:sch C_VDD2_DECOUPLE2.C x=-21.3200 y=595.9000 rot=0
+# pcb:sch C_VDD2_DECOUPLE3.C x=-148.3200 y=595.9000 rot=0
+# pcb:sch C_VDD2_DECOUPLE4.C x=-288.0200 y=595.9000 rot=0
+# pcb:sch C_VDD2_DECOUPLE5.C x=-415.0200 y=595.9000 rot=0
+# pcb:sch C_VDD2_DECOUPLE6.C x=-542.0200 y=608.6000 rot=0
+# pcb:sch C_VDD3_DECOUPLE1.C x=105.6800 y=862.6000 rot=0
+# pcb:sch C_VDD3_DECOUPLE2.C x=-21.3200 y=862.6000 rot=0
+# pcb:sch C_VDD3_DECOUPLE3.C x=-148.3200 y=862.6000 rot=0
+# pcb:sch C_VDD3_DECOUPLE4.C x=-288.0200 y=862.6000 rot=0
+# pcb:sch C_VDD3_DECOUPLE5.C x=-415.0200 y=862.6000 rot=0
+# pcb:sch C_VDD3_DECOUPLE6.C x=-542.0200 y=862.6000 rot=0
+# pcb:sch C_VDD3_DECOUPLE7.C x=-681.7200 y=862.6000 rot=0
+# pcb:sch C_VDD3_DECOUPLE8.C x=-821.4200 y=862.6000 rot=0
+# pcb:sch C_VDD3_DECOUPLE9.C x=-948.4200 y=862.6000 rot=0
+# pcb:sch GND.1 x=964.2000 y=3936.0000 rot=0
+# pcb:sch GND.2 x=1497.6000 y=3936.0000 rot=0
+# pcb:sch GND.3 x=113.3000 y=1205.5000 rot=0
+# pcb:sch GND.4 x=-13.7000 y=1205.5000 rot=0
+# pcb:sch GND.5 x=-140.7000 y=1205.5000 rot=0
+# pcb:sch GND.6 x=-280.4000 y=1205.5000 rot=0
+# pcb:sch GND.7 x=113.3000 y=964.2000 rot=0
+# pcb:sch GND.8 x=-13.7000 y=976.9000 rot=0
+# pcb:sch GND.9 x=-140.7000 y=976.9000 rot=0
+# pcb:sch GND.10 x=-280.4000 y=976.9000 rot=0
+# pcb:sch GND.11 x=-407.4000 y=976.9000 rot=0
+# pcb:sch GND.12 x=-534.4000 y=976.9000 rot=0
+# pcb:sch GND.13 x=-674.1000 y=976.9000 rot=0
+# pcb:sch GND.14 x=-813.8000 y=976.9000 rot=0
+# pcb:sch GND.15 x=-940.8000 y=976.9000 rot=0
+# pcb:sch GND.16 x=113.3000 y=710.2000 rot=0
+# pcb:sch GND.17 x=-13.7000 y=710.2000 rot=0
+# pcb:sch GND.18 x=-140.7000 y=710.2000 rot=0
+# pcb:sch GND.19 x=-280.4000 y=710.2000 rot=0
+# pcb:sch GND.20 x=-407.4000 y=710.2000 rot=0
+# pcb:sch GND.21 x=-534.4000 y=710.2000 rot=0
+# pcb:sch LPDDR4X.MT53E512M32D1ZW-046_AUT_B x=1027.7000 y=1332.5000 rot=0
+# pcb:sch R_ZQ0.R x=446.0400 y=1383.3000 rot=180
+# pcb:sch R_ZQ1.R x=344.4400 y=1383.3000 rot=180
+# pcb:sch VREG_L2A_1P128V.1 x=118.3800 y=545.1000 rot=0
+# pcb:sch VREG_L2A_1P128V.2 x=1489.9800 y=1269.0000 rot=0
+# pcb:sch VREG_L3A_0P6V.1 x=854.9800 y=1269.0000 rot=0
+# pcb:sch VREG_L3A_0P6V.2 x=1807.4800 y=1269.0000 rot=0
+# pcb:sch VREG_L3A_0P6V.3 x=118.3800 y=799.1000 rot=0
+# pcb:sch VREG_L3A_0P6V.4 x=346.9800 y=1294.4000 rot=0
+# pcb:sch VREG_L15A_1P8V.1 x=689.8800 y=1269.0000 rot=0
+# pcb:sch VREG_L15A_1P8V.2 x=1655.0800 y=1269.0000 rot=0
+# pcb:sch VREG_L15A_1P8V.3 x=118.3800 y=1027.7000 rot=0

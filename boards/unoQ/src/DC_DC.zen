@@ -1,0 +1,555 @@
+"""
+DC-DC Converter Schematic
+Author: Nasheed Ur Rehman
+"""
+
+# ----------------------------------------------------------------------------
+# Libraries & Dependencies
+# ----------------------------------------------------------------------------
+
+load("@stdlib/config.zen", "config_properties", "config_unit")
+load("@stdlib/interfaces.zen", "Power", "Ground", "NotConnected", "I2c", "Gpio")
+load("@stdlib/properties.zen", "Layout")
+load("@stdlib/units.zen", "Capacitance", "Current", "Frequency", "Inductance", "Resistance", "Voltage")
+
+# ----------------------------------------------------------------------------
+# Configuration
+# ----------------------------------------------------------------------------
+
+# ----------------------------------------------------------------------------
+# Component Modules
+# ----------------------------------------------------------------------------
+
+LMR51440SDRRR = Module("../../../components/LMR51440SDRRR_DFN12P/LMR51440SDRRR_DFN12P.zen")
+SX34 = Module("../../../components/SX34/SX34.zen")
+NRS8030T3R3MJGJ = Module("../../../components/NRS8030T3R3MJGJ/NRS8030T3R3MJGJ.zen")
+TPS62A02APDDCR = Module("../../../components/TPS62A02APDDCR_SOT23_6P/TPS62A02APDDCR_SOT23_6P.zen")
+MMBT3904W = Module("../../../components/MMBT3904W_SOT323_3P/MMBT3904W_SOT323_3P.zen")
+PJA3413 = Module("../../../components/PJA3413_SOT23_3P/PJA3413_SOT23_3P.zen")
+TFM252012ALMA1R0MTAA = Module("../../../components/TFM252012ALMA1R0MTAA/TFM252012ALMA1R0MTAA.zen")
+Capacitor = Module("@stdlib/generics/Capacitor.zen")
+Resistor = Module("@stdlib/generics/Resistor.zen")
+
+# ----------------------------------------------------------------------------
+# IO Interfaces
+# ----------------------------------------------------------------------------
+
+# Input Power
+DC_IN = io("DC_IN", Power) # 6~24V
+USB_VBUS_IN = io("USB_VBUS_IN", Power)
+# Output Power
+BUCK_5V_OUT = io("BUCK_5V_OUT", Power) # 5V
+PWR_3P8V = io("PWR_3P8V", Power)
+PWR_3P3V = io("PWR_3P3V", Power)
+SYS_5V = io("SYS_5V", Power)
+USB_5V_VBUS = io("USB_5V_VBUS", Power)
+VBAT = io("VBAT", Power)
+
+VBUS_POWER_SWITCH_DISABLE_N = io("VBUS_POWER_SWITCH_DISABLE_N", Net)
+
+# Ground
+GND = io("GND", Ground)
+
+# ----------------------------------------------------------------------------
+# Local Net 
+# ----------------------------------------------------------------------------
+
+BUCK_5V_C = Net("BUCK_5V_C")
+BUCK_5V_VIN = Net("BUCK_5V_VIN")
+BUCK_5V_EN = Net("BUCK_5V_EN")
+BUCK_5V_RT = Net("BUCK_5V_RT")
+BUCK_5V_SW = Net("BUCK_5V_SW")
+BUCK_5V_BOOT = Net("BUCK_5V_BOOT")
+BUCK_5V_FB = Net("BUCK_5V_FB")
+BUCK_5V_FB_C = Net("BUCK_5V_FB_C")
+
+USB_5V_VBUS_ON_N = Net("USB_5V_VBUS_ON_N")
+
+LDO1_LX = Net("LDO1_LX")
+LDO1_EN = Net("LDO1_EN")
+LDO1_FB = Net("LDO1_FB")
+LDO1_PG = Net("LDO1_PG")
+
+LDO2_LX = Net("LDO2_LX")
+LDO2_EN = Net("LDO2_EN")
+LDO2_FB = Net("LDO2_FB")
+# ----------------------------------------------------------------------------
+# Components
+# ----------------------------------------------------------------------------
+
+# 6~24V to 5V
+
+LMR51440SDRRR(
+    name = "LMR51440SDRRR",
+    # Power Input Pins
+    VIN_1 = BUCK_5V_VIN,
+    VIN_2 = BUCK_5V_VIN,
+    VIN_3 = BUCK_5V_VIN,
+    
+    # Ground Pins
+    AGND = GND,
+    PGND = GND,
+    
+    # Control Pins
+    EN = BUCK_5V_EN,
+    RT = BUCK_5V_RT,
+    FB = BUCK_5V_FB,
+    
+    # Switching Pins
+    SW_1 = BUCK_5V_SW,
+    SW_2 = BUCK_5V_SW,
+    SW_3 = BUCK_5V_SW,
+    BOOT = BUCK_5V_BOOT,
+    
+    # Power Good (Not Connected)
+    PG = NotConnected(),
+)
+
+SX34(
+    name = "SX34",
+    A = DC_IN,
+    K = BUCK_5V_VIN,
+)
+
+Capacitor(
+    name = "C_BUCK_5V_IN1",
+    value = "22uF",
+    package = "0805",
+    voltage = "25V",
+    P1 = BUCK_5V_VIN,
+    P2 = BUCK_5V_C,
+)
+
+Capacitor(
+    name = "C_BUCK_5V_IN2",
+    value = "22uF",
+    package = "0805",
+    voltage = "25V",
+    P1 = BUCK_5V_C,
+    P2 = GND,
+)
+
+Capacitor(
+    name = "C_BUCK_5V_IN3",
+    value = "0.1uF",
+    package = "0603",
+    voltage = "50V",
+    P1 = BUCK_5V_VIN,
+    P2 = GND,
+)
+
+Resistor(
+    name = "R_BUCK_5V_EN",
+    value = "301k 1%",
+    package = "0603",
+    P1 = BUCK_5V_VIN,
+    P2 = BUCK_5V_EN,
+)
+
+Resistor(
+    name = "R_BUCK_5V_EN_PULLDOWN",
+    value = "100k 1%",
+    package = "0603",
+    P1 = BUCK_5V_EN,
+    P2 = GND,
+)
+
+Resistor(
+    name = "R_BUCK_5V_RT",
+    value = "0",
+    package = "0402",
+    P1 = BUCK_5V_RT,
+    P2 = GND,
+)
+
+Capacitor(
+    name = "C_BUCK_5V_BOOT",
+    value = "100nF",
+    package = "0402",
+    voltage = "16V",
+    P1 = BUCK_5V_BOOT,
+    P2 = BUCK_5V_SW,
+)
+
+Resistor(
+    name = "R_BUCK_5V_FB",
+    value = "100k 1%",
+    package = "0603",
+    P1 = BUCK_5V_OUT,
+    P2 = BUCK_5V_FB,
+)
+
+Resistor(
+    name = "R_BUCK_5V_FB_DIV",
+    value = "19.1k 1%",
+    package = "0603",
+    P1 = BUCK_5V_FB,
+    P2 = GND,
+)
+
+Resistor(
+    name = "R_BUCK_5V_FB_C",
+    value = "1k 1%",
+    package = "0603",
+    P1 = BUCK_5V_OUT,
+    P2 = BUCK_5V_FB_C,
+)
+
+Capacitor(
+    name = "C_BUCK_5V_FB_C",
+    value = "22pF",
+    package = "0603",
+    voltage = "50V",
+    P1 = BUCK_5V_FB_C,
+    P2 = BUCK_5V_FB,
+)
+
+Capacitor(
+    name = "C_BUCK_5V_OUT",
+    value = "22uF",
+    package = "0603",
+    voltage = "10V",
+    P1 = BUCK_5V_OUT,
+    P2 = GND,
+)
+
+Capacitor(
+    name = "C_BUCK_5V_OUT2",
+    value = "10uF",
+    package = "0603",
+    voltage = "10V",
+    P1 = BUCK_5V_OUT,
+    P2 = GND,
+)
+
+NRS8030T3R3MJGJ(
+    name = "NRS8030T3R3MJGJ",
+    P1 = BUCK_5V_SW,
+    P2 = BUCK_5V_OUT,
+)
+# 5V to 3.8V
+
+TPS62A02APDDCR(
+    name = "TPS62A02APDDCR",
+    EN = LDO1_EN,
+    FB = LDO1_FB,
+    GND = GND,
+    PG = LDO1_PG,
+    SW = LDO1_LX,
+    VIN = SYS_5V,
+)
+
+Capacitor(
+    name = "C_SYS_5V_1",
+    value = "4.7uF",
+    package = "0603",
+    voltage = "10V",
+    P1 = SYS_5V,
+    P2 = GND,
+)
+
+Capacitor(
+    name = "C_SYS_5V_2",
+    value = "100nF",
+    package = "0603",
+    voltage = "10V",
+    P1 = SYS_5V,
+    P2 = GND,
+)
+
+Resistor(
+    name = "R_LDO1_PG_PULLUP",
+    value = "10k 1%",
+    package = "0603",
+    P1 = PWR_3P8V,
+    P2 = LDO1_PG,
+)
+
+Capacitor(
+    name = "C_LDO1_PG",
+    value = "4.7uF",
+    package = "0603",
+    voltage = "10V",
+    P1 = LDO1_PG,
+    P2 = GND,
+)
+
+Resistor(
+    name = "R_LDO1_PG_PULLDOWN",
+    value = "10k 1%",
+    package = "0603",
+    P1 = LDO1_PG,
+    P2 = GND,
+)
+
+Resistor(
+    name = "R_LDO1_EN_PULLUP",
+    value = "10k 1%",
+    package = "0603",
+    P1 = SYS_5V,
+    P2 = LDO1_EN,
+)
+
+Resistor(
+    name = "R_LDO1_EN_TO_VBUS_DISABLE",
+    value = "0",
+    package = "0603",
+    P1 = LDO1_EN,
+    P2 = VBUS_POWER_SWITCH_DISABLE_N,
+)
+
+Resistor(
+    name = "R_LDO1_FB_SERIES",
+    value = "499k 1%",
+    package = "0603",
+    P1 = PWR_3P8V,
+    P2 = LDO1_FB,
+)
+
+Capacitor(
+    name = "C_LDO1_FB_COMP",
+    value = "120pF",
+    package = "0603",
+    voltage = "25V",
+    P1 = PWR_3P8V,
+    P2 = LDO1_FB,
+    do_not_populate = True,
+)
+
+Resistor(
+    name = "R_LDO1_FB_DIV",
+    value = "95.3k 1%",
+    package = "0603",
+    P1 = LDO1_FB,
+    P2 = GND,
+)
+
+Capacitor(
+    name = "C_PWR_3P8V_DECOUPLE",
+    value = "22uF",
+    package = "0603",
+    voltage = "6.3V",
+    P1 = PWR_3P8V,
+    P2 = GND,
+)
+
+Resistor(
+    name = "R_PWR_3P8V_TO_VBAT",
+    value = "0",
+    package = "0603",
+    P1 = PWR_3P8V,
+    P2 = VBAT,
+)
+
+SX34(
+    name = "SX34_USB_VBUS",
+    A = USB_5V_VBUS,
+    K = SYS_5V,
+)
+
+SX34(
+    name = "SX34_BUCK_OUT",
+    A = BUCK_5V_OUT,
+    K = SYS_5V,
+)
+
+PJA3413(
+    name = "PJA3413_USB_VBUS",
+    D = USB_VBUS_IN,
+    G = USB_5V_VBUS_ON_N,
+    S = SYS_5V,
+)
+
+MMBT3904W(
+    name = "MMBT3904W",
+    B = LDO1_PG,
+    C = USB_5V_VBUS_ON_N,
+    E = GND,
+)
+
+Resistor(
+    name = "R_SYS_5V_TO_VBUS_ON",
+    value = "10k 1%",
+    package = "0603",
+    P1 = SYS_5V,
+    P2 = USB_5V_VBUS_ON_N,
+)
+
+TFM252012ALMA1R0MTAA(
+    name = "L_3P8V_TO_LDO1_LX",
+    P1 = LDO1_LX,
+    P2 = PWR_3P8V,
+)
+
+# 3.8V to 3.3V
+
+TPS62A02APDDCR(
+    name = "TPS62A02APDDCR_3P8V_TO_3P3V",
+    EN = LDO2_EN,
+    FB = LDO2_FB,
+    GND = GND,
+    PG = GND,
+    SW = LDO2_LX,
+    VIN = PWR_3P8V,
+)
+
+Capacitor(
+    name = "C_PWR_3P8V_DECOUPLE_4P7UF",
+    value = "4.7uF",
+    package = "0805",
+    voltage = "6.3V",
+    P1 = PWR_3P8V,
+    P2 = GND,
+)
+
+Capacitor(
+    name = "C_PWR_3P8V_DECOUPLE_100NF",
+    value = "100nF",
+    package = "0603",
+    voltage = "6.3V",
+    P1 = PWR_3P8V,
+    P2 = GND,
+)
+
+Resistor(
+    name = "R_PWR_3P8V_TO_3P3V_0R",
+    value = "0",
+    package = "0603",
+    P1 = PWR_3P8V,
+    P2 = PWR_3P3V,
+    do_not_populate = True,
+)
+
+TFM252012ALMA1R0MTAA(
+    name = "L_3P8V_TO_3P3V",
+    P1 = LDO2_LX,
+    P2 = PWR_3P3V,
+)
+
+Resistor(
+    name = "R_LDO2_EN_PULLUP",
+    value = "10k 1%",
+    package = "0603",
+    P1 = PWR_3P8V,
+    P2 = LDO2_EN,
+)
+
+Resistor(
+    name = "R_LDO2_FB_DIV",
+    value = "453k 1%",
+    package = "0603",
+    P1 = PWR_3P3V,
+    P2 = LDO2_FB,
+)
+
+Resistor(
+    name = "R_LDO2_FB_PULLDOWN",
+    value = "100k 1%",
+    package = "0603",
+    P1 = LDO2_FB,
+    P2 = GND,
+)
+
+Capacitor(
+    name = "C_LDO2_FB_COMP",
+    value = "120pF",
+    package = "0603",
+    voltage = "25V",
+    P1 = PWR_3P3V,
+    P2 = LDO2_FB,
+    do_not_populate = True,
+)
+
+Capacitor(
+    name = "C_PWR_3P3V_DECOUPLE",
+    value = "22uF",
+    package = "0603",
+    voltage = "6.3V",
+    P1 = PWR_3P3V,
+    P2 = GND,
+)
+
+# pcb:sch BUCK_5V_OUT.2 x=-364.2200 y=-521.7000 rot=0
+# pcb:sch BUCK_5V_OUT.3 x=-491.2200 y=-1118.6000 rot=0
+# pcb:sch C_BUCK_5V_BOOT.C x=-1037.3200 y=-1029.7000 rot=180
+# pcb:sch C_BUCK_5V_FB_C.C x=-669.0200 y=-940.8000 rot=0
+# pcb:sch C_BUCK_5V_IN1.C x=-1900.9200 y=-1017.0000 rot=0
+# pcb:sch C_BUCK_5V_IN2.C x=-1900.9200 y=-890.0000 rot=0
+# pcb:sch C_BUCK_5V_IN3.C x=-1773.9200 y=-1029.7000 rot=0
+# pcb:sch C_BUCK_5V_OUT.C x=-618.2200 y=-1017.0000 rot=0
+# pcb:sch C_BUCK_5V_OUT2.C x=-503.9200 y=-1017.0000 rot=0
+# pcb:sch C_LDO1_FB_COMP.C x=-973.8200 y=-128.0000 rot=0
+# pcb:sch C_LDO1_PG.C x=-1900.9200 y=189.5000 rot=0
+# pcb:sch C_LDO2_FB_COMP.C x=-834.1200 y=430.8000 rot=0
+# pcb:sch C_PWR_3P3V_DECOUPLE.C x=-694.4200 y=430.8000 rot=0
+# pcb:sch C_PWR_3P8V_DECOUPLE.C x=-834.1200 y=-128.0000 rot=0
+# pcb:sch C_PWR_3P8V_DECOUPLE_4P7UF.C x=-1900.9200 y=456.2000 rot=0
+# pcb:sch C_PWR_3P8V_DECOUPLE_100NF.C x=-1773.9200 y=456.2000 rot=0
+# pcb:sch C_SYS_5V_1.C x=-1977.1200 y=-128.0000 rot=0
+# pcb:sch C_SYS_5V_2.C x=-1837.4200 y=-140.7000 rot=0
+# pcb:sch DC_IN.1 x=-2154.9200 y=-1105.9000 rot=0
+# pcb:sch GND.1 x=-1321.8000 y=-712.2000 rot=0
+# pcb:sch GND.2 x=-1893.3000 y=-724.9000 rot=0
+# pcb:sch GND.3 x=-1766.3000 y=-724.9000 rot=0
+# pcb:sch GND.4 x=-1309.1000 y=-64.5000 rot=0
+# pcb:sch GND.5 x=-1639.3000 y=-737.6000 rot=0
+# pcb:sch GND.6 x=-1512.3000 y=-737.6000 rot=0
+# pcb:sch GND.7 x=-1575.8000 y=-737.6000 rot=0
+# pcb:sch GND.8 x=-496.3000 y=-877.3000 rot=0
+# pcb:sch GND.9 x=-763.0000 y=-737.6000 rot=0
+# pcb:sch GND.10 x=-1969.5000 y=-39.1000 rot=0
+# pcb:sch GND.11 x=-1829.8000 y=-51.8000 rot=0
+# pcb:sch GND.12 x=-1893.3000 y=303.8000 rot=0
+# pcb:sch GND.13 x=-1766.3000 y=303.8000 rot=0
+# pcb:sch GND.14 x=-966.2000 y=113.3000 rot=0
+# pcb:sch GND.15 x=-343.9000 y=240.3000 rot=0
+# pcb:sch GND.16 x=-826.5000 y=24.4000 rot=0
+# pcb:sch GND.17 x=-1690.1000 y=570.5000 rot=0
+# pcb:sch GND.18 x=-1359.9000 y=595.9000 rot=0
+# pcb:sch GND.19 x=-1893.3000 y=557.8000 rot=0
+# pcb:sch GND.20 x=-1766.3000 y=557.8000 rot=0
+# pcb:sch GND.21 x=-686.8000 y=557.8000 rot=0
+# pcb:sch GND.22 x=-1042.4000 y=659.4000 rot=0
+# pcb:sch LMR51440SDRRR.LMR51440SDRRR x=-1448.8000 y=-1067.8000 rot=0
+# pcb:sch L_3P8V_TO_3P3V.TFM252012ALMA1R0MTAA x=-1359.9000 y=456.7207 rot=0
+# pcb:sch L_3P8V_TO_LDO1_LX.TFM252012ALMA1R0MTAA x=-1309.1000 y=-178.2793 rot=0
+# pcb:sch MMBT3904W.SMMBT3904WT1G x=-432.8000 y=49.8000 rot=0
+# pcb:sch NRS8030T3R3MJGJ.NRS8030T3R3MJGJ x=-991.6000 y=-1067.8000 rot=0
+# pcb:sch PJA3413_USB_VBUS.PJA3413_R1_00001 x=-382.0000 y=-140.7000 rot=270
+# pcb:sch PWR_3P3V.3 x=-681.7200 y=367.3000 rot=0
+# pcb:sch PWR_3P8V.1 x=-1888.2200 y=-1.0000 rot=0
+# pcb:sch PWR_3P8V.2 x=-961.1200 y=-242.3000 rot=0
+# pcb:sch PWR_3P8V.4 x=-1075.4200 y=-242.3000 rot=0
+# pcb:sch PWR_3P8V.5 x=-1888.2200 y=367.3000 rot=0
+# pcb:sch PWR_3P8V.6 x=-1291.3200 y=532.4000 rot=0
+# pcb:sch R_BUCK_5V_EN.R x=-1636.7600 y=-1029.7000 rot=0
+# pcb:sch R_BUCK_5V_EN_PULLDOWN.R x=-1636.7600 y=-877.3000 rot=0
+# pcb:sch R_BUCK_5V_FB.R x=-760.4600 y=-1004.3000 rot=0
+# pcb:sch R_BUCK_5V_FB_C.R x=-658.8600 y=-1042.4000 rot=0
+# pcb:sch R_BUCK_5V_FB_DIV.R x=-760.4600 y=-839.2000 rot=0
+# pcb:sch R_BUCK_5V_RT.R x=-1509.7600 y=-851.9000 rot=0
+# pcb:sch R_LDO1_EN_PULLUP.R x=-1217.6600 y=-64.5000 rot=0
+# pcb:sch R_LDO1_EN_TO_VBUS_DISABLE.R x=-1306.5600 y=138.7000 rot=90
+# pcb:sch R_LDO1_FB_DIV.R x=-963.6600 y=11.7000 rot=0
+# pcb:sch R_LDO1_FB_SERIES.R x=-1077.9600 y=-128.0000 rot=0
+# pcb:sch R_LDO1_PG_PULLDOWN.R x=-1763.7600 y=189.5000 rot=0
+# pcb:sch R_LDO1_PG_PULLUP.R x=-1890.7600 y=37.1000 rot=0
+# pcb:sch R_LDO2_EN_PULLUP.R x=-1293.8600 y=595.9000 rot=0
+# pcb:sch R_LDO2_FB_DIV.R x=-1039.8600 y=430.8000 rot=0
+# pcb:sch R_LDO2_FB_PULLDOWN.R x=-1039.8600 y=545.1000 rot=0
+# pcb:sch R_PWR_3P8V_TO_3P3V_0R.R x=-1535.1600 y=367.3000 rot=270
+# pcb:sch R_PWR_3P8V_TO_VBAT.R x=-760.4600 y=-191.5000 rot=270
+# pcb:sch R_SYS_5V_TO_VBUS_ON.R x=-214.3600 y=-77.2000 rot=0
+# pcb:sch SX34.SX34 x=-1880.6000 y=-1067.8000 rot=180
+# pcb:sch SX34_BUCK_OUT.SX34 x=-64.5000 y=-470.9000 rot=180
+# pcb:sch SX34_USB_VBUS.SX34 x=-64.5000 y=-585.2000 rot=180
+# pcb:sch SYS_5V.1 x=-1215.1200 y=-115.3000 rot=0
+# pcb:sch SYS_5V.2 x=-1964.4200 y=-191.5000 rot=0
+# pcb:sch SYS_5V.3 x=-34.0200 y=-648.7000 rot=0
+# pcb:sch SYS_5V.4 x=-211.8200 y=-191.5000 rot=0
+# pcb:sch TFM252012ALMA1R0MTAA.TFM252012ALMA1R0MTAA x=-1309.1000 y=-178.2793 rot=0
+# pcb:sch TPS62A02APDDCR.TPS62A02APDDCR x=-1626.6000 y=-178.8000 rot=0
+# pcb:sch TPS62A02APDDCR_3P8V_TO_3P3V.TPS62A02APDDCR x=-1652.0000 y=456.2000 rot=0
+# pcb:sch USB_5V_VBUS.1 x=-364.2200 y=-648.7000 rot=0
+# pcb:sch USB_VBUS_IN.1 x=-503.9200 y=-191.5000 rot=0
+# pcb:sch VBAT.1 x=-694.4200 y=-229.6000 rot=0

@@ -1,0 +1,186 @@
+"""
+eMMC Schematic
+Author: Nasheed Ur Rehman
+"""
+
+# ----------------------------------------------------------------------------
+# Libraries & Dependencies
+# ----------------------------------------------------------------------------
+
+load("@stdlib/config.zen", "config_properties", "config_unit")
+load("@stdlib/interfaces.zen", "Power", "Ground", "NotConnected", "I2c", "Gpio")
+load("@stdlib/properties.zen", "Layout")
+load("@stdlib/units.zen", "Capacitance", "Current", "Frequency", "Inductance", "Resistance", "Voltage")
+
+# ----------------------------------------------------------------------------
+# Configuration
+# ----------------------------------------------------------------------------
+
+# ----------------------------------------------------------------------------
+# Component Modules
+# ----------------------------------------------------------------------------
+
+EMMC16G_WW28_GA01 = Module("../../../components/EMMC16G-MW28-GA01_BGA153P/EMMC16G-MW28-GA01_BGA153P.zen")
+Capacitor = Module("@stdlib/generics/Capacitor.zen")
+Resistor = Module("@stdlib/generics/Resistor.zen")
+
+# ----------------------------------------------------------------------------
+# IO Interfaces
+# ----------------------------------------------------------------------------
+
+VREG_L20A_2P96V = io("VREG_L20A_2P96V", Power)
+VREG_L14A_1P8V = io("VREG_L14A_1P8V", Power)
+VREG_L15A_1P8V = io("VREG_L15A_1P8V", Power)
+GND = io("GND", Ground)
+
+SDC1_RCLK = io("SDC1_RCLK", Net)
+SDC1_CLK = io("SDC1_CLK", Net)
+SDC1_CMD = io("SDC1_CMD", Net)
+SDC1_DATA_6 = io("SDC1_DATA_6", Net)
+SDC1_DATA_7 = io("SDC1_DATA_7", Net)
+SDC1_DATA_0 = io("SDC1_DATA_0", Net)
+SDC1_DATA_1 = io("SDC1_DATA_1", Net)
+SDC1_DATA_2 = io("SDC1_DATA_2", Net)
+SDC1_DATA_3 = io("SDC1_DATA_3", Net)
+SDC1_DATA_4 = io("SDC1_DATA_4", Net)
+SDC1_DATA_5 = io("SDC1_DATA_5", Net)
+RESOUT_N = io("RESOUT_N", Net)
+
+# ----------------------------------------------------------------------------
+# Local Net
+# ----------------------------------------------------------------------------
+
+EMMC1_VDDI = Net("EMMC1_VDDI")
+
+# ----------------------------------------------------------------------------
+# Components
+# ----------------------------------------------------------------------------
+
+EMMC16G_WW28_GA01(
+    name = "EMMC16G_WW28_GA01",
+    # Power
+    VDDI = EMMC1_VDDI,
+    VCC = VREG_L20A_2P96V,
+    VCCQ = VREG_L14A_1P8V,
+    # Ground
+    VSS = GND,
+    VSF = GND,
+    VSSQ = GND,
+    # Data
+    CLK = SDC1_CLK,
+    CMD = SDC1_CMD,
+    DAT0 = SDC1_DATA_0,
+    DAT1 = SDC1_DATA_1,
+    DAT2 = SDC1_DATA_2,
+    DAT3 = SDC1_DATA_3,
+    DAT4 = SDC1_DATA_4,
+    DAT5 = SDC1_DATA_5,
+    DAT6 = SDC1_DATA_6,
+    DAT7 = SDC1_DATA_7,
+    # Control
+    RST_n = RESOUT_N,
+    RFU = NotConnected(),
+)
+
+# Decoupling capacitors for EMMC1_VDDI
+Capacitor(
+    name = "C_EMMC1_VDDI_100NF",
+    value = "100nF",
+    voltage = "10V",
+    P1 = EMMC1_VDDI,
+    P2 = GND,
+)
+
+Capacitor(
+    name = "C_EMMC1_VDDI_1UF",
+    value = "1uF",
+    voltage = "6.3V",
+    P1 = EMMC1_VDDI,
+    P2 = GND,
+)
+
+# Decoupling capacitors for VREG_L14A_1P8V
+Capacitor(
+    name = "C_VREG_L14A_1P8V_1UF",
+    value = "1uF",
+    voltage = "6.3V",
+    P1 = VREG_L14A_1P8V,
+    P2 = GND,
+)
+
+Capacitor(
+    name = "C_VREG_L14A_1P8V_2P2UF",
+    value = "2.2uF",
+    voltage = "6.3V",
+    P1 = VREG_L14A_1P8V,
+    P2 = GND,
+)
+# Decoupling capacitors for VREG_L20A_2P96V
+Capacitor(
+    name = "C_VREG_L20A_2P96V_2P2UF_1",
+    value = "2.2uF",
+    voltage = "6.3V",
+    P1 = VREG_L20A_2P96V,
+    P2 = GND,
+)
+
+Capacitor(
+    name = "C_VREG_L20A_2P96V_100NF",
+    value = "100nF",
+    voltage = "6.3V",
+    P1 = VREG_L20A_2P96V,
+    P2 = GND,
+)
+
+Capacitor(
+    name = "C_VREG_L20A_2P96V_2P2UF_2",
+    value = "2.2uF",
+    voltage = "6.3V",
+    P1 = VREG_L20A_2P96V,
+    P2 = GND,
+    do_not_populate = True,
+)
+
+Resistor(
+    name = "R_SDC1_RCLK",
+    value = "10k 1%",
+    package = "0402",
+    P1 = SDC1_RCLK,
+    P2 = GND,
+)
+
+Resistor(
+    name = "R_SDC1_CMD",
+    value = "10k 1%",
+    package = "0402",
+    P1 = VREG_L15A_1P8V,
+    P2 = SDC1_CMD,
+)
+
+# pcb:sch C_EMMC1_VDDI_1UF.C x=-719.8200 y=443.5000 rot=0
+# pcb:sch C_EMMC1_VDDI_100NF.C x=-846.8200 y=443.5000 rot=0
+# pcb:sch C_VREG_L14A_1P8V_1UF.C x=-719.8200 y=164.1000 rot=0
+# pcb:sch C_VREG_L14A_1P8V_2P2UF.C x=-846.8200 y=164.1000 rot=0
+# pcb:sch C_VREG_L20A_2P96V_2P2UF_1.C x=-1138.9200 y=164.1000 rot=0
+# pcb:sch C_VREG_L20A_2P96V_2P2UF_2.C x=-999.2200 y=164.1000 rot=0
+# pcb:sch C_VREG_L20A_2P96V_100NF.C x=-1278.6200 y=164.1000 rot=0
+# pcb:sch EMMC16G_WW28_GA01.EMMC16G-WW28-GA01 x=-128.0000 y=316.5000 rot=0
+# pcb:sch GND.1 x=-242.3000 y=2323.1000 rot=0
+# pcb:sch GND.2 x=202.2000 y=2310.4000 rot=0
+# pcb:sch GND.3 x=-305.8000 y=862.6000 rot=0
+# pcb:sch GND.4 x=-839.2000 y=557.8000 rot=0
+# pcb:sch GND.5 x=-712.2000 y=278.4000 rot=0
+# pcb:sch GND.6 x=-839.2000 y=278.4000 rot=0
+# pcb:sch GND.7 x=-991.6000 y=278.4000 rot=0
+# pcb:sch GND.8 x=-1131.3000 y=278.4000 rot=0
+# pcb:sch GND.9 x=-1271.0000 y=278.4000 rot=0
+# pcb:sch GND.10 x=-839.2000 y=849.9000 rot=0
+# pcb:sch R_SDC1_CMD.R x=-735.0600 y=735.6000 rot=0
+# pcb:sch R_SDC1_RCLK.R x=-836.6600 y=735.6000 rot=0
+# pcb:sch VREG_L14A_1P8V.1 x=-338.8200 y=227.6000 rot=0
+# pcb:sch VREG_L14A_1P8V.2 x=219.9800 y=227.6000 rot=0
+# pcb:sch VREG_L14A_1P8V.4 x=-834.1200 y=100.6000 rot=0
+# pcb:sch VREG_L15A_1P8V.1 x=-732.5200 y=659.4000 rot=0
+# pcb:sch VREG_L20A_2P96V.1 x=-415.0200 y=265.7000 rot=0
+# pcb:sch VREG_L20A_2P96V.2 x=308.8800 y=265.7000 rot=0
+# pcb:sch VREG_L20A_2P96V.5 x=-1265.9200 y=100.6000 rot=0

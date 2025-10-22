@@ -1,0 +1,25 @@
+[board]
+name = "Arduino UNO Q"
+description = """
+Arduino UNO Q - Dual-Processor Development Board
+
+Powerful development board combining a Qualcomm application processor with STM32 microcontroller.
+Perfect for AI, machine learning, computer vision, and IoT applications.
+
+Key Features:
+- Qualcomm QRB2210 Dragonwing™ (Quad-core Arm® Cortex®-A53 @ 2.0 GHz)
+- STM32U585 microcontroller (Arm® Cortex®-M33 @ 160 MHz)
+- 2GB LPDDR4X RAM + 16GB eMMC storage
+- Multi-rail power management (6-24V DC input)
+- USB-C with SuperSpeed USB 3.0
+- 8×13 Blue LED matrix + 4× RGB user LEDs
+- Dual-band Wi-Fi 5 (2.4/5 GHz) and Bluetooth® 5.1
+- MIPI DSI/CSI camera interfaces
+- Audio I/O (Mic IN, Headphone OUT, Line OUT)
+- Arduino UNO form factor (68.85mm × 53.34mm)
+- Compatible with Arduino shields and accessories
+
+Operating Systems:
+- MPU: Linux Debian OS
+- MCU: Arduino Core on Zephyr OS
+"""

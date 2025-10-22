@@ -1,0 +1,8 @@
+(fp_lib_table
+  (version 7)
+  (lib (name "C_0402_1005Metric") (type "KiCad") (uri "${KIPRJMOD}/../../../../../../Library/Caches/pcb/gitlab/kicad/libraries/kicad-footprints/9.0.0/Capacitor_SMD.pretty/") (options "") (descr ""))
+  (lib (name "LED-SMD_4P-L1.0-W1.0-TR_RGB") (type "KiCad") (uri "${KIPRJMOD}/../../../components/LTST-C28NBEGK-SN/eda/") (options "") (descr ""))
+  (lib (name "LED_0603_1608Metric") (type "KiCad") (uri "${KIPRJMOD}/../../../../../../Library/Caches/pcb/gitlab/kicad/libraries/kicad-footprints/9.0.0/LED_SMD.pretty/") (options "") (descr ""))
+  (lib (name "R_0402_1005Metric") (type "KiCad") (uri "${KIPRJMOD}/../../../../../../Library/Caches/pcb/gitlab/kicad/libraries/kicad-footprints/9.0.0/Resistor_SMD.pretty/") (options "") (descr ""))
+  (lib (name "SOT-363_L2.0-W1.3-P0.65-LS2.1-TL") (type "KiCad") (uri "${KIPRJMOD}/../../../components/MMDT3904-7-F_SOT363_6P/eda/") (options "") (descr ""))
+)

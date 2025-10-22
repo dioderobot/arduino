@@ -1,0 +1,17 @@
+# Component definition file
+# Graphics: Qualcomm Logo
+
+"""Qualcomm Logo - Graphical Component
+
+Qualcomm branding logo for PCB silkscreen/copper layer.
+This is a non-electrical graphical element.
+"""
+
+# Component
+Component(
+    name = "QUALCOMM_LOGO",
+    symbol = Symbol(library = "qualcomm_logo.kicad_sym"),
+    footprint = File("qualcomm_logo.kicad_mod"),
+    pins = {}
+)
+

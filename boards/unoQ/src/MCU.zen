@@ -1,0 +1,922 @@
+"""
+MCU Schematic
+Author: Nasheed Ur Rehman
+"""
+
+# ----------------------------------------------------------------------------
+# Libraries & Dependencies
+# ----------------------------------------------------------------------------
+
+load("@stdlib/config.zen", "config_properties", "config_unit")
+load("@stdlib/interfaces.zen", "Power", "Ground", "NotConnected", "I2c", "Gpio")
+load("@stdlib/properties.zen", "Layout")
+load("@stdlib/units.zen", "Capacitance", "Current", "Frequency", "Inductance", "Resistance", "Voltage")
+
+# ----------------------------------------------------------------------------
+# Configuration
+# ----------------------------------------------------------------------------
+
+# ----------------------------------------------------------------------------
+# Component Modules
+# ----------------------------------------------------------------------------
+
+STM32U585AII6TR = Module("../../../components/STM32U585AII6TR/STM32U585AII6TR.zen")
+IC_SWITCH = Module("../../../components/74LVC1G3157DW-7/74LVC1G3157DW-7.zen")
+Capacitor = Module("@stdlib/generics/Capacitor.zen")
+Resistor = Module("@stdlib/generics/Resistor.zen")
+Crystal = Module("@stdlib/generics/Crystal.zen")
+TestPoint = Module("@stdlib/generics/TestPoint.zen")
+
+
+# ----------------------------------------------------------------------------
+# IO Interfaces
+# ----------------------------------------------------------------------------
+
+# Power Interfaces
+PWR_3P3V = io("PWR_3P3V", Power)
+VREG_L15A_1P8V = io("VREG_L15A_1P8V", Power)
+MCU_VREFP = io("MCU_VREFP", Power)
+VCOIN = io("VCOIN", Power)
+
+# Ground Interface
+GND = io("GND", Ground)
+
+# Boot Pin
+MCU_BOOT0 = io("MCU_BOOT0", Net)
+
+# Reset Pin
+MCU_NRST = io("MCU_NRST", Net)
+
+# JTAG/Debug Pins
+MCU_JTAG_SWDIO = io("MCU_JTAG_SWDIO", Net)
+MCU_JTAG_SWCLK = io("MCU_JTAG_SWCLK", Net)
+MCU_JTAG_SWO_PB3 = io("MCU_JTAG_SWO_PB3", Net)
+MCU_JTAG_NJTRST_PB4 = io("MCU_JTAG_NJTRST_PB4", Net)
+
+# Trace Pins
+MCU_TRACE_CLK = io("MCU_TRACE_CLK", Net)
+MCU_TRACE_D0 = io("MCU_TRACE_D0", Net)
+MCU_TRACE_D2 = io("MCU_TRACE_D2", Net)
+MCU_TRACE_D3 = io("MCU_TRACE_D3", Net)
+
+# I2C2 Pins
+MCU_I2C2_SCL = io("MCU_I2C2_SCL", Net)
+MCU_I2C2_SDA = io("MCU_I2C2_SDA", Net)
+
+# I2C4 Pins
+MCU_I2C4_SCL_PD12 = io("MCU_I2C4_SCL_PD12", Net)
+MCU_I2C4_SDA_PD13 = io("MCU_I2C4_SDA_PD13", Net)
+MCU_I2C4_SCL_PF14 = io("MCU_I2C4_SCL_PF14", Net)
+MCU_I2C4_SDA_PF15 = io("MCU_I2C4_SDA_PF15", Net)
+
+# SPI2 Pins
+MCU_SPI2_NSS = io("MCU_SPI2_NSS", Net)
+MCU_SPI2_CLK = io("MCU_SPI2_CLK", Net)
+MCU_SPI2_CLK_PD1 = io("MCU_SPI2_CLK_PD1", Net)
+MCU_SPI2_MISO = io("MCU_SPI2_MISO", Net)
+MCU_SPI2_MISO_PC2 = io("MCU_SPI2_MISO_PC2", Net)
+MCU_SPI2_MOSI = io("MCU_SPI2_MOSI", Net)
+MCU_SPI2_MOSI_PC3 = io("MCU_SPI2_MOSI_PC3", Net)
+
+# SPI3 Pins
+MCU_SPI3_CLK = io("MCU_SPI3_CLK", Net)
+MCU_SPI3_MISO = io("MCU_SPI3_MISO", Net)
+MCU_SPI3_MOSI = io("MCU_SPI3_MOSI", Net)
+MCU_SPI3_MOSI_3P3V = io("MCU_SPI3_MOSI_3P3V", Net)
+MCU_SPI3_CS_N = io("MCU_SPI3_CS_N", Net)
+MCU_SPI3_RDY = io("MCU_SPI3_RDY", Net)
+
+# USART1 Pins
+MCU_USART1_TX = io("MCU_USART1_TX", Net)
+MCU_USART1_RX = io("MCU_USART1_RX", Net)
+
+# LPUART1 Pins
+SOC_MCU_LPUART1_RTS = io("SOC_MCU_LPUART1_RTS", Net)
+SOC_MCU_LPUART1_CTS = io("SOC_MCU_LPUART1_CTS", Net)
+SOC_MCU_LPUART1_RX = io("SOC_MCU_LPUART1_RX", Net)
+SOC_MCU_LPUART1_TX = io("SOC_MCU_LPUART1_TX", Net)
+
+# SDMMC1 Pins
+MCU_SDMMC1_CMD_PD2 = io("MCU_SDMMC1_CMD_PD2", Net)
+
+# PSSI Pins
+MCU_PSSI_DE = io("MCU_PSSI_DE", Net)
+MCU_PSSI_PDCK = io("MCU_PSSI_PDCK", Net)
+MCU_PSSI_RDY = io("MCU_PSSI_RDY", Net)
+MCU_PSSI_D0 = io("MCU_PSSI_D0", Net)
+MCU_PSSI_D1 = io("MCU_PSSI_D1", Net)
+MCU_PSSI_D2 = io("MCU_PSSI_D2", Net)
+MCU_PSSI_D3 = io("MCU_PSSI_D3", Net)
+MCU_PSSI_D4 = io("MCU_PSSI_D4", Net)
+MCU_PSSI_D5 = io("MCU_PSSI_D5", Net)
+MCU_PSSI_D6 = io("MCU_PSSI_D6", Net)
+MCU_PSSI_D7 = io("MCU_PSSI_D7", Net)
+
+# OPAMP Pins
+MCU_OPAMP1_VINP_PA0 = io("MCU_OPAMP1_VINP_PA0", Net)
+MCU_OPAMP1_VINM_PA1 = io("MCU_OPAMP1_VINM_PA1", Net)
+MCU_OPAMP1_VOUT_PA3 = io("MCU_OPAMP1_VOUT_PA3", Net)
+
+# LED Pins
+MCU_LED1_RED = io("MCU_LED1_RED", Net)
+MCU_LED1_GRN = io("MCU_LED1_GRN", Net)
+MCU_LED1_BLU = io("MCU_LED1_BLU", Net)
+MCU_LED2_RED = io("MCU_LED2_RED", Net)
+MCU_LED2_GRN = io("MCU_LED2_GRN", Net)
+MCU_LED2_BLU = io("MCU_LED2_BLU", Net)
+
+# LED Matrix Pins
+LED_MATRIX_0 = io("LED_MATRIX_0", Net)
+LED_MATRIX_1 = io("LED_MATRIX_1", Net)
+LED_MATRIX_2 = io("LED_MATRIX_2", Net)
+LED_MATRIX_3 = io("LED_MATRIX_3", Net)
+LED_MATRIX_4 = io("LED_MATRIX_4", Net)
+LED_MATRIX_5 = io("LED_MATRIX_5", Net)
+LED_MATRIX_6 = io("LED_MATRIX_6", Net)
+LED_MATRIX_7 = io("LED_MATRIX_7", Net)
+LED_MATRIX_8 = io("LED_MATRIX_8", Net)
+LED_MATRIX_9 = io("LED_MATRIX_9", Net)
+LED_MATRIX_10 = io("LED_MATRIX_10", Net)
+
+# Port A Pins
+MCU_PA4 = io("MCU_PA4", Net)
+MCU_PA5 = io("MCU_PA5", Net)
+MCU_PA6 = io("MCU_PA6", Net)
+MCU_PA7 = io("MCU_PA7", Net)
+MCU_MCO_PA8 = io("MCU_MCO_PA8", Net)
+MCU_CRS_SYNC_PA10 = io("MCU_CRS_SYNC_PA10", Net)
+MCU_PA11 = io("MCU_PA11", Net)
+MCU_PA12 = io("MCU_PA12", Net)
+
+# Port B Pins
+MCU_PB0 = io("MCU_PB0", Net)
+MCU_PB1 = io("MCU_PB1", Net)
+MCU_PB2 = io("MCU_PB2", Net)
+MCU_PB8 = io("MCU_PB8", Net)
+
+# Port C Pins
+MCU_PC0 = io("MCU_PC0", Net)
+MCU_PC1 = io("MCU_PC1", Net)
+
+# Port E Pins
+MCU_PE7 = io("MCU_PE7", Net)
+MCU_PE8 = io("MCU_PE8", Net)
+
+# ----------------------------------------------------------------------------
+# Local Net
+# ----------------------------------------------------------------------------
+
+# Internal MCU Nets
+MCU_VCAP = Net("MCU_VCAP")
+MCU_VREF_EN = Net("MCU_VREF_EN")
+
+# LPUART1 Nets
+MCU_SOC_LPUART1_CTS = Net("MCU_SOC_LPUART1_CTS")
+MCU_SOC_LPUART1_RTS = Net("MCU_SOC_LPUART1_RTS")
+MCU_SOC_LPUART1_TX = Net("MCU_SOC_LPUART1_TX")
+MCU_SOC_LPUART1_RX = Net("MCU_SOC_LPUART1_RX")
+
+# SPI3 Nets
+MCU_SPI3_CLK_R = Net("MCU_SPI3_CLK_R")
+MCU_SPI3_MISO_R = Net("MCU_SPI3_MISO_R")
+MCU_SPI3_MOSI_R = Net("MCU_SPI3_MOSI_R")
+MCU_SPI3_CS_N_R = Net("MCU_SPI3_CS_N_R")
+MCU_SPI3_RDY_R = Net("MCU_SPI3_RDY_R")
+
+# JTAG Nets
+MCU_JTAG_TDI = Net("MCU_JTAG_TDI")
+
+# Oscillator Nets - 16MHz
+OSC_16M_IN = Net("OSC_16M_IN")
+OSC_16M_OUT = Net("OSC_16M_OUT")
+MCU_OSC_IN_PH0_R = Net("MCU_OSC_IN_PH0_R")
+MCU_OSC_OUT_PH1_R = Net("MCU_OSC_OUT_PH1_R")
+
+# Oscillator Nets - 32kHz
+OSC_32K_IN = Net("OSC_32K_IN")
+OSC_32K_OUT = Net("OSC_32K_OUT")
+MCU_OSC32_IN_PC14 = Net("MCU_OSC32_IN_PC14")
+MCU_OSC32_OUT_PC15 = Net("MCU_OSC32_OUT_PC15")
+
+LED_MATRIX_11 = Net("LED_MATRIX_11")
+
+# ----------------------------------------------------------------------------
+# Components
+# ----------------------------------------------------------------------------
+mcu = STM32U585AII6TR(
+    name = "STM32U585AII6TR",
+    NRST = MCU_NRST,
+    OPAMP1_VINM = NotConnected(),
+    OPAMP2_VINM = NotConnected(),
+    PA0 = MCU_OPAMP1_VINP_PA0,
+    PA1 = MCU_OPAMP1_VINM_PA1,
+    PA2 = MCU_VREF_EN,
+    PA3 = MCU_OPAMP1_VOUT_PA3,
+    PA4 = MCU_PA4,
+    PA5 = MCU_PA5,
+    PA6 = MCU_PA6,
+    PA7 = MCU_PA7,
+    PA8 = MCU_MCO_PA8,
+    PA9 = NotConnected(),
+    PA10 = MCU_CRS_SYNC_PA10,
+    PA11 = MCU_PA11,
+    PA12 = MCU_PA12,
+    PA13 = MCU_JTAG_SWDIO,
+    PA14 = MCU_JTAG_SWCLK,
+    PA15 = MCU_JTAG_TDI,
+    PB0 = MCU_PB0,
+    PB1 = MCU_PB1,
+    PB2 = MCU_PB2,
+    PB3 = MCU_JTAG_SWO_PB3,
+    PB4 = MCU_JTAG_NJTRST_PB4,
+    PB5 = MCU_SPI3_MOSI_R,
+    PB6 = MCU_USART1_TX,
+    PB7 = MCU_USART1_RX,
+    PB8 = MCU_PB8,
+    PB9 = MCU_SPI2_NSS,
+    PB10 = MCU_I2C2_SCL,
+    PB11 = MCU_I2C2_SDA,
+    PB12 = NotConnected(),
+    PB13 = MCU_SPI2_CLK,
+    PB14 = MCU_SPI2_MISO,
+    PB15 = MCU_SPI2_MOSI,
+    PC0 = MCU_PC0,
+    PC1 = MCU_PC1,
+    PC2 = MCU_SPI2_MISO_PC2,
+    PC3 = MCU_SPI2_MOSI_PC3,
+    PC4 = NotConnected(),
+    PC5 = NotConnected(),
+    PC6 = MCU_PSSI_D0,
+    PC7 = MCU_PSSI_D1,
+    PC8 = MCU_PSSI_D2,
+    PC9 = MCU_PSSI_D3,
+    PC10 = NotConnected(),
+    PC11 = NotConnected(),
+    PC12 = NotConnected(),
+    PC13 = NotConnected(),
+    PC14M_OSC32_IN = MCU_OSC32_IN_PC14,
+    PC15M_OSC32_OUT = MCU_OSC32_OUT_PC15,
+    PD0 = NotConnected(),
+    PD1 = MCU_SPI2_CLK_PD1,
+    PD2 = MCU_SDMMC1_CMD_PD2,
+    PD3 = NotConnected(),
+    PD4 = NotConnected(),
+    PD5 = NotConnected(),
+    PD6 = NotConnected(),
+    PD7 = NotConnected(),
+    PD8 = MCU_PSSI_DE,
+    PD9 = MCU_PSSI_PDCK,
+    PD10 = NotConnected(),
+    PD11 = NotConnected(),
+    PD12 = MCU_I2C4_SCL_PD12,
+    PD13 = MCU_I2C4_SDA_PD13,
+    PD14 = NotConnected(),
+    PD15 = NotConnected(),
+    PE0 = NotConnected(),
+    PE1 = NotConnected(),
+    PE2 = MCU_TRACE_CLK,
+    PE3 = MCU_TRACE_D0,
+    PE4 = MCU_PSSI_D4,
+    PE5 = MCU_TRACE_D2,
+    PE6 = MCU_TRACE_D3,
+    PE7 = MCU_PE7,
+    PE8 = MCU_PE8,
+    PE9 = NotConnected(),
+    PE10 = NotConnected(),
+    PE11 = NotConnected(),
+    PE12 = NotConnected(),
+    PE13 = NotConnected(),
+    PE14 = NotConnected(),
+    PE15 = NotConnected(),
+    PF0 = LED_MATRIX_0,
+    PF1 = LED_MATRIX_1,
+    PF2 = LED_MATRIX_2,
+    PF3 = LED_MATRIX_3,
+    PF4 = LED_MATRIX_4,
+    PF5 = LED_MATRIX_5,
+    PF6 = LED_MATRIX_6,
+    PF7 = LED_MATRIX_7,
+    PF8 = LED_MATRIX_8,
+    PF9 = LED_MATRIX_9,
+    PF10 = LED_MATRIX_10,
+    PF11 = LED_MATRIX_11,
+    PF12 = NotConnected(),
+    PF13 = NotConnected(),
+    PF14 = MCU_I2C4_SCL_PF14,
+    PF15 = MCU_I2C4_SDA_PF15,
+    PG0 = NotConnected(),
+    PG1 = NotConnected(),
+    PG2 = NotConnected(),
+    PG3 = NotConnected(),
+    PG4 = NotConnected(),
+    PG5 = MCU_SOC_LPUART1_CTS,
+    PG6 = MCU_SOC_LPUART1_RTS,
+    PG7 = MCU_SOC_LPUART1_TX,
+    PG8 = MCU_SOC_LPUART1_RX,
+    PG9 = MCU_SPI3_CLK_R,
+    PG10 = MCU_SPI3_MISO_R,
+    PG11 = NotConnected(),
+    PG12 = MCU_SPI3_CS_N_R,
+    PG13 = MCU_SPI3_RDY_R,
+    PG14 = NotConnected(),
+    PG15 = NotConnected(),
+    PH0M_OSC_IN = MCU_OSC_IN_PH0_R,
+    PH1M_OSC_OUT = MCU_OSC_OUT_PH1_R,
+    PH2 = NotConnected(),
+    PH3M_BOOT0 = MCU_BOOT0,
+    PH4 = NotConnected(),
+    PH5 = NotConnected(),
+    PH6 = NotConnected(),
+    PH7 = NotConnected(),
+    PH8 = NotConnected(),
+    PH9 = NotConnected(),
+    PH10 = MCU_LED1_RED,
+    PH11 = MCU_LED1_GRN,
+    PH12 = MCU_LED1_BLU,
+    PH13 = MCU_LED2_RED,
+    PH14 = MCU_LED2_GRN,
+    PH15 = MCU_LED2_BLU,
+    PI0 = NotConnected(),
+    PI1 = NotConnected(),
+    PI2 = NotConnected(),
+    PI3 = NotConnected(),
+    PI4 = MCU_PSSI_D5,
+    PI5 = MCU_PSSI_RDY,
+    PI6 = MCU_PSSI_D6,
+    PI7 = MCU_PSSI_D7,
+    VBAT = VCOIN,
+    VCAP_1 = MCU_VCAP,
+    VCAP_2 = MCU_VCAP,
+    VDDA = PWR_3P3V,
+    VDDIO2_1 = VREG_L15A_1P8V,
+    VDDIO2_2 = VREG_L15A_1P8V,
+    VDDUSB = PWR_3P3V,
+    VDD_1 = PWR_3P3V,
+    VDD_2 = PWR_3P3V,
+    VDD_3 = PWR_3P3V,
+    VDD_4 = PWR_3P3V,
+    VDD_5 = PWR_3P3V,
+    VDD_6 = PWR_3P3V,
+    VDD_7 = PWR_3P3V,
+    VDD_8 = PWR_3P3V,
+    VDD_9 = PWR_3P3V,
+    VDD_10 = PWR_3P3V,
+    VREFP = MCU_VREFP,
+    VSSA = GND,
+    VSS_1 = GND,
+    VSS_2 = GND,
+    VSS_3 = GND,
+    VSS_4 = GND,
+    VSS_5 = GND,
+    VSS_6 = GND,
+    VSS_7 = GND,
+    VSS_8 = GND,
+    VSS_9 = GND,
+    VSS_10 = GND,
+    VSS_11 = GND,
+)
+
+Crystal(
+    name = "Crystal_16MHz",
+    frequency = "16MHz",
+    package = "3225_4Pin",
+    XIN = OSC_16M_IN,
+    XOUT = OSC_16M_OUT,
+    GND = GND,
+)
+
+Capacitor(
+    name = "C_OSC_1",
+    value = "12pF",
+    package = "0402",
+    voltage = "50V",
+    P1 = OSC_16M_IN,
+    P2 = GND,
+)
+
+Capacitor(
+    name = "C_OSC_2",
+    value = "12pF",
+    package = "0402",
+    voltage = "50V",
+    P1 = OSC_16M_OUT,
+    P2 = GND,
+)
+
+Resistor(
+    name = "R_MCU_OSC_IN",
+    value = "0",
+    package = "0402",
+    P1 = MCU_OSC_IN_PH0_R,
+    P2 = OSC_16M_IN,
+)
+
+Resistor(
+    name = "R_MCU_OSC_OUT",
+    value = "0",
+    package = "0402",
+    P1 = MCU_OSC_OUT_PH1_R,
+    P2 = OSC_16M_OUT,
+)
+
+Crystal(
+    name = "Crystal_32KHz",
+    frequency = "32kHz",
+    package = "3215_2Pin",
+    XIN = OSC_32K_IN,
+    XOUT = OSC_32K_OUT,
+)
+
+Capacitor(
+    name = "C_OSC_32K_1",
+    value = "7pF",
+    package = "0402",
+    voltage = "25V",
+    P1 = OSC_32K_IN,
+    P2 = GND,
+)
+
+Capacitor(
+    name = "C_OSC_32K_2",
+    value = "7pF",
+    package = "0402",
+    voltage = "25V",
+    P1 = OSC_32K_OUT,
+    P2 = GND,
+)
+
+
+Resistor(
+    name = "R_OSC_32K",
+    value = "1M",
+    package = "0402",
+    P1 = OSC_32K_IN,
+    P2 = OSC_32K_OUT,
+    do_not_populate = True,
+)
+
+Resistor(
+    name = "R_MCU_OSC32_OUT",
+    value = "0",
+    package = "0402",
+    P1 = MCU_OSC32_OUT_PC15,
+    P2 = OSC_32K_OUT,
+)
+
+Resistor(
+    name = "R_MCU_OSC32_IN",
+    value = "0",
+    package = "0402",
+    P1 = MCU_OSC32_IN_PC14,
+    P2 = OSC_32K_IN,
+)
+
+
+
+# Decoupling Capacitors
+Capacitor(
+    name = "C_VCOIN",
+    value = "4.7uF",
+    package = "0603",
+    voltage = "6.3V",
+    P1 = VCOIN,
+    P2 = GND,
+)
+
+Capacitor(
+    name = "C_VCOIN2",
+    value = "100nF",
+    package = "0402",
+    voltage = "6.3V",
+    P1 = VCOIN,
+    P2 = GND,
+)
+
+Capacitor(
+    name = "C_PWR_3P3V_DECOUPLE1",
+    value = "1uF",
+    package = "0603",
+    voltage = "6.3V",
+    P1 = PWR_3P3V,
+    P2 = GND,
+)
+
+Capacitor(
+    name = "C_PWR_3P3V_DECOUPLE2",
+    value = "100nF",
+    package = "0402",
+    voltage = "6.3V",
+    P1 = PWR_3P3V,
+    P2 = GND,
+)
+
+Capacitor(
+    name = "C_VREG_L15A_1P8V_DECOUPLE1",
+    value = "4.7uF",
+    package = "0603",
+    voltage = "6.3V",
+    P1 = VREG_L15A_1P8V,
+    P2 = GND,
+)
+
+Capacitor(
+    name = "C_VREG_L15A_1P8V_DECOUPLE2",
+    value = "100nF",
+    package = "0402",
+    voltage = "6.3V",
+    P1 = VREG_L15A_1P8V,
+    P2 = GND,
+)
+
+Capacitor(
+    name = "C_VREG_L15A_1P8V_DECOUPLE3",
+    value = "100nF",
+    package = "0402",
+    voltage = "6.3V",
+    P1 = VREG_L15A_1P8V,
+    P2 = GND,
+)
+
+Capacitor(
+    name = "C_PWR_3P3V_DECOUPLE3",
+    value = "100nF",
+    package = "0402",
+    voltage = "6.3V",
+    P1 = PWR_3P3V,
+    P2 = GND,
+)
+
+Capacitor(
+    name = "C_PWR_3P3V_DECOUPLE4",
+    value = "100nF",
+    package = "0402",
+    voltage = "6.3V",
+    P1 = PWR_3P3V,
+    P2 = GND,
+)
+
+Capacitor(
+    name = "C_PWR_3P3V_DECOUPLE5",
+    value = "100nF",
+    package = "0402",
+    voltage = "6.3V",
+    P1 = PWR_3P3V,
+    P2 = GND,
+)
+
+Capacitor(
+    name = "C_PWR_3P3V_DECOUPLE6",
+    value = "100nF",
+    package = "0402",
+    voltage = "6.3V",
+    P1 = PWR_3P3V,
+    P2 = GND,
+)
+
+Capacitor(
+    name = "C_PWR_3P3V_DECOUPLE7",
+    value = "100nF",
+    package = "0402",
+    voltage = "6.3V",
+    P1 = PWR_3P3V,
+    P2 = GND,
+)
+
+Capacitor(
+    name = "C_PWR_3P3V_DECOUPLE8",
+    value = "100nF",
+    package = "0402",
+    voltage = "6.3V",
+    P1 = PWR_3P3V,
+    P2 = GND,
+)
+
+Capacitor(
+    name = "C_PWR_3P3V_DECOUPLE9",
+    value = "100nF",
+    package = "0402",
+    voltage = "6.3V",
+    P1 = PWR_3P3V,
+    P2 = GND,
+)
+
+Capacitor(
+    name = "C_PWR_3P3V_DECOUPLE10",
+    value = "100nF",
+    package = "0402",
+    voltage = "6.3V",
+    P1 = PWR_3P3V,
+    P2 = GND,
+)
+
+Capacitor(
+    name = "C_PWR_3P3V_DECOUPLE11",
+    value = "100nF",
+    package = "0402",
+    voltage = "6.3V",
+    P1 = PWR_3P3V,
+    P2 = GND,
+)
+
+Capacitor(
+    name = "C_PWR_3P3V_DECOUPLE12",
+    value = "100nF",
+    package = "0402",
+    voltage = "6.3V",
+    P1 = PWR_3P3V,
+    P2 = GND,
+)
+
+Capacitor(
+    name = "C_PWR_3P3V_DECOUPLE13",
+    value = "100nF",
+    package = "0402",
+    voltage = "6.3V",
+    P1 = PWR_3P3V,
+    P2 = GND,
+)
+
+Capacitor(
+    name = "C_PWR_3P3V_DECOUPLE14",
+    value = "100nF",
+    package = "0402",
+    voltage = "6.3V",
+    P1 = PWR_3P3V,
+    P2 = GND,
+)
+
+Capacitor(
+    name = "C_MCU_VREFP_DECOUPLE1",
+    value = "1uF",
+    package = "0603",
+    voltage = "6.3V",
+    P1 = MCU_VREFP,
+    P2 = GND,
+)
+
+Capacitor(
+    name = "C_MCU_VREFP_DECOUPLE2",
+    value = "100nF",
+    package = "0402",
+    voltage = "6.3V",
+    P1 = MCU_VREFP,
+    P2 = GND,
+)
+
+Capacitor(
+    name = "C_PWR_3P3V_DECOUPLE15",
+    value = "100nF",
+    package = "0402",
+    voltage = "6.3V",
+    P1 = PWR_3P3V,
+    P2 = GND,
+)
+
+IC_SWITCH(
+    name = "IC_SWITCH",
+    A = PWR_3P3V,
+    B0 = MCU_VREFP,
+    B1 = NotConnected(),
+    GND = GND,
+    SELECT = MCU_VREF_EN,
+    VCC = PWR_3P3V,
+)
+
+Resistor(
+    name = "R_Select_IC_SWITCH",
+    value = "100k",
+    package = "0402",
+    P1 = MCU_VREF_EN,
+    P2 = GND,
+)
+
+Capacitor(
+    name = "C_IC_SWITCH_DECOUPLE",
+    value = "100nF",
+    package = "0402",
+    voltage = "6.3V",
+    P1 = PWR_3P3V,
+    P2 = GND,
+)
+
+Resistor(
+    name = "R_MCU_SPI3_MOSI",
+    value = "0",
+    package = "0402",
+    P1 = MCU_SPI3_MOSI_R,
+    P2 = MCU_SPI3_MOSI_3P3V,
+)
+
+Resistor(
+    name = "R_MCU_SPI3_CLK",
+    value = "0",
+    package = "0402",
+    P1 = MCU_SPI3_CLK,
+    P2 = MCU_SPI3_CLK_R,
+)
+
+Resistor(
+    name = "R_MCU_SPI3_MISO",
+    value = "0",
+    package = "0402",
+    P1 = MCU_SPI3_MISO,
+    P2 = MCU_SPI3_MISO_R,
+)
+
+Resistor(
+    name = "R_MCU_SPI3_CS_N",
+    value = "0",
+    package = "0402",
+    P1 = MCU_SPI3_CS_N,
+    P2 = MCU_SPI3_CS_N_R,
+)
+
+Resistor(
+    name = "R_MCU_SPI3_RDY",
+    value = "0",
+    package = "0402",
+    P1 = MCU_SPI3_RDY,
+    P2 = MCU_SPI3_RDY_R,
+)
+
+Resistor(
+    name = "R_SOC_MCU_LPUART1_RTS",
+    value = "0",
+    package = "0402",
+    P1 = SOC_MCU_LPUART1_RTS,
+    P2 = MCU_SOC_LPUART1_CTS,
+)
+
+Resistor(
+    name = "R_SOC_MCU_LPUART1_CTS",
+    value = "0",
+    package = "0402",
+    P1 = SOC_MCU_LPUART1_CTS,
+    P2 = MCU_SOC_LPUART1_RTS,
+)
+
+Resistor(
+    name = "R_SOC_MCU_LPUART1_RX",
+    value = "0",
+    package = "0402",
+    P1 = SOC_MCU_LPUART1_RX,
+    P2 = MCU_SOC_LPUART1_TX,
+)
+
+Resistor(
+    name = "R_SOC_MCU_LPUART1_TX",
+    value = "0",
+    package = "0402",
+    P1 = SOC_MCU_LPUART1_TX,
+    P2 = MCU_SOC_LPUART1_RX,
+)
+
+TestPoint(
+    name = "TP_MCU_JTAG_SWDIO",
+    variant = "Pad_D1.5mm",
+    P1 = MCU_JTAG_SWDIO,
+)
+
+TestPoint(
+    name = "TP_MCU_JTAG_SWCLK",
+    variant = "Pad_D1.5mm",
+    P1 = MCU_JTAG_SWCLK,
+)
+
+TestPoint(
+    name = "TP_MCU_JTAG_NJTRST_PB4",
+    variant = "Pad_D1.5mm",
+    P1 = MCU_JTAG_NJTRST_PB4,
+)
+
+TestPoint(
+    name = "TP_MCU_JTAG_TDI",
+    variant = "Pad_D1.5mm",
+    P1 = MCU_JTAG_TDI,
+)
+
+TestPoint(
+    name = "TP_LED_MATRIX_11",
+    variant = "Pad_D1.5mm",
+    P1 = LED_MATRIX_11,
+)
+
+# pcb:sch C_.C x=-110.2200 y=291.1000 rot=0
+# pcb:sch C_IC_SWITCH_DECOUPLE.C x=-110.2200 y=253.0000 rot=0
+# pcb:sch C_MCU_VREFP_DECOUPLE1.C x=-681.7200 y=1230.9000 rot=0
+# pcb:sch C_MCU_VREFP_DECOUPLE2.C x=-821.4200 y=1230.9000 rot=0
+# pcb:sch C_OSC_1.C x=1235.9800 y=75.2000 rot=0
+# pcb:sch C_OSC_2.C x=1451.8800 y=75.2000 rot=0
+# pcb:sch C_OSC_32K_1.C x=1705.8800 y=75.2000 rot=0
+# pcb:sch C_OSC_32K_2.C x=1909.0800 y=75.2000 rot=0
+# pcb:sch C_PWR_3P3V_DECOUPLE1.C x=-808.7200 y=2005.6000 rot=0
+# pcb:sch C_PWR_3P3V_DECOUPLE2.C x=-681.7200 y=2005.6000 rot=0
+# pcb:sch C_PWR_3P3V_DECOUPLE3.C x=-681.7200 y=1688.1000 rot=0
+# pcb:sch C_PWR_3P3V_DECOUPLE4.C x=-821.4200 y=1688.1000 rot=0
+# pcb:sch C_PWR_3P3V_DECOUPLE5.C x=-961.1200 y=1688.1000 rot=0
+# pcb:sch C_PWR_3P3V_DECOUPLE6.C x=-1100.8200 y=1688.1000 rot=0
+# pcb:sch C_PWR_3P3V_DECOUPLE7.C x=-1240.5200 y=1688.1000 rot=0
+# pcb:sch C_PWR_3P3V_DECOUPLE8.C x=-1380.2200 y=1688.1000 rot=0
+# pcb:sch C_PWR_3P3V_DECOUPLE9.C x=-681.7200 y=1484.9000 rot=0
+# pcb:sch C_PWR_3P3V_DECOUPLE10.C x=-821.4200 y=1484.9000 rot=0
+# pcb:sch C_PWR_3P3V_DECOUPLE11.C x=-961.1200 y=1484.9000 rot=0
+# pcb:sch C_PWR_3P3V_DECOUPLE12.C x=-1100.8200 y=1484.9000 rot=0
+# pcb:sch C_PWR_3P3V_DECOUPLE13.C x=-1240.5200 y=1484.9000 rot=0
+# pcb:sch C_PWR_3P3V_DECOUPLE14.C x=-1380.2200 y=1484.9000 rot=0
+# pcb:sch C_PWR_3P3V_DECOUPLE15.C x=-681.7200 y=989.6000 rot=0
+# pcb:sch C_VCOIN.C x=-376.9200 y=2005.6000 rot=0
+# pcb:sch C_VCOIN2.C x=-516.6200 y=2005.6000 rot=0
+# pcb:sch C_VREG_L15A_1P8V_DECOUPLE1.C x=-1011.9200 y=2005.6000 rot=0
+# pcb:sch C_VREG_L15A_1P8V_DECOUPLE2.C x=-1151.6200 y=2005.6000 rot=0
+# pcb:sch C_VREG_L15A_1P8V_DECOUPLE3.C x=-1291.3200 y=2005.6000 rot=0
+# pcb:sch Crystal_16MHz.Y x=1332.5000 y=11.7000 rot=0
+# pcb:sch Crystal_32KHz.Y x=1789.7000 y=37.1000 rot=0
+# pcb:sch GND.1 x=75.2000 y=1548.4000 rot=90
+# pcb:sch GND.2 x=748.3000 y=1675.4000 rot=270
+# pcb:sch GND.3 x=748.3000 y=1573.8000 rot=270
+# pcb:sch GND.4 x=748.3000 y=1472.2000 rot=270
+# pcb:sch GND.5 x=748.3000 y=786.4000 rot=270
+# pcb:sch GND.6 x=748.3000 y=710.2000 rot=270
+# pcb:sch GND.7 x=735.6000 y=126.0000 rot=270
+# pcb:sch GND.8 x=75.2000 y=354.6000 rot=90
+# pcb:sch GND.9 x=75.2000 y=303.8000 rot=90
+# pcb:sch GND.10 x=75.2000 y=456.2000 rot=90
+# pcb:sch GND.11 x=75.2000 y=532.4000 rot=90
+# pcb:sch GND.12 x=75.2000 y=1624.6000 rot=90
+# pcb:sch GND.13 x=-369.3000 y=2119.9000 rot=0
+# pcb:sch GND.14 x=-509.0000 y=2119.9000 rot=0
+# pcb:sch GND.15 x=-674.1000 y=2119.9000 rot=0
+# pcb:sch GND.16 x=-801.1000 y=2119.9000 rot=0
+# pcb:sch GND.17 x=-1004.3000 y=2119.9000 rot=0
+# pcb:sch GND.18 x=-674.1000 y=1789.7000 rot=0
+# pcb:sch GND.19 x=-1144.0000 y=2119.9000 rot=0
+# pcb:sch GND.20 x=-1283.7000 y=2119.9000 rot=0
+# pcb:sch GND.21 x=-953.5000 y=1789.7000 rot=0
+# pcb:sch GND.22 x=-1093.2000 y=1789.7000 rot=0
+# pcb:sch GND.23 x=-1232.9000 y=1789.7000 rot=0
+# pcb:sch GND.24 x=-1372.6000 y=1789.7000 rot=0
+# pcb:sch GND.25 x=-813.8000 y=1789.7000 rot=0
+# pcb:sch GND.26 x=-1372.6000 y=1573.8000 rot=0
+# pcb:sch GND.27 x=-1232.9000 y=1573.8000 rot=0
+# pcb:sch GND.28 x=-1093.2000 y=1573.8000 rot=0
+# pcb:sch GND.29 x=-953.5000 y=1573.8000 rot=0
+# pcb:sch GND.30 x=-813.8000 y=1573.8000 rot=0
+# pcb:sch GND.31 x=-674.1000 y=1573.8000 rot=0
+# pcb:sch GND.32 x=-674.1000 y=1332.5000 rot=0
+# pcb:sch GND.33 x=-813.8000 y=1345.2000 rot=0
+# pcb:sch GND.34 x=-674.1000 y=1091.2000 rot=0
+# pcb:sch GND.35 x=-572.5000 y=303.8000 rot=0
+# pcb:sch GND.36 x=-178.8000 y=392.7000 rot=0
+# pcb:sch GND.37 x=-102.6000 y=392.7000 rot=0
+# pcb:sch GND.38 x=1916.7000 y=164.1000 rot=0
+# pcb:sch GND.39 x=1357.9000 y=189.5000 rot=0
+# pcb:sch GND.40 x=1243.6000 y=189.5000 rot=0
+# pcb:sch GND.41 x=1459.5000 y=189.5000 rot=0
+# pcb:sch GND.42 x=1713.5000 y=164.1000 rot=0
+# pcb:sch IC_SWITCH.74LVC1G3157DW-7 x=-509.0000 y=164.1000 rot=0
+# pcb:sch MCU_VREFP.1 x=753.3800 y=1065.8000 rot=90
+# pcb:sch MCU_VREFP.2 x=-669.0200 y=1154.7000 rot=0
+# pcb:sch MCU_VREFP.3 x=-592.8200 y=113.3000 rot=0
+# pcb:sch PWR_3P3V.1 x=67.5800 y=253.0000 rot=270
+# pcb:sch PWR_3P3V.2 x=753.3800 y=1091.2000 rot=90
+# pcb:sch PWR_3P3V.3 x=753.3800 y=710.2000 rot=90
+# pcb:sch PWR_3P3V.4 x=740.6800 y=1777.0000 rot=90
+# pcb:sch PWR_3P3V.5 x=740.6800 y=1878.6000 rot=90
+# pcb:sch PWR_3P3V.6 x=740.6800 y=2005.6000 rot=90
+# pcb:sch PWR_3P3V.7 x=80.2800 y=1548.4000 rot=270
+# pcb:sch PWR_3P3V.8 x=92.9800 y=1904.0000 rot=270
+# pcb:sch PWR_3P3V.9 x=92.9800 y=1218.2000 rot=270
+# pcb:sch PWR_3P3V.10 x=-669.0200 y=1942.1000 rot=0
+# pcb:sch PWR_3P3V.11 x=67.5800 y=176.8000 rot=270
+# pcb:sch PWR_3P3V.12 x=67.5800 y=100.6000 rot=270
+# pcb:sch PWR_3P3V.13 x=67.5800 y=-26.4000 rot=270
+# pcb:sch PWR_3P3V.14 x=-669.0200 y=1624.6000 rot=0
+# pcb:sch PWR_3P3V.15 x=-669.0200 y=1421.4000 rot=0
+# pcb:sch PWR_3P3V.16 x=-669.0200 y=938.8000 rot=0
+# pcb:sch PWR_3P3V.17 x=-97.5200 y=138.7000 rot=0
+# pcb:sch R_MCU_OSC32_IN.R x=1754.1400 y=-140.7000 rot=0
+# pcb:sch R_MCU_OSC32_OUT.R x=1881.1400 y=-140.7000 rot=0
+# pcb:sch R_MCU_OSC_IN.R x=1246.1400 y=-77.2000 rot=0
+# pcb:sch R_MCU_OSC_OUT.R x=1462.0400 y=-77.2000 rot=0
+# pcb:sch R_MCU_SPI3_CLK.R x=-49.2600 y=62.5000 rot=270
+# pcb:sch R_MCU_SPI3_CS_N.R x=-23.8600 y=1357.9000 rot=270
+# pcb:sch R_MCU_SPI3_MISO.R x=-36.5600 y=722.9000 rot=270
+# pcb:sch R_MCU_SPI3_MOSI.R x=-36.5600 y=697.5000 rot=90
+# pcb:sch R_MCU_SPI3_RDY.R x=814.3400 y=1942.1000 rot=90
+# pcb:sch R_OSC_32K.R x=1817.6400 y=-64.5000 rot=270
+# pcb:sch R_SOC_MCU_LPUART1_CTS.R x=890.5400 y=291.1000 rot=90
+# pcb:sch R_SOC_MCU_LPUART1_RTS.R x=890.5400 y=595.9000 rot=90
+# pcb:sch R_SOC_MCU_LPUART1_RX.R x=877.8400 y=-89.9000 rot=90
+# pcb:sch R_SOC_MCU_LPUART1_TX.R x=890.5400 y=265.7000 rot=90
+# pcb:sch R_Select_IC_SWITCH.R x=-176.2600 y=291.1000 rot=0
+# pcb:sch STM32U585AII6TR.STM32U585AII6TR x=151.4000 y=-77.2000 rot=0
+# pcb:sch TP_LED_MATRIX_11.TP x=1134.3800 y=1012.4600 rot=0
+# pcb:sch TP_MCU_JTAG_NJTRST_PB4.TP x=1007.3800 y=771.1600 rot=0
+# pcb:sch TP_MCU_JTAG_SWCLK.TP x=1134.3800 y=771.1600 rot=0
+# pcb:sch TP_MCU_JTAG_SWDIO.TP x=1007.3800 y=1190.2600 rot=0
+# pcb:sch TP_MCU_JTAG_TDI.TP x=1007.3800 y=1012.4600 rot=0
+# pcb:sch VCOIN.1 x=80.2800 y=583.2000 rot=270
+# pcb:sch VCOIN.2 x=-364.2200 y=1942.1000 rot=0
+# pcb:sch VREG_L15A_1P8V.1 x=67.5800 y=49.8000 rot=270
+# pcb:sch VREG_L15A_1P8V.2 x=727.9800 y=354.6000 rot=90
+# pcb:sch VREG_L15A_1P8V.3 x=-999.2200 y=1942.1000 rot=0
