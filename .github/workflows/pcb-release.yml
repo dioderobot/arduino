@@ -5,7 +5,7 @@ on:
   push:
 
 env:
-  PCB_VERSION: "v0.2.27"
+  PCB_VERSION: "v0.3.1"
 
 permissions:
   contents: read
@@ -30,7 +30,7 @@ jobs:
           version: ${{ matrix.pcb-version }}
       - name: Build .zen files
         run: |
-          pcb build boards --offline
+          pcb build boards
 
   detect:
     name: Detect boards
@@ -48,7 +48,17 @@ jobs:
 
       - name: Detect boards
         id: detect
-        uses: diodeinc/pcb-action/detect@v2
+        shell: bash
+        run: |
+          set -e -o pipefail
+          version=$(pcb --version | awk '{print $2}')
+          minor=${version#*.}; minor=${minor%%.*}
+          if [[ ${version%%.*} -ge 1 || $minor -ge 3 ]]; then
+            boards=$(pcb info -f json | jq -c '[.packages[].config.board.name? // empty]')
+          else
+            boards=$(pcb info -f json | jq -c '[.boards[].name]')
+          fi
+          echo "boards=$boards" >> "$GITHUB_OUTPUT"
 
   release:
     name: Release ${{ matrix.board }}
