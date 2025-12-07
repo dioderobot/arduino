@@ -34,7 +34,7 @@ load("@stdlib/interfaces.zen", "Power", "Ground", "NotConnected", "I2c", "Gpio")
 load("@stdlib/properties.zen", "Layout")
 load("@stdlib/units.zen", "Capacitance", "Current", "Frequency", "Inductance", "Resistance", "Voltage")
 load("@stdlib/board_config.zen", "Board")
-load("//modules/Stackup/Stackup.zen", "ARDUINO_BLUE_CONFIG")
+load("github.com/dioderobot/arduino/modules/Stackup/Stackup.zen", "ARDUINO_BLUE_CONFIG")
 # ----------------------------------------------------------------------------
 # Configuration
 # ----------------------------------------------------------------------------

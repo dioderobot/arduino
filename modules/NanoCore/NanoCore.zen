@@ -58,10 +58,10 @@ Capacitor = Module("@stdlib/generics/Capacitor.zen")
 Led = Module("@stdlib/generics/Led.zen")
 
 # Reference designs
-ATmega328Px = Module("//reference/ATmega328Px/ATmega328Px.zen")
-FT232RLx = Module("//reference/FT232RLx/FT232RLx.zen")
-AMS1117x = Module("//reference/AMS1117x/AMS1117x.zen")
-SKRKAHE020x = Module("//reference/SKRKAHE020x/SKRKAHE020x.zen")
+ATmega328Px = Module("github.com/dioderobot/arduino/reference/ATmega328Px/ATmega328Px.zen")
+FT232RLx = Module("github.com/dioderobot/arduino/reference/FT232RLx/FT232RLx.zen")
+AMS1117x = Module("github.com/dioderobot/arduino/reference/AMS1117x/AMS1117x.zen")
+SKRKAHE020x = Module("github.com/dioderobot/arduino/reference/SKRKAHE020x/SKRKAHE020x.zen")
 
 # ============================================================================
 # POWER SUPPLY

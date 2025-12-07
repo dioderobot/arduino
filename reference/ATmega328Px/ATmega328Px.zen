@@ -67,11 +67,11 @@ Capacitor = Module("@stdlib/generics/Capacitor.zen")
 Crystal = Module("@stdlib/generics/Crystal.zen")
 
 # Components
-ATMEGA328PMAU = Module("//components/ATMEGA328P-AU/ATMEGA328P-AU.zen")
+ATMEGA328PMAU = Module("github.com/dioderobot/arduino/components/ATMEGA328P-AU/ATMEGA328P-AU.zen")
 
 # Button (if needed)
 if add_reset_button:
-    SKRKAHE020x = Module("//reference/SKRKAHE020x/SKRKAHE020x.zen")
+    SKRKAHE020x = Module("github.com/dioderobot/arduino/reference/SKRKAHE020x/SKRKAHE020x.zen")
 
 # Main microcontroller
 ATMEGA328PMAU(

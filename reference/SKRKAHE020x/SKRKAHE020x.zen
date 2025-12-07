@@ -19,7 +19,7 @@ P1 = io("P1", Net)
 P2 = io("P2", Net)
 
 # Components
-SKRKAHE020 = Module("//components/SKRKAHE020/SKRKAHE020.zen")
+SKRKAHE020 = Module("github.com/dioderobot/arduino/components/SKRKAHE020/SKRKAHE020.zen")
 
 # Tactile switch
 SKRKAHE020(

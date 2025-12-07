@@ -20,7 +20,7 @@ load("@stdlib/units.zen", "Capacitance", "Current", "Frequency", "Inductance", "
 # Component Modules
 # ----------------------------------------------------------------------------
 
-LPDDR4X = Module("../../../components/MT53E512M32D1ZW/MT53E512M32D1ZW.zen")
+LPDDR4X = Module("github.com/dioderobot/arduino/components/MT53E512M32D1ZW/MT53E512M32D1ZW.zen")
 Capacitor = Module("@stdlib/generics/Capacitor.zen")
 Resistor = Module("@stdlib/generics/Resistor.zen")
 

@@ -20,13 +20,13 @@ load("@stdlib/units.zen", "Capacitance", "Current", "Frequency", "Inductance", "
 # Component Modules
 # ----------------------------------------------------------------------------
 
-LMR51440SDRRR = Module("../../../components/LMR51440SDRRR_DFN12P/LMR51440SDRRR_DFN12P.zen")
-SX34 = Module("../../../components/SX34/SX34.zen")
-NRS8030T3R3MJGJ = Module("../../../components/NRS8030T3R3MJGJ/NRS8030T3R3MJGJ.zen")
-TPS62A02APDDCR = Module("../../../components/TPS62A02APDDCR_SOT23_6P/TPS62A02APDDCR_SOT23_6P.zen")
-MMBT3904W = Module("../../../components/MMBT3904W_SOT323_3P/MMBT3904W_SOT323_3P.zen")
-PJA3413 = Module("../../../components/PJA3413_SOT23_3P/PJA3413_SOT23_3P.zen")
-TFM252012ALMA1R0MTAA = Module("../../../components/TFM252012ALMA1R0MTAA/TFM252012ALMA1R0MTAA.zen")
+LMR51440SDRRR = Module("github.com/dioderobot/arduino/components/LMR51440SDRRR_DFN12P/LMR51440SDRRR_DFN12P.zen")
+SX34 = Module("github.com/dioderobot/arduino/components/SX34/SX34.zen")
+NRS8030T3R3MJGJ = Module("github.com/dioderobot/arduino/components/NRS8030T3R3MJGJ/NRS8030T3R3MJGJ.zen")
+TPS62A02APDDCR = Module("github.com/dioderobot/arduino/components/TPS62A02APDDCR_SOT23_6P/TPS62A02APDDCR_SOT23_6P.zen")
+MMBT3904W = Module("github.com/dioderobot/arduino/components/MMBT3904W_SOT323_3P/MMBT3904W_SOT323_3P.zen")
+PJA3413 = Module("github.com/dioderobot/arduino/components/PJA3413_SOT23_3P/PJA3413_SOT23_3P.zen")
+TFM252012ALMA1R0MTAA = Module("github.com/dioderobot/arduino/components/TFM252012ALMA1R0MTAA/TFM252012ALMA1R0MTAA.zen")
 Capacitor = Module("@stdlib/generics/Capacitor.zen")
 Resistor = Module("@stdlib/generics/Resistor.zen")
 

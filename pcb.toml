@@ -1,10 +1,13 @@
 [workspace]
-name = "arduino"
-
-[packages]
-stdlib = "@github/diodeinc/stdlib:v0.3.21"
+repository = "github.com/dioderobot/arduino"
+pcb-version = "0.3"
+members = [
+    "components/*",
+    "reference/*",
+    "modules/*",
+    "boards/*",
+]
+vendor = ["github.com/diodeinc/registry/**"]
 
 [access]
-allow = [
-    "*@arduino.cc",
-]
+allow = ["*@arduino.cc"]

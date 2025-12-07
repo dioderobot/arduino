@@ -1,0 +1,3 @@
+[dependencies]
+"github.com/diodeinc/stdlib" = "0.4.0"
+"github.com/dioderobot/arduino/components/SKRKAHE020" = "0.1.0"
