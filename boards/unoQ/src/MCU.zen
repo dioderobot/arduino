@@ -452,7 +452,7 @@ Resistor(
     package = "0402",
     P1 = OSC_32K_IN,
     P2 = OSC_32K_OUT,
-    do_not_populate = True,
+    dnp = True,
 )
 
 Resistor(

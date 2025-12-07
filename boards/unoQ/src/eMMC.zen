@@ -138,7 +138,7 @@ Capacitor(
     voltage = "6.3V",
     P1 = VREG_L20A_2P96V,
     P2 = GND,
-    do_not_populate = True,
+    dnp = True,
 )
 
 Resistor(

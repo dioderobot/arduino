@@ -1355,7 +1355,7 @@ Capacitor(
     voltage = "25V",
     P1 = EAR_P_R,
     P2 = GND,
-    do_not_populate = True,
+    dnp = True,
 )
 
 Capacitor(
@@ -1365,7 +1365,7 @@ Capacitor(
     voltage = "25V",
     P1 = EAR_M_R,
     P2 = GND,
-    do_not_populate = True,
+    dnp = True,
 )
 
 DF2B7ASL(

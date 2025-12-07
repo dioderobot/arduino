@@ -313,7 +313,7 @@ Capacitor(
     voltage = "25V",
     P1 = PWR_3P8V,
     P2 = LDO1_FB,
-    do_not_populate = True,
+    dnp = True,
 )
 
 Resistor(
@@ -417,7 +417,7 @@ Resistor(
     package = "0603",
     P1 = PWR_3P8V,
     P2 = PWR_3P3V,
-    do_not_populate = True,
+    dnp = True,
 )
 
 TFM252012ALMA1R0MTAA(
@@ -457,7 +457,7 @@ Capacitor(
     voltage = "25V",
     P1 = PWR_3P3V,
     P2 = LDO2_FB,
-    do_not_populate = True,
+    dnp = True,
 )
 
 Capacitor(

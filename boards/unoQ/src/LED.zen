@@ -1074,7 +1074,7 @@ Capacitor(
     voltage = "10V",
     P1 = SOC_LED1_RED_B,
     P2 = GND,
-    do_not_populate = True,
+    dnp = True,
 )
 
 Capacitor(
@@ -1084,7 +1084,7 @@ Capacitor(
     voltage = "10V",
     P1 = SOC_LED1_GRN_B,
     P2 = GND,
-    do_not_populate = True,
+    dnp = True,
 )
 
 MMDT3904(
@@ -1120,7 +1120,7 @@ Capacitor(
     voltage = "10V",
     P1 = SOC_LED1_BLU_B,
     P2 = GND,
-    do_not_populate = True,
+    dnp = True,
 )
 
 Capacitor(
@@ -1130,7 +1130,7 @@ Capacitor(
     voltage = "10V",
     P1 = SOC_LED2_RED_B,
     P2 = GND,
-    do_not_populate = True,
+    dnp = True,
 )
 
 
@@ -1167,7 +1167,7 @@ Capacitor(
     voltage = "10V",
     P1 = SOC_LED2_GRN_B,
     P2 = GND,
-    do_not_populate = True,
+    dnp = True,
 )
 
 Capacitor(
@@ -1177,7 +1177,7 @@ Capacitor(
     voltage = "10V",
     P1 = SOC_LED2_BLU_B,
     P2 = GND,
-    do_not_populate = True,
+    dnp = True,
 )
 
 #SoC_LED1

@@ -530,7 +530,7 @@ Capacitor(
     voltage = "6.3V",
     P1 = VREG_L3A_0P6V,
     P2 = GND,
-    do_not_populate = True,
+    dnp = True,
 )
 
 # VDD2 Decoupling Capacitors (1.128V)
@@ -586,7 +586,7 @@ Capacitor(
     voltage = "6.3V",
     P1 = VREG_L2A_1P128V,
     P2 = GND,
-    do_not_populate = True,
+    dnp = True,
 )
 
 # pcb:sch C_VDD1_DECOUPLE1.C x=105.6800 y=1091.2000 rot=0
