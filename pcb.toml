@@ -2,7 +2,7 @@
 name = "arduino"
 
 [packages]
-stdlib = "@github/diodeinc/stdlib"
+stdlib = "@github/diodeinc/stdlib:v0.3.21"
 
 [access]
 allow = [
