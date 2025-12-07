@@ -20,8 +20,8 @@ load("@stdlib/units.zen", "Capacitance", "Current", "Frequency", "Inductance", "
 # Component Modules
 # ----------------------------------------------------------------------------
 
-STM32U585AII6TR = Module("../../../components/STM32U585AII6TR/STM32U585AII6TR.zen")
-IC_SWITCH = Module("../../../components/74LVC1G3157DW-7/74LVC1G3157DW-7.zen")
+STM32U585AII6TR = Module("github.com/dioderobot/arduino/components/STM32U585AII6TR/STM32U585AII6TR.zen")
+IC_SWITCH = Module("github.com/dioderobot/arduino/components/74LVC1G3157DW-7/74LVC1G3157DW-7.zen")
 Capacitor = Module("@stdlib/generics/Capacitor.zen")
 Resistor = Module("@stdlib/generics/Resistor.zen")
 Crystal = Module("@stdlib/generics/Crystal.zen")
@@ -452,7 +452,7 @@ Resistor(
     package = "0402",
     P1 = OSC_32K_IN,
     P2 = OSC_32K_OUT,
-    do_not_populate = True,
+    dnp = True,
 )
 
 Resistor(

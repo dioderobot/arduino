@@ -5,3 +5,10 @@ Arduino Nano compatible board design.
 A compact microcontroller board based on the ATmega328P.
 Ideal for breadboard-friendly prototyping and embedded applications.
 """
+
+[dependencies]
+"github.com/diodeinc/stdlib" = "0.4.0"
+"github.com/dioderobot/arduino/components/10033526-N3212LF" = "0.1.0"
+"github.com/dioderobot/arduino/modules/NanoCarrier" = "0.1.0"
+"github.com/dioderobot/arduino/modules/NanoCore" = "0.1.0"
+"github.com/dioderobot/arduino/modules/Stackup" = "0.1.0"

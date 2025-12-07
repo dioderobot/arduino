@@ -28,7 +28,7 @@ Resistor = Module("@stdlib/generics/Resistor.zen")
 Capacitor = Module("@stdlib/generics/Capacitor.zen")
 
 # Components
-AMS1117M5_0 = Module("//components/AMS1117-5.0/AMS1117-5.0.zen")
+AMS1117M5_0 = Module("github.com/dioderobot/arduino/components/AMS1117-5.0/AMS1117-5.0.zen")
 
 # Main regulator
 AMS1117M5_0(

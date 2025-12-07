@@ -34,7 +34,7 @@ load("@stdlib/interfaces.zen", "Power", "Ground", "NotConnected", "I2c", "Gpio")
 load("@stdlib/properties.zen", "Layout")
 load("@stdlib/units.zen", "Capacitance", "Current", "Frequency", "Inductance", "Resistance", "Voltage")
 load("@stdlib/board_config.zen", "Board")
-load("//stackup.zen", "ARDUINO_BLUE_CONFIG")
+load("github.com/dioderobot/arduino/modules/Stackup/Stackup.zen", "ARDUINO_BLUE_CONFIG")
 # ----------------------------------------------------------------------------
 # Configuration
 # ----------------------------------------------------------------------------
@@ -374,23 +374,6 @@ MIC2_INP = Net("MIC2_INP")
 MIC2_INN = Net("MIC2_INN")
 MIC2_BIAS = Net("MIC2_BIAS")
 HS_DET = Net("HS_DET")
-
-# Additional Signals
-RESOUT_N = Net("RESOUT_N")
-USB0_HS_DM = Net("USB0_HS_DM")
-USB0_HS_DP = Net("USB0_HS_DP")
-USB_CC1 = Net("USB_CC1")
-USB_CC2 = Net("USB_CC2")
-MUX_SBU1 = Net("MUX_SBU1")
-MUX_SBU2 = Net("MUX_SBU2")
-MUX_SSRXN1 = Net("MUX_SSRXN1")
-MUX_SSRXN2 = Net("MUX_SSRXN2")
-MUX_SSRXP1 = Net("MUX_SSRXP1")
-MUX_SSRXP2 = Net("MUX_SSRXP2")
-MUX_SSTXN1 = Net("MUX_SSTXN1")
-MUX_SSTXN2 = Net("MUX_SSTXN2")
-MUX_SSTXP1 = Net("MUX_SSTXP1")
-MUX_SSTXP2 = Net("MUX_SSTXP2")
 
 # ----------------------------------------------------------------------------
 # Module Instantiations

@@ -59,8 +59,8 @@ Capacitor = Module("@stdlib/generics/Capacitor.zen")
 Inductor = Module("@stdlib/generics/Inductor.zen")
 
 # Components
-FT232RLMREEL = Module("//components/FT232RL-REEL/FT232RL-REEL.zen")
-FT231XQMR = Module("//components/FT231XQ-R/FT231XQ-R.zen")
+FT232RLMREEL = Module("github.com/dioderobot/arduino/components/FT232RL-REEL/FT232RL-REEL.zen")
+FT231XQMR = Module("github.com/dioderobot/arduino/components/FT231XQ-R/FT231XQ-R.zen")
 
 # Select IC based on package configuration
 if package == Package("FT232RL"):

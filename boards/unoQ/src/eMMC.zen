@@ -20,7 +20,7 @@ load("@stdlib/units.zen", "Capacitance", "Current", "Frequency", "Inductance", "
 # Component Modules
 # ----------------------------------------------------------------------------
 
-EMMC16G_WW28_GA01 = Module("../../../components/EMMC16G-MW28-GA01_BGA153P/EMMC16G-MW28-GA01_BGA153P.zen")
+EMMC16G_WW28_GA01 = Module("github.com/dioderobot/arduino/components/EMMC16G-MW28-GA01_BGA153P/EMMC16G-MW28-GA01_BGA153P.zen")
 Capacitor = Module("@stdlib/generics/Capacitor.zen")
 Resistor = Module("@stdlib/generics/Resistor.zen")
 
@@ -138,7 +138,7 @@ Capacitor(
     voltage = "6.3V",
     P1 = VREG_L20A_2P96V,
     P2 = GND,
-    do_not_populate = True,
+    dnp = True,
 )
 
 Resistor(

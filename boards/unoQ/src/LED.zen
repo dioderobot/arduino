@@ -24,8 +24,8 @@ Led = Module("@stdlib/generics/Led.zen")
 Resistor = Module("@stdlib/generics/Resistor.zen")
 Capacitor = Module("@stdlib/generics/Capacitor.zen")
 SchottkyDiode = Module("@stdlib/generics/Diode.zen")
-MMDT3904 = Module("../../../components/MMDT3904-7-F_SOT363_6P/MMDT3904-7-F_SOT363_6P.zen")
-LTST_C28NBEGK_SN = Module("../../../components/LTST-C28NBEGK-SN/LTST-C28NBEGK-SN.zen")
+MMDT3904 = Module("github.com/dioderobot/arduino/components/MMDT3904-7-F_SOT363_6P/MMDT3904-7-F_SOT363_6P.zen")
+LTST_C28NBEGK_SN = Module("github.com/dioderobot/arduino/components/LTST-C28NBEGK-SN/LTST-C28NBEGK-SN.zen")
 
 # ----------------------------------------------------------------------------
 # IO Interfaces
@@ -1074,7 +1074,7 @@ Capacitor(
     voltage = "10V",
     P1 = SOC_LED1_RED_B,
     P2 = GND,
-    do_not_populate = True,
+    dnp = True,
 )
 
 Capacitor(
@@ -1084,7 +1084,7 @@ Capacitor(
     voltage = "10V",
     P1 = SOC_LED1_GRN_B,
     P2 = GND,
-    do_not_populate = True,
+    dnp = True,
 )
 
 MMDT3904(
@@ -1120,7 +1120,7 @@ Capacitor(
     voltage = "10V",
     P1 = SOC_LED1_BLU_B,
     P2 = GND,
-    do_not_populate = True,
+    dnp = True,
 )
 
 Capacitor(
@@ -1130,7 +1130,7 @@ Capacitor(
     voltage = "10V",
     P1 = SOC_LED2_RED_B,
     P2 = GND,
-    do_not_populate = True,
+    dnp = True,
 )
 
 
@@ -1167,7 +1167,7 @@ Capacitor(
     voltage = "10V",
     P1 = SOC_LED2_GRN_B,
     P2 = GND,
-    do_not_populate = True,
+    dnp = True,
 )
 
 Capacitor(
@@ -1177,7 +1177,7 @@ Capacitor(
     voltage = "10V",
     P1 = SOC_LED2_BLU_B,
     P2 = GND,
-    do_not_populate = True,
+    dnp = True,
 )
 
 #SoC_LED1

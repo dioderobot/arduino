@@ -44,7 +44,7 @@ Capacitor = Module("@stdlib/generics/Capacitor.zen")
 Crystal = Module("@stdlib/generics/Crystal.zen")
 
 # Components
-CH340G = Module("//components/CH340G/CH340G.zen")
+CH340G = Module("github.com/dioderobot/arduino/components/CH340G/CH340G.zen")
 Led = Module("@stdlib/generics/Led.zen")
 
 # Main CH340G IC
