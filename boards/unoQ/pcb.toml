@@ -25,7 +25,6 @@ Operating Systems:
 """
 
 [dependencies]
-"github.com/diodeinc/stdlib" = "0.4.0"
 "github.com/dioderobot/arduino/components/1571636-3" = "0.1.0"
 "github.com/dioderobot/arduino/components/20TW-994" = "0.1.0"
 "github.com/dioderobot/arduino/components/20TW-995" = "0.1.0"

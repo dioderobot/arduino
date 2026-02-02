@@ -1334,7 +1334,7 @@ Resistor(
 
 Resistor(
     name = "R_MCU_I2C4_SCL_PF14_PU",
-    value = "2.2K",
+    value = "2.2k",
     package = "0402",
     P1 = PWR_3P3V,
     P2 = MCU_I2C4_SCL_PF14,
@@ -1342,7 +1342,7 @@ Resistor(
 
 Resistor(
     name = "R_MCU_I2C4_SDA_PF15_PU",
-    value = "2.2K",
+    value = "2.2k",
     package = "0402",
     P1 = PWR_3P3V,
     P2 = MCU_I2C4_SDA_PF15,

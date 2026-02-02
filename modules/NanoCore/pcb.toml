@@ -1,5 +1,4 @@
 [dependencies]
-"github.com/diodeinc/stdlib" = "0.4.0"
 "github.com/dioderobot/arduino/reference/AMS1117x" = "0.1.0"
 "github.com/dioderobot/arduino/reference/ATmega328Px" = "0.1.0"
 "github.com/dioderobot/arduino/reference/FT232RLx" = "0.1.0"
