@@ -773,6 +773,7 @@ MountingHole(
     diameter = "M3",
     standard = "ISO14580",
     plating = "Via",
+    P1 = GND,
 )
 
 MountingHole(
@@ -780,6 +781,7 @@ MountingHole(
     diameter = "M3",
     standard = "ISO14580",
     plating = "Via",
+    P1 = GND,
 )
 
 MountingHole(
@@ -787,6 +789,7 @@ MountingHole(
     diameter = "M3",
     standard = "ISO14580",
     plating = "Via",
+    P1 = GND,
 )
 
 MountingHole(
@@ -794,6 +797,7 @@ MountingHole(
     diameter = "M3",
     standard = "ISO14580",
     plating = "Via",
+    P1 = GND,
 )
 
 
