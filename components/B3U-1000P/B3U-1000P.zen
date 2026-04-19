@@ -10,7 +10,7 @@ Pins_B3UM1000P = struct(P1=io("P1", Net), P2=io("P2", Net))
 # Component
 Component(
     name="B3U-1000P",
-    symbol=Symbol(library="eda/B3U-1000P.kicad_sym"),
-    footprint=File("eda/B3U-1000P.kicad_mod"),
+    symbol=Symbol(library="B3U-1000P.kicad_sym"),
+    footprint=File("B3U-1000P.kicad_mod"),
     pins={"1": Pins_B3UM1000P.P1, "2": Pins_B3UM1000P.P2},
 )

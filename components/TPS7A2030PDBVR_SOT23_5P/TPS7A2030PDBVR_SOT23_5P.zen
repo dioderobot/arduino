@@ -17,8 +17,8 @@ Pins_TPS7A2030PDBVR = struct(
 # Component
 Component(
     name = "TPS7A2030PDBVR",
-    symbol = Symbol(library = "eda/TPS7A2030PDBVR.kicad_sym"),
-    footprint = File("eda/SOT95P280X145-5N.kicad_mod"),
+    symbol = Symbol(library = "TPS7A2030PDBVR.kicad_sym"),
+    footprint = File("SOT95P280X145-5N.kicad_mod"),
     pins = {
         "EN": Pins_TPS7A2030PDBVR.EN,
         "GND": Pins_TPS7A2030PDBVR.GND,

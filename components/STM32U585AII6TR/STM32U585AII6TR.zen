@@ -181,8 +181,8 @@ Pins_STM32U585AII6TR = struct(
 # Component
 Component(
     name = "STM32U585AII6TR",
-    symbol = Symbol(library = "eda/STM32U585AII6TR.kicad_sym"),
-    footprint = File("eda/BGA169C50P13X13_700X700X60.kicad_mod"),
+    symbol = Symbol(library = "STM32U585AII6TR.kicad_sym"),
+    footprint = File("BGA169C50P13X13_700X700X60.kicad_mod"),
     pins = {
         "NRST": Pins_STM32U585AII6TR.NRST,
         "OPAMP1__VINM": Pins_STM32U585AII6TR.OPAMP1_VINM,

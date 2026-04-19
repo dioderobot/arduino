@@ -14,8 +14,8 @@ Pins_PJGBLC24C = struct(
 # Component
 Component(
     name = "PJGBLC24C",
-    symbol = Symbol(library = "eda/PJGBLC24C.kicad_sym"),
-    footprint = File("eda/SODFL2512X90N.kicad_mod"),
+    symbol = Symbol(library = "PJGBLC24C.kicad_sym"),
+    footprint = File("SODFL2512X90N.kicad_mod"),
     pins = {
         "K1": Pins_PJGBLC24C.K1,
         "K2": Pins_PJGBLC24C.K2

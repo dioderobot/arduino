@@ -30,8 +30,8 @@ Pins_20TW_994 = struct(
 # Component
 Component(
     name = "20TW_994",
-    symbol = Symbol(library = "eda/20TW-994.kicad_sym"),
-    footprint = File("eda/1X18-CUSTOM.kicad_mod"),
+    symbol = Symbol(library = "20TW-994.kicad_sym"),
+    footprint = File("1X18-CUSTOM.kicad_mod"),
     pins = {
         "P1": Pins_20TW_994.P1,
         "P2": Pins_20TW_994.P2,

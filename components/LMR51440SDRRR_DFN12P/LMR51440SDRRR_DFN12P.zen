@@ -25,8 +25,8 @@ Pins_LMR51440SDRRR = struct(
 # Component
 Component(
     name = "LMR51440SDRRR",
-    symbol = Symbol(library = "eda/LMR51440SDRRR.kicad_sym"),
-    footprint = File("eda/SON50P300X300X80-13N-D.kicad_mod"),
+    symbol = Symbol(library = "LMR51440SDRRR.kicad_sym"),
+    footprint = File("SON50P300X300X80-13N-D.kicad_mod"),
     pins = {
         "AGND": Pins_LMR51440SDRRR.AGND,
         "BOOT": Pins_LMR51440SDRRR.BOOT,

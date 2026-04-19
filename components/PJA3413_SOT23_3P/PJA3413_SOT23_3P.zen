@@ -15,8 +15,8 @@ Pins_PJA3413_R1_00001 = struct(
 # Component
 Component(
     name = "PJA3413_R1_00001",
-    symbol = Symbol(library = "eda/C391635.kicad_sym"),
-    footprint = File("eda/SOT-23_L2.9-W1.3-P1.90-LS2.4-BR.kicad_mod"),
+    symbol = Symbol(library = "C391635.kicad_sym"),
+    footprint = File("SOT-23_L2.9-W1.3-P1.90-LS2.4-BR.kicad_mod"),
     pins = {
         "D": Pins_PJA3413_R1_00001.D,
         "G": Pins_PJA3413_R1_00001.G,

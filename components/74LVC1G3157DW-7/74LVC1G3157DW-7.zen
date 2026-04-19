@@ -18,8 +18,8 @@ Pins_74LVC1G3157DWM7 = struct(
 # Component
 Component(
     name = "74LVC1G3157DW-7",
-    symbol = Symbol(library = "eda/74LVC1G3157DW-7.kicad_sym"),
-    footprint = File("eda/SOT65P210X110-6N.kicad_mod"),
+    symbol = Symbol(library = "74LVC1G3157DW-7.kicad_sym"),
+    footprint = File("SOT65P210X110-6N.kicad_mod"),
     pins = {
         "A": Pins_74LVC1G3157DWM7.A,
         "B0": Pins_74LVC1G3157DWM7.B0,

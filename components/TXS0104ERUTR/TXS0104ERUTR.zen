@@ -24,8 +24,8 @@ Pins_TXS0104ERUTR = struct(
 # Component
 Component(
     name = "TXS0104ERUTR",
-    symbol = Symbol(library = "eda/TXS0104ERUTR.kicad_sym"),
-    footprint = File("eda/TXS0104ERUTR.kicad_mod"),
+    symbol = Symbol(library = "TXS0104ERUTR.kicad_sym"),
+    footprint = File("TXS0104ERUTR.kicad_mod"),
     pins = {
         "A1": Pins_TXS0104ERUTR.A1,
         "A2": Pins_TXS0104ERUTR.A2,

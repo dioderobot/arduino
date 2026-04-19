@@ -15,8 +15,8 @@ Pins_SMMBT3904WT1G = struct(
 # Component
 Component(
     name = "SMMBT3904WT1G",
-    symbol = Symbol(library = "eda/SMMBT3904WT1G.kicad_sym"),
-    footprint = File("eda/SOT65P220X100-3N.kicad_mod"),
+    symbol = Symbol(library = "SMMBT3904WT1G.kicad_sym"),
+    footprint = File("SOT65P220X100-3N.kicad_mod"),
     pins = {
         "B": Pins_SMMBT3904WT1G.B,
         "C": Pins_SMMBT3904WT1G.C,

@@ -72,8 +72,8 @@ Pins_CLEM130M01MGMDVMPMTR = struct(
 # Component
 Component(
     name = "CLE-130-01-G-DV-P-TR",
-    symbol = Symbol(library = "eda/CLE-130-01-G-DV-P-TR.kicad_sym"),
-    footprint = File("eda/CLE-130-01-X-DV-P-TR.kicad_mod"),
+    symbol = Symbol(library = "CLE-130-01-G-DV-P-TR.kicad_sym"),
+    footprint = File("CLE-130-01-X-DV-P-TR.kicad_mod"),
     pins = {
         "1": Pins_CLEM130M01MGMDVMPMTR.P1,
         "10": Pins_CLEM130M01MGMDVMPMTR.P10,

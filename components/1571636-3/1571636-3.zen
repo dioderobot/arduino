@@ -17,8 +17,8 @@ Pins_1571636_3 = struct(
 # Component
 Component(
     name = "1571636_3",
-    symbol = Symbol(library = "eda/1571636-3.kicad_sym"),
-    footprint = File("eda/1571636-3.kicad_mod"),
+    symbol = Symbol(library = "1571636-3.kicad_sym"),
+    footprint = File("1571636-3.kicad_mod"),
     pins = {
         "1": Pins_1571636_3.P1,
         "2": Pins_1571636_3.P2,

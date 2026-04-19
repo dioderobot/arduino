@@ -18,8 +18,8 @@ Pins_RCLAMP0522P_TCT = struct(
 # Component
 Component(
     name = "RCLAMP0522P_TCT",
-    symbol = Symbol(library = "eda/RCLAMP0522P_TCT.kicad_sym"),
-    footprint = File("eda/RCLAMP0522PTCT.kicad_mod"),
+    symbol = Symbol(library = "RCLAMP0522P_TCT.kicad_sym"),
+    footprint = File("RCLAMP0522PTCT.kicad_mod"),
     pins = {
         "GND_1": Pins_RCLAMP0522P_TCT.GND_1,
         "GND_2": Pins_RCLAMP0522P_TCT.GND_2,

@@ -16,8 +16,8 @@ Pins_LTSTMC28NBEGKMDF = struct(
 # Component
 Component(
     name = "LTST-C28NBEGK-DF",
-    symbol = Symbol(library = "eda/C49437709.kicad_sym"),
-    footprint = File("eda/LED-SMD_4P-L1.0-W1.0-TR_RGB.kicad_mod"),
+    symbol = Symbol(library = "C49437709.kicad_sym"),
+    footprint = File("LED-SMD_4P-L1.0-W1.0-TR_RGB.kicad_mod"),
     pins = {
         "B-": Pins_LTSTMC28NBEGKMDF.BM,
         "G-": Pins_LTSTMC28NBEGKMDF.GM,

@@ -31,8 +31,8 @@ Pins_EMMC16GMWW28MGA01 = struct(
 # Component
 Component(
     name = "EMMC16G-WW28-GA01",
-    symbol = Symbol(library = "eda/C9900185643.kicad_sym"),
-    footprint = File("eda/BGA-153_L13.0-W11.5-P0.50-TL_KLM8G1GEME-B041.kicad_mod"),
+    symbol = Symbol(library = "C9900185643.kicad_sym"),
+    footprint = File("BGA-153_L13.0-W11.5-P0.50-TL_KLM8G1GEME-B041.kicad_mod"),
     pins = {
         "CLK": Pins_EMMC16GMWW28MGA01.CLK,
         "CMD": Pins_EMMC16GMWW28MGA01.CMD,

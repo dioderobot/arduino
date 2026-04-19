@@ -212,8 +212,8 @@ Pins_MT53E512M32D1ZWM046_AUT_B = struct(
 # Component
 Component(
     name = "MT53E512M32D1ZW-046_AUT_B",
-    symbol = Symbol(library = "eda/MT53E512M32D1ZW-046_AUT_B.kicad_sym"),
-    footprint = File("eda/BGA200C65P12X22_1000X1450X105.kicad_mod"),
+    symbol = Symbol(library = "MT53E512M32D1ZW-046_AUT_B.kicad_sym"),
+    footprint = File("BGA200C65P12X22_1000X1450X105.kicad_mod"),
     pins = {
         "CA0_A": Pins_MT53E512M32D1ZWM046_AUT_B.CA0_A,
         "CA0_B": Pins_MT53E512M32D1ZWM046_AUT_B.CA0_B,
