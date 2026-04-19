@@ -14,8 +14,8 @@ Pins_TFM252012ALMA1R0MTAA = struct(
 # Component
 Component(
     name = "TFM252012ALMA1R0MTAA",
-    symbol = Symbol(library = "eda/TFM252012ALMA1R0MTAA.kicad_sym"),
-    footprint = File("eda/INDC2520X120N.kicad_mod"),
+    symbol = Symbol(library = "TFM252012ALMA1R0MTAA.kicad_sym"),
+    footprint = File("INDC2520X120N.kicad_mod"),
     pins = {
         "1": Pins_TFM252012ALMA1R0MTAA.P1,
         "2": Pins_TFM252012ALMA1R0MTAA.P2

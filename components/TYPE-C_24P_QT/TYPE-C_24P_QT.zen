@@ -29,8 +29,8 @@ Pins_TYPEMC24PQT = struct(
 # Component
 Component(
     name = "TYPE-C24PQT",
-    symbol = Symbol(library = "eda/C2681555.kicad_sym"),
-    footprint = File("eda/USB-C-SMD_TYPE-C-24P-QT.kicad_mod"),
+    symbol = Symbol(library = "C2681555.kicad_sym"),
+    footprint = File("USB-C-SMD_TYPE-C-24P-QT.kicad_mod"),
     pins = {
         "CC1": Pins_TYPEMC24PQT.CC1,
         "CC2": Pins_TYPEMC24PQT.CC2,

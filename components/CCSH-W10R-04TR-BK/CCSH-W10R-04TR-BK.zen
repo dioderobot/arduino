@@ -18,8 +18,8 @@ Pins_CCSHMW10RM04TRMBK = struct(
 # Component
 Component(
     name = "CCSH-W10R-04TR-BK",
-    symbol = Symbol(library = "eda/C9900067955.kicad_sym"),
-    footprint = File("eda/CONN-SMD_4P-P1.00_CCSH-W10R-04TR-BK.kicad_mod"),
+    symbol = Symbol(library = "C9900067955.kicad_sym"),
+    footprint = File("CONN-SMD_4P-P1.00_CCSH-W10R-04TR-BK.kicad_mod"),
     pins = {
         "1": Pins_CCSHMW10RM04TRMBK.P1,
         "2": Pins_CCSHMW10RM04TRMBK.P2,

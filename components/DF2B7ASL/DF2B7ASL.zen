@@ -14,8 +14,8 @@ Pins_DF2B7ASL = struct(
 # Component
 Component(
     name = "DF2B7ASL",
-    symbol = Symbol(library = "eda/DF2B7ASL.kicad_sym"),
-    footprint = File("eda/DF2S51ASLL3F.kicad_mod"),
+    symbol = Symbol(library = "DF2B7ASL.kicad_sym"),
+    footprint = File("DF2S51ASLL3F.kicad_mod"),
     pins = {
         "1": Pins_DF2B7ASL.P1,
         "2": Pins_DF2B7ASL.P2

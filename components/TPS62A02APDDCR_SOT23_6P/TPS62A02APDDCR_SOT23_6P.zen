@@ -18,8 +18,8 @@ Pins_TPS62A02APDDCR = struct(
 # Component
 Component(
     name = "TPS62A02APDDCR",
-    symbol = Symbol(library = "eda/TPS62A02APDDCR.kicad_sym"),
-    footprint = File("eda/SOT95P280X110-6N.kicad_mod"),
+    symbol = Symbol(library = "TPS62A02APDDCR.kicad_sym"),
+    footprint = File("SOT95P280X110-6N.kicad_mod"),
     pins = {
         "EN": Pins_TPS62A02APDDCR.EN,
         "FB": Pins_TPS62A02APDDCR.FB,

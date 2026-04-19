@@ -14,8 +14,8 @@ Pins_PESD5V0X1BL_315 = struct(
 # Component
 Component(
     name = "PESD5V0X1BL,315",
-    symbol = Symbol(library = "eda/PESD5V0X1BL_315.kicad_sym"),
-    footprint = File("eda/PESD5V0S1BL315.kicad_mod"),
+    symbol = Symbol(library = "PESD5V0X1BL_315.kicad_sym"),
+    footprint = File("PESD5V0S1BL315.kicad_mod"),
     pins = {
         "K1": Pins_PESD5V0X1BL_315.K1,
         "K2": Pins_PESD5V0X1BL_315.K2

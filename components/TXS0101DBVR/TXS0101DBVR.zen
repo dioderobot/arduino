@@ -18,8 +18,8 @@ Pins_TXS0101DBVR = struct(
 # Component
 Component(
     name = "TXS0101DBVR",
-    symbol = Symbol(library = "eda/TXS0101DBVR.kicad_sym"),
-    footprint = File("eda/SOT95P280X145-6N.kicad_mod"),
+    symbol = Symbol(library = "TXS0101DBVR.kicad_sym"),
+    footprint = File("SOT95P280X145-6N.kicad_mod"),
     pins = {
         "A": Pins_TXS0101DBVR.A,
         "B": Pins_TXS0101DBVR.B,

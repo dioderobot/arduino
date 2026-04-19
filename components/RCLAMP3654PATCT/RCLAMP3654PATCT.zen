@@ -19,8 +19,8 @@ Pins_RCLAMP3654PATCT = struct(
 # Component
 Component(
     name = "RCLAMP3654PATCT",
-    symbol = Symbol(library = "eda/RCLAMP3654PATCT.kicad_sym"),
-    footprint = File("eda/SON50P160X160X65-7N.kicad_mod"),
+    symbol = Symbol(library = "RCLAMP3654PATCT.kicad_sym"),
+    footprint = File("SON50P160X160X65-7N.kicad_mod"),
     pins = {
         "DM": Pins_RCLAMP3654PATCT.DM,
         "DP": Pins_RCLAMP3654PATCT.DP,

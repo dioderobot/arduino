@@ -14,8 +14,8 @@ Pins_NRS8030T3R3MJGJ = struct(
 # Component
 Component(
     name = "NRS8030T3R3MJGJ",
-    symbol = Symbol(library = "eda/NRS8030T3R3MJGJ.kicad_sym"),
-    footprint = File("eda/NRS8030T3R3MJGJ.kicad_mod"),
+    symbol = Symbol(library = "NRS8030T3R3MJGJ.kicad_sym"),
+    footprint = File("NRS8030T3R3MJGJ.kicad_mod"),
     pins = {
         "1": Pins_NRS8030T3R3MJGJ.P1,
         "2": Pins_NRS8030T3R3MJGJ.P2
